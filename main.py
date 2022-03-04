@@ -22,6 +22,9 @@ class MainView(QMainWindow):
         self.ui.logo.setPixmap(QPixmap("image/sooncheon_fc_mean.PNG"))
         # self.ui.logo.setScaledContents(True)
 
+        self._dialog = None
+
+
         #move window with title bar
         def moveWindow(event):
             if UIFunctions.returnStatus(self) == 1:
@@ -41,9 +44,14 @@ class MainView(QMainWindow):
         self.dragPos = event.globalPos()
 
     def control(self):
+        # 메뉴 토글 버튼
         self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 250, True))
+        # home 버튼
         self.ui.btn_home.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.home))
+        # analysis 버튼
         self.ui.btn_anal.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.anal))
+        # new file 버튼
+        self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
 
 
 if __name__ == '__main__':

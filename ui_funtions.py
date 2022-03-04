@@ -1,8 +1,8 @@
 from main import *
-
+from newfile_dialog import Ui_Dialog
 GLOBAL_STATE = 0
 
-class UIFunctions(MainView): #ui_main.py의 클래스를 상속
+class UIFunctions(MainView): #main.py의 클래스를 상속
     def maximize_restore(self):
         global GLOBAL_STATE
         status = GLOBAL_STATE
@@ -38,7 +38,7 @@ class UIFunctions(MainView): #ui_main.py의 클래스를 상속
         # CLOSE
         self.ui.btn_close.clicked.connect(lambda: self.close())
 
-        ## ==> CREATE SIZE GRIP TO RESIZE WINDOW
+        ## ==> CREATE SIZE GRIP TO RESIZE WINDOW 나중에 구현해야욈
         # self.sizegrip = QSizeGrip(self.ui.frame_grip)
         # self.sizegrip.setStyleSheet(
         #     "QSizeGrip { width: 10px; height: 10px; margin: 5px } QSizeGrip:hover { background-color: rgb(50, 42, 94) }")
@@ -48,6 +48,7 @@ class UIFunctions(MainView): #ui_main.py의 클래스를 상속
     def returnStatus(self):
         return GLOBAL_STATE
 
+    ## 토글 메뉴
     def toggleMenu(self, maxWidth, enable):
         if enable:
             #get width
@@ -69,5 +70,21 @@ class UIFunctions(MainView): #ui_main.py의 클래스를 상속
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animation.start()
 
+    ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):
         self.ui.pages.setCurrentWidget(page)
+
+    ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
+    def handleOpenDialog(self):
+        self._dialog = Ui_Dialog()
+        # self._dialog.resize(300, 200)
+
+        if self._dialog.exec(): #확인 버튼 눌렀을때
+            x = self._dialog.info() #정보 받아오기
+            print(x)
+            #TODO: 받아온 정보나 파일을 어떻게 알고리즘과 연결할지
+
+        else: #취소 버튼 눌렀을때
+            print("cancel")
+
+
