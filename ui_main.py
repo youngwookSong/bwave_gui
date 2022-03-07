@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'test5lNtcnu.ui'
+## Form generated from reading UI file 'test5pJsFeF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.drop_frame = QFrame(self.centralwidget)
         self.drop_frame.setObjectName(u"drop_frame")
         self.drop_frame.setStyleSheet(u"border-radius:10px;\n"
-"background-color: rgb(190, 190, 190);")
+"background-color: rgb(205, 255, 255);")
         self.drop_frame.setFrameShape(QFrame.StyledPanel)
         self.drop_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.drop_frame)
@@ -44,8 +44,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(4, 4, 4, 4)
         self.frame_left_menu = QFrame(self.content)
         self.frame_left_menu.setObjectName(u"frame_left_menu")
-        self.frame_left_menu.setMinimumSize(QSize(70, 0))
-        self.frame_left_menu.setMaximumSize(QSize(70, 16777215))
+        self.frame_left_menu.setMinimumSize(QSize(60, 0))
+        self.frame_left_menu.setMaximumSize(QSize(60, 16777215))
         self.frame_left_menu.setStyleSheet(u"background-color: rgb(54, 54, 54);")
         self.frame_left_menu.setFrameShape(QFrame.StyledPanel)
         self.frame_left_menu.setFrameShadow(QFrame.Raised)
@@ -224,7 +224,7 @@ class Ui_MainWindow(object):
         self.title_bar = QFrame(self.content_frame)
         self.title_bar.setObjectName(u"title_bar")
         self.title_bar.setMinimumSize(QSize(0, 40))
-        self.title_bar.setStyleSheet(u"background-color: rgb(143, 143, 143);")
+        self.title_bar.setStyleSheet(u"background-color: rgb(228, 255, 255);")
         self.title_bar.setFrameShape(QFrame.NoFrame)
         self.title_bar.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.title_bar)
@@ -259,8 +259,14 @@ class Ui_MainWindow(object):
         self.frame_btns.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.frame_btns)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(3, 3, 3, 3)
         self.btn_min = QPushButton(self.frame_btns)
         self.btn_min.setObjectName(u"btn_min")
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_min.sizePolicy().hasHeightForWidth())
+        self.btn_min.setSizePolicy(sizePolicy)
         self.btn_min.setMinimumSize(QSize(40, 20))
         self.btn_min.setMaximumSize(QSize(40, 20))
         self.btn_min.setStyleSheet(u"QPushButton {\n"
@@ -357,7 +363,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.tabWidget = QTabWidget(self.anal)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setStyleSheet(u"")
+        self.tabWidget.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.tabWidget.setTabsClosable(True)
+        self.tabWidget.setMovable(True)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.tabWidget.addTab(self.tab, "")
@@ -385,7 +393,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.pages.setCurrentIndex(1)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -404,15 +412,15 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_min.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.btn_min.setText(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c", None))
 #if QT_CONFIG(tooltip)
         self.btn_max.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\ub300\ud654", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_max.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.btn_max.setText(QCoreApplication.translate("MainWindow", u"\ucd5c\ub300", None))
 #if QT_CONFIG(tooltip)
         self.btn_close.setToolTip(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_close.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.btn_close.setText(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
         self.logo.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Tab 1", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tab 2", None))

@@ -4,7 +4,7 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6 import QtUiTools, QtGui
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
-from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, Qt, QEvent)
+from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, Qt, QEvent, QRect)
 
 #imort gui file
 from ui_main import Ui_MainWindow

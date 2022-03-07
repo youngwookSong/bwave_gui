@@ -1,5 +1,6 @@
 from main import *
-from newfile_dialog import Ui_Dialog
+from newfile_dialog2 import Ui_Dialog
+from tab_frame import Ui_tabFrame
 GLOBAL_STATE = 0
 
 class UIFunctions(MainView): #main.py의 클래스를 상속
@@ -54,10 +55,10 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             #get width
             width = self.ui.frame_left_menu.width()
             maxExtend = maxWidth
-            standard = 70
+            standard = 60
 
             #set max width
-            if width == 70:
+            if width == 60:
                 widthExtended = maxExtend
             else:
                 widthExtended = standard
@@ -74,14 +75,29 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     def set_page(self, page):
         self.ui.pages.setCurrentWidget(page)
 
+    ## 알고리즘 돌리는 함수
+    def bwavedata(self, filename):
+        print(filename, "분석 시작")
+
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
     def handleOpenDialog(self):
         self._dialog = Ui_Dialog()
-        # self._dialog.resize(300, 200)
 
         if self._dialog.exec(): #확인 버튼 눌렀을때
-            x = self._dialog.info() #정보 받아오기
-            print(x)
+            file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
+            print(file, name, birth, num, date, sex)
+
+            self.ui.pages.setCurrentWidget(self.ui.anal) #분석 화면으로 이동
+
+            # 탭 추가 및 해당 탭으로 이동
+            current_tab = QWidget()
+            self.ui.tabWidget.addTab(current_tab, name)
+            self.ui.tabWidget.setCurrentWidget(current_tab)
+
+            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex) #프레임 뿌려줌
+
+
+
             #TODO: 받아온 정보나 파일을 어떻게 알고리즘과 연결할지
 
         else: #취소 버튼 눌렀을때
