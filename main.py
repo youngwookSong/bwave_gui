@@ -4,7 +4,7 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6 import QtUiTools, QtGui
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
-from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, Qt, QEvent, QRect)
+from PySide6.QtCore import *
 
 #imort gui file
 from ui_main import Ui_MainWindow
@@ -19,11 +19,18 @@ class MainView(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.control()
-        self.ui.logo.setPixmap(QPixmap("image/sooncheon_fc_mean.PNG"))
-        # self.ui.logo.setScaledContents(True)
+
+        self.logoFile = QPixmap()
+        self.logoFile.load("icon/bwave_logo.png")
+        # self.logoFile = self.logoFile.scaledToWidth(500)
+        self.ui.logo.setPixmap(self.logoFile)
+        self.ui.logo.setScaledContents(True)
+        # self.ui.logo.set
 
         self._dialog = None
-
+        self.activepage = self.ui.btn_home
+        self.activepage.setStyleSheet("background-color: rgb(152, 255, 140);")
+        self.prep_activepage = None
 
         #move window with title bar
         def moveWindow(event):

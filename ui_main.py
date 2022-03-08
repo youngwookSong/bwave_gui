@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.drop_frame = QFrame(self.centralwidget)
         self.drop_frame.setObjectName(u"drop_frame")
         self.drop_frame.setStyleSheet(u"border-radius:10px;\n"
-"background-color: rgb(205, 255, 255);")
+"background-color: rgb(255, 255, 255);")
         self.drop_frame.setFrameShape(QFrame.StyledPanel)
         self.drop_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.drop_frame)
@@ -224,7 +224,7 @@ class Ui_MainWindow(object):
         self.title_bar = QFrame(self.content_frame)
         self.title_bar.setObjectName(u"title_bar")
         self.title_bar.setMinimumSize(QSize(0, 40))
-        self.title_bar.setStyleSheet(u"background-color: rgb(228, 255, 255);")
+        self.title_bar.setStyleSheet(u"background-color: rgb(230, 230, 230);")
         self.title_bar.setFrameShape(QFrame.NoFrame)
         self.title_bar.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.title_bar)
@@ -339,14 +339,77 @@ class Ui_MainWindow(object):
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.logo = QLabel(self.frame_2)
+        self.frame_25 = QFrame(self.frame_2)
+        self.frame_25.setObjectName(u"frame_25")
+        self.frame_25.setFrameShape(QFrame.StyledPanel)
+        self.frame_25.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_4.addWidget(self.frame_25)
+
+        self.frame_24 = QFrame(self.frame_2)
+        self.frame_24.setObjectName(u"frame_24")
+        self.frame_24.setFrameShape(QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_17 = QVBoxLayout(self.frame_24)
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.logo = QLabel(self.frame_24)
         self.logo.setObjectName(u"logo")
         self.logo.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_4.addWidget(self.logo)
+        self.verticalLayout_17.addWidget(self.logo)
 
+        self.horizontalLayout_4.addWidget(self.frame_24)
+
+        self.frame_23 = QFrame(self.frame_2)
+        self.frame_23.setObjectName(u"frame_23")
+        self.frame_23.setFrameShape(QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_4.addWidget(self.frame_23)
 
         self.verticalLayout.addWidget(self.frame_2)
+
+        self.frame_19 = QFrame(self.home)
+        self.frame_19.setObjectName(u"frame_19")
+        self.frame_19.setMaximumSize(QSize(16777215, 150))
+        self.frame_19.setFrameShape(QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.frame_19)
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.frame_20 = QFrame(self.frame_19)
+        self.frame_20.setObjectName(u"frame_20")
+        self.frame_20.setFrameShape(QFrame.StyledPanel)
+        self.frame_20.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_8.addWidget(self.frame_20)
+
+        self.frame_21 = QFrame(self.frame_19)
+        self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setFrameShape(QFrame.StyledPanel)
+        self.frame_21.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_19 = QVBoxLayout(self.frame_21)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+
+        self.pushButton = QPushButton(self.frame_21)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.verticalLayout_19.addWidget(self.pushButton)
+        self.pushButton_2 = QPushButton(self.frame_21)
+        self.pushButton_2.setObjectName(u"pushButton")
+        self.verticalLayout_19.addWidget(self.pushButton_2)
+
+        self.horizontalLayout_8.addWidget(self.frame_21)
+
+        self.frame_22 = QFrame(self.frame_19)
+        self.frame_22.setObjectName(u"frame_22")
+        self.frame_22.setFrameShape(QFrame.StyledPanel)
+        self.frame_22.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_8.addWidget(self.frame_22)
+
+        self.verticalLayout.addWidget(self.frame_19)
 
         self.frame_3 = QFrame(self.home)
         self.frame_3.setObjectName(u"frame_3")
@@ -366,12 +429,10 @@ class Ui_MainWindow(object):
         self.tabWidget.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setMovable(True)
+        self.tabWidget.tabCloseRequested.connect(self.close_current_tab)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        self.tabWidget.addTab(self.tab_2, "")
 
         self.verticalLayout_7.addWidget(self.tabWidget)
 
@@ -392,12 +453,18 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.pages.setCurrentIndex(1)
+        self.pages.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
+
+    def close_current_tab(self, i):
+            if self.tabWidget.count() < 2:
+                    return
+
+            self.tabWidget.removeTab(i)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
@@ -423,6 +490,10 @@ class Ui_MainWindow(object):
         self.btn_close.setText(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
         self.logo.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Tab 1", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tab 2", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", "새 파일 열기", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", "기존 파일 열기", None))
+        self.logo.setText(QCoreApplication.translate("MainWindow", u"", None))
+        #TODO: pushButton 코드봐서 정리하고 logo도 정리
+
     # retranslateUi
 

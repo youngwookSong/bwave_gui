@@ -8,7 +8,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import *
 
 class Ui_tabFrame(QFrame):
-    def __init__(self, current_tab, file, name, birth, num, date, sex):
+    def __init__(self, current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba):
         super().__init__()
         self.current_tab = current_tab
         self.file = file
@@ -17,6 +17,8 @@ class Ui_tabFrame(QFrame):
         self.num = num
         self.date = date
         self.sex = sex
+        self.y_pred = y_pred
+        self.y_pred_proba = y_pred_proba
 
         self.verticalLayout_10 = QVBoxLayout(self.current_tab)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
@@ -127,6 +129,20 @@ class Ui_tabFrame(QFrame):
         self.frame_8.setObjectName(u"frame_8")
         self.frame_8.setFrameShape(QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_18 = QVBoxLayout(self.frame_8)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.label_7 = QLabel(self.frame_8)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_18.addWidget(self.label_7)
+
+        self.label_8 = QLabel(self.frame_8)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_18.addWidget(self.label_8)
+
 
         self.horizontalLayout_5.addWidget(self.frame_8)
 
@@ -173,6 +189,8 @@ class Ui_tabFrame(QFrame):
         self.label_4.setText(QCoreApplication.translate("MainWindow", self.num, None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", self.date, None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", self.sex, None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", self.y_pred, None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", self.y_pred_proba, None))
 
         # retranslateUi
 

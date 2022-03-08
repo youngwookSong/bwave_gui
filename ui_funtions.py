@@ -1,6 +1,7 @@
 from main import *
-from newfile_dialog2 import Ui_Dialog
+from dialog.newfile_dialog2 import Ui_Dialog
 from tab_frame import Ui_tabFrame
+from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
 
 class UIFunctions(MainView): #main.py의 클래스를 상속
@@ -74,6 +75,22 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):
         self.ui.pages.setCurrentWidget(page)
+        self.prep_activepage = self.activepage
+        if page == self.ui.home:
+            self.activepage = self.ui.btn_home
+        if page == self.ui.anal:
+            self.activepage = self.ui.btn_anal
+        self.prep_activepage.setStyleSheet(u"QPushButton{\n"
+                                      "	color: rgb(255, 255, 255);\n"
+                                      "	\n"
+                                      "	background-color: rgb(129, 129, 129);\n"
+                                      "	border:0px solid;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "	\n"
+                                      "	background-color: rgb(152, 255, 140);\n"
+                                      "}")
+        self.activepage.setStyleSheet("background-color: rgb(152, 255, 140);")
 
     ## 알고리즘 돌리는 함수
     def bwavedata(self, filename):
@@ -94,11 +111,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self.ui.tabWidget.addTab(current_tab, name)
             self.ui.tabWidget.setCurrentWidget(current_tab)
 
-            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex) #프레임 뿌려줌
+            # 알고리즘 돌림
+            md = model_test(file)
+            md.test()
+            y_pred = md.y_pred
+            y_pred_proba = md.y_pred_proba
 
+            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
 
-
-            #TODO: 받아온 정보나 파일을 어떻게 알고리즘과 연결할지
 
         else: #취소 버튼 눌렀을때
             print("cancel")
