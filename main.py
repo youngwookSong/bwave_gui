@@ -31,7 +31,9 @@ class MainView(QMainWindow):
         # self.ui.logo.setScaledContents(True)
         # self.ui.logo.setAlignment(Qt.AlignCenter)
 
-        self._dialog = None
+        self._dialog = None # new file의 dialog
+
+        # 왼쪽 메뉴바에서 활성화 된 메뉴 색 변경
         self.activepage = self.ui.btn_home
         self.activepage.setStyleSheet(active_style)
 
