@@ -120,7 +120,7 @@ background-color: rgb(255, 255, 255);</string>
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>0</height>
+                 <height>40</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -137,7 +137,7 @@ background-color: rgb(255, 255, 255);</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_9">
                 <property name="spacing">
-                 <number>2</number>
+                 <number>0</number>
                 </property>
                 <property name="leftMargin">
                  <number>2</number>
@@ -154,7 +154,7 @@ background-color: rgb(255, 255, 255);</string>
                 <item>
                  <widget class="QPushButton" name="btn_toggle">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -162,6 +162,12 @@ background-color: rgb(255, 255, 255);</string>
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
                     <height>40</height>
                    </size>
                   </property>
@@ -223,8 +229,18 @@ QPushButton:hover{
                     <height>40</height>
                    </size>
                   </property>
+                  <property name="font">
+                   <font>
+                    <family>맑은 고딕</family>
+                    <pointsize>9</pointsize>
+                    <weight>9</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
+	font: 75 9pt &quot;맑은 고딕&quot;;
 	color: rgb(255, 255, 255);
 	
 	background-color: rgb(129, 129, 129);
@@ -233,10 +249,13 @@ QPushButton:hover{
 QPushButton:hover{
 	
 	background-color: rgb(152, 255, 140);
-}</string>
+}btn</string>
                   </property>
                   <property name="text">
                    <string>HOME</string>
+                  </property>
+                  <property name="default">
+                   <bool>false</bool>
                   </property>
                  </widget>
                 </item>
@@ -538,17 +557,20 @@ QPushButton:hover{
                    <enum>QFrame::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_3">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
                    <property name="leftMargin">
-                    <number>3</number>
+                    <number>0</number>
                    </property>
                    <property name="topMargin">
-                    <number>3</number>
+                    <number>0</number>
                    </property>
                    <property name="rightMargin">
-                    <number>3</number>
+                    <number>0</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>3</number>
+                    <number>0</number>
                    </property>
                    <item>
                     <widget class="QPushButton" name="btn_min">
@@ -561,13 +583,13 @@ QPushButton:hover{
                      <property name="minimumSize">
                       <size>
                        <width>40</width>
-                       <height>20</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
                        <width>40</width>
-                       <height>20</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="toolTip">
@@ -594,13 +616,13 @@ QPushButton:hover {
                      <property name="minimumSize">
                       <size>
                        <width>40</width>
-                       <height>20</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
                        <width>40</width>
-                       <height>20</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="toolTip">
@@ -627,13 +649,13 @@ QPushButton:hover {
                      <property name="minimumSize">
                       <size>
                        <width>40</width>
-                       <height>20</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
                        <width>40</width>
-                       <height>20</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="toolTip">
@@ -664,7 +686,7 @@ QPushButton:hover {
              <item>
               <widget class="QStackedWidget" name="pages">
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="home">
                 <layout class="QVBoxLayout" name="verticalLayout">
@@ -695,6 +717,12 @@ QPushButton:hover {
                    <layout class="QHBoxLayout" name="horizontalLayout_4">
                     <item>
                      <widget class="QFrame" name="frame_25">
+                      <property name="maximumSize">
+                       <size>
+                        <width>230</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -714,8 +742,11 @@ QPushButton:hover {
                       <layout class="QVBoxLayout" name="verticalLayout_17">
                        <item>
                         <widget class="QLabel" name="logo">
+                         <property name="styleSheet">
+                          <string notr="true">image: url(:/newPrefix/bwave_gui/icon/bwave_logo.png);</string>
+                         </property>
                          <property name="text">
-                          <string>TextLabel</string>
+                          <string/>
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
@@ -727,6 +758,12 @@ QPushButton:hover {
                     </item>
                     <item>
                      <widget class="QFrame" name="frame_23">
+                      <property name="maximumSize">
+                       <size>
+                        <width>230</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -789,15 +826,34 @@ QPushButton:hover {
                       <layout class="QVBoxLayout" name="verticalLayout_19">
                        <item>
                         <widget class="QPushButton" name="pushButton">
+                         <property name="font">
+                          <font>
+                           <pointsize>20</pointsize>
+                          </font>
+                         </property>
                          <property name="text">
-                          <string>PushButton</string>
+                          <string>새로운 파일로 환자 진단하기</string>
+                         </property>
+                         <property name="autoDefault">
+                          <bool>false</bool>
+                         </property>
+                         <property name="default">
+                          <bool>false</bool>
+                         </property>
+                         <property name="flat">
+                          <bool>false</bool>
                          </property>
                         </widget>
                        </item>
                        <item>
                         <widget class="QPushButton" name="pushButton_2">
+                         <property name="font">
+                          <font>
+                           <pointsize>20</pointsize>
+                          </font>
+                         </property>
                          <property name="text">
-                          <string>PushButton</string>
+                          <string>기존의 저장된 진단 파일 열기</string>
                          </property>
                         </widget>
                        </item>
@@ -1174,6 +1230,8 @@ QPushButton:hover {
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../bwave_pro/gui/test.qrc"/>
+ </resources>
  <connections/>
 </ui>

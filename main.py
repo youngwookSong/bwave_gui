@@ -12,6 +12,9 @@ from ui_main import Ui_MainWindow
 #import gui functions
 from ui_funtions import *
 
+#import stylesheet
+from style import *
+
 class MainView(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -20,17 +23,20 @@ class MainView(QMainWindow):
         self.ui.setupUi(self)
         self.control()
 
-        self.logoFile = QPixmap()
-        self.logoFile.load("icon/bwave_logo.png")
-        # self.logoFile = self.logoFile.scaledToWidth(500)
-        self.ui.logo.setPixmap(self.logoFile)
-        self.ui.logo.setScaledContents(True)
-        # self.ui.logo.set
+        # self.logoFile = QPixmap()
+        # self.logoFile.load("icon/bwave_logo_2.png")
+        # # self.logoFile = self.logoFile.scaledToWidth(500)
+        # # self.logoFile = self.logoFile.scaled(QSize(600,400), aspectMode=Qt.IgnoreAspectRatio)
+        # self.ui.logo.setPixmap(self.logoFile)
+        # self.ui.logo.setScaledContents(True)
+        # self.ui.logo.setAlignment(Qt.AlignCenter)
 
         self._dialog = None
         self.activepage = self.ui.btn_home
-        self.activepage.setStyleSheet("background-color: rgb(152, 255, 140);")
+        self.activepage.setStyleSheet(active_style)
+
         self.prep_activepage = None
+        self.menu_state = "open"
 
         #move window with title bar
         def moveWindow(event):
@@ -52,13 +58,15 @@ class MainView(QMainWindow):
 
     def control(self):
         # 메뉴 토글 버튼
-        self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 250, True))
+        self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
         # home 버튼
         self.ui.btn_home.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.home))
         # analysis 버튼
         self.ui.btn_anal.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.anal))
         # new file 버튼
         self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        # 홈 화면 new file 버튼
+        self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
 
 
 if __name__ == '__main__':

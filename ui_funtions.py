@@ -1,8 +1,23 @@
+import time
+
 from main import *
 from dialog.newfile_dialog2 import Ui_Dialog
 from tab_frame import Ui_tabFrame
 from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
+
+from style import *
+
+# toggle close시 아이콘만
+def changeBtnIcon(button):
+    button.setStyleSheet(close_style)
+    button.setText("")
+
+# toggle open시 다 나오게
+def afterChange(button, text):
+    button.setStyleSheet(style)
+    button.setText(text)
+
 
 class UIFunctions(MainView): #main.py의 클래스를 상속
     def maximize_restore(self):
@@ -50,27 +65,52 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     def returnStatus(self):
         return GLOBAL_STATE
 
+
     ## 토글 메뉴
     def toggleMenu(self, maxWidth, enable):
         if enable:
             #get width
             width = self.ui.frame_left_menu.width()
             maxExtend = maxWidth
-            standard = 60
+            standard = 250
 
             #set max width
-            if width == 60:
+            if self.menu_state == "open":
                 widthExtended = maxExtend
+                self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/menu.png"))
+                self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
+                changeBtnIcon(self.ui.btn_toggle)
+                changeBtnIcon(self.ui.btn_home)
+                changeBtnIcon(self.ui.btn_anal)
+                changeBtnIcon(self.ui.btn_new_file)
+                changeBtnIcon(self.ui.btn_open_2)
+                changeBtnIcon(self.ui.btn_save_2)
+                changeBtnIcon(self.ui.btn_new_file_2)
+                self.activepage.setStyleSheet(active_close_style)
+                self.menu_state = "close"
+
             else:
                 widthExtended = standard
+                self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/left.png"))
+                self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
+                afterChange(self.ui.btn_toggle, "  메뉴")
+                afterChange(self.ui.btn_home, "  메인 화면")
+                afterChange(self.ui.btn_anal, "  진단 결과")
+                afterChange(self.ui.btn_new_file, "  새로운 파일 열기")
+                afterChange(self.ui.btn_open_2, "  열기")
+                afterChange(self.ui.btn_save_2, "  저장")
+                afterChange(self.ui.btn_new_file_2, "  설정")
+                self.activepage.setStyleSheet(active_style)
+                self.menu_state = "open"
 
             #animation
             self.animation = QPropertyAnimation(self.ui.frame_left_menu, b"minimumWidth")
-            self.animation.setDuration(300)
+            self.animation.setDuration(500)
             self.animation.setStartValue(width)
             self.animation.setEndValue(widthExtended)
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animation.start()
+
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):
@@ -80,17 +120,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self.activepage = self.ui.btn_home
         if page == self.ui.anal:
             self.activepage = self.ui.btn_anal
-        self.prep_activepage.setStyleSheet(u"QPushButton{\n"
-                                      "	color: rgb(255, 255, 255);\n"
-                                      "	\n"
-                                      "	background-color: rgb(129, 129, 129);\n"
-                                      "	border:0px solid;\n"
-                                      "}\n"
-                                      "QPushButton:hover{\n"
-                                      "	\n"
-                                      "	background-color: rgb(152, 255, 140);\n"
-                                      "}")
-        self.activepage.setStyleSheet("background-color: rgb(152, 255, 140);")
+
+        if self.menu_state == "open":
+            self.prep_activepage.setStyleSheet(style)
+            self.activepage.setStyleSheet(active_style)
+
+        if self.menu_state == "close":
+            self.prep_activepage.setStyleSheet(close_style)
+            self.activepage.setStyleSheet(active_close_style)
 
     ## 알고리즘 돌리는 함수
     def bwavedata(self, filename):

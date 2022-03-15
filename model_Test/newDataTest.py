@@ -1,6 +1,8 @@
 import numpy as np
+import os
 import pickle
 from model_Test.BwaveData import BwaveData as bd
+from model_Test.directory import ROOT_DIR
 
 class model_test:
     def __init__(self, file):
@@ -10,6 +12,7 @@ class model_test:
 
     def test(self):
         ## new data preprocess & feature extraction
+        print(ROOT_DIR)
         file_path = self.file
 
         raw_file = bd()
@@ -19,15 +22,18 @@ class model_test:
         result = raw_file.fc_f
 
         name = "fc"
-        with open("C:/Users/Bwave/Documents/GitHub/bwave_gui/model_Test/model_{}_proba.pickle".format(name), 'rb') as f:
+        model_dir = os.path.join(ROOT_DIR, "model_{}_proba.pickle".format(name))
+        with open(model_dir, 'rb') as f:
             clf = pickle.load(f)
 
         from sklearn import preprocessing
-        with open("C:/Users/Bwave/Documents/GitHub/bwave_gui/model_Test/scaler.pickle", 'rb') as f:
+        scaler_dir = os.path.join(ROOT_DIR, "scaler.pickle")
+        with open(scaler_dir, 'rb') as f:
             scaler = pickle.load(f)
         result = scaler.transform(result)
 
-        idx = np.load('C:/Users/Bwave/Documents/GitHub/bwave_gui/model_Test/fis.npy')
+        fisher_dir = os.path.join(ROOT_DIR, "fis.npy")
+        idx = np.load(fisher_dir)
         result = result[:, idx]
 
         self.y_pred = str(clf.predict(result)[0])
