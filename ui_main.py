@@ -32,9 +32,10 @@ class Ui_MainWindow(object):
         self.layout = QVBoxLayout(self.centralwidget)
         self.layout.setSpacing(0)
         self.layout.setObjectName(u"layout")
+        self.layout.setContentsMargins(0, 0, 0, 0)
         self.drop_frame = QFrame(self.centralwidget)
         self.drop_frame.setObjectName(u"drop_frame")
-        self.drop_frame.setStyleSheet(u"border-radius:10px;\n"
+        self.drop_frame.setStyleSheet(u"border-radius:0px;\n"
 "background-color: rgb(255, 255, 255);")
         self.drop_frame.setFrameShape(QFrame.StyledPanel)
         self.drop_frame.setFrameShadow(QFrame.Raised)
@@ -49,7 +50,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QHBoxLayout(self.content)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(4, 4, 4, 4)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame_left_menu = QFrame(self.content)
         self.frame_left_menu.setObjectName(u"frame_left_menu")
         self.frame_left_menu.setMinimumSize(QSize(250, 0))
@@ -166,11 +167,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QVBoxLayout(self.content_frame)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(7, 0, 0, 0)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.title_bar = QFrame(self.content_frame)
         self.title_bar.setObjectName(u"title_bar")
-        self.title_bar.setMinimumSize(QSize(0, 40))
-        self.title_bar.setStyleSheet(u"background-color: rgb(230, 230, 230);")
+        self.title_bar.setMinimumSize(QSize(0, 50))
+        self.title_bar.setStyleSheet(u"background-color: rgb(220, 220, 220);")
         self.title_bar.setFrameShape(QFrame.NoFrame)
         self.title_bar.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.title_bar)
@@ -207,63 +208,63 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3 = QHBoxLayout(self.frame_btns)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(3, 3, 3, 3)
-        self.btn_min = QPushButton(self.frame_btns)
-        self.btn_min.setObjectName(u"btn_min")
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Ignored)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_min.sizePolicy().hasHeightForWidth())
-        self.btn_min.setSizePolicy(sizePolicy)
-        # self.btn_min.setMinimumSize(QSize(40, 30))
-        # self.btn_min.setMaximumSize(QSize(40, 30))
-        self.btn_min.setIcon(QtGui.QIcon("./icon/mini.png"))
-        self.btn_min.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
-        self.btn_min.setStyleSheet(u"QPushButton {\n"
-"	border:none;\n"
-"	border-radius: 3px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	\n"
-"	background-color: rgba(85, 255, 127, 150);\n"
-"}")
-
-        self.horizontalLayout_3.addWidget(self.btn_min)
-
-        self.btn_max = QPushButton(self.frame_btns)
-        self.btn_max.setObjectName(u"btn_max")
-        self.btn_max.setSizePolicy(sizePolicy)
-        # self.btn_max.setMinimumSize(QSize(40, 20))
-        # self.btn_max.setMaximumSize(QSize(40, 20))
-        self.btn_max.setIcon(QtGui.QIcon("./icon/maxi.png"))
-        self.btn_max.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
-        self.btn_max.setStyleSheet(u"QPushButton {\n"
-"	border:none;\n"
-"	border-radius: 3px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	\n"
-"	background-color: rgba(255, 170, 0, 150);\n"
-"}")
-
-        self.horizontalLayout_3.addWidget(self.btn_max)
-
-        self.btn_close = QPushButton(self.frame_btns)
-        self.btn_close.setObjectName(u"btn_close")
-        self.btn_close.setSizePolicy(sizePolicy)
-        # self.btn_close.setMinimumSize(QSize(40, 20))
-        # self.btn_close.setMaximumSize(QSize(40, 20))
-        self.btn_close.setIcon(QtGui.QIcon("./icon/close.png"))
-        self.btn_close.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
-        self.btn_close.setStyleSheet(u"QPushButton {\n"
-"	border:none;\n"
-"	border-radius: 3px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"	\n"
-"	background-color: rgba(255,0, 0, 150);\n"
-"}")
-
-        self.horizontalLayout_3.addWidget(self.btn_close)
+#         self.btn_min = QPushButton(self.frame_btns)
+#         self.btn_min.setObjectName(u"btn_min")
+#         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Ignored)
+#         sizePolicy.setHorizontalStretch(0)
+#         sizePolicy.setVerticalStretch(0)
+#         sizePolicy.setHeightForWidth(self.btn_min.sizePolicy().hasHeightForWidth())
+#         self.btn_min.setSizePolicy(sizePolicy)
+#         # self.btn_min.setMinimumSize(QSize(40, 30))
+#         # self.btn_min.setMaximumSize(QSize(40, 30))
+#         self.btn_min.setIcon(QtGui.QIcon("./icon/mini.png"))
+#         self.btn_min.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+#         self.btn_min.setStyleSheet(u"QPushButton {\n"
+# "	border:none;\n"
+# "	border-radius: 3px;\n"
+# "}\n"
+# "QPushButton:hover {\n"
+# "	\n"
+# "	background-color: rgba(85, 255, 127, 150);\n"
+# "}")
+#
+#         self.horizontalLayout_3.addWidget(self.btn_min)
+#
+#         self.btn_max = QPushButton(self.frame_btns)
+#         self.btn_max.setObjectName(u"btn_max")
+#         self.btn_max.setSizePolicy(sizePolicy)
+#         # self.btn_max.setMinimumSize(QSize(40, 20))
+#         # self.btn_max.setMaximumSize(QSize(40, 20))
+#         self.btn_max.setIcon(QtGui.QIcon("./icon/maxi.png"))
+#         self.btn_max.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+#         self.btn_max.setStyleSheet(u"QPushButton {\n"
+# "	border:none;\n"
+# "	border-radius: 3px;\n"
+# "}\n"
+# "QPushButton:hover {\n"
+# "	\n"
+# "	background-color: rgba(255, 170, 0, 150);\n"
+# "}")
+#
+#         self.horizontalLayout_3.addWidget(self.btn_max)
+#
+#         self.btn_close = QPushButton(self.frame_btns)
+#         self.btn_close.setObjectName(u"btn_close")
+#         self.btn_close.setSizePolicy(sizePolicy)
+#         # self.btn_close.setMinimumSize(QSize(40, 20))
+#         # self.btn_close.setMaximumSize(QSize(40, 20))
+#         self.btn_close.setIcon(QtGui.QIcon("./icon/close.png"))
+#         self.btn_close.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+#         self.btn_close.setStyleSheet(u"QPushButton {\n"
+# "	border:none;\n"
+# "	border-radius: 3px;\n"
+# "}\n"
+# "QPushButton:hover {\n"
+# "	\n"
+# "	background-color: rgba(255,0, 0, 150);\n"
+# "}")
+#
+#         self.horizontalLayout_3.addWidget(self.btn_close)
 
 
         self.horizontalLayout.addWidget(self.frame_btns)
@@ -447,17 +448,17 @@ class Ui_MainWindow(object):
         self.btn_new_file_2.setText(QCoreApplication.translate("MainWindow", u"  설정", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"title", None))
 #if QT_CONFIG(tooltip)
-        self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
-#endif // QT_CONFIG(tooltip)
-        self.btn_min.setText("")
-#if QT_CONFIG(tooltip)
-        self.btn_max.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\ub300\ud654", None))
-#endif // QT_CONFIG(tooltip)
-        self.btn_max.setText("")
-#if QT_CONFIG(tooltip)
-        self.btn_close.setToolTip(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
-#endif // QT_CONFIG(tooltip)
-        self.btn_close.setText("")
+#         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
+# #endif // QT_CONFIG(tooltip)
+#         self.btn_min.setText("")
+# #if QT_CONFIG(tooltip)
+#         self.btn_max.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\ub300\ud654", None))
+# #endif // QT_CONFIG(tooltip)
+#         self.btn_max.setText("")
+# #if QT_CONFIG(tooltip)
+#         self.btn_close.setToolTip(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
+# #endif // QT_CONFIG(tooltip)
+#         self.btn_close.setText("")
         self.logo.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Tab 1", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow",

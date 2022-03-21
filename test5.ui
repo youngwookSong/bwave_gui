@@ -24,10 +24,22 @@
     <property name="spacing">
      <number>0</number>
     </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QFrame" name="drop_frame">
       <property name="styleSheet">
-       <string notr="true">border-radius:10px;
+       <string notr="true">border-radius:0px;
 background-color: rgb(255, 255, 255);</string>
       </property>
       <property name="frameShape">
@@ -65,16 +77,16 @@ background-color: rgb(255, 255, 255);</string>
            <number>0</number>
           </property>
           <property name="leftMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="topMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QFrame" name="frame_left_menu">
@@ -233,7 +245,6 @@ QPushButton:hover{
                    <font>
                     <family>맑은 고딕</family>
                     <pointsize>9</pointsize>
-                    <weight>9</weight>
                     <italic>false</italic>
                     <bold>false</bold>
                    </font>
@@ -452,7 +463,7 @@ QPushButton:hover{
               <number>0</number>
              </property>
              <property name="leftMargin">
-              <number>7</number>
+              <number>0</number>
              </property>
              <property name="topMargin">
               <number>0</number>
