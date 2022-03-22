@@ -3,6 +3,7 @@ import os
 import pickle
 from model_Test.BwaveData import BwaveData as bd
 from model_Test.directory import ROOT_DIR
+import matplotlib.pyplot as plt
 
 class model_test:
     def __init__(self, file):
@@ -36,13 +37,23 @@ class model_test:
         idx = np.load(fisher_dir)
         result = result[:, idx]
 
-        self.y_pred = str(clf.predict(result)[0])
-        self.y_pred_proba = str(clf.predict_proba(result)[0][1])
 
-        if self.y_pred == "1":
+        if str(clf.predict(result)[0]) == "1":
             self.y_pred = "MDD"
+            self.y_pred_proba = clf.predict_proba(result)[0][1]
         else:
             self.y_pred = "HC"
+            self.y_pred_proba = clf.predict_proba(result)[0][0]
 
-        print(self.y_pred)
-        print(self.y_pred_proba)
+        self.y_pred_proba *= 100
+        self.y_pred_proba = round(self.y_pred_proba, 2)
+
+        fig, ax = plt.subplots(figsize=(6, 6))
+        wedgeprops = {'width': 0.3, 'edgecolor': 'black', 'linewidth': 1}
+        ax.pie([self.y_pred_proba, 100-self.y_pred_proba], wedgeprops=wedgeprops, startangle=90, colors=['#e25d61', '#6879f7'])
+        plt.title(self.y_pred, fontsize=24, loc='center')
+        plt.text(0, 0, str(self.y_pred_proba)+"%", ha='center', va='center', fontsize=42)
+        plt.savefig("proba.png")
+
+
+        self.y_pred_proba = str(self.y_pred_proba)

@@ -2,6 +2,7 @@ import time
 
 from main import *
 from dialog.newfile_dialog2 import Ui_Dialog
+from dialog.loadingBar import Ui_Dialog_loading
 from tab_frame import Ui_tabFrame
 from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
@@ -20,50 +21,50 @@ def afterChange(button, text):
 
 
 class UIFunctions(MainView): #main.py의 클래스를 상속
-    # def maximize_restore(self):
-    #     global GLOBAL_STATE
-    #     status = GLOBAL_STATE
-    #
-    #     # if maximized
-    #     if status == 0:
-    #         self.showMaximized()
-    #         GLOBAL_STATE = 1
-    #         # self.ui.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-    #         # self.ui.drop_frame.setStyleSheet("border-radius: 0px;")
-    #         self.ui.btn_max.setToolTip("Restore")
-    #
-    #     else:
-    #         GLOBAL_STATE = 0
-    #         self.showNormal()
-    #         self.resize(self.width() + 1, self.height() + 1)
-    #         # self.ui.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
-    #         # self.ui.drop_frame.setStyleSheet("border-radius: 10px;")
-    #         self.ui.btn_max.setToolTip("Maximize")
-    #
-    #
-    # def uiDefinitions(self):
-    #     #remove title bar
-    #     self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-    #     self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-    #
-    #     # MAXIMIZE / RESTORE
-    #     self.ui.btn_max.clicked.connect(lambda: UIFunctions.maximize_restore(self))
-    #
-    #     # MINIMIZE
-    #     self.ui.btn_min.clicked.connect(lambda: self.showMinimized())
-    #
-    #     # CLOSE
-    #     self.ui.btn_close.clicked.connect(lambda: self.close())
-    #
-    #     ## ==> CREATE SIZE GRIP TO RESIZE WINDOW 나중에 구현해야욈
-    #     # self.sizegrip = QSizeGrip(self.ui.frame_grip)
-    #     # self.sizegrip.setStyleSheet(
-    #     #     "QSizeGrip { width: 10px; height: 10px; margin: 5px } QSizeGrip:hover { background-color: rgb(50, 42, 94) }")
-    #     # self.sizegrip.setToolTip("Resize Window")
-    #
-    # ## RETURN STATUS IF WINDOWS IS MAXIMIZE OR RESTAURED
-    # def returnStatus(self):
-    #     return GLOBAL_STATE
+    def maximize_restore(self):
+        global GLOBAL_STATE
+        status = GLOBAL_STATE
+
+        # if maximized
+        if status == 0:
+            self.showMaximized()
+            GLOBAL_STATE = 1
+            # self.ui.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+            # self.ui.drop_frame.setStyleSheet("border-radius: 0px;")
+            self.ui.btn_max.setToolTip("Restore")
+
+        else:
+            GLOBAL_STATE = 0
+            self.showNormal()
+            self.resize(self.width() + 1, self.height() + 1)
+            # self.ui.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
+            # self.ui.drop_frame.setStyleSheet("border-radius: 10px;")
+            self.ui.btn_max.setToolTip("Maximize")
+
+
+    def uiDefinitions(self):
+        #remove title bar
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+        # MAXIMIZE / RESTORE
+        self.ui.btn_max.clicked.connect(lambda: UIFunctions.maximize_restore(self))
+
+        # MINIMIZE
+        self.ui.btn_min.clicked.connect(lambda: self.showMinimized())
+
+        # CLOSE
+        self.ui.btn_close.clicked.connect(lambda: self.close())
+
+        ## ==> CREATE SIZE GRIP TO RESIZE WINDOW 나중에 구현해야욈
+        # self.sizegrip = QSizeGrip(self.ui.frame_grip)
+        # self.sizegrip.setStyleSheet(
+        #     "QSizeGrip { width: 10px; height: 10px; margin: 5px } QSizeGrip:hover { background-color: rgb(50, 42, 94) }")
+        # self.sizegrip.setToolTip("Resize Window")
+
+    ## RETURN STATUS IF WINDOWS IS MAXIMIZE OR RESTAURED
+    def returnStatus(self):
+        return GLOBAL_STATE
 
 
     ## 토글 메뉴
@@ -80,8 +81,8 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                 self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/menu.png"))
                 self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
                 changeBtnIcon(self.ui.btn_toggle)
-                changeBtnIcon(self.ui.btn_home)
-                changeBtnIcon(self.ui.btn_anal)
+                # changeBtnIcon(self.ui.btn_home)
+                # changeBtnIcon(self.ui.btn_anal)
                 changeBtnIcon(self.ui.btn_new_file)
                 changeBtnIcon(self.ui.btn_open_2)
                 changeBtnIcon(self.ui.btn_save_2)
@@ -94,8 +95,8 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                 self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/left.png"))
                 self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
                 afterChange(self.ui.btn_toggle, "  메뉴")
-                afterChange(self.ui.btn_home, "  메인 화면")
-                afterChange(self.ui.btn_anal, "  진단 결과")
+                # afterChange(self.ui.btn_home, "  메인 화면")
+                # afterChange(self.ui.btn_anal, "  진단 결과")
                 afterChange(self.ui.btn_new_file, "  새로운 파일 열기")
                 afterChange(self.ui.btn_open_2, "  열기")
                 afterChange(self.ui.btn_save_2, "  저장")
@@ -138,10 +139,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         self._dialog = Ui_Dialog()
 
         if self._dialog.exec(): #확인 버튼 눌렀을때
+
+            self._dialog_loading = Ui_Dialog_loading #loading bar 열기
+
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
             print(file, name, birth, num, date, sex)
 
-            self.ui.pages.setCurrentWidget(self.ui.anal) #분석 화면으로 이동
+            # self.ui.pages.setCurrentWidget(self.ui.anal) #분석 화면으로 이동
+            # TODO: menu_bar에 버튼 스타일도 바꿔야함. self.set_page를 쓰면되는데 에러
 
             # 탭 추가 및 해당 탭으로 이동
             current_tab = QWidget()
@@ -155,6 +160,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             y_pred_proba = md.y_pred_proba
 
             self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
+
 
 
         else: #취소 버튼 눌렀을때

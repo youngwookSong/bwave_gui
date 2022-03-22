@@ -3,7 +3,7 @@ import time
 import networkx as nx
 import scipy.io
 from model_Test.directory import FREQ_BANDS, FUNCDATA_DIR, ch_detect, ch_detect_62
-from model_Test.helper_functions  import *
+from model_Test.helper_functions import *
 from sklearn.decomposition import PCA
 from joblib import Parallel, delayed
 import itertools

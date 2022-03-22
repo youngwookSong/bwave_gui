@@ -74,6 +74,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setContentsMargins(2, 2, 2, 2)
         self.btn_toggle = QPushButton(self.frame_5)
         self.btn_toggle.setObjectName(u"btn_toggle")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_toggle.sizePolicy().hasHeightForWidth())
+        self.btn_toggle.setSizePolicy(sizePolicy)
         self.btn_toggle.setMinimumSize(QSize(0, 40))
         self.btn_toggle.setMaximumSize(QSize(16777215, 40))
         self.btn_toggle.setStyleSheet(style)
@@ -85,26 +90,27 @@ class Ui_MainWindow(object):
 
         self.top_menus = QFrame(self.frame_left_menu)
         self.top_menus.setObjectName(u"top_menus")
-        self.top_menus.setMaximumSize(QSize(16777215, 230))
+        self.top_menus.setMaximumSize(QSize(16777215, 100))
         self.top_menus.setFrameShape(QFrame.NoFrame)
         self.top_menus.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.top_menus)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(5, 2, 5, 2)
-        self.btn_home = QPushButton(self.top_menus)
-        self.btn_home.setObjectName(u"btn_home")
-        self.btn_home.setMinimumSize(QSize(0, 40))
-        self.btn_home.setStyleSheet(style)
 
-        self.verticalLayout_3.addWidget(self.btn_home)
-
-        self.btn_anal = QPushButton(self.top_menus)
-        self.btn_anal.setObjectName(u"btn_anal")
-        self.btn_anal.setMinimumSize(QSize(0, 40))
-        self.btn_anal.setStyleSheet(style)
-
-        self.verticalLayout_3.addWidget(self.btn_anal)
+        # self.btn_home = QPushButton(self.top_menus)
+        # self.btn_home.setObjectName(u"btn_home")
+        # self.btn_home.setMinimumSize(QSize(0, 40))
+        # self.btn_home.setStyleSheet(style)
+        #
+        # self.verticalLayout_3.addWidget(self.btn_home)
+        #
+        # self.btn_anal = QPushButton(self.top_menus)
+        # self.btn_anal.setObjectName(u"btn_anal")
+        # self.btn_anal.setMinimumSize(QSize(0, 40))
+        # self.btn_anal.setStyleSheet(style)
+        #
+        # self.verticalLayout_3.addWidget(self.btn_anal)
 
         self.btn_new_file = QPushButton(self.top_menus)
         self.btn_new_file.setObjectName(u"btn_new_file")
@@ -121,6 +127,68 @@ class Ui_MainWindow(object):
         self.frame_4.setMinimumSize(QSize(0, 0))
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_21 = QVBoxLayout(self.frame_4)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(5, 2, 5, 2)
+        self.frame_32 = QFrame(self.frame_4)
+        self.frame_32.setObjectName(u"frame_32")
+        self.frame_32.setMaximumSize(QSize(16777215, 70))
+        self.frame_32.setFrameShape(QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_32)
+        self.horizontalLayout_13.setSpacing(10)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.lineEdit = QLineEdit(self.frame_32)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setStyleSheet(u"background-color: rgb(182, 182, 182);")
+
+        self.horizontalLayout_13.addWidget(self.lineEdit)
+
+        self.pushButton_3 = QPushButton(self.frame_32)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+
+        self.horizontalLayout_13.addWidget(self.pushButton_3)
+
+        self.pushButton_4 = QPushButton(self.frame_32)
+        self.pushButton_4.setObjectName(u"pushButton_4")
+
+        self.horizontalLayout_13.addWidget(self.pushButton_4)
+
+        self.verticalLayout_21.addWidget(self.frame_32)
+
+        self.frame_33 = QFrame(self.frame_4)
+        self.frame_33.setObjectName(u"frame_33")
+        self.frame_33.setFrameShape(QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_33)
+        self.horizontalLayout_14.setSpacing(0)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.tableWidget = QTableWidget(self.frame_33)
+        if (self.tableWidget.columnCount() < 5):
+                self.tableWidget.setColumnCount(5)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        self.tableWidget.setObjectName(u"tableWidget")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy1)
+
+        self.horizontalLayout_14.addWidget(self.tableWidget)
+
+        self.verticalLayout_21.addWidget(self.frame_33)
 
         self.verticalLayout_2.addWidget(self.frame_4)
 
@@ -208,63 +276,63 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3 = QHBoxLayout(self.frame_btns)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(3, 3, 3, 3)
-#         self.btn_min = QPushButton(self.frame_btns)
-#         self.btn_min.setObjectName(u"btn_min")
-#         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Ignored)
-#         sizePolicy.setHorizontalStretch(0)
-#         sizePolicy.setVerticalStretch(0)
-#         sizePolicy.setHeightForWidth(self.btn_min.sizePolicy().hasHeightForWidth())
-#         self.btn_min.setSizePolicy(sizePolicy)
-#         # self.btn_min.setMinimumSize(QSize(40, 30))
-#         # self.btn_min.setMaximumSize(QSize(40, 30))
-#         self.btn_min.setIcon(QtGui.QIcon("./icon/mini.png"))
-#         self.btn_min.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
-#         self.btn_min.setStyleSheet(u"QPushButton {\n"
-# "	border:none;\n"
-# "	border-radius: 3px;\n"
-# "}\n"
-# "QPushButton:hover {\n"
-# "	\n"
-# "	background-color: rgba(85, 255, 127, 150);\n"
-# "}")
-#
-#         self.horizontalLayout_3.addWidget(self.btn_min)
-#
-#         self.btn_max = QPushButton(self.frame_btns)
-#         self.btn_max.setObjectName(u"btn_max")
-#         self.btn_max.setSizePolicy(sizePolicy)
-#         # self.btn_max.setMinimumSize(QSize(40, 20))
-#         # self.btn_max.setMaximumSize(QSize(40, 20))
-#         self.btn_max.setIcon(QtGui.QIcon("./icon/maxi.png"))
-#         self.btn_max.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
-#         self.btn_max.setStyleSheet(u"QPushButton {\n"
-# "	border:none;\n"
-# "	border-radius: 3px;\n"
-# "}\n"
-# "QPushButton:hover {\n"
-# "	\n"
-# "	background-color: rgba(255, 170, 0, 150);\n"
-# "}")
-#
-#         self.horizontalLayout_3.addWidget(self.btn_max)
-#
-#         self.btn_close = QPushButton(self.frame_btns)
-#         self.btn_close.setObjectName(u"btn_close")
-#         self.btn_close.setSizePolicy(sizePolicy)
-#         # self.btn_close.setMinimumSize(QSize(40, 20))
-#         # self.btn_close.setMaximumSize(QSize(40, 20))
-#         self.btn_close.setIcon(QtGui.QIcon("./icon/close.png"))
-#         self.btn_close.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
-#         self.btn_close.setStyleSheet(u"QPushButton {\n"
-# "	border:none;\n"
-# "	border-radius: 3px;\n"
-# "}\n"
-# "QPushButton:hover {\n"
-# "	\n"
-# "	background-color: rgba(255,0, 0, 150);\n"
-# "}")
-#
-#         self.horizontalLayout_3.addWidget(self.btn_close)
+        self.btn_min = QPushButton(self.frame_btns)
+        self.btn_min.setObjectName(u"btn_min")
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_min.sizePolicy().hasHeightForWidth())
+        self.btn_min.setSizePolicy(sizePolicy)
+        # self.btn_min.setMinimumSize(QSize(40, 30))
+        # self.btn_min.setMaximumSize(QSize(40, 30))
+        self.btn_min.setIcon(QtGui.QIcon("./icon/mini.png"))
+        self.btn_min.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+        self.btn_min.setStyleSheet(u"QPushButton {\n"
+"	border:none;\n"
+"	border-radius: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	\n"
+"	background-color: rgba(85, 255, 127, 150);\n"
+"}")
+
+        self.horizontalLayout_3.addWidget(self.btn_min)
+
+        self.btn_max = QPushButton(self.frame_btns)
+        self.btn_max.setObjectName(u"btn_max")
+        self.btn_max.setSizePolicy(sizePolicy)
+        # self.btn_max.setMinimumSize(QSize(40, 20))
+        # self.btn_max.setMaximumSize(QSize(40, 20))
+        self.btn_max.setIcon(QtGui.QIcon("./icon/maxi.png"))
+        self.btn_max.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+        self.btn_max.setStyleSheet(u"QPushButton {\n"
+"	border:none;\n"
+"	border-radius: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	\n"
+"	background-color: rgba(255, 170, 0, 150);\n"
+"}")
+
+        self.horizontalLayout_3.addWidget(self.btn_max)
+
+        self.btn_close = QPushButton(self.frame_btns)
+        self.btn_close.setObjectName(u"btn_close")
+        self.btn_close.setSizePolicy(sizePolicy)
+        # self.btn_close.setMinimumSize(QSize(40, 20))
+        # self.btn_close.setMaximumSize(QSize(40, 20))
+        self.btn_close.setIcon(QtGui.QIcon("./icon/close.png"))
+        self.btn_close.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+        self.btn_close.setStyleSheet(u"QPushButton {\n"
+"	border:none;\n"
+"	border-radius: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	\n"
+"	background-color: rgba(255,0, 0, 150);\n"
+"}")
+
+        self.horizontalLayout_3.addWidget(self.btn_close)
 
 
         self.horizontalLayout.addWidget(self.frame_btns)
@@ -420,8 +488,8 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
 
         changeBtnIcon(self.btn_toggle, "./icon/left.png", 24)
-        changeBtnIcon(self.btn_home, "./icon/home.png", 24)
-        changeBtnIcon(self.btn_anal, "./icon/report.png", 24)
+        # changeBtnIcon(self.btn_home, "./icon/home.png", 24)
+        # changeBtnIcon(self.btn_anal, "./icon/report.png", 24)
         changeBtnIcon(self.btn_new_file, "./icon/new_file.png", 24)
         changeBtnIcon(self.btn_open_2, "./icon/open_file.png", 24)
         changeBtnIcon(self.btn_save_2, "./icon/save.png", 24)
@@ -440,25 +508,25 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u"  메뉴", None))
-        self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
-        self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
+        # self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
+        # self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
         self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"  새로운 파일 열기", None))
         self.btn_open_2.setText(QCoreApplication.translate("MainWindow", u"  열기", None))
         self.btn_save_2.setText(QCoreApplication.translate("MainWindow", u"  저장", None))
         self.btn_new_file_2.setText(QCoreApplication.translate("MainWindow", u"  설정", None))
-        self.label_title.setText(QCoreApplication.translate("MainWindow", u"title", None))
+        self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
 #if QT_CONFIG(tooltip)
-#         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
-# #endif // QT_CONFIG(tooltip)
-#         self.btn_min.setText("")
-# #if QT_CONFIG(tooltip)
-#         self.btn_max.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\ub300\ud654", None))
-# #endif // QT_CONFIG(tooltip)
-#         self.btn_max.setText("")
-# #if QT_CONFIG(tooltip)
-#         self.btn_close.setToolTip(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
-# #endif // QT_CONFIG(tooltip)
-#         self.btn_close.setText("")
+        self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_min.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_max.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\ub300\ud654", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_max.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_close.setToolTip(QCoreApplication.translate("MainWindow", u"\ub2eb\uae30", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_close.setText("")
         self.logo.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Tab 1", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow",
@@ -467,6 +535,18 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow",
                                                              u"\uae30\uc874\uc758 \uc800\uc7a5\ub41c \uc9c4\ub2e8 \ud30c\uc77c \uc5f4\uae30",
                                                              None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9", None))
+        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
+        __qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
+        __qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\uc120\ud0dd", None));
+        __qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
+        __qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\ud658\uc790ID", None));
+        __qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
+        __qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"\uc774\ub984", None));
+        __qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
+        __qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0ac\uc77c\uc2dc", None));
+        __qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
+        __qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\uc810\uc218", None));
 
     #TODO: pushButton 코드봐서 정리하고 logo도 정리
 
