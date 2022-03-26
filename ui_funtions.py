@@ -1,11 +1,14 @@
 import time
 
+from PySide6.QtWidgets import QTableWidgetItem
+
 from main import *
 from dialog.newfile_dialog2 import Ui_Dialog
 from dialog.loadingBar import Ui_Dialog_loading
 from tab_frame import Ui_tabFrame
 from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
+from dummy_data import dummy_data
 
 from style import *
 
@@ -112,6 +115,26 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animation.start()
 
+    ## 테이블에 데이터 추가
+    def add_table_data(self):
+        self.row += 1
+        self.ui.tableWidget.setRowCount(self.row)
+
+        new_data = {"선택": 'QCheckBox', "회원ID": "12456", "이름": "홍길동", "검사일시": "2022-01-01", "점수": "60"}
+
+        ckbox = QCheckBox()
+        cellWidget = QWidget()
+        layoutCB = QHBoxLayout(cellWidget)
+        layoutCB.addWidget(ckbox)
+        layoutCB.setAlignment(QtCore.Qt.AlignCenter)
+        layoutCB.setContentsMargins(0,0,0,0)
+        cellWidget.setLayout(layoutCB)
+
+        self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
+        self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(new_data["회원ID"]))
+        self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(new_data["이름"]))
+        self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(new_data["검사일시"]))
+        self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(new_data["점수"]))
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):

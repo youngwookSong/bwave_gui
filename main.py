@@ -5,6 +5,7 @@ from PySide6 import QtUiTools, QtGui
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
+from dummy_data import dummy_data
 
 #imort gui file
 from ui_main import Ui_MainWindow
@@ -22,14 +23,6 @@ class MainView(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.control()
-
-        # self.logoFile = QPixmap()
-        # self.logoFile.load("icon/bwave_logo_2.png")
-        # # self.logoFile = self.logoFile.scaledToWidth(500)
-        # # self.logoFile = self.logoFile.scaled(QSize(600,400), aspectMode=Qt.IgnoreAspectRatio)
-        # self.ui.logo.setPixmap(self.logoFile)
-        # self.ui.logo.setScaledContents(True)
-        # self.ui.logo.setAlignment(Qt.AlignCenter)
 
         self._dialog = None # new file의 dialog
 
@@ -53,6 +46,16 @@ class MainView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
+        ## load dummy data
+        self.row = len(dummy_data)
+        self.ui.tableWidget.setRowCount(self.row)
+        for row, person in enumerate(dummy_data):
+            self.ui.tableWidget.setItem(row, 0, QTableWidgetItem(person["선택"]))
+            self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(person["회원ID"]))
+            self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(person["이름"]))
+            self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(person["검사일시"]))
+            self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(person["점수"]))
+
         self.show()
 
     def mousePressEvent(self, event):
@@ -61,6 +64,7 @@ class MainView(QMainWindow):
     def control(self):
         # 메뉴 토글 버튼
         self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
+        self.ui.btn_add.clicked.connect(lambda: UIFunctions.add_table_data(self))
         # # home 버튼
         # self.ui.btn_home.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.home))
         # # analysis 버튼
