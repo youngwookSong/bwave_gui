@@ -34,7 +34,7 @@ class MainView(QMainWindow):
         self._dialog = None # new file의 dialog
 
         # 왼쪽 메뉴바에서 활성화 된 메뉴 색 변경
-        self.activepage = self.ui.btn_new_file
+        self.activepage = self.ui.btn_save_2
         self.activepage.setStyleSheet(active_style)
 
         self.prep_activepage = None

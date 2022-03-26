@@ -53,9 +53,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame_left_menu = QFrame(self.content)
         self.frame_left_menu.setObjectName(u"frame_left_menu")
-        self.frame_left_menu.setMinimumSize(QSize(250, 0))
-        self.frame_left_menu.setMaximumSize(QSize(250, 16777215))
-        self.frame_left_menu.setStyleSheet(u"background-color: rgb(204, 204, 204);")
+        self.frame_left_menu.setMinimumSize(QSize(350, 0))
+        self.frame_left_menu.setMaximumSize(QSize(350, 16777215))
+        self.frame_left_menu.setStyleSheet(u"background-color: rgb(8, 23, 28);")
         self.frame_left_menu.setFrameShape(QFrame.StyledPanel)
         self.frame_left_menu.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.frame_left_menu)
@@ -85,7 +85,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.btn_toggle)
 
-
         self.verticalLayout_2.addWidget(self.frame_5)
 
         self.top_menus = QFrame(self.frame_left_menu)
@@ -93,32 +92,65 @@ class Ui_MainWindow(object):
         self.top_menus.setMaximumSize(QSize(16777215, 100))
         self.top_menus.setFrameShape(QFrame.NoFrame)
         self.top_menus.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_3 = QVBoxLayout(self.top_menus)
-        self.verticalLayout_3.setSpacing(0)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(5, 2, 5, 2)
-
-        # self.btn_home = QPushButton(self.top_menus)
-        # self.btn_home.setObjectName(u"btn_home")
-        # self.btn_home.setMinimumSize(QSize(0, 40))
-        # self.btn_home.setStyleSheet(style)
-        #
-        # self.verticalLayout_3.addWidget(self.btn_home)
-        #
-        # self.btn_anal = QPushButton(self.top_menus)
-        # self.btn_anal.setObjectName(u"btn_anal")
-        # self.btn_anal.setMinimumSize(QSize(0, 40))
-        # self.btn_anal.setStyleSheet(style)
-        #
-        # self.verticalLayout_3.addWidget(self.btn_anal)
-
+        self.horizontalLayout_13 = QHBoxLayout(self.top_menus)
+        # ifndef Q_OS_MAC
+        self.horizontalLayout_13.setSpacing(-1)
+        # endif
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(-1, 12, -1, 12)
         self.btn_new_file = QPushButton(self.top_menus)
         self.btn_new_file.setObjectName(u"btn_new_file")
+        sizePolicy.setHeightForWidth(self.btn_new_file.sizePolicy().hasHeightForWidth())
+        self.btn_new_file.setSizePolicy(sizePolicy)
         self.btn_new_file.setMinimumSize(QSize(0, 40))
-        self.btn_new_file.setStyleSheet(style)
+        self.btn_new_file.setStyleSheet(u"QPushButton{\n"
+                                        "	color: rgb(255, 255, 255);\n"
+                                        "	\n"
+                                        "	background-color: rgb(129, 129, 129);\n"
+                                        "	border:0px solid;\n"
+                                        "}\n"
+                                        "QPushButton:hover{\n"
+                                        "	\n"
+                                        "	background-color: rgb(152, 255, 140);\n"
+                                        "}")
 
-        self.verticalLayout_3.addWidget(self.btn_new_file)
+        self.horizontalLayout_13.addWidget(self.btn_new_file)
 
+        self.btn_add = QPushButton(self.top_menus)
+        self.btn_add.setObjectName(u"btn_add")
+        sizePolicy.setHeightForWidth(self.btn_add.sizePolicy().hasHeightForWidth())
+        self.btn_add.setSizePolicy(sizePolicy)
+        self.btn_add.setMinimumSize(QSize(0, 40))
+        self.btn_add.setStyleSheet(u"QPushButton{\n"
+                                   "	color: rgb(255, 255, 255);\n"
+                                   "	\n"
+                                   "	background-color: rgb(129, 129, 129);\n"
+                                   "	border:0px solid;\n"
+                                   "}\n"
+                                   "QPushButton:hover{\n"
+                                   "	\n"
+                                   "	background-color: rgb(152, 255, 140);\n"
+                                   "}")
+
+        self.horizontalLayout_13.addWidget(self.btn_add)
+
+        self.btn_open = QPushButton(self.top_menus)
+        self.btn_open.setObjectName(u"btn_open")
+        sizePolicy.setHeightForWidth(self.btn_open.sizePolicy().hasHeightForWidth())
+        self.btn_open.setSizePolicy(sizePolicy)
+        self.btn_open.setMinimumSize(QSize(0, 40))
+        self.btn_open.setStyleSheet(u"QPushButton{\n"
+                                    "	color: rgb(255, 255, 255);\n"
+                                    "	\n"
+                                    "	background-color: rgb(129, 129, 129);\n"
+                                    "	border:0px solid;\n"
+                                    "}\n"
+                                    "QPushButton:hover{\n"
+                                    "	\n"
+                                    "	background-color: rgb(152, 255, 140);\n"
+                                    "}")
+
+        self.horizontalLayout_13.addWidget(self.btn_open)
 
         self.verticalLayout_2.addWidget(self.top_menus)
 
@@ -127,46 +159,102 @@ class Ui_MainWindow(object):
         self.frame_4.setMinimumSize(QSize(0, 0))
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_21 = QVBoxLayout(self.frame_4)
-        self.verticalLayout_21.setSpacing(0)
-        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.verticalLayout_21.setContentsMargins(5, 2, 5, 2)
+        self.verticalLayout_3 = QVBoxLayout(self.frame_4)
+        self.verticalLayout_3.setSpacing(6)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.frame_32 = QFrame(self.frame_4)
         self.frame_32.setObjectName(u"frame_32")
-        self.frame_32.setMaximumSize(QSize(16777215, 70))
+        self.frame_32.setMaximumSize(QSize(16777215, 60))
         self.frame_32.setFrameShape(QFrame.StyledPanel)
         self.frame_32.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_13 = QHBoxLayout(self.frame_32)
-        self.horizontalLayout_13.setSpacing(10)
-        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit = QLineEdit(self.frame_32)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setStyleSheet(u"background-color: rgb(182, 182, 182);")
-
-        self.horizontalLayout_13.addWidget(self.lineEdit)
-
-        self.pushButton_3 = QPushButton(self.frame_32)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-
-        self.horizontalLayout_13.addWidget(self.pushButton_3)
-
-        self.pushButton_4 = QPushButton(self.frame_32)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-
-        self.horizontalLayout_13.addWidget(self.pushButton_4)
-
-        self.verticalLayout_21.addWidget(self.frame_32)
-
-        self.frame_33 = QFrame(self.frame_4)
-        self.frame_33.setObjectName(u"frame_33")
-        self.frame_33.setFrameShape(QFrame.StyledPanel)
-        self.frame_33.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_14 = QHBoxLayout(self.frame_33)
+        self.frame_32.setStyleSheet(u"border: 2px solid")
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_32)
         self.horizontalLayout_14.setSpacing(0)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
         self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.tableWidget = QTableWidget(self.frame_33)
+        self.dateEdit = QDateEdit(self.frame_32)
+        self.dateEdit.setObjectName(u"dateEdit")
+        # self.dateEdit.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.dateEdit.setCalendarPopup(True)
+
+        self.horizontalLayout_14.addWidget(self.dateEdit)
+
+        self.label_17 = QLabel(self.frame_32)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_14.addWidget(self.label_17)
+
+        self.dateEdit_2 = QDateEdit(self.frame_32)
+        self.dateEdit_2.setObjectName(u"dateEdit_2")
+        # self.dateEdit_2.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.dateEdit_2.setCalendarPopup(True)
+
+        self.horizontalLayout_14.addWidget(self.dateEdit_2)
+
+        self.verticalLayout_3.addWidget(self.frame_32)
+
+        self.frame_33 = QFrame(self.frame_4)
+        self.frame_33.setObjectName(u"frame_33")
+        self.frame_33.setMaximumSize(QSize(16777215, 60))
+        self.frame_33.setFrameShape(QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QFrame.Raised)
+        self.frame_33.setStyleSheet(u"border: 2px solid")
+        self.horizontalLayout_15 = QHBoxLayout(self.frame_33)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.lineEdit = QLineEdit(self.frame_33)
+        self.lineEdit.setObjectName(u"lineEdit")
+
+        self.horizontalLayout_15.addWidget(self.lineEdit)
+
+        self.btn_search = QPushButton(self.frame_33)
+        self.btn_search.setObjectName(u"btn_search")
+        sizePolicy.setHeightForWidth(self.btn_search.sizePolicy().hasHeightForWidth())
+        self.btn_search.setSizePolicy(sizePolicy)
+        self.btn_search.setMinimumSize(QSize(40, 0))
+        self.btn_search.setMaximumSize(QSize(40, 16777215))
+        self.btn_search.setStyleSheet(u"QPushButton{\n"
+                                      "	color: rgb(255, 255, 255);\n"
+                                      "	\n"
+                                      "	background-color: rgb(129, 129, 129);\n"
+                                      "	border:0px solid;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "	\n"
+                                      "	background-color: rgb(152, 255, 140);\n"
+                                      "}")
+
+        self.horizontalLayout_15.addWidget(self.btn_search)
+
+        self.btn_delete = QPushButton(self.frame_33)
+        self.btn_delete.setObjectName(u"btn_delete")
+        sizePolicy.setHeightForWidth(self.btn_delete.sizePolicy().hasHeightForWidth())
+        self.btn_delete.setSizePolicy(sizePolicy)
+        self.btn_delete.setMinimumSize(QSize(40, 0))
+        self.btn_delete.setMaximumSize(QSize(40, 16777215))
+        self.btn_delete.setStyleSheet(u"QPushButton{\n"
+                                      "	color: rgb(255, 255, 255);\n"
+                                      "	\n"
+                                      "	background-color: rgb(129, 129, 129);\n"
+                                      "	border:0px solid;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "	\n"
+                                      "	background-color: rgb(152, 255, 140);\n"
+                                      "}")
+
+        self.horizontalLayout_15.addWidget(self.btn_delete)
+
+        self.verticalLayout_3.addWidget(self.frame_33)
+
+        self.frame_34 = QFrame(self.frame_4)
+        self.frame_34.setObjectName(u"frame_34")
+        self.frame_34.setFrameShape(QFrame.StyledPanel)
+        self.frame_34.setFrameShadow(QFrame.Raised)
+        self.frame_34.setStyleSheet(u"border: 2px solid")
+        self.verticalLayout_21 = QVBoxLayout(self.frame_34)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.tableWidget = QTableWidget(self.frame_34)
         if (self.tableWidget.columnCount() < 5):
                 self.tableWidget.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
@@ -179,52 +267,49 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+
+        self.tableWidget.setColumnWidth(0, 45)
+        self.tableWidget.setColumnWidth(1, 70)
+        self.tableWidget.setColumnWidth(2, 55)
+        self.tableWidget.setColumnWidth(3, 70)
+        self.tableWidget.setColumnWidth(4, 55)
+
         self.tableWidget.setObjectName(u"tableWidget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
-        self.tableWidget.setSizePolicy(sizePolicy1)
+        sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy)
 
-        self.horizontalLayout_14.addWidget(self.tableWidget)
+        self.verticalLayout_21.addWidget(self.tableWidget)
 
-        self.verticalLayout_21.addWidget(self.frame_33)
+        self.verticalLayout_3.addWidget(self.frame_34)
 
         self.verticalLayout_2.addWidget(self.frame_4)
 
         self.top_menus_2 = QFrame(self.frame_left_menu)
         self.top_menus_2.setObjectName(u"top_menus_2")
-        self.top_menus_2.setMaximumSize(QSize(16777215, 200))
+        self.top_menus_2.setMaximumSize(QSize(16777215, 100))
         self.top_menus_2.setFrameShape(QFrame.NoFrame)
         self.top_menus_2.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.top_menus_2)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(5, 2, 5, 2)
-        self.btn_open_2 = QPushButton(self.top_menus_2)
-        self.btn_open_2.setObjectName(u"btn_open_2")
-        self.btn_open_2.setMinimumSize(QSize(0, 40))
-        self.btn_open_2.setStyleSheet(style)
-
-        self.verticalLayout_8.addWidget(self.btn_open_2)
-
         self.btn_save_2 = QPushButton(self.top_menus_2)
         self.btn_save_2.setObjectName(u"btn_save_2")
         self.btn_save_2.setMinimumSize(QSize(0, 40))
-        self.btn_save_2.setStyleSheet(style)
+        self.btn_save_2.setStyleSheet(u"QPushButton{\n"
+                                      "	color: rgb(255, 255, 255);\n"
+                                      "	\n"
+                                      "	background-color: rgb(129, 129, 129);\n"
+                                      "	border:0px solid;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "	\n"
+                                      "	background-color: rgb(152, 255, 140);\n"
+                                      "}")
 
         self.verticalLayout_8.addWidget(self.btn_save_2)
 
-        self.btn_new_file_2 = QPushButton(self.top_menus_2)
-        self.btn_new_file_2.setObjectName(u"btn_new_file_2")
-        self.btn_new_file_2.setMinimumSize(QSize(0, 40))
-        self.btn_new_file_2.setStyleSheet(style)
-
-        self.verticalLayout_8.addWidget(self.btn_new_file_2)
-
-
         self.verticalLayout_2.addWidget(self.top_menus_2)
-
 
         self.horizontalLayout_2.addWidget(self.frame_left_menu)
 
@@ -490,10 +575,10 @@ class Ui_MainWindow(object):
         changeBtnIcon(self.btn_toggle, "./icon/left.png", 24)
         # changeBtnIcon(self.btn_home, "./icon/home.png", 24)
         # changeBtnIcon(self.btn_anal, "./icon/report.png", 24)
-        changeBtnIcon(self.btn_new_file, "./icon/new_file.png", 24)
-        changeBtnIcon(self.btn_open_2, "./icon/open_file.png", 24)
+        # changeBtnIcon(self.btn_new_file, "./icon/new_file.png", 24)
+        # changeBtnIcon(self.btn_open_2, "./icon/open_file.png", 24)
         changeBtnIcon(self.btn_save_2, "./icon/save.png", 24)
-        changeBtnIcon(self.btn_new_file_2, "./icon/setting.png", 24)
+        # changeBtnIcon(self.btn_new_file_2, "./icon/setting.png", 24)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -510,10 +595,14 @@ class Ui_MainWindow(object):
         self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u"  메뉴", None))
         # self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
         # self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
-        self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"  새로운 파일 열기", None))
-        self.btn_open_2.setText(QCoreApplication.translate("MainWindow", u"  열기", None))
+        self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"NEW", None))
+        self.btn_add.setText(QCoreApplication.translate("MainWindow", u"add", None))
+        self.btn_open.setText(QCoreApplication.translate("MainWindow", u"open", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"~", None))
+        self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
+        self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
+
         self.btn_save_2.setText(QCoreApplication.translate("MainWindow", u"  저장", None))
-        self.btn_new_file_2.setText(QCoreApplication.translate("MainWindow", u"  설정", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
 #if QT_CONFIG(tooltip)
         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
@@ -535,8 +624,6 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow",
                                                              u"\uae30\uc874\uc758 \uc800\uc7a5\ub41c \uc9c4\ub2e8 \ud30c\uc77c \uc5f4\uae30",
                                                              None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"\uac80\uc0c9", None))
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
         __qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         __qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\uc120\ud0dd", None));
         __qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
