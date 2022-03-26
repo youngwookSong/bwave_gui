@@ -376,6 +376,9 @@ QPushButton:hover{
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);</string>
                      </property>
+                     <property name="calendarPopup">
+                      <bool>true</bool>
+                     </property>
                     </widget>
                    </item>
                    <item>
@@ -392,6 +395,9 @@ QPushButton:hover{
                     <widget class="QDateEdit" name="dateEdit_2">
                      <property name="styleSheet">
                       <string notr="true">color: rgb(0, 0, 0);</string>
+                     </property>
+                     <property name="calendarPopup">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
