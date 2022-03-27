@@ -268,11 +268,15 @@ class Ui_MainWindow(object):
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
 
+        self.tableWidget.setColumnWidth(-1, 30)
         self.tableWidget.setColumnWidth(0, 45)
         self.tableWidget.setColumnWidth(1, 70)
         self.tableWidget.setColumnWidth(2, 55)
         self.tableWidget.setColumnWidth(3, 70)
         self.tableWidget.setColumnWidth(4, 55)
+        self.tableWidget.setShowGrid(True)
+        self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)  # edit 금지 모드
+
 
         self.tableWidget.setObjectName(u"tableWidget")
         sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())

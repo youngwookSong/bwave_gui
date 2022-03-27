@@ -115,26 +115,27 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animation.start()
 
-    ## 테이블에 데이터 추가
-    def add_table_data(self):
-        self.row += 1
-        self.ui.tableWidget.setRowCount(self.row)
-
-        new_data = {"선택": 'QCheckBox', "회원ID": "12456", "이름": "홍길동", "검사일시": "2022-01-01", "점수": "60"}
-
-        ckbox = QCheckBox()
+    ## 각 row의 해당하는 고유의 체크박스 만들기
+    def makeChbox(self, idx):
+        # 고유의 이름을 가지는 체크박스 만들어야되는데 안되네...
+        self.ckbox = QCheckBox()
+        # self.ckbox.setObjectName("ckbox{}".format(idx))
         cellWidget = QWidget()
         layoutCB = QHBoxLayout(cellWidget)
-        layoutCB.addWidget(ckbox)
+        layoutCB.addWidget(self.ckbox)
         layoutCB.setAlignment(QtCore.Qt.AlignCenter)
-        layoutCB.setContentsMargins(0,0,0,0)
+        layoutCB.setContentsMargins(0, 0, 0, 0)
         cellWidget.setLayout(layoutCB)
+        return cellWidget
 
-        self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
-        self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(new_data["회원ID"]))
-        self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(new_data["이름"]))
-        self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(new_data["검사일시"]))
-        self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(new_data["점수"]))
+    ## 테이블에 데이터 삭제
+    def remove_table_data(self):
+        # print(self.ckbox1.checkState())
+        self.ui.tableWidget.removeRow(0)
+        del self.data[-1]
+
+        with open('data.pickle', 'wb') as f:
+            pickle.dump(self.data, f)
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):
@@ -168,21 +169,43 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
             print(file, name, birth, num, date, sex)
 
-            # self.ui.pages.setCurrentWidget(self.ui.anal) #분석 화면으로 이동
-            # TODO: menu_bar에 버튼 스타일도 바꿔야함. self.set_page를 쓰면되는데 에러
-
             # 탭 추가 및 해당 탭으로 이동
             current_tab = QWidget()
             self.ui.tabWidget.addTab(current_tab, name)
             self.ui.tabWidget.setCurrentWidget(current_tab)
 
-            # 알고리즘 돌림
-            md = model_test(file)
-            md.test()
-            y_pred = md.y_pred
-            y_pred_proba = md.y_pred_proba
+            self.row += 1
+            self.ui.tableWidget.setRowCount(self.row)
 
-            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
+            ## 새로운 데이터 기존 data에 추가 및 pickle파일 저장
+            new_data = {"선택": 'QCheckBox', "회원ID": num, "이름": name, "검사일시": date, "점수": "70"}
+            self.data.append(new_data)
+
+            with open('data.pickle', 'wb') as f:
+                pickle.dump(self.data, f)
+
+            self.ckbox = QCheckBox()
+            self.ckbox.setObjectName("ckbox{}".format(self.row - 1))
+            cellWidget = QWidget()
+            layoutCB = QHBoxLayout(cellWidget)
+            layoutCB.addWidget(self.ckbox)
+            layoutCB.setAlignment(QtCore.Qt.AlignCenter)
+            layoutCB.setContentsMargins(0, 0, 0, 0)
+            cellWidget.setLayout(layoutCB)
+
+            self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
+            self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(new_data["회원ID"]))
+            self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(new_data["이름"]))
+            self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(new_data["검사일시"]))
+            self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(new_data["점수"]))
+
+            # 알고리즘 돌림
+            # md = model_test(file)
+            # md.test()
+            # y_pred = md.y_pred
+            # y_pred_proba = md.y_pred_proba
+            #
+            # self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
 
 
 

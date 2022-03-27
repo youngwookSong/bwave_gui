@@ -6,6 +6,7 @@ from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 from dummy_data import dummy_data
+import pickle
 
 #imort gui file
 from ui_main import Ui_MainWindow
@@ -46,15 +47,26 @@ class MainView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
+        # with open('data.pickle', 'wb') as f:
+        #     pickle.dump([], f)
+
         ## load dummy data
-        self.row = len(dummy_data)
+        with open('data.pickle', 'rb') as f:
+            self.data = pickle.load(f)
+
+        print(self.data)
+
+        self.row = len(self.data)
         self.ui.tableWidget.setRowCount(self.row)
-        for row, person in enumerate(dummy_data):
-            self.ui.tableWidget.setItem(row, 0, QTableWidgetItem(person["선택"]))
+
+        for row, person in enumerate(self.data):
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.makeChbox(self,row))
             self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(person["회원ID"]))
             self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(person["이름"]))
             self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(person["검사일시"]))
             self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(person["점수"]))
+
+        # print(self.ckbox1.checkState())
 
         self.show()
 
@@ -64,15 +76,15 @@ class MainView(QMainWindow):
     def control(self):
         # 메뉴 토글 버튼
         self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
+        #
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.add_table_data(self))
-        # # home 버튼
-        # self.ui.btn_home.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.home))
-        # # analysis 버튼
-        # self.ui.btn_anal.clicked.connect(lambda: UIFunctions.set_page(self, self.ui.anal))
+
         # new file 버튼
         self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
         # 홈 화면 new file 버튼
         self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        # 삭제 버튼
+        self.ui.btn_delete.clicked.connect(lambda: UIFunctions.remove_table_data(self))
 
 
 if __name__ == '__main__':
