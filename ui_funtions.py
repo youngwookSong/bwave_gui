@@ -22,7 +22,6 @@ def afterChange(button, text):
     button.setStyleSheet(style)
     button.setText(text)
 
-
 class UIFunctions(MainView): #main.py의 클래스를 상속
     def maximize_restore(self):
         global GLOBAL_STATE
@@ -117,22 +116,30 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
     ## 각 row의 해당하는 고유의 체크박스 만들기
     def makeChbox(self, idx):
-        # 고유의 이름을 가지는 체크박스 만들어야되는데 안되네...
-        self.ckbox = QCheckBox()
-        # self.ckbox.setObjectName("ckbox{}".format(idx))
+        # 고유의 이름을 가지는 체크박스 만들어야되는데 안되네... -> list로 해결
+        ckbox = QCheckBox()
         cellWidget = QWidget()
         layoutCB = QHBoxLayout(cellWidget)
-        layoutCB.addWidget(self.ckbox)
+        layoutCB.addWidget(ckbox)
         layoutCB.setAlignment(QtCore.Qt.AlignCenter)
         layoutCB.setContentsMargins(0, 0, 0, 0)
         cellWidget.setLayout(layoutCB)
+
+        self.checkboxList.append(ckbox)
+        print(self.checkboxList)
         return cellWidget
 
     ## 테이블에 데이터 삭제
     def remove_table_data(self):
-        # print(self.ckbox1.checkState())
-        self.ui.tableWidget.removeRow(0)
-        del self.data[-1]
+        print(self.checkboxList)
+        delIdx = []
+        for idx, chbox in enumerate(self.checkboxList):
+            if chbox.isChecked() == True:
+                self.ui.tableWidget.removeRow(idx)
+                del self.data[idx]
+                del self.checkboxList[idx]
+                self.row -= 1
+                print("data: ", self.data)
 
         with open('data.pickle', 'wb') as f:
             pickle.dump(self.data, f)
@@ -167,7 +174,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self._dialog_loading = Ui_Dialog_loading #loading bar 열기
 
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
-            print(file, name, birth, num, date, sex)
+            # print(file, name, birth, num, date, sex)
 
             # 탭 추가 및 해당 탭으로 이동
             current_tab = QWidget()
@@ -184,14 +191,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             with open('data.pickle', 'wb') as f:
                 pickle.dump(self.data, f)
 
-            self.ckbox = QCheckBox()
-            self.ckbox.setObjectName("ckbox{}".format(self.row - 1))
+            ckbox = QCheckBox()
             cellWidget = QWidget()
             layoutCB = QHBoxLayout(cellWidget)
-            layoutCB.addWidget(self.ckbox)
+            layoutCB.addWidget(ckbox)
             layoutCB.setAlignment(QtCore.Qt.AlignCenter)
             layoutCB.setContentsMargins(0, 0, 0, 0)
             cellWidget.setLayout(layoutCB)
+            self.checkboxList.append(ckbox)
 
             self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
             self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(new_data["회원ID"]))

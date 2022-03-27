@@ -28,8 +28,8 @@ class MainView(QMainWindow):
         self._dialog = None # new file의 dialog
 
         # 왼쪽 메뉴바에서 활성화 된 메뉴 색 변경
-        self.activepage = self.ui.btn_save_2
-        self.activepage.setStyleSheet(active_style)
+        # self.activepage = self.ui.btn_save_2
+        # self.activepage.setStyleSheet(active_style)
 
         self.prep_activepage = None
         self.menu_state = "open"
@@ -58,6 +58,8 @@ class MainView(QMainWindow):
 
         self.row = len(self.data)
         self.ui.tableWidget.setRowCount(self.row)
+
+        self.checkboxList = [] # 체크박스 리스트 저장하기
 
         for row, person in enumerate(self.data):
             self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.makeChbox(self,row))

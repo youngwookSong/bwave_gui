@@ -581,7 +581,7 @@ class Ui_MainWindow(object):
         # changeBtnIcon(self.btn_anal, "./icon/report.png", 24)
         # changeBtnIcon(self.btn_new_file, "./icon/new_file.png", 24)
         # changeBtnIcon(self.btn_open_2, "./icon/open_file.png", 24)
-        changeBtnIcon(self.btn_save_2, "./icon/save.png", 24)
+        # changeBtnIcon(self.btn_save_2, "./icon/save.png", 24)
         # changeBtnIcon(self.btn_new_file_2, "./icon/setting.png", 24)
 
 
@@ -606,7 +606,7 @@ class Ui_MainWindow(object):
         self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
 
-        self.btn_save_2.setText(QCoreApplication.translate("MainWindow", u"  저장", None))
+        self.btn_save_2.setText(QCoreApplication.translate("MainWindow", u"분석하기", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
 #if QT_CONFIG(tooltip)
         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
