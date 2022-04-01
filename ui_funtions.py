@@ -214,8 +214,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             #
             # self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
 
-
-
         else: #취소 버튼 눌렀을때
             print("cancel")
 

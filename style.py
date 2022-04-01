@@ -1,5 +1,18 @@
 ## style sheet
 
+btn_style = (u"QPushButton{\n"
+            "	color: rgb(255, 255, 255);\n"
+            "	\n"
+            "	background-color: rgb(129, 129, 129);\n"
+            "	border:0px solid;\n"
+            "	border-radius:4px;\n"
+            "}\n"
+            "QPushButton:hover{\n"
+            "	\n"
+            "	background-color: rgb(152, 255, 140);\n"
+            "}"
+)
+
 style = (u"QPushButton{\n"
         "	font: 75 14pt \"\ub9d1\uc740 \uace0\ub515\";\n"
         "	\n"

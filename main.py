@@ -78,7 +78,7 @@ class MainView(QMainWindow):
     def control(self):
         # 메뉴 토글 버튼
         self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
-        #
+        # add 버튼
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.add_table_data(self))
 
         # new file 버튼

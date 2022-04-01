@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.frame_left_menu.setObjectName(u"frame_left_menu")
         self.frame_left_menu.setMinimumSize(QSize(350, 0))
         self.frame_left_menu.setMaximumSize(QSize(350, 16777215))
-        self.frame_left_menu.setStyleSheet(u"background-color: rgb(8, 23, 28);")
+        self.frame_left_menu.setStyleSheet(u"background-color: rgb(40, 40, 45);")
         self.frame_left_menu.setFrameShape(QFrame.StyledPanel)
         self.frame_left_menu.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.frame_left_menu)
@@ -68,6 +68,7 @@ class Ui_MainWindow(object):
         self.frame_5.setMaximumSize(QSize(16777215, 40))
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
+        self.frame_5.setStyleSheet(u"background-color: rgb(53,56,69);")
         self.verticalLayout_9 = QVBoxLayout(self.frame_5)
         self.verticalLayout_9.setSpacing(2)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -103,16 +104,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btn_new_file.sizePolicy().hasHeightForWidth())
         self.btn_new_file.setSizePolicy(sizePolicy)
         self.btn_new_file.setMinimumSize(QSize(0, 40))
-        self.btn_new_file.setStyleSheet(u"QPushButton{\n"
-                                        "	color: rgb(255, 255, 255);\n"
-                                        "	\n"
-                                        "	background-color: rgb(129, 129, 129);\n"
-                                        "	border:0px solid;\n"
-                                        "}\n"
-                                        "QPushButton:hover{\n"
-                                        "	\n"
-                                        "	background-color: rgb(152, 255, 140);\n"
-                                        "}")
+        self.btn_new_file.setStyleSheet(btn_style)
 
         self.horizontalLayout_13.addWidget(self.btn_new_file)
 
@@ -121,16 +113,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btn_add.sizePolicy().hasHeightForWidth())
         self.btn_add.setSizePolicy(sizePolicy)
         self.btn_add.setMinimumSize(QSize(0, 40))
-        self.btn_add.setStyleSheet(u"QPushButton{\n"
-                                   "	color: rgb(255, 255, 255);\n"
-                                   "	\n"
-                                   "	background-color: rgb(129, 129, 129);\n"
-                                   "	border:0px solid;\n"
-                                   "}\n"
-                                   "QPushButton:hover{\n"
-                                   "	\n"
-                                   "	background-color: rgb(152, 255, 140);\n"
-                                   "}")
+        self.btn_add.setStyleSheet(btn_style)
 
         self.horizontalLayout_13.addWidget(self.btn_add)
 
@@ -139,16 +122,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btn_open.sizePolicy().hasHeightForWidth())
         self.btn_open.setSizePolicy(sizePolicy)
         self.btn_open.setMinimumSize(QSize(0, 40))
-        self.btn_open.setStyleSheet(u"QPushButton{\n"
-                                    "	color: rgb(255, 255, 255);\n"
-                                    "	\n"
-                                    "	background-color: rgb(129, 129, 129);\n"
-                                    "	border:0px solid;\n"
-                                    "}\n"
-                                    "QPushButton:hover{\n"
-                                    "	\n"
-                                    "	background-color: rgb(152, 255, 140);\n"
-                                    "}")
+        self.btn_open.setStyleSheet(btn_style)
 
         self.horizontalLayout_13.addWidget(self.btn_open)
 
@@ -160,14 +134,14 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.frame_4)
-        self.verticalLayout_3.setSpacing(6)
+        self.verticalLayout_3.setSpacing(12)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(12,0,12,0)
         self.frame_32 = QFrame(self.frame_4)
         self.frame_32.setObjectName(u"frame_32")
         self.frame_32.setMaximumSize(QSize(16777215, 60))
         self.frame_32.setFrameShape(QFrame.StyledPanel)
         self.frame_32.setFrameShadow(QFrame.Raised)
-        self.frame_32.setStyleSheet(u"border: 2px solid")
         self.horizontalLayout_14 = QHBoxLayout(self.frame_32)
         self.horizontalLayout_14.setSpacing(0)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
@@ -194,16 +168,51 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.frame_32)
 
+        self.frame_35 = QFrame(self.frame_4)
+        self.frame_35.setObjectName(u"frame_35")
+        self.frame_35.setMaximumSize(QSize(16777215, 50))
+        self.frame_35.setFrameShape(QFrame.StyledPanel)
+        self.frame_35.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_16 = QHBoxLayout(self.frame_35)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.btn_today = QPushButton(self.frame_35)
+        self.btn_today.setObjectName(u"btn_today")
+        sizePolicy.setHeightForWidth(self.btn_today.sizePolicy().hasHeightForWidth())
+        self.btn_today.setSizePolicy(sizePolicy)
+        self.btn_today.setStyleSheet(btn_style)
+
+        self.horizontalLayout_16.addWidget(self.btn_today)
+
+        self.btn_week = QPushButton(self.frame_35)
+        self.btn_week.setObjectName(u"btn_week")
+        sizePolicy.setHeightForWidth(self.btn_week.sizePolicy().hasHeightForWidth())
+        self.btn_week.setSizePolicy(sizePolicy)
+        self.btn_week.setStyleSheet(btn_style)
+
+        self.horizontalLayout_16.addWidget(self.btn_week)
+
+        self.btn_month = QPushButton(self.frame_35)
+        self.btn_month.setObjectName(u"btn_month")
+        sizePolicy.setHeightForWidth(self.btn_month.sizePolicy().hasHeightForWidth())
+        self.btn_month.setSizePolicy(sizePolicy)
+        self.btn_month.setStyleSheet(btn_style)
+
+        self.horizontalLayout_16.addWidget(self.btn_month)
+
+        self.verticalLayout_3.addWidget(self.frame_35)
+
         self.frame_33 = QFrame(self.frame_4)
         self.frame_33.setObjectName(u"frame_33")
         self.frame_33.setMaximumSize(QSize(16777215, 60))
         self.frame_33.setFrameShape(QFrame.StyledPanel)
         self.frame_33.setFrameShadow(QFrame.Raised)
-        self.frame_33.setStyleSheet(u"border: 2px solid")
         self.horizontalLayout_15 = QHBoxLayout(self.frame_33)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.horizontalLayout_15.setContentsMargins(0, 6, 0, 6)
         self.lineEdit = QLineEdit(self.frame_33)
         self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setStyleSheet(u"border: 2px solid")
 
         self.horizontalLayout_15.addWidget(self.lineEdit)
 
@@ -212,17 +221,8 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btn_search.sizePolicy().hasHeightForWidth())
         self.btn_search.setSizePolicy(sizePolicy)
         self.btn_search.setMinimumSize(QSize(40, 0))
-        self.btn_search.setMaximumSize(QSize(40, 16777215))
-        self.btn_search.setStyleSheet(u"QPushButton{\n"
-                                      "	color: rgb(255, 255, 255);\n"
-                                      "	\n"
-                                      "	background-color: rgb(129, 129, 129);\n"
-                                      "	border:0px solid;\n"
-                                      "}\n"
-                                      "QPushButton:hover{\n"
-                                      "	\n"
-                                      "	background-color: rgb(152, 255, 140);\n"
-                                      "}")
+        self.btn_search.setMaximumSize(QSize(40, 40))
+        self.btn_search.setStyleSheet(btn_style)
 
         self.horizontalLayout_15.addWidget(self.btn_search)
 
@@ -231,17 +231,8 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btn_delete.sizePolicy().hasHeightForWidth())
         self.btn_delete.setSizePolicy(sizePolicy)
         self.btn_delete.setMinimumSize(QSize(40, 0))
-        self.btn_delete.setMaximumSize(QSize(40, 16777215))
-        self.btn_delete.setStyleSheet(u"QPushButton{\n"
-                                      "	color: rgb(255, 255, 255);\n"
-                                      "	\n"
-                                      "	background-color: rgb(129, 129, 129);\n"
-                                      "	border:0px solid;\n"
-                                      "}\n"
-                                      "QPushButton:hover{\n"
-                                      "	\n"
-                                      "	background-color: rgb(152, 255, 140);\n"
-                                      "}")
+        self.btn_delete.setMaximumSize(QSize(40, 40))
+        self.btn_delete.setStyleSheet(btn_style)
 
         self.horizontalLayout_15.addWidget(self.btn_delete)
 
@@ -251,10 +242,11 @@ class Ui_MainWindow(object):
         self.frame_34.setObjectName(u"frame_34")
         self.frame_34.setFrameShape(QFrame.StyledPanel)
         self.frame_34.setFrameShadow(QFrame.Raised)
-        self.frame_34.setStyleSheet(u"border: 2px solid")
         self.verticalLayout_21 = QVBoxLayout(self.frame_34)
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.tableWidget = QTableWidget(self.frame_34)
+        self.tableWidget.setStyleSheet(u"border: 2px solid")
         if (self.tableWidget.columnCount() < 5):
                 self.tableWidget.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
@@ -296,20 +288,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_8 = QVBoxLayout(self.top_menus_2)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.verticalLayout_8.setContentsMargins(5, 2, 5, 2)
+        self.verticalLayout_8.setContentsMargins(12, 12, 12, 12)
         self.btn_save_2 = QPushButton(self.top_menus_2)
         self.btn_save_2.setObjectName(u"btn_save_2")
         self.btn_save_2.setMinimumSize(QSize(0, 40))
-        self.btn_save_2.setStyleSheet(u"QPushButton{\n"
-                                      "	color: rgb(255, 255, 255);\n"
-                                      "	\n"
-                                      "	background-color: rgb(129, 129, 129);\n"
-                                      "	border:0px solid;\n"
-                                      "}\n"
-                                      "QPushButton:hover{\n"
-                                      "	\n"
-                                      "	background-color: rgb(152, 255, 140);\n"
-                                      "}")
+        self.btn_save_2.setStyleSheet(btn_style)
 
         self.verticalLayout_8.addWidget(self.btn_save_2)
 
@@ -327,8 +310,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.title_bar = QFrame(self.content_frame)
         self.title_bar.setObjectName(u"title_bar")
-        self.title_bar.setMinimumSize(QSize(0, 50))
-        self.title_bar.setStyleSheet(u"background-color: rgb(220, 220, 220);")
+        self.title_bar.setMinimumSize(QSize(0, 40))
+        self.title_bar.setStyleSheet(u"background-color: rgb(53,56,69);")
         self.title_bar.setFrameShape(QFrame.NoFrame)
         self.title_bar.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.title_bar)
@@ -608,7 +591,11 @@ class Ui_MainWindow(object):
 
         self.btn_save_2.setText(QCoreApplication.translate("MainWindow", u"분석하기", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
-#if QT_CONFIG(tooltip)
+        self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))
+        self.btn_week.setText(QCoreApplication.translate("MainWindow", u"This Week", None))
+        self.btn_month.setText(QCoreApplication.translate("MainWindow", u"This Month", None))
+
+        #if QT_CONFIG(tooltip)
         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_min.setText("")
