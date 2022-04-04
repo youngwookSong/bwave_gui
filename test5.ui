@@ -360,13 +360,13 @@ QPushButton:hover{
                     <number>0</number>
                    </property>
                    <property name="leftMargin">
-                    <number>0</number>
+                    <number>12</number>
                    </property>
                    <property name="topMargin">
                     <number>0</number>
                    </property>
                    <property name="rightMargin">
-                    <number>0</number>
+                    <number>12</number>
                    </property>
                    <property name="bottomMargin">
                     <number>0</number>
@@ -525,7 +525,11 @@ QPushButton:hover{
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_15">
                    <item>
-                    <widget class="QLineEdit" name="lineEdit"/>
+                    <widget class="QLineEdit" name="lineEdit">
+                     <property name="clearButtonEnabled">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
                    </item>
                    <item>
                     <widget class="QPushButton" name="btn_search">
@@ -621,6 +625,12 @@ QPushButton:hover{
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
+                     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                      <bool>false</bool>
+                     </attribute>
+                     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+                      <bool>true</bool>
+                     </attribute>
                      <column>
                       <property name="text">
                        <string>선택</string>

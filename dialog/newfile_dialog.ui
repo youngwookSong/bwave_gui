@@ -210,7 +210,7 @@
                <item>
                 <widget class="QLabel" name="label_7">
                  <property name="text">
-                  <string>생년월일</string>
+                  <string>나이</string>
                  </property>
                 </widget>
                </item>
@@ -442,6 +442,23 @@
                <enum>QFrame::Raised</enum>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QDateEdit" name="dateEdit">
+                 <property name="displayFormat">
+                  <string>yyyy-MM-dd</string>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
+                 <property name="date">
+                  <date>
+                   <year>2022</year>
+                   <month>1</month>
+                   <day>1</day>
+                  </date>
+                 </property>
+                </widget>
+               </item>
                <item>
                 <widget class="QLineEdit" name="lineEdit_4"/>
                </item>

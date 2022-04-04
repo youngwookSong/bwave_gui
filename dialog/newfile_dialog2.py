@@ -55,6 +55,7 @@ class Ui_Dialog(QDialog):
 
         self.lineEdit = QLineEdit(self.frame_1)
         self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setPlaceholderText("파일 추가하기")
 
         self.horizontalLayout_2.addWidget(self.lineEdit)
 
@@ -271,11 +272,12 @@ class Ui_Dialog(QDialog):
         self.frame_9.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_9)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.lineEdit_4 = QLineEdit(self.frame_9)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.dateEdit = QDateEdit(self.frame_9)
+        self.dateEdit.setObjectName(u"dateEdit")
+        self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setDate(QDate(2022, 1, 1))
 
-        self.horizontalLayout_4.addWidget(self.lineEdit_4)
-
+        self.horizontalLayout_4.addWidget(self.dateEdit)
 
         self.verticalLayout_5.addWidget(self.frame_9)
 
@@ -316,7 +318,7 @@ class Ui_Dialog(QDialog):
         self.label_5.setText(QCoreApplication.translate("", u"\ub370\uc774\ud130, \uac1c\uc778\uc815\ubcf4\uc785\ub825", None))
         self.pushButton.setText(QCoreApplication.translate("", u"\uc5c5\ub85c\ub4dc", None))
         self.label_3.setText(QCoreApplication.translate("", u"\uc774\ub984", None))
-        self.label_7.setText(QCoreApplication.translate("", u"\uc0dd\ub144\uc6d4\uc77c", None))
+        self.label_7.setText(QCoreApplication.translate("Dialog", u"\ub098\uc774", None))
         self.label_4.setText(QCoreApplication.translate("", u"\uc131\ubcc4", None))
         self.radioButton_3.setText(QCoreApplication.translate("", u"\ub0a8\uc131", None))
         self.radioButton_4.setText(QCoreApplication.translate("", u"\uc5ec\uc131", None))
@@ -330,7 +332,7 @@ class Ui_Dialog(QDialog):
         name = self.lineEdit_3.text()
         birth = self.lineEdit_5.text()
         num = self.lineEdit_2.text()
-        date = self.lineEdit_4.text()
+        date = self.dateEdit.text()
         if self.radioButton_3.isChecked():
             sex = '남성'
         if self.radioButton_4.isChecked():

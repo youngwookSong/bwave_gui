@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_14 = QHBoxLayout(self.frame_32)
         self.horizontalLayout_14.setSpacing(0)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_14.setContentsMargins(12, 0, 12, 0)
         self.dateEdit = QDateEdit(self.frame_32)
         self.dateEdit.setObjectName(u"dateEdit")
         # self.dateEdit.setStyleSheet(u"color: rgb(0, 0, 0);")
@@ -212,7 +212,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15.setContentsMargins(0, 6, 0, 6)
         self.lineEdit = QLineEdit(self.frame_33)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setStyleSheet(u"border: 2px solid")
+        self.lineEdit.setStyleSheet(u"border: 2px solid;\n"
+                                    "height: 30px;\n"
+                                    "background-color: rgb(255, 255, 255);\n"
+                                    )
+        self.lineEdit.setClearButtonEnabled(True)
 
         self.horizontalLayout_15.addWidget(self.lineEdit)
 
@@ -259,6 +263,21 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+
+        # self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+
+        # 사이즈 자동 조절 코드
+        # header = self.tableWidget.horizontalHeader()
+        # twidth = header.width()
+        # width = []
+        # for column in range(header.count()):
+        #         header.setSectionResizeMode(column, QHeaderView.ResizeToContents)
+        #         width.append(header.sectionSize(column))
+        #
+        # wfactor = twidth / sum(width)
+        # for column in range(header.count()):
+        #         header.setSectionResizeMode(column, QHeaderView.Interactive)
+        #         header.resizeSection(column, width[column] * wfactor)
 
         self.tableWidget.setColumnWidth(-1, 30)
         self.tableWidget.setColumnWidth(0, 45)
@@ -582,9 +601,9 @@ class Ui_MainWindow(object):
         self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u"  메뉴", None))
         # self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
         # self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
-        self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"NEW", None))
-        self.btn_add.setText(QCoreApplication.translate("MainWindow", u"add", None))
-        self.btn_open.setText(QCoreApplication.translate("MainWindow", u"open", None))
+        self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"New", None))
+        self.btn_add.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.btn_open.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"~", None))
         self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
