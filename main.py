@@ -63,10 +63,18 @@ class MainView(QMainWindow):
 
         for row, person in enumerate(self.data):
             self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.makeChbox(self,row))
+
             self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(person["회원ID"]))
+            self.ui.tableWidget.item(row, 1).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(person["이름"]))
+            self.ui.tableWidget.item(row, 2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(person["검사일시"]))
+            self.ui.tableWidget.item(row, 3).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(person["점수"]))
+            self.ui.tableWidget.item(row, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+
+
+
 
         # print(self.ckbox1.checkState())
 

@@ -124,6 +124,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         layoutCB.setAlignment(QtCore.Qt.AlignCenter)
         layoutCB.setContentsMargins(0, 0, 0, 0)
         cellWidget.setLayout(layoutCB)
+        cellWidget.setStyleSheet(u"border:0px")
 
         self.checkboxList.append(ckbox)
         print(self.checkboxList)

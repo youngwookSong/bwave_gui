@@ -291,26 +291,42 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.tableWidget = QTableWidget(self.frame_34)
         self.tableWidget.setStyleSheet(u"border: 2px solid;\n"
-                                       "color: rgb(153, 153, 153);")
+                                       "color: rgb(153, 153, 153);\n"
+                                       "text-align: center;")
+
         if (self.tableWidget.columnCount() < 5):
                 self.tableWidget.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem.setTextAlignment(QtCore.Qt.AlignCenter)
+
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem1.setTextAlignment(QtCore.Qt.AlignCenter)
+
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+
         __qtablewidgetitem3 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
 
-        self.tableWidget.setColumnWidth(-1, 30)
-        self.tableWidget.setColumnWidth(0, 45)
-        self.tableWidget.setColumnWidth(1, 70)
-        self.tableWidget.setColumnWidth(2, 55)
-        self.tableWidget.setColumnWidth(3, 70)
-        self.tableWidget.setColumnWidth(4, 55)
+        # self.tableWidget.item(1,2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+
+        header = self.tableWidget.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        # self.tableWidget.setColumnWidth(-1, 30)
+        # self.tableWidget.setColumnWidth(0, 45)
+        # self.tableWidget.setColumnWidth(1, 70)
+        # self.tableWidget.setColumnWidth(2, 55)
+        # self.tableWidget.setColumnWidth(3, 70)
+        # self.tableWidget.setColumnWidth(4, 55)
         self.tableWidget.setShowGrid(True)
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)  # edit 금지 모드
 

@@ -274,7 +274,7 @@ class Ui_Dialog(QDialog):
         self.dateEdit = QDateEdit(self.frame_9)
         self.dateEdit.setObjectName(u"dateEdit")
         self.dateEdit.setCalendarPopup(True)
-        self.dateEdit_2.setDate(QDate.currentDate())
+        self.dateEdit.setDate(QDate.currentDate())
 
         self.horizontalLayout_4.addWidget(self.dateEdit)
 
