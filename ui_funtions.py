@@ -178,6 +178,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             # print(file, name, birth, num, date, sex)
 
             # 탭 추가 및 해당 탭으로 이동
+            self.ui.pages.setCurrentWidget(self.ui.anal)
             current_tab = QWidget()
             self.ui.tabWidget.addTab(current_tab, name)
             self.ui.tabWidget.setCurrentWidget(current_tab)
@@ -199,21 +200,26 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             layoutCB.setAlignment(QtCore.Qt.AlignCenter)
             layoutCB.setContentsMargins(0, 0, 0, 0)
             cellWidget.setLayout(layoutCB)
+            cellWidget.setStyleSheet(u"border:0px")
             self.checkboxList.append(ckbox)
 
             self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
             self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(new_data["회원ID"]))
+            self.ui.tableWidget.item(self.row - 1, 1).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(new_data["이름"]))
+            self.ui.tableWidget.item(self.row - 1, 2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(new_data["검사일시"]))
+            self.ui.tableWidget.item(self.row - 1, 3).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
             self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(new_data["점수"]))
+            self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
 
             # 알고리즘 돌림
-            # md = model_test(file)
-            # md.test()
-            # y_pred = md.y_pred
-            # y_pred_proba = md.y_pred_proba
-            #
-            # self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
+            md = model_test(file)
+            md.test()
+            y_pred = md.y_pred
+            y_pred_proba = md.y_pred_proba
+
+            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
 
         else: #취소 버튼 눌렀을때
             print("cancel")

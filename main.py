@@ -73,9 +73,6 @@ class MainView(QMainWindow):
             self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(person["점수"]))
             self.ui.tableWidget.item(row, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
 
-
-
-
         # print(self.ckbox1.checkState())
 
         self.show()
