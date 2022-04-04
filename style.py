@@ -3,13 +3,15 @@
 btn_style = (u"QPushButton{\n"
             "	color: rgb(255, 255, 255);\n"
             "	\n"
-            "	background-color: rgb(129, 129, 129);\n"
+            "	background-color: rgb(77, 90, 140);\n"
             "	border:0px solid;\n"
             "	border-radius:4px;\n"
+            "   font-size: 14px;\n"
+            "   font-style: bold;\n"
             "}\n"
             "QPushButton:hover{\n"
             "	\n"
-            "	background-color: rgb(152, 255, 140);\n"
+            "	background-color: rgba(77, 90, 140, 0.5);\n"
             "}"
 )
 

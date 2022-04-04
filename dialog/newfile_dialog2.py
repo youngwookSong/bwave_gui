@@ -274,16 +274,13 @@ class Ui_Dialog(QDialog):
         self.dateEdit = QDateEdit(self.frame_9)
         self.dateEdit.setObjectName(u"dateEdit")
         self.dateEdit.setCalendarPopup(True)
-        self.dateEdit.setDate(QDate(2022,1,1))
+        self.dateEdit_2.setDate(QDate.currentDate())
 
         self.horizontalLayout_4.addWidget(self.dateEdit)
 
-
         self.verticalLayout_5.addWidget(self.frame_9)
 
-
         self.horizontalLayout_3.addWidget(self.frame_5)
-
 
         self.verticalLayout.addWidget(self.frame_2)
 

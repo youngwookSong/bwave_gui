@@ -39,6 +39,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(255, 255, 255);")
         self.drop_frame.setFrameShape(QFrame.StyledPanel)
         self.drop_frame.setFrameShadow(QFrame.Raised)
+        # self.drop_frame.setStyleSheet(u"background-color: rgb(53,56,69);")
         self.verticalLayout_5 = QVBoxLayout(self.drop_frame)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -69,10 +70,11 @@ class Ui_MainWindow(object):
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
         self.frame_5.setStyleSheet(u"background-color: rgb(53,56,69);")
-        self.verticalLayout_9 = QVBoxLayout(self.frame_5)
-        self.verticalLayout_9.setSpacing(2)
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.verticalLayout_9.setContentsMargins(2, 2, 2, 2)
+        self.horizontalLayout_18 = QHBoxLayout(self.frame_5)
+        self.horizontalLayout_18.setSpacing(0)
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.horizontalLayout_18.setContentsMargins(2, 2, 2, 2)
+
         self.btn_toggle = QPushButton(self.frame_5)
         self.btn_toggle.setObjectName(u"btn_toggle")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
@@ -81,24 +83,41 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btn_toggle.sizePolicy().hasHeightForWidth())
         self.btn_toggle.setSizePolicy(sizePolicy)
         self.btn_toggle.setMinimumSize(QSize(0, 40))
-        self.btn_toggle.setMaximumSize(QSize(16777215, 40))
+        self.btn_toggle.setMaximumSize(QSize(45, 40))
         self.btn_toggle.setStyleSheet(style)
 
-        self.verticalLayout_9.addWidget(self.btn_toggle)
+        self.horizontalLayout_18.addWidget(self.btn_toggle)
+
+        self.frame_37 = QFrame(self.frame_5)
+        self.frame_37.setObjectName(u"frame_37")
+        self.frame_37.setFrameShape(QFrame.StyledPanel)
+        self.frame_37.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_9 = QVBoxLayout(self.frame_37)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(9,0,0,0)
+        self.label_18 = QLabel(self.frame_37)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setStyleSheet(u"color: rgb(255,255,255);\n"
+                                    "font-style: bold;\n"
+                                    "font-size: 16px")
+
+        self.verticalLayout_9.addWidget(self.label_18)
+
+        self.horizontalLayout_18.addWidget(self.frame_37)
 
         self.verticalLayout_2.addWidget(self.frame_5)
 
         self.top_menus = QFrame(self.frame_left_menu)
         self.top_menus.setObjectName(u"top_menus")
-        self.top_menus.setMaximumSize(QSize(16777215, 100))
+        self.top_menus.setMaximumSize(QSize(16777215, 130))
         self.top_menus.setFrameShape(QFrame.NoFrame)
         self.top_menus.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_13 = QHBoxLayout(self.top_menus)
         # ifndef Q_OS_MAC
-        self.horizontalLayout_13.setSpacing(-1)
+        self.horizontalLayout_13.setSpacing(20)
         # endif
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalLayout_13.setContentsMargins(-1, 12, -1, 12)
+        self.horizontalLayout_13.setContentsMargins(12, 30, 12, 12)
         self.btn_new_file = QPushButton(self.top_menus)
         self.btn_new_file.setObjectName(u"btn_new_file")
         sizePolicy.setHeightForWidth(self.btn_new_file.sizePolicy().hasHeightForWidth())
@@ -150,6 +169,7 @@ class Ui_MainWindow(object):
         self.dateEdit.setObjectName(u"dateEdit")
         self.dateEdit.setStyleSheet(u"color: rgb(153, 153, 153);")
         self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setDate(QDate(2021, 1, 1))
 
         self.horizontalLayout_14.addWidget(self.dateEdit)
 
@@ -164,8 +184,27 @@ class Ui_MainWindow(object):
         self.dateEdit_2.setObjectName(u"dateEdit_2")
         self.dateEdit_2.setStyleSheet(u"color: rgb(153, 153, 153);")
         self.dateEdit_2.setCalendarPopup(True)
+        self.dateEdit_2.setDate(QDate.currentDate())
 
         self.horizontalLayout_14.addWidget(self.dateEdit_2)
+
+        self.frame_36 = QFrame(self.frame_32)
+        self.frame_36.setObjectName(u"frame_36")
+        self.frame_36.setFrameShape(QFrame.StyledPanel)
+        self.frame_36.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_17 = QHBoxLayout(self.frame_36)
+        self.horizontalLayout_17.setSpacing(0)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.horizontalLayout_17.setContentsMargins(20, -1, 0, -1)
+        self.pushButton_3 = QPushButton(self.frame_36)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
+        self.pushButton_3.setSizePolicy(sizePolicy)
+        self.pushButton_3.setStyleSheet(btn_style)
+
+        self.horizontalLayout_17.addWidget(self.pushButton_3)
+
+        self.horizontalLayout_14.addWidget(self.frame_36)
 
         self.verticalLayout_3.addWidget(self.frame_32)
 
@@ -175,6 +214,7 @@ class Ui_MainWindow(object):
         self.frame_35.setFrameShape(QFrame.StyledPanel)
         self.frame_35.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_16 = QHBoxLayout(self.frame_35)
+        self.horizontalLayout_16.setSpacing(20)
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
         self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.btn_today = QPushButton(self.frame_35)
@@ -210,6 +250,7 @@ class Ui_MainWindow(object):
         self.frame_33.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_15 = QHBoxLayout(self.frame_33)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        # self.horizontalLayout_15.setSpacing(20)
         self.horizontalLayout_15.setContentsMargins(0, 6, 0, 6)
         self.lineEdit = QLineEdit(self.frame_33)
         self.lineEdit.setObjectName(u"lineEdit")
@@ -308,10 +349,11 @@ class Ui_MainWindow(object):
         self.content_frame.setObjectName(u"content_frame")
         self.content_frame.setFrameShape(QFrame.StyledPanel)
         self.content_frame.setFrameShadow(QFrame.Raised)
+        self.content_frame.setStyleSheet(u"background-color: rgb(53,56,69);")
         self.verticalLayout_4 = QVBoxLayout(self.content_frame)
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setContentsMargins(1, 1, 1, 1)
         self.title_bar = QFrame(self.content_frame)
         self.title_bar.setObjectName(u"title_bar")
         self.title_bar.setMinimumSize(QSize(0, 40))
@@ -419,6 +461,7 @@ class Ui_MainWindow(object):
 
         self.pages = QStackedWidget(self.content_frame)
         self.pages.setObjectName(u"pages")
+        self.pages.setStyleSheet(u"background-color: rgb(255,255,255);")
         self.home = QWidget()
         self.home.setObjectName(u"home")
         self.verticalLayout = QVBoxLayout(self.home)
@@ -584,13 +627,15 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u"  메뉴", None))
+        self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u" 메뉴", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Maumgyeol-Depression   ver. 1.0.0"))
         # self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
         # self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
         self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"NEW", None))
         self.btn_add.setText(QCoreApplication.translate("MainWindow", u"add", None))
         self.btn_open.setText(QCoreApplication.translate("MainWindow", u"open", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"~", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"검색", None))
         self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
 
