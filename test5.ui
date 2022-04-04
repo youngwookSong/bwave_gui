@@ -219,7 +219,7 @@ QPushButton:hover{
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_13">
                 <property name="spacing">
-                 <number>-1</number>
+                 <number>6</number>
                 </property>
                 <property name="topMargin">
                  <number>12</number>
@@ -620,6 +620,9 @@ QPushButton:hover{
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
                      </property>
                      <column>
                       <property name="text">

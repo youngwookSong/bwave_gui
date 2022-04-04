@@ -271,10 +271,12 @@ class Ui_Dialog(QDialog):
         self.frame_9.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_9)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.lineEdit_4 = QLineEdit(self.frame_9)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.dateEdit = QDateEdit(self.frame_9)
+        self.dateEdit.setObjectName(u"dateEdit")
+        self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setDate(QDate(2022,1,1))
 
-        self.horizontalLayout_4.addWidget(self.lineEdit_4)
+        self.horizontalLayout_4.addWidget(self.dateEdit)
 
 
         self.verticalLayout_5.addWidget(self.frame_9)
@@ -330,7 +332,7 @@ class Ui_Dialog(QDialog):
         name = self.lineEdit_3.text()
         birth = self.lineEdit_5.text()
         num = self.lineEdit_2.text()
-        date = self.lineEdit_4.text()
+        date = self.dateEdit.text()
         if self.radioButton_3.isChecked():
             sex = '남성'
         if self.radioButton_4.isChecked():

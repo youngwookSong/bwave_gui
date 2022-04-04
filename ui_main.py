@@ -145,23 +145,24 @@ class Ui_MainWindow(object):
         self.horizontalLayout_14 = QHBoxLayout(self.frame_32)
         self.horizontalLayout_14.setSpacing(0)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_14.setContentsMargins(12, 0, 12, 0)
         self.dateEdit = QDateEdit(self.frame_32)
         self.dateEdit.setObjectName(u"dateEdit")
-        # self.dateEdit.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.dateEdit.setStyleSheet(u"color: rgb(153, 153, 153);")
         self.dateEdit.setCalendarPopup(True)
 
         self.horizontalLayout_14.addWidget(self.dateEdit)
 
         self.label_17 = QLabel(self.frame_32)
         self.label_17.setObjectName(u"label_17")
+        self.label_17.setStyleSheet(u"color: rgb(153, 153, 153);")
         self.label_17.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_14.addWidget(self.label_17)
 
         self.dateEdit_2 = QDateEdit(self.frame_32)
         self.dateEdit_2.setObjectName(u"dateEdit_2")
-        # self.dateEdit_2.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.dateEdit_2.setStyleSheet(u"color: rgb(153, 153, 153);")
         self.dateEdit_2.setCalendarPopup(True)
 
         self.horizontalLayout_14.addWidget(self.dateEdit_2)
@@ -212,8 +213,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15.setContentsMargins(0, 6, 0, 6)
         self.lineEdit = QLineEdit(self.frame_33)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setStyleSheet(u"border: 2px solid")
-
+        self.lineEdit.setStyleSheet(u"border: 2px solid;\n"
+                                    "height: 30px;\n"
+                                    "background-color: rgb(255, 255, 255)")
+        self.lineEdit.setClearButtonEnabled(True)
         self.horizontalLayout_15.addWidget(self.lineEdit)
 
         self.btn_search = QPushButton(self.frame_33)
@@ -246,7 +249,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.tableWidget = QTableWidget(self.frame_34)
-        self.tableWidget.setStyleSheet(u"border: 2px solid")
+        self.tableWidget.setStyleSheet(u"border: 2px solid;\n"
+                                       "color: rgb(153, 153, 153);")
         if (self.tableWidget.columnCount() < 5):
                 self.tableWidget.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
@@ -329,6 +333,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setContentsMargins(15, 0, 0, 0)
         self.label_title = QLabel(self.frame_title)
         self.label_title.setObjectName(u"label_title")
+        self.label_title.setStyleSheet(u"color: rgb(153, 153, 153)")
         font = QFont()
         font.setFamily(u"Franklin Gothic Heavy")
         font.setPointSize(14)
