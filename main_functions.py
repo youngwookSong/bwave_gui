@@ -5,10 +5,11 @@ from PySide6.QtWidgets import QTableWidgetItem
 from main import *
 from dialog.newfile_dialog2 import Ui_Dialog
 from dialog.loadingBar import Ui_Dialog_loading
-from tab_frame import Ui_tabFrame
+
+from ui.tab_frame import Ui_tabFrame
+
 from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
-from dummy_data import dummy_data
 
 from style import *
 
@@ -219,7 +220,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             y_pred = md.y_pred
             y_pred_proba = md.y_pred_proba
 
-            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #프레임 뿌려줌
+            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #tab_frame에 프레임 뿌려줌
 
         else: #취소 버튼 눌렀을때
             print("cancel")

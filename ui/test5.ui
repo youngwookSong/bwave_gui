@@ -848,7 +848,7 @@ QPushButton:hover{
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <layout class="QHBoxLayout" name="horizontalLayout_19">
                    <property name="spacing">
                     <number>0</number>
                    </property>
@@ -874,6 +874,13 @@ QPushButton:hover{
                      </property>
                      <property name="text">
                       <string>title</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="btn_logout">
+                     <property name="text">
+                      <string>로그아웃</string>
                      </property>
                     </widget>
                    </item>

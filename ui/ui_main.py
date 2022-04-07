@@ -385,10 +385,10 @@ class Ui_MainWindow(object):
         self.frame_title.setMinimumSize(QSize(0, 0))
         self.frame_title.setFrameShape(QFrame.StyledPanel)
         self.frame_title.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_6 = QVBoxLayout(self.frame_title)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(15, 0, 0, 0)
+        self.horizontalLayout_19 = QHBoxLayout(self.frame_title)
+        self.horizontalLayout_19.setSpacing(0)
+        self.horizontalLayout_19.setObjectName(u"verticalLayout_6")
+        self.horizontalLayout_19.setContentsMargins(15, 0, 0, 0)
         self.label_title = QLabel(self.frame_title)
         self.label_title.setObjectName(u"label_title")
         self.label_title.setStyleSheet(u"color: rgb(153, 153, 153)")
@@ -397,8 +397,12 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.label_title.setFont(font)
 
-        self.verticalLayout_6.addWidget(self.label_title)
+        self.horizontalLayout_19.addWidget(self.label_title)
 
+        self.btn_logout = QPushButton(self.frame_title)
+        self.btn_logout.setObjectName(u"btn_logout")
+
+        self.horizontalLayout_19.addWidget(self.btn_logout)
 
         self.horizontalLayout.addWidget(self.frame_title)
 
@@ -660,7 +664,7 @@ class Ui_MainWindow(object):
         self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))
         self.btn_week.setText(QCoreApplication.translate("MainWindow", u"This Week", None))
         self.btn_month.setText(QCoreApplication.translate("MainWindow", u"This Month", None))
-
+        self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"\ub85c\uadf8\uc544\uc6c3", None))
         #if QT_CONFIG(tooltip)
         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
 #endif // QT_CONFIG(tooltip)
