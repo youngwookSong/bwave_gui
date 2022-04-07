@@ -184,6 +184,7 @@ class Ui_LoginWindow(object):
         self.frame_3 = QFrame(self.frame)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setMaximumSize(QSize(16777215, 200))
+        self.frame_3.setMinimumSize(QSize(0, 200))
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_3)
@@ -192,7 +193,6 @@ class Ui_LoginWindow(object):
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.frame_7 = QFrame(self.frame_3)
         self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setMaximumSize(QSize(250, 16777215))
         self.frame_7.setFrameShape(QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QFrame.Raised)
 
@@ -227,7 +227,6 @@ class Ui_LoginWindow(object):
 
         self.frame_9 = QFrame(self.frame_3)
         self.frame_9.setObjectName(u"frame_9")
-        self.frame_9.setMaximumSize(QSize(250, 16777215))
         self.frame_9.setFrameShape(QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QFrame.Raised)
 
@@ -240,6 +239,7 @@ class Ui_LoginWindow(object):
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
+        self.frame_4.setMinimumSize(QSize(0, 350))
         self.horizontalLayout_5 = QHBoxLayout(self.frame_4)
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -256,6 +256,13 @@ class Ui_LoginWindow(object):
         self.frame_11.setObjectName(u"frame_11")
         self.frame_11.setFrameShape(QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QFrame.Raised)
+        self.frame_11.setMinimumSize(QSize(700, 350))
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.frame_11.sizePolicy().hasHeightForWidth())
+        self.frame_11.setSizePolicy(sizePolicy1)
+
         self.verticalLayout_3 = QVBoxLayout(self.frame_11)
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -309,12 +316,19 @@ class Ui_LoginWindow(object):
 
         self.IDInput = QLineEdit(self.frame_17)
         self.IDInput.setObjectName(u"IDInput")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        self.IDInput.setMinimumSize(QSize(230, 0))
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.IDInput.sizePolicy().hasHeightForWidth())
         self.IDInput.setSizePolicy(sizePolicy1)
-        self.IDInput.setStyleSheet(u"background-color: rgb(208, 206, 210);")
+        # self.IDInput.setStyleSheet(u"background-color: rgb(208, 206, 210);")
+        self.IDInput.setStyleSheet(u"border: 2px solid;\n"
+                                         "height: 30px;\n"
+                                         "background-color: rgb(255, 255, 255);\n"
+                                         "font-size: 20px;\n"
+                                         "color: rgb(0,0,0);\n"
+                                         "border-radius: 7px;\n")
 
         self.horizontalLayout_8.addWidget(self.IDInput)
 
@@ -337,9 +351,17 @@ class Ui_LoginWindow(object):
 
         self.passwordInput = QLineEdit(self.frame_18)
         self.passwordInput.setObjectName(u"passwordInput")
+        self.passwordInput.setMinimumSize(QSize(230, 0))
         sizePolicy1.setHeightForWidth(self.passwordInput.sizePolicy().hasHeightForWidth())
         self.passwordInput.setSizePolicy(sizePolicy1)
-        self.passwordInput.setStyleSheet(u"background-color: rgb(208, 206, 210);")
+        # self.passwordInput.setStyleSheet(u"background-color: rgb(208, 206, 210);")
+        self.passwordInput.setStyleSheet(u"border: 2px solid;\n"
+                                    "height: 30px;\n"
+                                    "background-color: rgb(255, 255, 255);\n"
+                                    "font-size: 20px;\n"
+                                    "color: rgb(0,0,0);\n"
+                                    "border-radius: 7px;\n")
+        self.passwordInput.setEchoMode(QLineEdit.Password)
 
         self.horizontalLayout_9.addWidget(self.passwordInput)
 
@@ -352,6 +374,7 @@ class Ui_LoginWindow(object):
         self.frame_16 = QFrame(self.frame_14)
         self.frame_16.setObjectName(u"frame_16")
         self.frame_16.setMaximumSize(QSize(250, 16777215))
+        self.frame_16.setMinimumSize(QSize(250, 0))
         self.frame_16.setFrameShape(QFrame.StyledPanel)
         self.frame_16.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frame_16)

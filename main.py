@@ -25,6 +25,7 @@ class LoginView(QMainWindow):
         self.ui = Ui_LoginWindow()
         self.ui.setupUi(self)
         self.control()
+        self.user = None
 
         def moveWindow(event):
             if UIFunctions.returnStatus(self) == 1:
@@ -48,18 +49,24 @@ class LoginView(QMainWindow):
         self.ui.btn_login.clicked.connect(self.button_login_action)
 
     def button_login_action(self): #이거 나중에 main_functions로 옮기기
+        ## user ID 저장
+        self.user = self.ui.IDInput.text()
+        print(self.user)
+
+        ## 로그인 화면 닫기
         self.close()
-        self.second = MainView()
+        self.second = MainView(self.user) ## 해당 id 전송
         self.second.show()
 
 
 class MainView(QMainWindow):
-    def __init__(self):
+    def __init__(self, user):
         super().__init__()
         self.dragPos = None
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.control()
+        self.ui.UserID.setText(user) # 해당 id 받아옴 text 바꿔줌
 
         self._dialog = None # new file의 dialog
 
@@ -115,8 +122,8 @@ class MainView(QMainWindow):
 
     def control(self):
         # 메뉴 토글 버튼
-        self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
-        # add 버튼3
+        # self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
+        # add 버튼
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.add_table_data(self))
         # new file 버튼
         self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
@@ -126,6 +133,8 @@ class MainView(QMainWindow):
         self.ui.btn_delete.clicked.connect(lambda: UIFunctions.remove_table_data(self))
         # 로그아웃 버튼
         self.ui.btn_logout.clicked.connect(self.button_logout_action)
+        # tablewidget 더블 클릭
+        self.ui.tableWidget.doubleClicked.connect(lambda: UIFunctions.table_double_clicked(self))
 
     def button_logout_action(self): #이거 나중에 main_functions로 옮기기
         self.close()

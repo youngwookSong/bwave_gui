@@ -44,7 +44,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             # self.ui.drop_frame.setStyleSheet("border-radius: 10px;")
             self.ui.btn_max.setToolTip("Maximize")
 
-
     def uiDefinitions(self):
         #remove title bar
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
@@ -68,7 +67,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     ## RETURN STATUS IF WINDOWS IS MAXIMIZE OR RESTAURED
     def returnStatus(self):
         return GLOBAL_STATE
-
 
     ## 토글 메뉴
     def toggleMenu(self, maxWidth, enable):
@@ -145,6 +143,12 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         with open('data.pickle', 'wb') as f:
             pickle.dump(self.data, f)
+
+    ## 테이블 더블 클릭 시 해당 데이터 결과 화면으로 이동
+    def table_double_clicked(self):
+        row = self.ui.tableWidget.currentIndex().row()
+        column = self.ui.tableWidget.currentIndex().column()
+        print(row, column)
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):

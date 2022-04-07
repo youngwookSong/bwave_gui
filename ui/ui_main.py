@@ -8,7 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 # from PySide6 import QtGui
-from PySide6 import QtGui, QtCore
+from PySide6 import QtGui, QtCore, QtWidgets
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -293,6 +293,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setStyleSheet(u"border: 2px solid;\n"
                                        "color: rgb(153, 153, 153);\n"
                                        "text-align: center;")
+        self.tableWidget.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
 
         if (self.tableWidget.columnCount() < 5):
                 self.tableWidget.setColumnCount(5)
@@ -312,8 +313,6 @@ class Ui_MainWindow(object):
 
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-
-        # self.tableWidget.item(1,2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
 
         header = self.tableWidget.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
@@ -399,8 +398,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_19.addWidget(self.label_title)
 
+        self.UserID = QLabel(self.frame_title)
+        self.UserID.setObjectName(u"UserID")
+        self.UserID.setStyleSheet(u"margin-right: 15px;")
+        self.UserID.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.UserID.setMargin(0)
+
+        self.horizontalLayout_19.addWidget(self.UserID)
+
         self.btn_logout = QPushButton(self.frame_title)
         self.btn_logout.setObjectName(u"btn_logout")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.btn_logout.sizePolicy().hasHeightForWidth())
+        self.btn_logout.setSizePolicy(sizePolicy1)
+        self.btn_logout.setStyleSheet(btn_style)
 
         self.horizontalLayout_19.addWidget(self.btn_logout)
 
@@ -664,6 +677,7 @@ class Ui_MainWindow(object):
         self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))
         self.btn_week.setText(QCoreApplication.translate("MainWindow", u"This Week", None))
         self.btn_month.setText(QCoreApplication.translate("MainWindow", u"This Month", None))
+        self.UserID.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"\ub85c\uadf8\uc544\uc6c3", None))
         #if QT_CONFIG(tooltip)
         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
