@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>800</height>
+    <height>808</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -442,7 +442,8 @@ QPushButton:hover {
                       <item>
                        <widget class="QLabel" name="label">
                         <property name="styleSheet">
-                         <string notr="true">font: 800 95pt &quot;Nanum Gothic&quot;;</string>
+                         <string notr="true">font: 800 95pt &quot;Nanum Gothic&quot;;
+color: rgb(255, 255, 255);</string>
                         </property>
                         <property name="text">
                          <string>Maumgyeol</string>

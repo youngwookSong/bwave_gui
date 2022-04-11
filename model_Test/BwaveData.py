@@ -18,6 +18,7 @@ class BwaveData:
         self.epoch_num = None
         self.prep_epochs = None
         self.psd = None
+        self.psd_abs = None
         self.fc = None
         self.fc_f = None
         self.ni = None
@@ -29,6 +30,8 @@ class BwaveData:
         self.kol = None
         self.crop_time = None
         self.crop_cri = None
+        self.psd_hz = None
+        self.psd_hz_abs = None
 
     # def bad_ch(self, raw):
 
@@ -263,7 +266,7 @@ class BwaveData:
         arr = self.source if self.source else self.prep_epochs
 
         # basic
-        psds, freqs = mne.time_frequency.psd_welch(arr, fmin=1., fmax=55., n_fft=5 * samplefreq, verbose=show, n_jobs=1)
+        psds, freqs = mne.time_frequency.psd_welch(arr, fmin=1., fmax=55., n_fft=4 * samplefreq, verbose=show, n_jobs=1)
 
         # hanning window
         # n = 3 * self.samplefreq
@@ -274,7 +277,15 @@ class BwaveData:
         # log
         psds = np.log10(1 + (1e12 * psds))
 
-        # normalization
+        ## absolute
+        psds_abs = psds.mean(axis=0)
+        X_abs = []
+        for fmin, fmax in FREQ_BANDS.values():
+            psds_band = psds_abs[:, (freqs >= fmin) & (freqs < fmax)].sum(axis=1)
+            X_abs.append(psds_band)
+        psds_abs_av = np.concatenate(X_abs)
+
+        # normalization (relative)
         psds /= np.sum(psds, axis=-1, keepdims=True)  # (epochs, sensors, freq)
 
         psds = psds.mean(axis=0)
@@ -283,12 +294,33 @@ class BwaveData:
             psds_band = psds[:, (freqs >= fmin) & (freqs < fmax)].sum(axis=1)
             X.append(psds_band)
         psd_mat_7band_av = np.concatenate(X)
+
         sec = time.time() - start
         print(int(sec), 'sec')
+
         if self.source:
             self.s_psd = psd_mat_7band_av.reshape(1, -1)  # [band0, band1, band2, ...]
         else:
             self.psd = psd_mat_7band_av.reshape(1, -1)  # [band0, band1, band2, ...]
+            self.psd_abs = psds_abs_av.reshape(1, -1)
+
+            temp_arr = np.linspace(0, len(freqs) - 1, 55)
+            psd_hz = np.array([])
+            psd_hz_abs = np.array([])
+            for ch in range(self.prep_epochs.get_data().shape[1]):
+                temp = []
+                temp_abs = []
+                for i in temp_arr:
+                    i = int(i)
+                    temp.append(psds[ch][i:i + 4].sum())
+                    temp_abs.append(psds_abs[ch][i:i+4].sum())
+                psd_hz = np.dstack((psd_hz, np.array(temp))) if psd_hz.size else np.array(temp)
+                psd_hz_abs = np.dstack((psd_hz_abs, np.array(temp_abs))) if psd_hz_abs.size else np.array(temp_abs)
+            psd_hz = np.swapaxes(psd_hz[0], 0, 1).reshape(1, -1)
+            psd_hz_abs = np.swapaxes(psd_hz_abs[0], 0, 1).reshape(1, -1)
+            self.psd_hz = psd_hz
+            self.psd_hz_abs = psd_hz_abs
+
         return psd_mat_7band_av.reshape(1, -1)  # (channels * 7)
 
     # plv

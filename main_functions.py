@@ -1,5 +1,5 @@
 import time
-
+import os
 from PySide6.QtWidgets import QTableWidgetItem
 
 from main import *
@@ -7,6 +7,7 @@ from dialog.newfile_dialog2 import Ui_Dialog
 from dialog.loadingBar import Ui_Dialog_loading
 
 from ui.tab_frame import Ui_tabFrame
+from ui.tab_frame_pre import Ui_tabFrame_pre
 
 from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
@@ -180,7 +181,27 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self._dialog_loading = Ui_Dialog_loading #loading bar 열기
 
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
-            # print(file, name, birth, num, date, sex)
+
+            ## 새로운 데이터 기존 data에 추가 및 pickle파일 저장
+            new_data = {"선택": 'QCheckBox', "회원ID": num, "이름": name, "검사일시": date, "점수": "70"}
+            self.data.append(new_data)
+
+            with open('data.pickle', 'wb') as f:
+                pickle.dump(self.data, f)
+
+            ## 환자 디렉토리 만들기
+            directory = "./personal_data/{}_{}".format(num, name)
+            try:
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
+            except OSError:
+                print('Error: Creating directory. ' + directory)
+
+            # 알고리즘 돌림
+            md = model_test(file, directory)
+            md.test()
+            y_pred = md.y_pred
+            y_pred_proba = md.y_pred_proba
 
             # 탭 추가 및 해당 탭으로 이동
             self.ui.pages.setCurrentWidget(self.ui.anal)
@@ -190,13 +211,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
             self.row += 1
             self.ui.tableWidget.setRowCount(self.row)
-
-            ## 새로운 데이터 기존 data에 추가 및 pickle파일 저장
-            new_data = {"선택": 'QCheckBox', "회원ID": num, "이름": name, "검사일시": date, "점수": "70"}
-            self.data.append(new_data)
-
-            with open('data.pickle', 'wb') as f:
-                pickle.dump(self.data, f)
 
             ckbox = QCheckBox()
             cellWidget = QWidget()
@@ -218,15 +232,11 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(new_data["점수"]))
             self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
 
-            # 알고리즘 돌림
-            md = model_test(file)
-            md.test()
-            y_pred = md.y_pred
-            y_pred_proba = md.y_pred_proba
-
-            self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #tab_frame에 프레임 뿌려줌
+            # self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #tab_frame에 프레임 뿌려줌
+            self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex)
 
         else: #취소 버튼 눌렀을때
             print("cancel")
+
 
 

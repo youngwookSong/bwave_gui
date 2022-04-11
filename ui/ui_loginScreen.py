@@ -82,8 +82,8 @@ class Ui_LoginWindow(object):
         self.label_title = QLabel(self.frame_title)
         self.label_title.setObjectName(u"label_title")
         font = QFont()
-        font.setFamilies([u"Franklin Gothic Heavy"])
-        font.setPointSize(14)
+        # font.setFamilies([u"Franklin Gothic Heavy"])
+        font.setPointSize(12)
         self.label_title.setFont(font)
 
         self.verticalLayout_6.addWidget(self.label_title)
@@ -207,7 +207,8 @@ class Ui_LoginWindow(object):
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.label = QLabel(self.frame_8)
         self.label.setObjectName(u"label")
-        self.label.setStyleSheet(u"font: 800 110pt \"Nanum Gothic\";")
+        self.label.setStyleSheet(u"font: 800 90pt;\n"
+                                 "color: rgb(255,255,255);")
         self.label.setAlignment(Qt.AlignBottom|Qt.AlignRight|Qt.AlignTrailing)
         self.label.setMargin(0)
 
@@ -216,7 +217,8 @@ class Ui_LoginWindow(object):
         self.label_2 = QLabel(self.frame_8)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setMaximumSize(QSize(160, 16777215))
-        self.label_2.setStyleSheet(u"font: 60pt \"Nanum Gothic\";")
+        self.label_2.setStyleSheet(u"font: 60pt;\n"
+                                   "color: rgb(255,255,255);")
         self.label_2.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.label_2.setMargin(8)
 
@@ -276,7 +278,8 @@ class Ui_LoginWindow(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.label_3 = QLabel(self.frame_13)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setStyleSheet(u"font: 17pt \"Nanum Gothic\";")
+        self.label_3.setStyleSheet(u"font: 17pt;\n"
+                                   "color: rgb(255,255,255);")
         self.label_3.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_4.addWidget(self.label_3)
@@ -309,7 +312,8 @@ class Ui_LoginWindow(object):
         self.label_4 = QLabel(self.frame_17)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setMaximumSize(QSize(160, 16777215))
-        self.label_4.setStyleSheet(u"font: 18pt \"Nanum Gothic\";")
+        self.label_4.setStyleSheet(u"font: 18pt;\n"
+                                   "color: rgb(255,255,255);")
         self.label_4.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_8.addWidget(self.label_4)
@@ -344,7 +348,8 @@ class Ui_LoginWindow(object):
         self.label_5 = QLabel(self.frame_18)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMaximumSize(QSize(160, 16777215))
-        self.label_5.setStyleSheet(u"font: 18pt \"Nanum Gothic\";")
+        self.label_5.setStyleSheet(u"font: 18pt;\n"
+                                   "color: rgb(255,255,255);")
         self.label_5.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_9.addWidget(self.label_5)
@@ -389,7 +394,8 @@ class Ui_LoginWindow(object):
         sizePolicy2.setHeightForWidth(self.btn_login.sizePolicy().hasHeightForWidth())
         self.btn_login.setSizePolicy(sizePolicy2)
         self.btn_login.setStyleSheet(u"background-color: rgb(132, 172, 255);\n"
-"font-size: 20px;")
+                                     "font-size: 20px;\n"
+                                     "border-radius: 7px;")
 
         self.horizontalLayout_10.addWidget(self.btn_login)
 
@@ -415,7 +421,7 @@ class Ui_LoginWindow(object):
 
         self.frame_5 = QFrame(self.frame)
         self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setMaximumSize(QSize(16777215, 110))
+        self.frame_5.setMaximumSize(QSize(16777215, 50))
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
 
@@ -447,6 +453,7 @@ class Ui_LoginWindow(object):
         self.littleLogo = QLabel(self.frame_20)
         self.littleLogo.setObjectName(u"littleLogo")
         self.littleLogo.setAlignment(Qt.AlignCenter)
+        # self.littleLogo.setStyleSheet(u"image:url(./icon/bwave_logo_2.png)")
 
         self.verticalLayout_8.addWidget(self.littleLogo)
 
@@ -477,7 +484,7 @@ class Ui_LoginWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label_title.setText(QCoreApplication.translate("MainWindow", u"Maumgyeol - Depression       ver. 1.0.0", None))
+        self.label_title.setText(QCoreApplication.translate("MainWindow", u"Maumgyeol - Depression    ver. 1.0.0", None))
 #if QT_CONFIG(tooltip)
 #         self.btn_min.setToolTip(QCoreApplication.translate("MainWindow", u"\ucd5c\uc18c\ud654", None))
 # #endif // QT_CONFIG(tooltip)
@@ -497,6 +504,6 @@ class Ui_LoginWindow(object):
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"ID", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Password", None))
         self.btn_login.setText(QCoreApplication.translate("MainWindow", u"Log In", None))
-        self.littleLogo.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.littleLogo.setText(QCoreApplication.translate("MainWindow", u"", None))
     # retranslateUi
 

@@ -93,7 +93,7 @@ class MainView(QMainWindow):
         # with open('data.pickle', 'wb') as f:
         #     pickle.dump([], f)
 
-        ## load dummy data
+        ## load data
         with open('data.pickle', 'rb') as f:
             self.data = pickle.load(f)
 
@@ -123,10 +123,10 @@ class MainView(QMainWindow):
     def control(self):
         # 메뉴 토글 버튼
         # self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
-        # add 버튼
-        self.ui.btn_add.clicked.connect(lambda: UIFunctions.add_table_data(self))
         # new file 버튼
         self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        # add 버튼
+        self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
         # 홈 화면 new file 버튼
         self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
         # 삭제 버튼

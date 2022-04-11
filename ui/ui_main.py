@@ -400,7 +400,8 @@ class Ui_MainWindow(object):
 
         self.UserID = QLabel(self.frame_title)
         self.UserID.setObjectName(u"UserID")
-        self.UserID.setStyleSheet(u"margin-right: 15px;")
+        self.UserID.setStyleSheet(u"margin-right: 15px;\n"
+                                  "color:rgb(255,255,255);")
         self.UserID.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
         self.UserID.setMargin(0)
 

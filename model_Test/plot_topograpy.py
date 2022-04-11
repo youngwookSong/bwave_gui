@@ -23,13 +23,6 @@ print(raw_file.prep_epochs.info)
 
 fig = raw_file.prep_epochs.plot_psd(fmin=1., fmax=55.)
 fig.savefig("./plot_image/psd.png")
-#
-# for i in range(7):
-#     fig = raw_file.prep_epochs.plot_psd_topomap(bands=[(1,4,"Delta")], ch_type='eeg', normalize=True,
-#                                                vlim=(-3,3), cmap='rainbow')
-#
-#     # plt.close(fig)
-#     fig.savefig("./plot_image/psd_topomap.png")
 
 raw_file.PSD()
 print(raw_file.psd.shape)
