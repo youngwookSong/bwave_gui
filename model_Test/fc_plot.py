@@ -35,11 +35,10 @@ class VisualizeFc:
         self.plv = plv
 
     def mean_plot(self,start=0, end=-1):
-        print("plv: ",self.plv.shape)
         feat = self.plv[self.idx]
         feat[abs(feat) < 2] = 0
         self.fig, _ = mne.viz.plot_connectivity_circle(feat, ch_names, (self.viz_i, self.viz_j),
-                                          vmin=self.vmin, vmax=self.vmax, show=True, fontsize_names=13,
+                                          vmin=self.vmin, vmax=self.vmax, show=False, fontsize_names=13,
                                          facecolor="#ffffff", textcolor="#000000",colormap='bwr', colorbar=False)
 
 

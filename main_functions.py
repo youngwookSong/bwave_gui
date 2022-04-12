@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from main import *
 from dialog.newfile_dialog2 import Ui_Dialog
-from dialog.loadingBar import Ui_Dialog_loading
+from dialog.loadingBar import Ui_Dialog_loading, Worker
 
 from ui.tab_frame import Ui_tabFrame
 from ui.tab_frame_pre import Ui_tabFrame_pre
@@ -178,8 +178,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         if self._dialog.exec(): #확인 버튼 눌렀을때
 
-            self._dialog_loading = Ui_Dialog_loading #loading bar 열기
-
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
 
             ## 새로운 데이터 기존 data에 추가 및 pickle파일 저장
@@ -196,6 +194,18 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                     os.makedirs(directory)
             except OSError:
                 print('Error: Creating directory. ' + directory)
+
+
+            # self.threadworker = ThreadClass(file, directory)
+            # self.threadworker.start()
+
+            self._dialog_loading = Ui_Dialog_loading()  # loading bar 열기
+            self._dialog_loading.exec()
+
+            # self.connect(self.threadworker, SIGNAL("threadDone()"), self.loading_close())
+
+
+            print("complete")
 
             # 알고리즘 돌림
             md = model_test(file, directory)
@@ -237,6 +247,27 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         else: #취소 버튼 눌렀을때
             print("cancel")
+
+
+class ThreadClass(QtCore.QThread):
+
+    def __init__(self, file, directory, parent=None, ):
+        super(ThreadClass, self).__init__(parent)
+        self.file = file
+        self.directory = directory
+        self.is_running = True
+
+    def run(self):
+        # 알고리즘 돌림
+        md = model_test(self.file, self.directory)
+        md.test()
+        y_pred = md.y_pred
+        y_pred_proba = md.y_pred_proba
+        self.is_running = False
+        print("완료")
+
+    def stop(self):
+        self.terminate()
 
 
 

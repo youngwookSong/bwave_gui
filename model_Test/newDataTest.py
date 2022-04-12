@@ -9,6 +9,9 @@ import pandas as pd
 
 from model_Test.fc_plot import VisualizeFc
 
+bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
+ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
+                    'P8', 'O1', 'O2']
 
 class model_test:
     def __init__(self, file, dir):
@@ -57,10 +60,7 @@ class model_test:
         self.y_pred_proba = str(self.y_pred_proba)
 
     def psd_plot(self, psd, power): # 위 두줄
-        import pandas as pd
-        bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
-        ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
-                    'P8', 'O1', 'O2']
+
         temp_montage = mne.channels.make_standard_montage('biosemi64')
         temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
         temp_info.set_montage(temp_montage)
@@ -81,7 +81,7 @@ class model_test:
             zscore_psd = np.split(zscore_psd, 5)
 
             for i in range(len(zscore_psd)):
-                fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False)
+                fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False, contours=0)
                 # plt.show()
                 fig.figure.savefig("{}/relative_{}.png".format(self.dir, bands[i]))
 
@@ -95,9 +95,39 @@ class model_test:
             zscore_psd = np.split(zscore_psd, 5)
 
             for i in range(len(zscore_psd)):
-                fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False)
+                fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False,
+                                              contours=0)
                 # plt.show()
                 fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]))
+
+    def ni_plot(self, ni):
+
+        temp_montage = mne.channels.make_standard_montage('biosemi64')
+        temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
+        temp_info.set_montage(temp_montage)
+
+        nodal = ni
+        nodal_band = np.split(nodal, 7)
+
+        clustering = np.array([])
+        for i in range(len(nodal_band)):
+            temp = np.array(np.split(nodal_band[i], 2)[1])
+            clustering = np.hstack((clustering, temp)) if clustering.size else temp
+
+        csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_plv_ni_clustering_335.csv")
+        hc_clustering = pd.read_csv(csv_dir)
+
+        zscore_clustering = np.zeros(len(hc_clustering.columns))
+        for i in range(len(clustering)):
+            zscore_clustering[i] = (clustering[i] - hc_clustering.values[0][i]) / hc_clustering.values[1][i]
+        zscore_clustering = np.split(zscore_clustering, 7)
+
+        for i in range(5):
+            fig_ni, _ = mne.viz.plot_topomap(zscore_clustering[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow',
+                                             show=False,
+                                             contours=0)
+            # plt.show()
+            fig_ni.figure.savefig("{}/network_{}.png".format(self.dir, bands[i]))
 
     def test(self):
         ## new data preprocess & feature extraction
@@ -109,8 +139,10 @@ class model_test:
         raw_file.preprocess()
         raw_file.PSD()
         raw_file.FC()
+        raw_file.NI()
         result_psd = raw_file.psd
         result_fc = raw_file.fc_f
+        result_ni = raw_file.ni
 
         clf_fc, result_fc = self.prepare("fc", result_fc)
         clf_psd, result_psd = self.prepare("psd", result_psd)
@@ -119,6 +151,8 @@ class model_test:
 
         self.psd_plot(raw_file.psd[0], "rel")
         self.psd_plot(raw_file.psd_abs[0], "abs")
+
+        self.ni_plot(raw_file.ni[0][28:])
 
         ##  ------------------- fc_plot
 
@@ -134,3 +168,4 @@ class model_test:
             vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=i)
             vis_bwave.mean_plot()
             vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff')
+

@@ -550,7 +550,8 @@ class Ui_tabFrame_pre(QFrame):
                                             .format(self.num, self.name, freq[i]))
             wpli_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/plv_{}.png)"
                                        .format(self.num, self.name, freq[i]))
-            network_array[i].setStyleSheet(u"image:url(./model_Test/plot_image/psd_topomap_Delta.png)")
+            network_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/network_{}.png)"
+                                        .format(self.num, self.name, freq[i]))
 
         # self.label_36.setStyleSheet(u"image:url(./icon/plot.png)")
 

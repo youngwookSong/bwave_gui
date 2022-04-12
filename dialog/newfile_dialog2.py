@@ -9,6 +9,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import *
 
+from dialog.loadingBar import Worker, Ui_Dialog_loading
+
 
 class Ui_Dialog(QDialog):
     def __init__(self):
@@ -324,6 +326,31 @@ class Ui_Dialog(QDialog):
         self.frame_below.setMaximumSize(QSize(16777215, 40))
         self.frame_below.setFrameShape(QFrame.StyledPanel)
         self.frame_below.setFrameShadow(QFrame.Raised)
+
+        # self.horizontalLayout_8 = QHBoxLayout(self.frame_below)
+        # self.horizontalLayout_8.setSpacing(0)
+        # self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        # self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        # self.progressBar = QProgressBar(self.frame_below)
+        # self.progressBar.setObjectName(u"progressBar")
+        # self.progressBar.setMinimumSize(QSize(0, 30))
+        # self.progressBar.setMaximumSize(QSize(16777215, 30))
+        # self.progressBar.setStyleSheet(u"QProgressBar{\n"
+        #                                "	border-style: none;\n"
+        #                                "	border-radius: 10px;\n"
+        #                                "	text-align: center;\n"
+        #                                "	background-color: rgb(235, 235, 235);\n"
+        #                                "	margin-left: 20px;\n"
+        #                                "	margin-right: 20px;\n"
+        #                                "}\n"
+        #                                "QProgressBar::chunk{\n"
+        #                                "	border-radius: 10px;\n"
+        #                                "	background-color: qlineargradient(spread:pad, x1:0, y1:0.472, x2:1, y2:0.472, stop:0 rgba(166, 166, 166, 255), stop:1 rgba(229, 254, 255, 255));\n"
+        #                                "}\n"
+        #                                "")
+        # self.progressBar.setValue(24)
+        #
+        # self.horizontalLayout_8.addWidget(self.progressBar)
 
         self.verticalLayout.addWidget(self.frame_below)
 

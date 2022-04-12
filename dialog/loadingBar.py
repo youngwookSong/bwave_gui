@@ -7,7 +7,9 @@
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
+import time
 
+from PySide6 import QtCore
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -16,6 +18,7 @@ from PySide6.QtWidgets import *
 class Ui_Dialog_loading(QDialog):
     def __init__(self):
         super().__init__()
+        self.btnstate = False
 
         self.resize(730, 350)
         self.setMinimumSize(QSize(730, 350))
@@ -88,7 +91,13 @@ class Ui_Dialog_loading(QDialog):
 "	background-color: qlineargradient(spread:pad, x1:0, y1:0.472, x2:1, y2:0.472, stop:0 rgba(166, 166, 166, 255), stop:1 rgba(229, 254, 255, 255));\n"
 "}\n"
 "")
-        self.progressBar.setValue(24)
+        self.progressBar.setValue(0)
+        self.progressBar.minimum = 1
+        self.progressBar.maximum = 100
+
+        self.worker = Worker()
+        self.worker.start()
+        self.worker.updateProgress.connect(self.setProgress)
 
         self.verticalLayout.addWidget(self.progressBar)
 
@@ -109,6 +118,12 @@ class Ui_Dialog_loading(QDialog):
         self.frame_3.setMaximumSize(QSize(16777215, 30))
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.frame_3)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.pushButton = QPushButton(self.frame_3)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.horizontalLayout.addWidget(self.pushButton)
 
         self.verticalLayout.addWidget(self.frame_3)
 
@@ -118,6 +133,9 @@ class Ui_Dialog_loading(QDialog):
 
         self.retranslateUi(self)
 
+        # self.pushButton.connect(self.accept)
+        self.pushButton.clicked.connect(lambda: self.btnclick())
+
         QMetaObject.connectSlotsByName(self)
     # setupUi
 
@@ -126,5 +144,24 @@ class Ui_Dialog_loading(QDialog):
         self.label_title.setText(QCoreApplication.translate("Dialog", u"<strong>\uc0c8\ub85c\uc6b4 \ub370\uc774\ud130 \ubd84\uc11d \uc911..", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"\uc9c4\ud589 \ud604\ud669...", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"loading...", None))
+        self.pushButton.setText(QCoreApplication.translate("Dialog", u"PushButton", None))
+
     # retranslateUi
+
+    def setProgress(self, progress):
+        self.progressBar.setValue(progress)
+
+    def btnclick(self):
+        self.btnstate = True
+
+class Worker(QtCore.QThread):
+    updateProgress = QtCore.Signal(int)
+
+    def __init__(self):
+        QtCore.QThread.__init__(self)
+
+    def run(self):
+        for i in range(1, 101):
+            self.updateProgress.emit(i)
+            time.sleep(0.1)
 
