@@ -1,5 +1,7 @@
 import time
 import os
+
+from PyQt5 import uic
 from PySide6.QtWidgets import QTableWidgetItem
 
 from main import *
@@ -151,6 +153,19 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         column = self.ui.tableWidget.currentIndex().column()
         print(row, column)
 
+        # if self.data[row] in personal_data:
+        #     self.ui.pages.setCurrentWidget(self.ui.anal)
+        #     current_tab = QWidget()
+        #     self.ui.tabWidget.addTab(current_tab, name)
+        #     self.ui.tabWidget.setCurrentWidget(current_tab)
+        #
+        #     self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex)
+        #
+        # else:
+        #     QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
+
+
+
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):
         self.ui.pages.setCurrentWidget(page)
@@ -167,10 +182,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if self.menu_state == "close":
             self.prep_activepage.setStyleSheet(close_style)
             self.activepage.setStyleSheet(active_close_style)
-
-    ## 알고리즘 돌리는 함수
-    def bwavedata(self, filename):
-        print(filename, "분석 시작")
 
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
     def handleOpenDialog(self):
@@ -195,23 +206,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             except OSError:
                 print('Error: Creating directory. ' + directory)
 
-
-            # self.threadworker = ThreadClass(file, directory)
-            # self.threadworker.start()
-
-            self._dialog_loading = Ui_Dialog_loading()  # loading bar 열기
+            self._dialog_loading = Ui_Dialog_loading(file, directory)  # loading bar 열기 (여기서 알고리즘 돌림 모델에 넣고)
             self._dialog_loading.exec()
 
-            # self.connect(self.threadworker, SIGNAL("threadDone()"), self.loading_close())
-
-
-            print("complete")
-
             # 알고리즘 돌림
-            md = model_test(file, directory)
-            md.test()
-            y_pred = md.y_pred
-            y_pred_proba = md.y_pred_proba
+            # md = model_test(file, directory)
+            # md.test()
+            # y_pred = md.y_pred
+            # y_pred_proba = md.y_pred_proba
 
             # 탭 추가 및 해당 탭으로 이동
             self.ui.pages.setCurrentWidget(self.ui.anal)
@@ -248,26 +250,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         else: #취소 버튼 눌렀을때
             print("cancel")
 
-
-class ThreadClass(QtCore.QThread):
-
-    def __init__(self, file, directory, parent=None, ):
-        super(ThreadClass, self).__init__(parent)
-        self.file = file
-        self.directory = directory
-        self.is_running = True
-
-    def run(self):
-        # 알고리즘 돌림
-        md = model_test(self.file, self.directory)
-        md.test()
-        y_pred = md.y_pred
-        y_pred_proba = md.y_pred_proba
-        self.is_running = False
-        print("완료")
-
-    def stop(self):
-        self.terminate()
 
 
 

@@ -16,9 +16,12 @@ from PySide6.QtWidgets import *
 
 
 class Ui_Dialog_loading(QDialog):
-    def __init__(self):
+    def __init__(self, file, directory):
         super().__init__()
         self.btnstate = False
+
+        self.file = file
+        self.directory = directory
 
         self.resize(730, 350)
         self.setMinimumSize(QSize(730, 350))
@@ -65,15 +68,6 @@ class Ui_Dialog_loading(QDialog):
 
         self.verticalLayout.addWidget(self.label_2)
 
-        self.frame_4 = QFrame(self.frame)
-        self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setMinimumSize(QSize(0, 20))
-        self.frame_4.setMaximumSize(QSize(16777215, 20))
-        self.frame_4.setFrameShape(QFrame.StyledPanel)
-        self.frame_4.setFrameShadow(QFrame.Raised)
-
-        self.verticalLayout.addWidget(self.frame_4)
-
         self.progressBar = QProgressBar(self.frame)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setMinimumSize(QSize(0, 30))
@@ -91,14 +85,6 @@ class Ui_Dialog_loading(QDialog):
 "	background-color: qlineargradient(spread:pad, x1:0, y1:0.472, x2:1, y2:0.472, stop:0 rgba(166, 166, 166, 255), stop:1 rgba(229, 254, 255, 255));\n"
 "}\n"
 "")
-        self.progressBar.setValue(0)
-        self.progressBar.minimum = 1
-        self.progressBar.maximum = 100
-
-        self.worker = Worker()
-        self.worker.start()
-        self.worker.updateProgress.connect(self.setProgress)
-
         self.verticalLayout.addWidget(self.progressBar)
 
         self.label_3 = QLabel(self.frame)
@@ -114,27 +100,45 @@ class Ui_Dialog_loading(QDialog):
 
         self.frame_3 = QFrame(self.frame)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setMinimumSize(QSize(0, 30))
-        self.frame_3.setMaximumSize(QSize(16777215, 30))
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
+        self.frame_3.setSizePolicy(sizePolicy)
+        self.frame_3.setMinimumSize(QSize(0, 0))
+        self.frame_3.setMaximumSize(QSize(16777215, 50))
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.frame_3)
+        self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.pushButton = QPushButton(self.frame_3)
         self.pushButton.setObjectName(u"pushButton")
+        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy)
+        self.pushButton.setMaximumSize(QSize(120, 16777215))
 
         self.horizontalLayout.addWidget(self.pushButton)
 
         self.verticalLayout.addWidget(self.frame_3)
 
-
         self.verticalLayout_2.addWidget(self.frame)
 
+        self.worker = Worker()
+        self.worker.updateProgress.connect(self.setProgress)
+        self.worker.start()
+
+        self.threadworker = ThreadClass(self.file, self.directory)  # 알고리즘 쓰레드 열기
+        self.threadworker.start()
+        self.threadworker.finished.connect(self.model_finished)
+
+        self.progressBar.minimum = 1
+        self.progressBar.maximum = 100
 
         self.retranslateUi(self)
 
-        # self.pushButton.connect(self.accept)
-        self.pushButton.clicked.connect(lambda: self.btnclick())
+        # self.progressBar.setVisible(False)
 
         QMetaObject.connectSlotsByName(self)
     # setupUi
@@ -144,7 +148,11 @@ class Ui_Dialog_loading(QDialog):
         self.label_title.setText(QCoreApplication.translate("Dialog", u"<strong>\uc0c8\ub85c\uc6b4 \ub370\uc774\ud130 \ubd84\uc11d \uc911..", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"\uc9c4\ud589 \ud604\ud669...", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"loading...", None))
-        self.pushButton.setText(QCoreApplication.translate("Dialog", u"PushButton", None))
+        self.pushButton.setText(QCoreApplication.translate("Dialog", u"\uacb0\uacfc\ubcf4\uae30", None))
+
+        self.pushButton.setDisabled(True)
+        self.progressBar.setValue(0)
+        self.pushButton.clicked.connect(lambda: self.btnclick())
 
     # retranslateUi
 
@@ -152,7 +160,15 @@ class Ui_Dialog_loading(QDialog):
         self.progressBar.setValue(progress)
 
     def btnclick(self):
-        self.btnstate = True
+        self.worker.stop()
+        self.close()
+
+    def model_finished(self):
+        self.worker.stop()
+        self.label_title.setText("분석완료!")
+        self.progressBar.setValue(100)
+        self.pushButton.setDisabled(False)
+        self.threadworker.stop()
 
 class Worker(QtCore.QThread):
     updateProgress = QtCore.Signal(int)
@@ -161,7 +177,29 @@ class Worker(QtCore.QThread):
         QtCore.QThread.__init__(self)
 
     def run(self):
-        for i in range(1, 101):
+        for i in range(1, 100):
             self.updateProgress.emit(i)
-            time.sleep(0.1)
+            time.sleep(0.4)
+
+    def stop(self):
+        self.terminate() #강제 종료
+
+from model_Test.newDataTest import model_test
+class ThreadClass(QtCore.QThread):
+
+    def __init__(self, file, directory, parent=None):
+        super(ThreadClass, self).__init__(parent)
+        self.file = file
+        self.directory = directory
+
+    def run(self):
+        # 알고리즘 돌림
+        md = model_test(self.file, self.directory)
+        md.test()
+        y_pred = md.y_pred
+        y_pred_proba = md.y_pred_proba
+        print("완료")
+
+    def stop(self):
+        self.quit()
 

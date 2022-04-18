@@ -13,7 +13,6 @@ from ui.ui_loginScreen import Ui_LoginWindow
 
 #import gui functions
 from main_functions import *
-# from login_functions import *
 
 #import stylesheet
 from style import *
