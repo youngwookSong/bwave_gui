@@ -99,6 +99,7 @@ class model_test:
                                               contours=0)
                 # plt.show()
                 fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]))
+                plt.close()
 
     def ni_plot(self, ni):
 
@@ -128,6 +129,8 @@ class model_test:
                                              contours=0)
             # plt.show()
             fig_ni.figure.savefig("{}/network_{}.png".format(self.dir, bands[i]))
+            plt.close()
+
 
     def test(self):
         ## new data preprocess & feature extraction
@@ -168,4 +171,4 @@ class model_test:
             vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=i)
             vis_bwave.mean_plot()
             vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff')
-
+            plt.close()

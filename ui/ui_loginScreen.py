@@ -19,6 +19,8 @@ from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QLineEdit, QMainWindow, QPushButton, QSizePolicy,
     QVBoxLayout, QWidget)
 
+from icon.resources import *
+
 class Ui_LoginWindow(object):
     def setupUi(self, MainWindow):
         self.btn_cmm = 20
@@ -109,7 +111,7 @@ class Ui_LoginWindow(object):
         self.btn_min.setSizePolicy(sizePolicy)
         # self.btn_min.setMinimumSize(QSize(40, 30))
         # self.btn_min.setMaximumSize(QSize(40, 30))
-        self.btn_min.setIcon(QtGui.QIcon("./icon/mini.png"))
+        self.btn_min.setIcon(QtGui.QIcon(icon_mini))
         self.btn_min.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
         self.btn_min.setStyleSheet(u"QPushButton {\n"
                                    "	border:none;\n"
@@ -127,7 +129,7 @@ class Ui_LoginWindow(object):
         self.btn_max.setSizePolicy(sizePolicy)
         # self.btn_max.setMinimumSize(QSize(40, 20))
         # self.btn_max.setMaximumSize(QSize(40, 20))
-        self.btn_max.setIcon(QtGui.QIcon("./icon/maxi.png"))
+        self.btn_max.setIcon(QtGui.QIcon(icon_maxi))
         self.btn_max.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
         self.btn_max.setStyleSheet(u"QPushButton {\n"
                                    "	border:none;\n"
@@ -145,7 +147,7 @@ class Ui_LoginWindow(object):
         self.btn_close.setSizePolicy(sizePolicy)
         # self.btn_close.setMinimumSize(QSize(40, 20))
         # self.btn_close.setMaximumSize(QSize(40, 20))
-        self.btn_close.setIcon(QtGui.QIcon("./icon/close.png"))
+        self.btn_close.setIcon(QtGui.QIcon(icon_close))
         self.btn_close.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
         self.btn_close.setStyleSheet(u"QPushButton {\n"
                                      "	border:none;\n"

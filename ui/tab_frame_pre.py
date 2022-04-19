@@ -7,6 +7,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import *
 
+import personal_data.resources as personal_res
+
 class Ui_tabFrame_pre(QFrame):
     def __init__(self, current_tab, file, name, birth, num, date, sex):
         super().__init__()

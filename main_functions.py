@@ -15,6 +15,8 @@ from model_Test.newDataTest import model_test
 GLOBAL_STATE = 0
 
 from style import *
+import resources as main_res
+import personal_data.resources as personal_res
 
 # toggle close시 아이콘만
 def changeBtnIcon(button):
@@ -144,7 +146,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                 self.row -= 1
                 print("data: ", self.data)
 
-        with open('data.pickle', 'wb') as f:
+        with open(os.path.join(main_res.root, 'data.pickle'), 'wb') as f:
             pickle.dump(self.data, f)
 
     ## 테이블 더블 클릭 시 해당 데이터 결과 화면으로 이동
@@ -163,8 +165,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         #
         # else:
         #     QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
-
-
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     def set_page(self, page):
@@ -195,11 +195,12 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             new_data = {"선택": 'QCheckBox', "회원ID": num, "이름": name, "검사일시": date, "점수": "70"}
             self.data.append(new_data)
 
-            with open('data.pickle', 'wb') as f:
+            with open(os.path.join(main_res.root, 'data.pickle'), 'wb') as f:
                 pickle.dump(self.data, f)
 
             ## 환자 디렉토리 만들기
-            directory = "./personal_data/{}_{}".format(num, name)
+            directory = os.path.join(personal_res.root, "{}_{}".format(num, name)) #절대 경로
+            # directory = "./personal_data/{}_{}".format(num, name)
             try:
                 if not os.path.exists(directory):
                     os.makedirs(directory)

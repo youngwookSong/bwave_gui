@@ -34,7 +34,7 @@ class VisualizeFc:
         self._vis_index()
         self.plv = plv
 
-    def mean_plot(self,start=0, end=-1):
+    def mean_plot(self, start=0, end=-1):
         feat = self.plv[self.idx]
         feat[abs(feat) < 2] = 0
         self.fig, _ = mne.viz.plot_connectivity_circle(feat, ch_names, (self.viz_i, self.viz_j),

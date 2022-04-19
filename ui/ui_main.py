@@ -14,6 +14,7 @@ from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
 from style import *
+from icon.resources import *
 
 def changeBtnIcon(button, iconFile, size):
     button.setIcon(QtGui.QIcon(iconFile))
@@ -438,7 +439,7 @@ class Ui_MainWindow(object):
         self.btn_min.setSizePolicy(sizePolicy)
         # self.btn_min.setMinimumSize(QSize(40, 30))
         # self.btn_min.setMaximumSize(QSize(40, 30))
-        self.btn_min.setIcon(QtGui.QIcon("./icon/mini.png"))
+        self.btn_min.setIcon(QtGui.QIcon(icon_mini))
         self.btn_min.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
         self.btn_min.setStyleSheet(u"QPushButton {\n"
 "	border:none;\n"
@@ -456,7 +457,7 @@ class Ui_MainWindow(object):
         self.btn_max.setSizePolicy(sizePolicy)
         # self.btn_max.setMinimumSize(QSize(40, 20))
         # self.btn_max.setMaximumSize(QSize(40, 20))
-        self.btn_max.setIcon(QtGui.QIcon("./icon/maxi.png"))
+        self.btn_max.setIcon(QtGui.QIcon(icon_maxi))
         self.btn_max.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
         self.btn_max.setStyleSheet(u"QPushButton {\n"
 "	border:none;\n"
@@ -474,7 +475,7 @@ class Ui_MainWindow(object):
         self.btn_close.setSizePolicy(sizePolicy)
         # self.btn_close.setMinimumSize(QSize(40, 20))
         # self.btn_close.setMaximumSize(QSize(40, 20))
-        self.btn_close.setIcon(QtGui.QIcon("./icon/close.png"))
+        self.btn_close.setIcon(QtGui.QIcon(icon_close))
         self.btn_close.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
         self.btn_close.setStyleSheet(u"QPushButton {\n"
 "	border:none;\n"
@@ -530,7 +531,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.logo = QLabel(self.frame_24)
         self.logo.setObjectName(u"logo")
-        self.logo.setStyleSheet(u"image:url(./icon/bwave_logo_2.png)")
+        self.logo.setStyleSheet("image:url(./icon/bwave_logo_2.png)")
         self.logo.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_17.addWidget(self.logo)

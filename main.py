@@ -16,6 +16,7 @@ from main_functions import *
 
 #import stylesheet
 from style import *
+import resources as main_res
 
 class LoginView(QMainWindow):
     def __init__(self):
@@ -93,7 +94,7 @@ class MainView(QMainWindow):
         #     pickle.dump([], f)
 
         ## load data
-        with open('data.pickle', 'rb') as f:
+        with open(os.path.join(main_res.root, 'data.pickle'), 'rb') as f:
             self.data = pickle.load(f)
 
         print(self.data)
