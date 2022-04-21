@@ -84,6 +84,7 @@ class model_test:
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False, contours=0)
                 # plt.show()
                 fig.figure.savefig("{}/relative_{}.png".format(self.dir, bands[i]))
+                plt.close()
 
         if power == "abs":
             csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_band_335.csv")
