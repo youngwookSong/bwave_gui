@@ -9,7 +9,7 @@ import pandas as pd
 
 from model_Test.fc_plot import VisualizeFc
 
-bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
+bands = ['Delta', 'Theta', 'LowAlpha', 'HighAlpha', 'LowBeta', 'HighBeta', 'Gamma']
 ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
                     'P8', 'O1', 'O2']
 
@@ -66,19 +66,19 @@ class model_test:
         temp_info.set_montage(temp_montage)
 
         temp = np.split(psd, 7)
-        bn = [temp[0], temp[1], temp[2] + temp[3], temp[4] + temp[5], temp[6]]
+        bn = [temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]]
         band_psd = np.array([])
-        for i in range(5):
+        for i in range(len(bn)):
             band_psd = np.hstack((band_psd, bn[i]))
 
         if power == "rel":
             csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_rel_PSD_band_335.csv")
             hc = pd.read_csv(csv_dir)
 
-            zscore_psd = np.zeros(95)
+            zscore_psd = np.zeros(133)
             for i in range(len(band_psd)):
                 zscore_psd[i] = (band_psd[i] - hc.values[0][i]) / hc.values[1][i]
-            zscore_psd = np.split(zscore_psd, 5)
+            zscore_psd = np.split(zscore_psd, 7)
 
             for i in range(len(zscore_psd)):
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False, contours=0)
@@ -90,10 +90,10 @@ class model_test:
             csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_band_335.csv")
             hc = pd.read_csv(csv_dir)
 
-            zscore_psd = np.zeros(95)
+            zscore_psd = np.zeros(133)
             for i in range(len(band_psd)):
                 zscore_psd[i] = (band_psd[i] - hc.values[0][i]) / hc.values[1][i]
-            zscore_psd = np.split(zscore_psd, 5)
+            zscore_psd = np.split(zscore_psd, 7)
 
             for i in range(len(zscore_psd)):
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False,
@@ -124,7 +124,7 @@ class model_test:
             zscore_clustering[i] = (clustering[i] - hc_clustering.values[0][i]) / hc_clustering.values[1][i]
         zscore_clustering = np.split(zscore_clustering, 7)
 
-        for i in range(5):
+        for i in range(7):
             fig_ni, _ = mne.viz.plot_topomap(zscore_clustering[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow',
                                              show=False,
                                              contours=0)
@@ -141,6 +141,11 @@ class model_test:
         raw_file = bd()
         raw_file.load_file(file_path)
         raw_file.preprocess()
+
+        fig = raw_file.prep_epochs.plot_psd(fmin=1., fmax=55., show=False)
+        fig.figure.savefig("{}/psd_power.png".format(self.dir))
+        plt.close()
+
         raw_file.PSD()
         raw_file.FC()
         raw_file.NI()
@@ -167,8 +172,8 @@ class model_test:
         for i in range(len(zscore_plv)):
             zscore_plv[i] = (raw_file.fc_f[0][i] - hc.values[0][i]) / hc.values[1][i]
 
-        bands = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gamma']
-        for i in range(5):
+
+        for i in range(7):
             vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=i)
             vis_bwave.mean_plot()
             vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff')

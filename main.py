@@ -67,6 +67,8 @@ class MainView(QMainWindow):
         self.ui.setupUi(self)
         self.control()
         self.ui.UserID.setText(user) # 해당 id 받아옴 text 바꿔줌
+        # self.ui.btn_anal.setDisabled(True)
+        self._tabFrame = None
 
         self._dialog = None # new file의 dialog
 
@@ -135,6 +137,8 @@ class MainView(QMainWindow):
         self.ui.btn_logout.clicked.connect(self.button_logout_action)
         # tablewidget 더블 클릭
         self.ui.tableWidget.doubleClicked.connect(lambda: UIFunctions.table_double_clicked(self))
+        # 분석하기 버튼
+        self.ui.btn_anal.clicked.connect(lambda: UIFunctions.analysis_result(self))
 
     def button_logout_action(self): #이거 나중에 main_functions로 옮기기
         self.close()

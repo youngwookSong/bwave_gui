@@ -350,12 +350,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(12, 12, 12, 12)
-        self.btn_save_2 = QPushButton(self.top_menus_2)
-        self.btn_save_2.setObjectName(u"btn_save_2")
-        self.btn_save_2.setMinimumSize(QSize(0, 40))
-        self.btn_save_2.setStyleSheet(btn_style)
+        self.btn_anal = QPushButton(self.top_menus_2)
+        self.btn_anal.setObjectName(u"btn_anal")
+        self.btn_anal.setMinimumSize(QSize(0, 40))
+        self.btn_anal.setStyleSheet(btn_style)
 
-        self.verticalLayout_8.addWidget(self.btn_save_2)
+        self.verticalLayout_8.addWidget(self.btn_anal)
 
         self.verticalLayout_2.addWidget(self.top_menus_2)
 
@@ -673,8 +673,7 @@ class Ui_MainWindow(object):
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"검색", None))
         self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
         self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
-
-        self.btn_save_2.setText(QCoreApplication.translate("MainWindow", u"분석하기", None))
+        self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"분석하기", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
         self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))
         self.btn_week.setText(QCoreApplication.translate("MainWindow", u"This Week", None))
