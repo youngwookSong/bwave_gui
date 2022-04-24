@@ -258,6 +258,21 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         print(self.ui.tabWidget.currentIndex())
         print(self.ui.tabWidget.currentWidget())
         # self.ui.tabWidget.currentWidget().tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
-        self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
+        information = self._tabFrame.name + self._tabFrame.num
+        msgBox = QMessageBox()
+        msgBox.setWindowTitle("Title of MessageBox")
+        msgBox.setText("분석을 진행하시겠습니까?")
+        msgBox.setInformativeText(information)
+        msgBox.setIcon(QMessageBox.Information)
+        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        msgBox.setDefaultButton(QMessageBox.Ok)
+
+        result = msgBox.exec()
+        if result == QMessageBox.Ok:
+            print("OK")
+            self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
+        elif result == QMessageBox.Cancel:
+            print("Cancel")
+
 
         # TODO: 만약 탭하나 생성하고 또 다른 탭 생성하고 전 탭가서 분석하기 누를 경우.. self._tabFrame은 최근 탭에 업데이트 되어있다. 분석하기 버튼 누를때 현재 탭 위젯 가지고 오기
