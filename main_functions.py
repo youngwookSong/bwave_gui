@@ -258,7 +258,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         print(self.ui.tabWidget.currentIndex())
         print(self.ui.tabWidget.currentWidget())
         # self.ui.tabWidget.currentWidget().tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
-        information = self._tabFrame.name + self._tabFrame.num
+        information = "이름: {}, 환자번호: {}".format(self._tabFrame.name, self._tabFrame.num)
         msgBox = QMessageBox()
         msgBox.setWindowTitle("Title of MessageBox")
         msgBox.setText("분석을 진행하시겠습니까?")
