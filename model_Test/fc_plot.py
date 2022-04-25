@@ -38,7 +38,7 @@ class VisualizeFc:
         feat = self.plv[self.idx]
         feat[abs(feat) < 2] = 0
         self.fig, _ = mne.viz.plot_connectivity_circle(feat, ch_names, (self.viz_i, self.viz_j),
-                                          vmin=self.vmin, vmax=self.vmax, show=False, fontsize_names=13,
+                                          vmin=self.vmin, vmax=self.vmax, show=False, fontsize_names=30,
                                          facecolor="#ffffff", textcolor="#000000",colormap='bwr', colorbar=False)
 
 

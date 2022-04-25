@@ -21,29 +21,24 @@ class model_test:
         self.y_pred_proba = None
 
     def prepare(self, name, result):
-        model_dir = os.path.join(ROOT_DIR, "model/model_{}_proba.pickle".format(name))
+        model_dir = os.path.join(ROOT_DIR, "model/model_{}".format(name))
         with open(model_dir, 'rb') as f:
             clf = pickle.load(f)
 
-        from sklearn import preprocessing
-        scaler_dir = os.path.join(ROOT_DIR, "model/scaler_{}.pickle".format(name))
-        with open(scaler_dir, 'rb') as f:
-            scaler = pickle.load(f)
-        result = scaler.transform(result)
+        # from sklearn import preprocessing
+        # scaler_dir = os.path.join(ROOT_DIR, "model/scaler_{}.pickle".format(name))
+        # with open(scaler_dir, 'rb') as f:
+        #     scaler = pickle.load(f)
+        # result = scaler.transform(result)
 
-        fisher_dir = os.path.join(ROOT_DIR, "model/fis_{}.npy".format(name))
+        fisher_dir = os.path.join(ROOT_DIR, "model/idx_{}.npy".format(name))
         idx = np.load(fisher_dir)
         result = result[:, idx]
 
         return clf, result
 
-    def pred_n_plot(self, clf, result): ## 확률 원 그래프
-        if str(clf.predict(result)[0]) == "1":
-            self.y_pred = "MDD"
-            self.y_pred_proba = clf.predict_proba(result)[0][1]
-        else:
-            self.y_pred = "HC"
-            self.y_pred_proba = clf.predict_proba(result)[0][0]
+
+    def pred_n_plot(self): ## 확률 원 그래프
 
         self.y_pred_proba *= 100
         self.y_pred_proba = round(self.y_pred_proba, 2)
@@ -54,7 +49,7 @@ class model_test:
         ax.pie([self.y_pred_proba, 100-self.y_pred_proba], wedgeprops=wedgeprops, startangle=90, colors=['#e25d61', '#6879f7'])
         plt.title(self.y_pred, fontsize=24, loc='center')
         plt.text(0, 0, str(self.y_pred_proba)+"%", ha='center', va='center', fontsize=42)
-        plt.savefig("{}/proba.png".format(self.dir))
+        plt.savefig("{}/proba.png".format(self.dir), bbox_inches='tight', pad_inches=0)
         plt.close()
 
         self.y_pred_proba = str(self.y_pred_proba)
@@ -83,7 +78,7 @@ class model_test:
             for i in range(len(zscore_psd)):
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False, contours=0)
                 # plt.show()
-                fig.figure.savefig("{}/relative_{}.png".format(self.dir, bands[i]))
+                fig.figure.savefig("{}/relative_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
 
         if power == "abs":
@@ -99,7 +94,7 @@ class model_test:
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False,
                                               contours=0)
                 # plt.show()
-                fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]))
+                fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
 
     def ni_plot(self, ni):
@@ -129,7 +124,7 @@ class model_test:
                                              show=False,
                                              contours=0)
             # plt.show()
-            fig_ni.figure.savefig("{}/network_{}.png".format(self.dir, bands[i]))
+            fig_ni.figure.savefig("{}/network_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
             plt.close()
 
 
@@ -155,8 +150,61 @@ class model_test:
 
         clf_fc, result_fc = self.prepare("fc", result_fc)
         clf_psd, result_psd = self.prepare("psd", result_psd)
+        clf_ni, result_ni = self.prepare("ni", result_ni)
 
-        self.pred_n_plot(clf_fc, result_fc)
+        mdd_proba = (clf_fc.predict_proba(result_fc)[0][1] + clf_psd.predict_proba(result_psd)[0][1] +
+                     clf_ni.predict_proba(result_ni)[0][1]) / 3
+        hc_proba = (clf_fc.predict_proba(result_fc)[0][0] + clf_psd.predict_proba(result_psd)[0][0] +
+                     clf_ni.predict_proba(result_ni)[0][0]) / 3
+
+
+        if mdd_proba > hc_proba:
+            self.y_pred = 'MDD'
+            self.y_pred_proba = mdd_proba
+            values = [clf_psd.predict_proba(result_psd)[0][1]*100, clf_fc.predict_proba(result_fc)[0][1]*100, clf_ni.predict_proba(result_ni)[0][1]*100,78,87,84]
+            # values = [71, 92.5, 90, 78, 87, 84]
+            x = ['PSD', 'FC', 'NI', 'S_PSD', 'S_FC', 'S_NI']
+            plt.figure(figsize=(8, 5))
+            plt.tick_params(labelsize=13, length=3, bottom=False)
+            bars = plt.bar(x, values, color='#54829C', alpha=0.5, width=0.7)
+            bars[np.argmax(values)].set_color('r')
+            plt.title('Predictive probability by model', fontsize=20)
+            for i, v in enumerate(values):
+                plt.text(x[i], v + 3, int(values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
+                         fontsize=14,
+                         color='black',
+                         horizontalalignment='center',  # horizontalalignment (left, center, right)
+                         verticalalignment='center')  # verticalalignment (top, center, bottom)
+            plt.ylim(0, 103)
+            plt.savefig("{}/mode_prob.png".format(self.dir))
+            plt.close()
+        else:
+            self.y_pred = "HC"
+            self.y_pred_proba = hc_proba
+            values = [clf_psd.predict_proba(result_psd)[0][0] * 100, clf_fc.predict_proba(result_fc)[0][0] * 100,
+                      clf_ni.predict_proba(result_ni)[0][0] * 100, 78, 87, 84]
+            # values = [71, 92.5, 90, 78, 87, 84]
+            x = ['PSD', 'FC', 'NI', 'S_PSD', 'S_FC', 'S_NI']
+            plt.figure(figsize=(8, 5))
+            plt.tick_params(labelsize=13, length=3, bottom=False)
+            bars = plt.bar(x, values, color='#54829C', alpha=0.5, width=0.7)
+            bars[np.argmax(values)].set_color('r')
+            plt.title('Predictive probability by model', fontsize=20)
+            for i, v in enumerate(values):
+                plt.text(x[i], v + 3, int(values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
+                         fontsize=14,
+                         color='black',
+                         horizontalalignment='center',  # horizontalalignment (left, center, right)
+                         verticalalignment='center')  # verticalalignment (top, center, bottom)
+            plt.ylim(0, 103)
+            plt.savefig("{}/mode_prob.png".format(self.dir))
+            plt.close()
+
+        print(mdd_proba, hc_proba)
+
+
+
+        self.pred_n_plot()
 
         self.psd_plot(raw_file.psd[0], "rel")
         self.psd_plot(raw_file.psd_abs[0], "abs")
@@ -176,5 +224,5 @@ class model_test:
         for i in range(7):
             vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=i)
             vis_bwave.mean_plot()
-            vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff')
+            vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff', bbox_inches='tight', pad_inches=0)
             plt.close()
