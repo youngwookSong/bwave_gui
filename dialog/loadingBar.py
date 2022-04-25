@@ -30,10 +30,10 @@ class Ui_Dialog_loading(QDialog):
         self.verticalLayout_2 = QVBoxLayout(self)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(8, 8, 8, 8)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(self)
         self.frame.setObjectName(u"frame")
-        self.frame.setStyleSheet(u"background-color: rgb(255, 250, 216);")
+        self.frame.setStyleSheet(u"background-color: rgb(230, 230, 230);")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout = QVBoxLayout(self.frame)
@@ -179,7 +179,7 @@ class Worker(QtCore.QThread):
     def run(self):
         for i in range(1, 100):
             self.updateProgress.emit(i)
-            time.sleep(0.4)
+            time.sleep(0.3)
 
     def stop(self):
         self.terminate() #강제 종료

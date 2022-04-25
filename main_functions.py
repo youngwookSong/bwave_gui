@@ -207,14 +207,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             except OSError:
                 print('Error: Creating directory. ' + directory)
 
-            # self._dialog_loading = Ui_Dialog_loading(file, directory)  # loading bar 열기 (여기서 알고리즘 돌림 모델에 넣고)
-            # self._dialog_loading.exec()
+            self._dialog_loading = Ui_Dialog_loading(file, directory)  # loading bar 열기 (여기서 알고리즘 돌림 모델에 넣고)
+            self._dialog_loading.exec()
 
             # 알고리즘 돌림
-            md = model_test(file, directory)
-            md.test()
-            y_pred = md.y_pred
-            y_pred_proba = md.y_pred_proba
+            # md = model_test(file, directory)
+            # md.test()
+            # y_pred = md.y_pred
+            # y_pred_proba = md.y_pred_proba
 
             # 탭 추가 및 해당 탭으로 이동
             self.ui.pages.setCurrentWidget(self.ui.anal)
@@ -258,7 +258,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         print(self.ui.tabWidget.currentIndex())
         print(self.ui.tabWidget.currentWidget())
         # self.ui.tabWidget.currentWidget().tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
-        information = "이름: {}, 환자번호: {}".format(self._tabFrame.name, self._tabFrame.num)
+        information = "이름: {}\n환자번호: {}".format(self._tabFrame.name, self._tabFrame.num)
         msgBox = QMessageBox()
         msgBox.setWindowTitle("Title of MessageBox")
         msgBox.setText("분석을 진행하시겠습니까?")
@@ -273,6 +273,8 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
         elif result == QMessageBox.Cancel:
             print("Cancel")
+
+        # self._tabFrame.pushButton_4.clicked.connect(lambda:  self._tabFrame.tab_pages.setCurrentIndex(0))
 
 
         # TODO: 만약 탭하나 생성하고 또 다른 탭 생성하고 전 탭가서 분석하기 누를 경우.. self._tabFrame은 최근 탭에 업데이트 되어있다. 분석하기 버튼 누를때 현재 탭 위젯 가지고 오기
