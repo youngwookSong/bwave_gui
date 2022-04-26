@@ -179,7 +179,7 @@ class Worker(QtCore.QThread):
     def run(self):
         for i in range(1, 100):
             self.updateProgress.emit(i)
-            time.sleep(0.4)
+            time.sleep(0.04)
 
     def stop(self):
         self.terminate() #강제 종료
@@ -196,8 +196,6 @@ class ThreadClass(QtCore.QThread):
         # 알고리즘 돌림
         md = model_test(self.file, self.directory)
         md.test()
-        y_pred = md.y_pred
-        y_pred_proba = md.y_pred_proba
         print("완료")
 
     def stop(self):

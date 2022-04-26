@@ -8,6 +8,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import *
 
 import personal_data.resources as personal_res
+from dialog.psdPowerHz import Ui_Dialog_power
+
+import json
 
 class Ui_tabFrame_pre(QFrame):
     def __init__(self, current_tab, file, name, birth, num, date, sex):
@@ -19,8 +22,7 @@ class Ui_tabFrame_pre(QFrame):
         self.num = num
         self.date = date
         self.sex = sex
-        # self.y_pred = y_pred
-        # self.y_pred_proba = y_pred_proba
+        self.data = None
 
         self.verticalLayout_6 = QVBoxLayout(self.current_tab)
         self.verticalLayout_6.setSpacing(0)
@@ -1072,6 +1074,10 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_47.setMaximumSize(QSize(50, 16777215))
         self.frame_47.setFrameShape(QFrame.StyledPanel)
         self.frame_47.setFrameShadow(QFrame.Raised)
+        # self.pushButton_5 = QPushButton(self.frame_47)
+        # self.pushButton_5.setObjectName(u"pushButton_5")
+        # self.pushButton_5.setGeometry(QRect(-10, 70, 75, 23))
+        # self.pushButton_5.clicked.connect(lambda: self.open_psd_power(self))
 
         self.horizontalLayout_6.addWidget(self.frame_47)
 
@@ -1128,13 +1134,23 @@ class Ui_tabFrame_pre(QFrame):
         self.label_52.setStyleSheet(u"image:url(./model_test/plot_image/test_plot_2.PNG)")
 
         ## 가장 유의미한 지표
-        self.label_12.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_Delta.png)".format(self.num, self.name))
-        self.label_7.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_Theta.png)".format(self.num, self.name))
-        self.label_8.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_LowAlpha.png)".format(self.num, self.name))
-        self.label_10.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_highAlpha.png)".format(self.num, self.name))
-        self.label_13.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_LowBeta.png)".format(self.num, self.name))
-        self.label_14.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_HighBeta.png)".format(self.num, self.name))
-        self.label_15.setStyleSheet(u"image:url(./personal_data/{}_{}/relative_Gamma.png)".format(self.num, self.name))
+        label_list = [self.label_12, self.label_7, self.label_8, self.label_10, self.label_13, self.label_14, self.label_15]
+        with open('./personal_data/{}_{}/info.json'.format(self.num, self.name)) as f:
+            self.data = json.load(f)
+        if self.data['best_model'] == 'psd':
+            for i in range(7):
+                label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/absolute_{}.png)"
+                                            .format(self.num, self.name, freq[i])))
+        if self.data['best_model'] == 'fc':
+            for i in range(7):
+                label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/plv_{}.png)"
+                                            .format(self.num, self.name, freq[i])))
+        if self.data['best_model'] == 'ni':
+            for i in range(7):
+                label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/network_{}.png)"
+                                            .format(self.num, self.name, freq[i])))
+
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - 가장 유의미한 특성".format(self.data['best_model']), None))
         # self.label_15.setStyleSheet(u"image:url(./model_Test/plot_image/psd_topomap_.png)")
 
 
@@ -1229,7 +1245,7 @@ class Ui_tabFrame_pre(QFrame):
         self.label_43.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_44.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_52.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"PSD - 가장 유의미한 특성", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - 가장 유의미한 특성".format(self.data), None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"", None))
@@ -1247,5 +1263,10 @@ class Ui_tabFrame_pre(QFrame):
         self.label_61.setText(QCoreApplication.translate("MainWindow", u"Gamma", None))
 
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"back", None))
+        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"View More", None))
 
 # retranslateUi
+
+    def open_psd_power(self):
+        self._psd_dialog = Ui_Dialog_power()
+        self._psd_dialog.exec()

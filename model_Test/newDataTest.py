@@ -2,12 +2,16 @@ import numpy as np
 import os
 import pickle
 from model_Test.BwaveData import BwaveData as bd
+from model_Test.BwaveData_source import BwaveData_s as bd_s
 from model_Test.directory import ROOT_DIR
 import matplotlib.pyplot as plt
 import mne
 import pandas as pd
 
 from model_Test.fc_plot import VisualizeFc
+
+import json
+from collections import OrderedDict
 
 bands = ['Delta', 'Theta', 'LowAlpha', 'HighAlpha', 'LowBeta', 'HighBeta', 'Gamma']
 ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
@@ -19,6 +23,8 @@ class model_test:
         self.dir = dir
         self.y_pred = None
         self.y_pred_proba = None
+        self.best_model = None
+        self.values = None
 
     def prepare(self, name, result):
         model_dir = os.path.join(ROOT_DIR, "model/model_{}".format(name))
@@ -97,6 +103,7 @@ class model_test:
                 fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
 
+
     def ni_plot(self, ni):
 
         temp_montage = mne.channels.make_standard_montage('biosemi64')
@@ -133,13 +140,14 @@ class model_test:
         print(ROOT_DIR)
         file_path = self.file
 
+        ##sensor----------------------------------------------------
         raw_file = bd()
         raw_file.load_file(file_path)
         raw_file.preprocess()
 
-        fig = raw_file.prep_epochs.plot_psd(fmin=1., fmax=55., show=False)
-        fig.figure.savefig("{}/psd_power.png".format(self.dir))
-        plt.close()
+        # fig = raw_file.prep_epochs.plot_psd(fmin=1., fmax=55., show=False)
+        # fig.figure.savefig("{}/psd_power.png".format(self.dir))
+        # plt.close()
 
         raw_file.PSD()
         raw_file.FC()
@@ -148,61 +156,128 @@ class model_test:
         result_fc = raw_file.fc_f
         result_ni = raw_file.ni
 
-        clf_fc, result_fc = self.prepare("fc", result_fc)
         clf_psd, result_psd = self.prepare("psd", result_psd)
+        clf_fc, result_fc = self.prepare("fc", result_fc)
         clf_ni, result_ni = self.prepare("ni", result_ni)
+
+        ##source----------------------------------------
+        # raw_file_s = bd_s()
+        # raw_file_s.load_file(file_path)
+        # raw_file_s.preprocess()
+        #
+        # raw_file_s.source_loc()
+        # raw_file_s.PSD()
+        # raw_file_s.FC()
+        # raw_file_s.NI()
+        # result_s_psd = raw_file_s.s_psd
+        # result_s_fc = raw_file_s.s_fc_f
+        # result_s_ni = raw_file_s.s_ni
+
+
 
         mdd_proba = (clf_fc.predict_proba(result_fc)[0][1] + clf_psd.predict_proba(result_psd)[0][1] +
                      clf_ni.predict_proba(result_ni)[0][1]) / 3
         hc_proba = (clf_fc.predict_proba(result_fc)[0][0] + clf_psd.predict_proba(result_psd)[0][0] +
                      clf_ni.predict_proba(result_ni)[0][0]) / 3
 
-
+        model = ['psd', 'fc', 'ni', 's_psd', 's_fc', 's_ni']
         if mdd_proba > hc_proba:
             self.y_pred = 'MDD'
             self.y_pred_proba = mdd_proba
-            values = [clf_psd.predict_proba(result_psd)[0][1]*100, clf_fc.predict_proba(result_fc)[0][1]*100, clf_ni.predict_proba(result_ni)[0][1]*100,78,87,84]
+            self.values = [clf_psd.predict_proba(result_psd)[0][1]*100, clf_fc.predict_proba(result_fc)[0][1]*100, clf_ni.predict_proba(result_ni)[0][1]*100,78,87,84]
             # values = [71, 92.5, 90, 78, 87, 84]
             x = ['PSD', 'FC', 'NI', 'S_PSD', 'S_FC', 'S_NI']
-            plt.figure(figsize=(8, 5))
+            plt.figure(figsize=(9, 5))
             plt.tick_params(labelsize=13, length=3, bottom=False)
-            bars = plt.bar(x, values, color='#54829C', alpha=0.5, width=0.7)
-            bars[np.argmax(values)].set_color('r')
+            bars = plt.bar(x, self.values, color='#54829C', alpha=0.5, width=0.7)
+            bars[np.argmax(self.values)].set_color('r')
+            self.best_model = model[np.argmax(self.values)]
             plt.title('Predictive probability by model', fontsize=20)
-            for i, v in enumerate(values):
-                plt.text(x[i], v + 3, int(values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
-                         fontsize=14,
+            for i, v in enumerate(self.values):
+                plt.text(x[i], v + 2.5, int(self.values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
+                         fontsize=13,
                          color='black',
                          horizontalalignment='center',  # horizontalalignment (left, center, right)
                          verticalalignment='center')  # verticalalignment (top, center, bottom)
-            plt.ylim(0, 103)
+            plt.ylim(0, 107)
             plt.savefig("{}/mode_prob.png".format(self.dir))
             plt.close()
         else:
             self.y_pred = "HC"
             self.y_pred_proba = hc_proba
-            values = [clf_psd.predict_proba(result_psd)[0][0] * 100, clf_fc.predict_proba(result_fc)[0][0] * 100,
+            self.values = [clf_psd.predict_proba(result_psd)[0][0] * 100, clf_fc.predict_proba(result_fc)[0][0] * 100,
                       clf_ni.predict_proba(result_ni)[0][0] * 100, 78, 87, 84]
             # values = [71, 92.5, 90, 78, 87, 84]
             x = ['PSD', 'FC', 'NI', 'S_PSD', 'S_FC', 'S_NI']
-            plt.figure(figsize=(8, 5))
+            plt.figure(figsize=(9, 5))
             plt.tick_params(labelsize=13, length=3, bottom=False)
-            bars = plt.bar(x, values, color='#54829C', alpha=0.5, width=0.7)
-            bars[np.argmax(values)].set_color('r')
+            bars = plt.bar(x, self.values, color='#54829C', alpha=0.5, width=0.7)
+            bars[np.argmax(self.values)].set_color('r')
+            self.best_model = model[np.argmax(self.values)]
             plt.title('Predictive probability by model', fontsize=20)
-            for i, v in enumerate(values):
-                plt.text(x[i], v + 3, int(values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
-                         fontsize=14,
+            for i, v in enumerate(self.values):
+                plt.text(x[i], v + 2.5, int(self.values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
+                         fontsize=13,
                          color='black',
                          horizontalalignment='center',  # horizontalalignment (left, center, right)
                          verticalalignment='center')  # verticalalignment (top, center, bottom)
-            plt.ylim(0, 103)
+            plt.ylim(0, 107)
             plt.savefig("{}/mode_prob.png".format(self.dir))
             plt.close()
 
-        print(mdd_proba, hc_proba)
+        file_data = OrderedDict()
+        file_data['y_pred'] = self.y_pred
+        file_data['y_pred_proba'] = self.y_pred_proba
+        file_data['best_model'] = self.best_model
 
+        with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file:
+            json.dump(file_data, make_file, ensure_ascii=False, indent='\t')
 
+        # import sys
+        # mod = sys.modules[__name__]
+        # best = x[np.argmax(values)]
+        # x_mdd = getattr(mod, 'x_{}_data'.format(best.lower()))[y_data == 1]
+        # x_hc = getattr(mod, 'x_{}_data'.format(best.lower()))[y_data == 0]
+        #
+        # plt.figure(figsize=(15, 6))
+        # plt.suptitle('Functional Connectivity', fontsize=20)
+        # for i in range(3):
+        #     y_hc = np.mean(x_hc[:, i], axis=0)
+        #     yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
+        #     y_mdd = np.mean(x_mdd[:, i], axis=0)
+        #     yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
+        #     plt.subplot(1, 3, i + 1)
+        #     plt.xlim(0, 1)
+        #     data_1 = {
+        #         'x': 0.2,
+        #         'y': y_hc,
+        #         'yerr': yerr_hc}
+        #     data_2 = {
+        #         'x': 0.8,
+        #         'y': y_mdd,
+        #         'yerr': yerr_mdd}
+        #     plt.scatter(data_1['x'], y_hc, color='blue', alpha=1, marker='D', s=60)
+        #     plt.scatter(data_2['x'], y_mdd, color='red', alpha=1, marker='D', s=60)
+        #     plt.errorbar(**data_1, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='blue', elinewidth=3)
+        #     plt.errorbar(**data_2, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='red', elinewidth=3)
+        #     y_temp = x_mdd[3, i]
+        #     if y_hc > y_mdd:
+        #         if y_temp < y_mdd - (yerr_mdd):
+        #             y_temp = y_mdd - (yerr_mdd)
+        #         elif y_temp > y_hc + margin:
+        #             y_temp = y_hc + (yerr_hc)
+        #     else:
+        #         if y_temp < y_hc - margin:
+        #             y_temp = y_hc - (yerr_hc)
+        #         elif y_temp > y_mdd + margin:
+        #             y_temp = y_mdd + (yerr_mdd)
+        #     plt.axhline(y=y_temp, color='g', linewidth=3, alpha=0.5)
+        #     plt.scatter(0.47, y_temp, marker='o', s=120, color='g', alpha=0.5)
+        #     plt.text(0.5, y_temp, 'Yours', color='black', size=16)
+        #     plt.gca().axes.xaxis.set_ticks([])
+        #     plt.gca().axes.yaxis.set_ticks([])
+        # # plt.tight_layout()
+        # plt.show()
 
         self.pred_n_plot()
 

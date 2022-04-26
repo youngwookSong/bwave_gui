@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QTableWidgetItem
 
 from main import *
 from dialog.newfile_dialog2 import Ui_Dialog
-from dialog.loadingBar import Ui_Dialog_loading, Worker
+from dialog.loadingBar import Ui_Dialog_loading, Worker, ThreadClass
 
 from ui.tab_frame import Ui_tabFrame
 from ui.tab_frame_pre import Ui_tabFrame_pre
