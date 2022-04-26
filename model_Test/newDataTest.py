@@ -10,6 +10,8 @@ import pandas as pd
 
 from model_Test.fc_plot import VisualizeFc
 
+from resources import root
+
 import json
 from collections import OrderedDict
 
@@ -173,8 +175,6 @@ class model_test:
         # result_s_fc = raw_file_s.s_fc_f
         # result_s_ni = raw_file_s.s_ni
 
-
-
         mdd_proba = (clf_fc.predict_proba(result_fc)[0][1] + clf_psd.predict_proba(result_psd)[0][1] +
                      clf_ni.predict_proba(result_ni)[0][1]) / 3
         hc_proba = (clf_fc.predict_proba(result_fc)[0][0] + clf_psd.predict_proba(result_psd)[0][0] +
@@ -184,14 +184,15 @@ class model_test:
         if mdd_proba > hc_proba:
             self.y_pred = 'MDD'
             self.y_pred_proba = mdd_proba
-            self.values = [clf_psd.predict_proba(result_psd)[0][1]*100, clf_fc.predict_proba(result_fc)[0][1]*100, clf_ni.predict_proba(result_ni)[0][1]*100,78,87,84]
+            self.values = [clf_psd.predict_proba(result_psd)[0][1]*100, clf_fc.predict_proba(result_fc)[0][1]*100,
+                           clf_ni.predict_proba(result_ni)[0][1]*100,78,87,83]
             # values = [71, 92.5, 90, 78, 87, 84]
             x = ['PSD', 'FC', 'NI', 'S_PSD', 'S_FC', 'S_NI']
             plt.figure(figsize=(9, 5))
             plt.tick_params(labelsize=13, length=3, bottom=False)
             bars = plt.bar(x, self.values, color='#54829C', alpha=0.5, width=0.7)
             bars[np.argmax(self.values)].set_color('r')
-            self.best_model = model[np.argmax(self.values)]
+            self.best_model = model[np.argmax(self.values[:3])]
             plt.title('Predictive probability by model', fontsize=20)
             for i, v in enumerate(self.values):
                 plt.text(x[i], v + 2.5, int(self.values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
@@ -206,14 +207,14 @@ class model_test:
             self.y_pred = "HC"
             self.y_pred_proba = hc_proba
             self.values = [clf_psd.predict_proba(result_psd)[0][0] * 100, clf_fc.predict_proba(result_fc)[0][0] * 100,
-                      clf_ni.predict_proba(result_ni)[0][0] * 100, 78, 87, 84]
+                      clf_ni.predict_proba(result_ni)[0][0] * 100, 78, 87, 83]
             # values = [71, 92.5, 90, 78, 87, 84]
             x = ['PSD', 'FC', 'NI', 'S_PSD', 'S_FC', 'S_NI']
             plt.figure(figsize=(9, 5))
             plt.tick_params(labelsize=13, length=3, bottom=False)
             bars = plt.bar(x, self.values, color='#54829C', alpha=0.5, width=0.7)
             bars[np.argmax(self.values)].set_color('r')
-            self.best_model = model[np.argmax(self.values)]
+            self.best_model = model[np.argmax(self.values[:3])]
             plt.title('Predictive probability by model', fontsize=20)
             for i, v in enumerate(self.values):
                 plt.text(x[i], v + 2.5, int(self.values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
@@ -225,59 +226,65 @@ class model_test:
             plt.savefig("{}/mode_prob.png".format(self.dir))
             plt.close()
 
-        file_data = OrderedDict()
-        file_data['y_pred'] = self.y_pred
-        file_data['y_pred_proba'] = self.y_pred_proba
-        file_data['best_model'] = self.best_model
+        ## positin plot ---------------------------
+        with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(root), 'rb') as f:
+            df = pickle.load(f)
 
-        with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file:
-            json.dump(file_data, make_file, ensure_ascii=False, indent='\t')
+        y_data = df['target'].to_numpy()
+        x_data = [np.vstack(df['psd'].to_numpy())[:, np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format('psd')))],
+                  np.vstack(df['fc'].to_numpy())[:, np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format('fc')))],
+                  np.vstack(df['ni'].to_numpy())[:, np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format('ni')))]]
 
         # import sys
         # mod = sys.modules[__name__]
-        # best = x[np.argmax(values)]
-        # x_mdd = getattr(mod, 'x_{}_data'.format(best.lower()))[y_data == 1]
-        # x_hc = getattr(mod, 'x_{}_data'.format(best.lower()))[y_data == 0]
-        #
-        # plt.figure(figsize=(15, 6))
-        # plt.suptitle('Functional Connectivity', fontsize=20)
-        # for i in range(3):
-        #     y_hc = np.mean(x_hc[:, i], axis=0)
-        #     yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
-        #     y_mdd = np.mean(x_mdd[:, i], axis=0)
-        #     yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
-        #     plt.subplot(1, 3, i + 1)
-        #     plt.xlim(0, 1)
-        #     data_1 = {
-        #         'x': 0.2,
-        #         'y': y_hc,
-        #         'yerr': yerr_hc}
-        #     data_2 = {
-        #         'x': 0.8,
-        #         'y': y_mdd,
-        #         'yerr': yerr_mdd}
-        #     plt.scatter(data_1['x'], y_hc, color='blue', alpha=1, marker='D', s=60)
-        #     plt.scatter(data_2['x'], y_mdd, color='red', alpha=1, marker='D', s=60)
-        #     plt.errorbar(**data_1, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='blue', elinewidth=3)
-        #     plt.errorbar(**data_2, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='red', elinewidth=3)
-        #     y_temp = x_mdd[3, i]
-        #     if y_hc > y_mdd:
-        #         if y_temp < y_mdd - (yerr_mdd):
-        #             y_temp = y_mdd - (yerr_mdd)
-        #         elif y_temp > y_hc + margin:
-        #             y_temp = y_hc + (yerr_hc)
-        #     else:
-        #         if y_temp < y_hc - margin:
-        #             y_temp = y_hc - (yerr_hc)
-        #         elif y_temp > y_mdd + margin:
-        #             y_temp = y_mdd + (yerr_mdd)
-        #     plt.axhline(y=y_temp, color='g', linewidth=3, alpha=0.5)
-        #     plt.scatter(0.47, y_temp, marker='o', s=120, color='g', alpha=0.5)
-        #     plt.text(0.5, y_temp, 'Yours', color='black', size=16)
-        #     plt.gca().axes.xaxis.set_ticks([])
-        #     plt.gca().axes.yaxis.set_ticks([])
-        # # plt.tight_layout()
-        # plt.show()
+        best = model[np.argmax(self.values[:3])]
+        x_mdd = x_data[np.argmax(self.values[:3])][y_data == 1]
+        x_hc = x_data[np.argmax(self.values[:3])][y_data == 0]
+        # x_mdd = getattr(mod, 'x_{}_data'.format(best))[y_data == 1]
+        # x_hc = getattr(mod, 'x_{}_data'.format(best))[y_data == 0]
+
+        plt.figure(figsize=(10, 6))
+        plt.suptitle('{}'.format(best.upper()), fontsize=20)
+        for i in range(3):
+            y_hc = np.mean(x_hc[:, i], axis=0)
+            yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
+            y_mdd = np.mean(x_mdd[:, i], axis=0)
+            yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
+            plt.subplot(1, 3, i + 1)
+            plt.xlim(0, 1)
+            data_1 = {
+                'x': 0.2,
+                'y': y_hc,
+                'yerr': yerr_hc}
+            data_2 = {
+                'x': 0.8,
+                'y': y_mdd,
+                'yerr': yerr_mdd}
+            plt.scatter(data_1['x'], y_hc, color='blue', alpha=1, marker='D', s=60)
+            plt.scatter(data_2['x'], y_mdd, color='red', alpha=1, marker='D', s=60)
+            plt.errorbar(**data_1, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='blue', elinewidth=3)
+            plt.errorbar(**data_2, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='red', elinewidth=3)
+            result_data=[result_psd, result_fc, result_ni]
+            y_temp = result_data[np.argmax(self.values[:3])][0, i]
+            # y_temp = getattr(mod, 'result_{}'.format(best))
+            if y_hc > y_mdd:
+                if y_temp < y_mdd - (yerr_mdd):
+                    y_temp = y_mdd - (yerr_mdd)
+                elif y_temp > y_hc + yerr_hc:
+                    y_temp = y_hc + (yerr_hc)
+            else:
+                if y_temp < y_hc - yerr_hc:
+                    y_temp = y_hc - (yerr_hc)
+                elif y_temp > y_mdd + yerr_mdd:
+                    y_temp = y_mdd + (yerr_mdd)
+            plt.axhline(y=y_temp, color='g', linewidth=3, alpha=0.5)
+            plt.scatter(0.47, y_temp, marker='o', s=120, color='g', alpha=0.5)
+            plt.text(0.5, y_temp, 'Yours', color='black', size=16)
+            plt.gca().axes.xaxis.set_ticks([])
+            plt.gca().axes.yaxis.set_ticks([])
+        plt.tight_layout(h_pad=0.5, w_pad=0.5)
+        plt.savefig("{}/position_plot.png".format(self.dir), bbox_inches='tight', pad_inches=0.4)
+        plt.close()
 
         self.pred_n_plot()
 
@@ -285,6 +292,15 @@ class model_test:
         self.psd_plot(raw_file.psd_abs[0], "abs")
 
         self.ni_plot(raw_file.ni[0][28:])
+
+        ##JSON
+        file_data = OrderedDict()
+        file_data['y_pred'] = self.y_pred
+        file_data['y_pred_proba'] = self.y_pred_proba
+        file_data['best_model'] = self.best_model
+
+        with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file:
+            json.dump(file_data, make_file, ensure_ascii=False, indent='\t')
 
         ##  ------------------- fc_plot
 

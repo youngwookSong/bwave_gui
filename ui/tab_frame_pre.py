@@ -793,6 +793,14 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_10.setSpacing(0)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.frame_68 = QFrame(self.frame_10)
+        self.frame_68.setObjectName(u"frame_68")
+        self.frame_68.setMaximumSize(QSize(50, 16777215))
+        self.frame_68.setFrameShape(QFrame.StyledPanel)
+        self.frame_68.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_10.addWidget(self.frame_68)
+
         self.label_37 = QLabel(self.frame_10)
         self.label_37.setObjectName(u"label_37")
         self.label_37.setAlignment(Qt.AlignCenter)
@@ -827,6 +835,23 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.frame_65 = QFrame(self.frame_28)
+        self.frame_65.setObjectName(u"frame_65")
+        sizePolicy3.setHeightForWidth(self.frame_65.sizePolicy().hasHeightForWidth())
+        self.frame_65.setSizePolicy(sizePolicy3)
+        self.frame_65.setMaximumSize(QSize(50, 16777215))
+        self.frame_65.setFrameShape(QFrame.StyledPanel)
+        self.frame_65.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_14 = QVBoxLayout(self.frame_65)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.label_74 = QLabel(self.frame_65)
+        self.label_74.setObjectName(u"label_74")
+        self.label_74.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+        self.verticalLayout_14.addWidget(self.label_74)
+
+        self.horizontalLayout_11.addWidget(self.frame_65)
+
         self.label_16 = QLabel(self.frame_28)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setAlignment(Qt.AlignCenter)
@@ -849,6 +874,23 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_33.setSpacing(0)
         self.horizontalLayout_33.setObjectName(u"horizontalLayout_33")
         self.horizontalLayout_33.setContentsMargins(0, 0, 0, 0)
+        self.frame_66 = QFrame(self.frame_29)
+        self.frame_66.setObjectName(u"frame_66")
+        sizePolicy3.setHeightForWidth(self.frame_66.sizePolicy().hasHeightForWidth())
+        self.frame_66.setSizePolicy(sizePolicy3)
+        self.frame_66.setMaximumSize(QSize(50, 16777215))
+        self.frame_66.setFrameShape(QFrame.StyledPanel)
+        self.frame_66.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_13 = QVBoxLayout(self.frame_66)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.label_75 = QLabel(self.frame_66)
+        self.label_75.setObjectName(u"label_75")
+        self.label_75.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+        self.verticalLayout_13.addWidget(self.label_75)
+
+        self.horizontalLayout_33.addWidget(self.frame_66)
+
         self.label_40 = QLabel(self.frame_29)
         self.label_40.setObjectName(u"label_40")
         self.label_40.setAlignment(Qt.AlignCenter)
@@ -871,6 +913,23 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_34.setSpacing(0)
         self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
         self.horizontalLayout_34.setContentsMargins(0, 0, 0, 0)
+        self.frame_67 = QFrame(self.frame_30)
+        self.frame_67.setObjectName(u"frame_67")
+        sizePolicy3.setHeightForWidth(self.frame_67.sizePolicy().hasHeightForWidth())
+        self.frame_67.setSizePolicy(sizePolicy3)
+        self.frame_67.setMaximumSize(QSize(50, 16777215))
+        self.frame_67.setFrameShape(QFrame.StyledPanel)
+        self.frame_67.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.frame_67)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.label_76 = QLabel(self.frame_67)
+        self.label_76.setObjectName(u"label_76")
+        self.label_76.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+
+        self.verticalLayout_15.addWidget(self.label_76)
+
+        self.horizontalLayout_34.addWidget(self.frame_67)
+
         self.label_43 = QLabel(self.frame_30)
         self.label_43.setObjectName(u"label_43")
         self.label_43.setAlignment(Qt.AlignCenter)
@@ -1128,10 +1187,13 @@ class Ui_tabFrame_pre(QFrame):
         self.label_16.setStyleSheet(u"image:url(./personal_data/{}_{}/absolute_Theta.png)".format(self.num, self.name))
         self.label_40.setStyleSheet(u"image:url(./personal_data/{}_{}/plv_Theta.png)".format(self.num, self.name))
         self.label_43.setStyleSheet(u"image:url(./personal_data/{}_{}/network_Theta.png)".format(self.num, self.name))
+        self.label_39.setStyleSheet(u"image:url(./model_Test/plot_image/source_1.png)")
+        self.label_42.setStyleSheet(u"image:url(./model_Test/plot_image/source_2.jpg)")
+        self.label_44.setStyleSheet(u"image:url(./model_Test/plot_image/source_3.png)")
 
         # self.label_52.setStyleSheet(u"image:url(./personal_data/{}_{}/psd_power.png)".format(self.num, self.name))
         self.label_36.setStyleSheet(u"image:url(./personal_data/{}_{}/mode_prob.png)".format(self.num, self.name))
-        self.label_52.setStyleSheet(u"image:url(./model_test/plot_image/test_plot_2.PNG)")
+        self.label_52.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot.png)".format(self.num, self.name))
 
         ## 가장 유의미한 지표
         label_list = [self.label_12, self.label_7, self.label_8, self.label_10, self.label_13, self.label_14, self.label_15]
@@ -1150,7 +1212,7 @@ class Ui_tabFrame_pre(QFrame):
                 label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/network_{}.png)"
                                             .format(self.num, self.name, freq[i])))
 
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - 가장 유의미한 특성".format(self.data['best_model']), None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - Most influential Feature".format(self.data['best_model'].upper()), None))
         # self.label_15.setStyleSheet(u"image:url(./model_Test/plot_image/psd_topomap_.png)")
 
 
@@ -1263,7 +1325,11 @@ class Ui_tabFrame_pre(QFrame):
         self.label_61.setText(QCoreApplication.translate("MainWindow", u"Gamma", None))
 
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"back", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"View More", None))
+        self.label_74.setText(QCoreApplication.translate("MainWindow", u"PSD", None))
+        self.label_75.setText(QCoreApplication.translate("MainWindow", u"FC", None))
+        self.label_76.setText(QCoreApplication.translate("MainWindow", u"NI", None))
+
+        # self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"View More", None))
 
 # retranslateUi
 
