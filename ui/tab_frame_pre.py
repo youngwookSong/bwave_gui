@@ -1197,7 +1197,7 @@ class Ui_tabFrame_pre(QFrame):
 
         ## 가장 유의미한 지표
         label_list = [self.label_12, self.label_7, self.label_8, self.label_10, self.label_13, self.label_14, self.label_15]
-        with open('./personal_data/{}_{}/info.json'.format(self.num, self.name)) as f:
+        with open('./personal_data/{}_{}/info.json'.format(self.num, self.name), 'r', encoding='utf-8') as f:
             self.data = json.load(f)
         if self.data['best_model'] == 'psd':
             for i in range(7):
@@ -1212,7 +1212,7 @@ class Ui_tabFrame_pre(QFrame):
                 label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/network_{}.png)"
                                             .format(self.num, self.name, freq[i])))
 
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - Most influential Feature".format(self.data['best_model'].upper()), None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - Most Influential Feature".format(self.data['best_model'].upper()), None))
         # self.label_15.setStyleSheet(u"image:url(./model_Test/plot_image/psd_topomap_.png)")
 
 

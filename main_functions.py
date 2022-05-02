@@ -1,3 +1,4 @@
+import shutil
 import time
 import os
 
@@ -17,6 +18,9 @@ GLOBAL_STATE = 0
 from style import *
 import resources as main_res
 import personal_data.resources as personal_res
+
+import json
+from collections import OrderedDict
 
 # # toggle close시 아이콘만
 # def changeBtnIcon(button):
@@ -135,19 +139,25 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         return cellWidget
 
     ## 테이블에 데이터 삭제
+    import shutil
     def remove_table_data(self):
-        print(self.checkboxList)
+        print(len(self.checkboxList))
+
+        print(self.dataList)
+
         delIdx = []
         for idx, chbox in enumerate(self.checkboxList):
             if chbox.isChecked() == True:
-                self.ui.tableWidget.removeRow(idx)
-                del self.data[idx]
-                del self.checkboxList[idx]
-                self.row -= 1
-                print("data: ", self.data)
+                path = os.path.join(personal_res.root, self.dataList[idx])
+                print("path:", path)
+                if os.path.exists(path):
+                    shutil.rmtree(path)
 
-        with open(os.path.join(main_res.root, 'data.pickle'), 'wb') as f:
-            pickle.dump(self.data, f)
+                self.ui.tableWidget.removeRow(idx)
+                del self.checkboxList[idx]
+                del self.dataList[idx]
+                self.row -= 1
+            print(self.dataList)
 
     ## 테이블 더블 클릭 시 해당 데이터 결과 화면으로 이동
     def table_double_clicked(self):
@@ -191,40 +201,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
 
-            ## 새로운 데이터 기존 data에 추가 및 pickle파일 저장
-            new_data = {"선택": 'QCheckBox', "회원ID": num, "이름": name, "검사일시": date, "점수": "70"}
-            self.data.append(new_data)
-
-            with open(os.path.join(main_res.root, 'data.pickle'), 'wb') as f:
-                pickle.dump(self.data, f)
-
-            ## 환자 디렉토리 만들기
-            directory = os.path.join(personal_res.root, "{}_{}".format(num, name)) #절대 경로
-            # directory = "./personal_data/{}_{}".format(num, name)
-            try:
-                if not os.path.exists(directory):
-                    os.makedirs(directory)
-            except OSError:
-                print('Error: Creating directory. ' + directory)
-
-            self._dialog_loading = Ui_Dialog_loading(file, directory)  # loading bar 열기 (여기서 알고리즘 돌림 모델에 넣고)
-            self._dialog_loading.exec()
-
-            # 알고리즘 돌림
-            # md = model_test(file, directory)
-            # md.test()
-            # y_pred = md.y_pred
-            # y_pred_proba = md.y_pred_proba
-
-            # 탭 추가 및 해당 탭으로 이동
-            self.ui.pages.setCurrentWidget(self.ui.anal)
-            current_tab = QWidget()
-            self.ui.tabWidget.addTab(current_tab, name)
-            self.ui.tabWidget.setCurrentWidget(current_tab)
-
-            self.row += 1
-            self.ui.tableWidget.setRowCount(self.row)
-
+            ## table에 새로운 열 추가
             ckbox = QCheckBox()
             cellWidget = QWidget()
             layoutCB = QHBoxLayout(cellWidget)
@@ -234,20 +211,53 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             cellWidget.setLayout(layoutCB)
             cellWidget.setStyleSheet(u"border:0px")
             self.checkboxList.append(ckbox)
+            self.dataList.append('{}_{}'.format(num, name))
 
+            self.row += 1
+            self.ui.tableWidget.setRowCount(self.row)
             self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
-            self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(new_data["회원ID"]))
+            self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(num))
             self.ui.tableWidget.item(self.row - 1, 1).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(new_data["이름"]))
+            self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(name))
             self.ui.tableWidget.item(self.row - 1, 2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(new_data["검사일시"]))
+            self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(date))
             self.ui.tableWidget.item(self.row - 1, 3).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(new_data["점수"]))
+            self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem('-'))
             self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+
+            ## 환자 디렉토리 만들기
+            self.directory = os.path.join(personal_res.root, "{}_{}".format(num, name)) #절대 경로
+            try:
+                if not os.path.exists(self.directory):
+                    os.makedirs(self.directory)
+            except OSError:
+                print('Error: Creating directory. ' + self.directory)
+
+            ## 환자 정보 json만들기
+            file_data = OrderedDict()
+            file_data['file'] = file
+            file_data['name'] = name
+            file_data['birth'] = birth
+            file_data['num'] = num
+            file_data['date'] = date
+            file_data['sex'] = sex
+            file_data['y_pred_proba'] = '-'
+
+            with open('{}/info.json'.format(self.directory), 'w', encoding='utf-8') as make_file:
+                json.dump(file_data, make_file, ensure_ascii=False, indent='\t')
+
+            ## 로딩바 화면 출력
+            self._dialog_loading = Ui_Dialog_loading(file, self.directory)  # loading bar 열기 (여기서 알고리즘 돌림 모델에 넣고)
+            self._dialog_loading.exec()
+
+            # 탭 추가 및 해당 탭으로 이동
+            self.ui.pages.setCurrentWidget(self.ui.anal)
+            current_tab = QWidget()
+            self.ui.tabWidget.addTab(current_tab, name)
+            self.ui.tabWidget.setCurrentWidget(current_tab)
 
             self.ui.btn_anal.setDisabled(False)
 
-            # self._tabFrame = Ui_tabFrame(current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba) #tab_frame에 프레임 뿌려줌
             self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex)
 
         else: #취소 버튼 눌렀을때
@@ -271,6 +281,11 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if result == QMessageBox.Ok:
             print("OK")
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
+
+            with open('{}/info.json'.format(self.directory), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(info_json_path['y_pred_proba']))
+            self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
         elif result == QMessageBox.Cancel:
             print("Cancel")
 

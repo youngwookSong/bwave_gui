@@ -17,6 +17,9 @@ from main_functions import *
 #import stylesheet
 from style import *
 import resources as main_res
+import personal_data.resources as personal_res
+
+import json
 
 class LoginView(QMainWindow):
     def __init__(self):
@@ -92,29 +95,29 @@ class MainView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
-        # with open('data.pickle', 'wb') as f:
-        #     pickle.dump([], f)
-
-        ## load data
-        with open(os.path.join(main_res.root, 'data.pickle'), 'rb') as f:
-            self.data = pickle.load(f)
-
+        self.data = os.listdir(personal_res.root)
+        self.data.remove('resources.py')
+        self.data.remove('__pycache__')
         print(self.data)
 
         self.row = len(self.data)
         self.ui.tableWidget.setRowCount(self.row)
 
         self.checkboxList = [] # 체크박스 리스트 저장하기
+        self.dataList = [] # 체크박스 인덱스에 맞는 데이터 저장하기
 
         for row, person in enumerate(self.data):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
             self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.makeChbox(self, row))
-            self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(person["회원ID"]))
+            self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(info_json_path['num']))
             self.ui.tableWidget.item(row, 1).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(person["이름"]))
+            self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(info_json_path['name']))
             self.ui.tableWidget.item(row, 2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(person["검사일시"]))
+            self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(info_json_path['date']))
             self.ui.tableWidget.item(row, 3).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(person["점수"]))
+            self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(info_json_path['y_pred_proba']))
             self.ui.tableWidget.item(row, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
 
         self.show()
@@ -144,7 +147,6 @@ class MainView(QMainWindow):
         self.close()
         self.second = LoginView()
         self.second.show()
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

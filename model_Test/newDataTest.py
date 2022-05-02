@@ -276,13 +276,14 @@ class model_test:
         self.ni_plot(raw_file.ni[0][28:])
 
         ##JSON
-        file_data = OrderedDict()
-        file_data['y_pred'] = self.y_pred
-        file_data['y_pred_proba'] = self.y_pred_proba
-        file_data['best_model'] = self.best_model
+        with open('{}/info.json'.format(self.dir), 'r', encoding='utf-8') as make_file: #읽고
+            data = json.load(make_file)
+            data['y_pred'] = self.y_pred
+            data['y_pred_proba'] = self.y_pred_proba
+            data['best_model'] = self.best_model
 
-        with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file:
-            json.dump(file_data, make_file, ensure_ascii=False, indent='\t')
+        with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file: #쓰기
+            json.dump(data, make_file, ensure_ascii=False, indent='\t')
 
         ##  ------------------- fc_plot
 
