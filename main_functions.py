@@ -18,15 +18,15 @@ from style import *
 import resources as main_res
 import personal_data.resources as personal_res
 
-# toggle close시 아이콘만
-def changeBtnIcon(button):
-    button.setStyleSheet(close_style)
-    button.setText("")
-
-# toggle open시 다 나오게
-def afterChange(button, text):
-    button.setStyleSheet(style)
-    button.setText(text)
+# # toggle close시 아이콘만
+# def changeBtnIcon(button):
+#     button.setStyleSheet(close_style)
+#     button.setText("")
+#
+# # toggle open시 다 나오게
+# def afterChange(button, text):
+#     button.setStyleSheet(style)
+#     button.setText(text)
 
 class UIFunctions(MainView): #main.py의 클래스를 상속
     def maximize_restore(self):
@@ -74,49 +74,49 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         return GLOBAL_STATE
 
     ## 토글 메뉴
-    def toggleMenu(self, maxWidth, enable):
-        if enable:
-            #get width
-            width = self.ui.frame_left_menu.width()
-            maxExtend = maxWidth
-            standard = 250
-
-            #set max width
-            if self.menu_state == "open":
-                widthExtended = maxExtend
-                self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/menu.png"))
-                self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
-                changeBtnIcon(self.ui.btn_toggle)
-                # changeBtnIcon(self.ui.btn_home)
-                # changeBtnIcon(self.ui.btn_anal)
-                changeBtnIcon(self.ui.btn_new_file)
-                changeBtnIcon(self.ui.btn_open_2)
-                changeBtnIcon(self.ui.btn_save_2)
-                changeBtnIcon(self.ui.btn_new_file_2)
-                self.activepage.setStyleSheet(active_close_style)
-                self.menu_state = "close"
-
-            else:
-                widthExtended = standard
-                self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/left.png"))
-                self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
-                afterChange(self.ui.btn_toggle, "  메뉴")
-                # afterChange(self.ui.btn_home, "  메인 화면")
-                # afterChange(self.ui.btn_anal, "  진단 결과")
-                afterChange(self.ui.btn_new_file, "  새로운 파일 열기")
-                afterChange(self.ui.btn_open_2, "  열기")
-                afterChange(self.ui.btn_save_2, "  저장")
-                afterChange(self.ui.btn_new_file_2, "  설정")
-                self.activepage.setStyleSheet(active_style)
-                self.menu_state = "open"
-
-            #animation
-            self.animation = QPropertyAnimation(self.ui.frame_left_menu, b"minimumWidth")
-            self.animation.setDuration(500)
-            self.animation.setStartValue(width)
-            self.animation.setEndValue(widthExtended)
-            self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-            self.animation.start()
+    # def toggleMenu(self, maxWidth, enable):
+    #     if enable:
+    #         #get width
+    #         width = self.ui.frame_left_menu.width()
+    #         maxExtend = maxWidth
+    #         standard = 250
+    #
+    #         #set max width
+    #         if self.menu_state == "open":
+    #             widthExtended = maxExtend
+    #             self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/menu.png"))
+    #             self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
+    #             changeBtnIcon(self.ui.btn_toggle)
+    #             # changeBtnIcon(self.ui.btn_home)
+    #             # changeBtnIcon(self.ui.btn_anal)
+    #             changeBtnIcon(self.ui.btn_new_file)
+    #             changeBtnIcon(self.ui.btn_open_2)
+    #             changeBtnIcon(self.ui.btn_save_2)
+    #             changeBtnIcon(self.ui.btn_new_file_2)
+    #             self.activepage.setStyleSheet(active_close_style)
+    #             self.menu_state = "close"
+    #
+    #         else:
+    #             widthExtended = standard
+    #             self.ui.btn_toggle.setIcon(QtGui.QIcon("./icon/left.png"))
+    #             self.ui.btn_toggle.setIconSize(QtCore.QSize(24, 24))
+    #             afterChange(self.ui.btn_toggle, "  메뉴")
+    #             # afterChange(self.ui.btn_home, "  메인 화면")
+    #             # afterChange(self.ui.btn_anal, "  진단 결과")
+    #             afterChange(self.ui.btn_new_file, "  새로운 파일 열기")
+    #             afterChange(self.ui.btn_open_2, "  열기")
+    #             afterChange(self.ui.btn_save_2, "  저장")
+    #             afterChange(self.ui.btn_new_file_2, "  설정")
+    #             self.activepage.setStyleSheet(active_style)
+    #             self.menu_state = "open"
+    #
+    #         #animation
+    #         self.animation = QPropertyAnimation(self.ui.frame_left_menu, b"minimumWidth")
+    #         self.animation.setDuration(500)
+    #         self.animation.setStartValue(width)
+    #         self.animation.setEndValue(widthExtended)
+    #         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+    #         self.animation.start()
 
     ## 각 row의 해당하는 고유의 체크박스 만들기
     def makeChbox(self, idx):
@@ -167,21 +167,21 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         #     QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
-    def set_page(self, page):
-        self.ui.pages.setCurrentWidget(page)
-        self.prep_activepage = self.activepage
-        if page == self.ui.home:
-            self.activepage = self.ui.btn_home
-        if page == self.ui.anal:
-            self.activepage = self.ui.btn_anal
-
-        if self.menu_state == "open":
-            self.prep_activepage.setStyleSheet(style)
-            self.activepage.setStyleSheet(active_style)
-
-        if self.menu_state == "close":
-            self.prep_activepage.setStyleSheet(close_style)
-            self.activepage.setStyleSheet(active_close_style)
+    # def set_page(self, page):
+    #     self.ui.pages.setCurrentWidget(page)
+    #     self.prep_activepage = self.activepage
+    #     if page == self.ui.home:
+    #         self.activepage = self.ui.btn_home
+    #     if page == self.ui.anal:
+    #         self.activepage = self.ui.btn_anal
+    #
+    #     if self.menu_state == "open":
+    #         self.prep_activepage.setStyleSheet(style)
+    #         self.activepage.setStyleSheet(active_style)
+    #
+    #     if self.menu_state == "close":
+    #         self.prep_activepage.setStyleSheet(close_style)
+    #         self.activepage.setStyleSheet(active_close_style)
 
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
     def handleOpenDialog(self):
