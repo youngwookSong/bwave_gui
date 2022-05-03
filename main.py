@@ -19,6 +19,8 @@ from style import *
 import resources as main_res
 import personal_data.resources as personal_res
 
+from dialog.product import Ui_Dialog_product
+
 import json
 
 class LoginView(QMainWindow):
@@ -41,6 +43,9 @@ class LoginView(QMainWindow):
 
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
+
+        # self._dialog_product = Ui_Dialog_product()
+        # self._dialog_product.show()
 
         self.show()
 
@@ -106,6 +111,7 @@ class MainView(QMainWindow):
         self.checkboxList = [] # 체크박스 리스트 저장하기
         self.dataList = [] # 체크박스 인덱스에 맞는 데이터 저장하기
 
+        ## 함수로 만들기
         for row, person in enumerate(self.data):
             self.dataList.append(person)
             with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:

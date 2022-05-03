@@ -135,7 +135,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         cellWidget.setStyleSheet(u"border:0px")
 
         self.checkboxList.append(ckbox)
-        print(self.checkboxList)
         return cellWidget
 
     ## 테이블에 데이터 삭제
@@ -165,16 +164,19 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         column = self.ui.tableWidget.currentIndex().column()
         print(row, column)
 
-        # if self.data[row] in personal_data:
-        #     self.ui.pages.setCurrentWidget(self.ui.anal)
-        #     current_tab = QWidget()
-        #     self.ui.tabWidget.addTab(current_tab, name)
-        #     self.ui.tabWidget.setCurrentWidget(current_tab)
-        #
-        #     self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex)
-        #
-        # else:
-        #     QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
+        with open(os.path.join(personal_res.root, '{}/info.json'.format(self.dataList[row])), 'r', encoding='utf-8') as f:
+            info_json_path = json.load(f)
+
+        self.ui.pages.setCurrentWidget(self.ui.anal)
+        current_tab = QWidget()
+        self.ui.tabWidget.addTab(current_tab, "{} {}".format(info_json_path['num'], info_json_path['name']))
+        self.ui.tabWidget.setCurrentWidget(current_tab)
+
+        self._tabFrame = Ui_tabFrame_pre(current_tab, info_json_path['file'], info_json_path['name'],
+                                         info_json_path['birth'], info_json_path['num'], info_json_path['date'],
+                                         info_json_path['sex'])
+
+            # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
     ## 왼쪽 메뉴 누르면 해당 페이지로 이동
     # def set_page(self, page):
@@ -252,13 +254,16 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
             # 탭 추가 및 해당 탭으로 이동
             self.ui.pages.setCurrentWidget(self.ui.anal)
+            # cur_idx = self.ui.tableWidget.currentIndex()
             current_tab = QWidget()
-            self.ui.tabWidget.addTab(current_tab, name)
+            self.ui.tabWidget.addTab(current_tab, "{} {}".format(num, name))
             self.ui.tabWidget.setCurrentWidget(current_tab)
 
             self.ui.btn_anal.setDisabled(False)
 
             self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex)
+            # self.ui.tabWidget.setCurrentWidget(self._tabFrame)
+            # self.ui.tableWidget.setCurrentIndex(cur_idx+1)
 
         else: #취소 버튼 눌렀을때
             print("cancel")
@@ -267,8 +272,11 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         print("분석하기")
         print(self.ui.tabWidget.currentIndex())
         print(self.ui.tabWidget.currentWidget())
-        # self.ui.tabWidget.currentWidget().tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
-        information = "이름: {}\n환자번호: {}".format(self._tabFrame.name, self._tabFrame.num)
+        print(self.ui.tabWidget.tabText(self.ui.tabWidget.currentIndex()))
+        num_name = self.ui.tabWidget.tabText(self.ui.tabWidget.currentIndex()).split()
+        print(num_name)
+
+        information = "이름: {}\n환자번호: {}".format(num_name[1], num_name[0])
         msgBox = QMessageBox()
         msgBox.setWindowTitle("Title of MessageBox")
         msgBox.setText("분석을 진행하시겠습니까?")
@@ -279,13 +287,12 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         result = msgBox.exec()
         if result == QMessageBox.Ok:
-            print("OK")
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
 
-            with open('{}/info.json'.format(self.directory), 'r', encoding='utf-8') as f:
-                info_json_path = json.load(f)
-            self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(info_json_path['y_pred_proba']))
-            self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+            # with open('{}/info.json'.format(self.directory), 'r', encoding='utf-8') as f:
+            #     info_json_path = json.load(f)
+            # self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem(info_json_path['y_pred_proba']))
+            # self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
         elif result == QMessageBox.Cancel:
             print("Cancel")
 
