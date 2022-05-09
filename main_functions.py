@@ -18,6 +18,7 @@ GLOBAL_STATE = 0
 from style import *
 import resources as main_res
 import personal_data.resources as personal_res
+from functions.progress_functions import progress_functions
 
 import json
 from collections import OrderedDict
@@ -174,7 +175,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         self._tabFrame = Ui_tabFrame_pre(current_tab, info_json_path['file'], info_json_path['name'],
                                          info_json_path['birth'], info_json_path['num'], info_json_path['date'],
-                                         info_json_path['sex'])
+                                         info_json_path['sex'], info_json_path['y_pred'], info_json_path['y_pred_proba'])
 
             # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
@@ -261,7 +262,11 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
             self.ui.btn_anal.setDisabled(False)
 
-            self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex)
+            with open('{}/info.json'.format(self.directory), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+
+            self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex, info_json_path['y_pred'],
+                                             info_json_path['y_pred_proba'])
             # self.ui.tabWidget.setCurrentWidget(self._tabFrame)
             # self.ui.tableWidget.setCurrentIndex(cur_idx+1)
 
@@ -288,6 +293,10 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         result = msgBox.exec()
         if result == QMessageBox.Ok:
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
+
+            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba, self._tabFrame.y_pred)
+
+            # self._tabFrame.circularProgress.setStyleSheet(progress_functions.newStylesheet)
 
             # with open('{}/info.json'.format(self.directory), 'r', encoding='utf-8') as f:
             #     info_json_path = json.load(f)
