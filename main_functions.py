@@ -23,16 +23,6 @@ from functions.progress_functions import progress_functions
 import json
 from collections import OrderedDict
 
-# # toggle close시 아이콘만
-# def changeBtnIcon(button):
-#     button.setStyleSheet(close_style)
-#     button.setText("")
-#
-# # toggle open시 다 나오게
-# def afterChange(button, text):
-#     button.setStyleSheet(style)
-#     button.setText(text)
-
 class UIFunctions(MainView): #main.py의 클래스를 상속
     def maximize_restore(self):
         global GLOBAL_STATE
@@ -42,16 +32,12 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if status == 0:
             self.showMaximized()
             GLOBAL_STATE = 1
-            # self.ui.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-            # self.ui.drop_frame.setStyleSheet("border-radius: 0px;")
             self.ui.btn_max.setToolTip("Restore")
 
         else:
             GLOBAL_STATE = 0
             self.showNormal()
             self.resize(self.width() + 1, self.height() + 1)
-            # self.ui.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
-            # self.ui.drop_frame.setStyleSheet("border-radius: 10px;")
             self.ui.btn_max.setToolTip("Maximize")
 
     def uiDefinitions(self):
@@ -60,7 +46,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
         # MAXIMIZE / RESTORE
-        self.ui.btn_max.clicked.connect(lambda: UIFunctions.maximize_restore(self))
+        # self.ui.btn_max.clicked.connect(lambda: UIFunctions.maximize_restore(self))
 
         # MINIMIZE
         self.ui.btn_min.clicked.connect(lambda: self.showMinimized())
@@ -124,8 +110,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     #         self.animation.start()
 
     ## 각 row의 해당하는 고유의 체크박스 만들기
-    def makeChbox(self, idx):
-        # 고유의 이름을 가지는 체크박스 만들어야되는데 안되네... -> list로 해결
+    def make_chbox(self, idx):
         ckbox = QCheckBox()
         cellWidget = QWidget()
         layoutCB = QHBoxLayout(cellWidget)
@@ -138,11 +123,44 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         self.checkboxList.append(ckbox)
         return cellWidget
 
+    ## 테이블 포맷 만들기.(처음 테이블 생성, 검색 시 테이블 생성)
+    def make_table_format(self, row, num, name, date, y_pred_proba):
+        self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(num))
+        self.ui.tableWidget.item(row, 1).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+        self.ui.tableWidget.setItem(row, 2, QTableWidgetItem(name))
+        self.ui.tableWidget.item(row, 2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+        self.ui.tableWidget.setItem(row, 3, QTableWidgetItem(date))
+        self.ui.tableWidget.item(row, 3).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+        self.ui.tableWidget.setItem(row, 4, QTableWidgetItem(y_pred_proba))
+        self.ui.tableWidget.item(row, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+
+    ## 테이블 데이터 검색
+    def search_table_data(self):
+        print(self.dataList)
+        print(self.checkboxList)
+        search_text = self.ui.lineEdit.text()
+        print(search_text)
+
+        search_list = []
+        for s in self.dataList:
+            s_split = s.split('_')
+            if s_split[0] == search_text or s_split[1] == search_text:
+                search_list.append(s)
+        print(search_list)
+
+        # TODO: 검색한 결과를 가지고 테이블에 뿌려주기
+        # for row, person in enumerate(search_list):
+        #     self.dataList.append(person)
+        #     with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+        #         info_json_path = json.load(f)
+        #     self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+        #     UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+        #                                   info_json_path['date'], info_json_path['y_pred_proba'])
+
     ## 테이블에 데이터 삭제
     import shutil
     def remove_table_data(self):
         print(len(self.checkboxList))
-
         print(self.dataList)
 
         delIdx = []
@@ -163,7 +181,6 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     def table_double_clicked(self):
         row = self.ui.tableWidget.currentIndex().row()
         column = self.ui.tableWidget.currentIndex().column()
-        print(row, column)
 
         with open(os.path.join(personal_res.root, '{}/info.json'.format(self.dataList[row])), 'r', encoding='utf-8') as f:
             info_json_path = json.load(f)
@@ -175,26 +192,11 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         self._tabFrame = Ui_tabFrame_pre(current_tab, info_json_path['file'], info_json_path['name'],
                                          info_json_path['birth'], info_json_path['num'], info_json_path['date'],
-                                         info_json_path['sex'], info_json_path['y_pred'], info_json_path['y_pred_proba'])
+                                         info_json_path['sex'], info_json_path['y_pred'],
+                                         info_json_path['y_pred_proba_mdd'], info_json_path['y_pred_proba_hc'],
+                                         info_json_path['best_model'])
 
             # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
-
-    ## 왼쪽 메뉴 누르면 해당 페이지로 이동
-    # def set_page(self, page):
-    #     self.ui.pages.setCurrentWidget(page)
-    #     self.prep_activepage = self.activepage
-    #     if page == self.ui.home:
-    #         self.activepage = self.ui.btn_home
-    #     if page == self.ui.anal:
-    #         self.activepage = self.ui.btn_anal
-    #
-    #     if self.menu_state == "open":
-    #         self.prep_activepage.setStyleSheet(style)
-    #         self.activepage.setStyleSheet(active_style)
-    #
-    #     if self.menu_state == "close":
-    #         self.prep_activepage.setStyleSheet(close_style)
-    #         self.activepage.setStyleSheet(active_close_style)
 
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
     def handleOpenDialog(self):
@@ -204,7 +206,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
 
-            ## table에 새로운 열 추가
+            ## table에 새로운 열 추가 #TODO: 위에 함수로 바꾸기
             ckbox = QCheckBox()
             cellWidget = QWidget()
             layoutCB = QHBoxLayout(cellWidget)
@@ -219,14 +221,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self.row += 1
             self.ui.tableWidget.setRowCount(self.row)
             self.ui.tableWidget.setCellWidget(self.row - 1, 0, cellWidget)
-            self.ui.tableWidget.setItem(self.row - 1, 1, QTableWidgetItem(num))
-            self.ui.tableWidget.item(self.row - 1, 1).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(self.row - 1, 2, QTableWidgetItem(name))
-            self.ui.tableWidget.item(self.row - 1, 2).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(self.row - 1, 3, QTableWidgetItem(date))
-            self.ui.tableWidget.item(self.row - 1, 3).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            self.ui.tableWidget.setItem(self.row - 1, 4, QTableWidgetItem('-'))
-            self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+            UIFunctions.make_table_format(self, self.row-1, num, name, date, '-')
 
             ## 환자 디렉토리 만들기
             self.directory = os.path.join(personal_res.root, "{}_{}".format(num, name)) #절대 경로
@@ -266,7 +261,8 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                 info_json_path = json.load(f)
 
             self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex, info_json_path['y_pred'],
-                                             info_json_path['y_pred_proba'])
+                                             info_json_path['y_pred_proba_mdd'], info_json_path['y_pred_proba_hc'],
+                                             info_json_path['best_model'])
             # self.ui.tabWidget.setCurrentWidget(self._tabFrame)
             # self.ui.tableWidget.setCurrentIndex(cur_idx+1)
 
@@ -274,12 +270,10 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             print("cancel")
 
     def analysis_result(self):
-        print("분석하기")
         print(self.ui.tabWidget.currentIndex())
         print(self.ui.tabWidget.currentWidget())
         print(self.ui.tabWidget.tabText(self.ui.tabWidget.currentIndex()))
         num_name = self.ui.tabWidget.tabText(self.ui.tabWidget.currentIndex()).split()
-        print(num_name)
 
         information = "이름: {}\n환자번호: {}".format(num_name[1], num_name[0])
         msgBox = QMessageBox()
@@ -294,7 +288,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if result == QMessageBox.Ok:
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
 
-            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba, self._tabFrame.y_pred)
+            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba_mdd, self._tabFrame.y_pred)
 
             # self._tabFrame.circularProgress.setStyleSheet(progress_functions.newStylesheet)
 

@@ -1595,13 +1595,118 @@ QPushButton:hover {
                                <number>0</number>
                               </property>
                               <item>
-                               <widget class="QLabel" name="label_9">
-                                <property name="text">
-                                 <string>TextLabel</string>
+                               <widget class="QFrame" name="frame_62">
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
                                 </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
                                 </property>
+                                <widget class="QLabel" name="label_62">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>280</x>
+                                   <y>110</y>
+                                   <width>121</width>
+                                   <height>31</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 10pt &quot;Segoe UI Symbol&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>■  MDD Probability</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_63">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>280</x>
+                                   <y>170</y>
+                                   <width>121</width>
+                                   <height>31</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 10pt &quot;Segoe UI Symbol&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>■  HC Probability</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_64">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>280</x>
+                                   <y>50</y>
+                                   <width>121</width>
+                                   <height>31</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 10pt &quot;Segoe UI Symbol&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>■  AI Predict</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_9">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>295</x>
+                                   <y>80</y>
+                                   <width>71</width>
+                                   <height>21</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 63 14pt &quot;Segoe UI Semibold&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>MDD</string>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_65">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>295</x>
+                                   <y>140</y>
+                                   <width>71</width>
+                                   <height>21</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 63 14pt &quot;Segoe UI Semibold&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>MDD</string>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_66">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>295</x>
+                                   <y>200</y>
+                                   <width>71</width>
+                                   <height>21</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 63 14pt &quot;Segoe UI Semibold&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>MDD</string>
+                                 </property>
+                                </widget>
                                </widget>
                               </item>
                               <item>
@@ -1876,15 +1981,163 @@ QPushButton:hover {
                              <property name="maximumSize">
                               <size>
                                <width>16777215</width>
-                               <height>150</height>
+                               <height>50</height>
                               </size>
                              </property>
                              <property name="text">
                               <string>TextLabel</string>
                              </property>
                              <property name="alignment">
-                              <set>Qt::AlignCenter</set>
+                              <set>Qt::AlignBottom|Qt::AlignHCenter</set>
                              </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_63">
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_43">
+                              <property name="spacing">
+                               <number>0</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <item>
+                               <widget class="QFrame" name="frame_64">
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>100</width>
+                                  <height>16777215</height>
+                                 </size>
+                                </property>
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
+                                </property>
+                                <widget class="QLabel" name="label_70">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>20</x>
+                                   <y>25</y>
+                                   <width>71</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 63 10pt &quot;Segoe UI Semibold&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel_1</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_71">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>20</x>
+                                   <y>95</y>
+                                   <width>71</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 63 10pt &quot;Segoe UI Semibold&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel_2</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                 </property>
+                                </widget>
+                                <widget class="QLabel" name="label_72">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>20</x>
+                                   <y>165</y>
+                                   <width>71</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">font: 63 10pt &quot;Segoe UI Semibold&quot;;</string>
+                                 </property>
+                                 <property name="text">
+                                  <string>TextLabel_3</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                 </property>
+                                </widget>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QFrame" name="frame_65">
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
+                                </property>
+                                <layout class="QVBoxLayout" name="verticalLayout_13">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QLabel" name="label_67">
+                                   <property name="text">
+                                    <string>plot1</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_68">
+                                   <property name="text">
+                                    <string>plot2</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_69">
+                                   <property name="text">
+                                    <string>plot3</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
                             </widget>
                            </item>
                           </layout>

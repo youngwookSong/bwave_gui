@@ -6,11 +6,11 @@ counter = 0
 jumper = 10
 
 class progress_functions:
-    def __init__(self, tabframe, y_pred_proba, y_pred):
+    def __init__(self, tabframe, y_pred_proba_mdd, y_pred):
         super().__init__()
 
         self._tabFrame = tabframe
-        self.y_pred_proba = y_pred_proba
+        self.y_pred_proba_mdd = y_pred_proba_mdd
         self.y_pred = y_pred
         self.progressBarValue(0)
 
@@ -28,7 +28,6 @@ class progress_functions:
         self.timer.start(15)
 
     def progress(self):
-        print("Aa")
         global counter
         global jumper
         value = counter
@@ -47,13 +46,15 @@ class progress_functions:
 
         # SET VALUE TO PROGRESS BAR
         # fix max value error if > than 100
-        if value >= float(self.y_pred_proba): value = float(self.y_pred_proba)
+        if value >= float(self.y_pred_proba_mdd): value = float(self.y_pred_proba_mdd)
         self.progressBarValue(value)
 
         # CLOSE SPLASH SCREE AND OPEN APP
-        if counter > float(self.y_pred_proba):
+        if counter > float(self.y_pred_proba_mdd):
             # STOP TIMER
             self.timer.stop()
+            counter = 0
+            jumper = 10
 
             # # SHOW MAIN WINDOW
             # self.main = MainWindow()
@@ -70,21 +71,12 @@ class progress_functions:
     def progressBarValue(self, value):
 
         # PROGRESSBAR STYLESHEET BASE
-        if self.y_pred == "MDD":
-            styleSheet = """
-            QFrame{
-                border-radius: 150px;
-                background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(255, 0, 127, 255);
-            }
-            """
-        else:
-            styleSheet = """
-                        QFrame{
-                            border-radius: 150px;
-                            background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(85, 170, 255, 255));
-                        }
-                        """
-
+        styleSheet = """
+                    QFrame{
+                        border-radius: 150px;
+                        background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(255, 90, 0, 255));
+                    }
+                    """
         # GET PROGRESS BAR VALUE, CONVERT TO FLOAT AND INVERT VALUES
         # stop works of 1.000 to 0.000
         progress = (100 - value) / 100.0

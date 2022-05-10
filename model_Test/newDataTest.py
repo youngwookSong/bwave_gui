@@ -7,6 +7,8 @@ from model_Test.directory import ROOT_DIR
 import matplotlib.pyplot as plt
 import mne
 import pandas as pd
+import plotly.graph_objects as go
+from PIL import Image
 
 from model_Test.fc_plot import VisualizeFc
 
@@ -24,7 +26,8 @@ class model_test:
         self.file = file
         self.dir = dir
         self.y_pred = None
-        self.y_pred_proba = None
+        self.y_pred_proba_mdd = None
+        self.y_pred_proba_hc = None
         self.best_model = None
         self.values = None
 
@@ -48,19 +51,22 @@ class model_test:
 
     def pred_n_plot(self): ## 확률 원 그래프
 
-        self.y_pred_proba *= 100
-        self.y_pred_proba = round(self.y_pred_proba, 2)
+        self.y_pred_proba_mdd *= 100
+        self.y_pred_proba_mdd = round(self.y_pred_proba_mdd, 2)
+        self.y_pred_proba_hc *= 100
+        self.y_pred_proba_hc = round(self.y_pred_proba_hc, 2)
 
         ## 확률 원형 그래프 그리기
         fig, ax = plt.subplots(figsize=(6, 6))
         wedgeprops = {'width': 0.3, 'edgecolor': 'black', 'linewidth': 1}
-        ax.pie([self.y_pred_proba, 100-self.y_pred_proba], wedgeprops=wedgeprops, startangle=90, colors=['#e25d61', '#6879f7'])
-        plt.title(self.y_pred, fontsize=24, loc='center')
-        plt.text(0, 0, str(self.y_pred_proba)+"%", ha='center', va='center', fontsize=42)
+        ax.pie([self.y_pred_proba_mdd, 100-self.y_pred_proba_mdd], wedgeprops=wedgeprops, startangle=90, colors=['#e25d61', '#6879f7'])
+        plt.title('MDD Probability', fontsize=24, loc='center')
+        plt.text(0, 0, str(self.y_pred_proba_mdd)+"%", ha='center', va='center', fontsize=42)
         plt.savefig("{}/proba.png".format(self.dir), bbox_inches='tight', pad_inches=0)
         plt.close()
 
-        self.y_pred_proba = str(self.y_pred_proba)
+        self.y_pred_proba_mdd = str(self.y_pred_proba_mdd)
+        self.y_pred_proba_hc = str(self.y_pred_proba_hc)
 
     def psd_plot(self, psd, power): # 위 두줄
 
@@ -141,13 +147,14 @@ class model_test:
         mdd_proba = (psd[1] + fc[1] + ni[1]) / 3
         hc_proba = (psd[0] + fc[0] + ni[0]) / 3
 
+        self.y_pred_proba_mdd = mdd_proba
+        self.y_pred_proba_hc = hc_proba
+
         if mdd_proba > hc_proba:
             self.y_pred = 'MDD'
-            self.y_pred_proba = mdd_proba
             self.values = [psd[1] * 100, fc[1] * 100, ni[1] * 100, 78, 87, 83]
         else:
             self.y_pred = "HC"
-            self.y_pred_proba = hc_proba
             self.values = [psd[0] * 100, fc[0] * 100, ni[0] * 100, 78, 87, 83]
 
         model = ['psd', 'fc', 'ni', 's_psd', 's_fc', 's_ni']
@@ -165,8 +172,9 @@ class model_test:
                      horizontalalignment='center',  # horizontalalignment (left, center, right)
                      verticalalignment='center')  # verticalalignment (top, center, bottom)
         plt.ylim(0, 107)
-        plt.savefig("{}/mode_prob.png".format(self.dir))
+        plt.savefig("{}/mode_prob.png".format(self.dir), bbox_inches='tight', pad_inches=0.1)
         plt.close()
+
 
     def position_plot(self, result_psd, result_fc, result_ni):
         with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(root), 'rb') as f:
@@ -222,6 +230,42 @@ class model_test:
         plt.tight_layout(h_pad=0.5, w_pad=0.5)
         plt.savefig("{}/position_plot.png".format(self.dir), bbox_inches='tight', pad_inches=0.4)
         plt.close()
+
+        # for i in range(3):
+        #     y_hc = np.mean(x_hc[:, i], axis=0)
+        #     yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
+        #     y_mdd = np.mean(x_mdd[:, i], axis=0)
+        #     yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
+        #     dist = abs(y_hc - y_mdd) / 4
+        #     center = max(y_hc, y_mdd) - dist * 2
+        #     result_data = [result_psd, result_fc, result_ni]
+        #     y_temp = result_data[np.argmax(self.values[:3])][0, i]
+        #     if y_temp >= y_mdd + dist * 5:
+        #         y_temp = y_mdd + dist * 5
+        #     elif y_temp <= y_hc - dist * 5:
+        #         y_temp = y_hc - dist * 5
+        #
+        #     fig = go.Figure(
+        #         go.Scatter(mode="markers", x=[3 - (y_temp - center) * 1 / dist], y=[1.05],
+        #                    marker={'symbol': 'arrow-up', 'line_color': 'black', 'line_width': 1, 'color': 'yellow',
+        #                            'size': 25},
+        #                    hovertemplate="name: %{y}%{x}<br>number: %{marker.symbol}<extra></extra>"))
+        #     image_path = os.path.join(ROOT_DIR, "data/base_F_bar.png")
+        #     fig.add_layout_image(
+        #         {'source': Image.open(image_path), 'xref': "x", 'yref': "y", 'x': 0, 'y': 2,
+        #          'sizex': 6, 'sizey': 0.9,
+        #          'sizing': "stretch", 'layer': "below"})
+        #
+        #     fig.update_layout(
+        #         xaxis={'showgrid': False, 'zeroline': False, 'showline': False, 'showticklabels': False},
+        #         yaxis={'showgrid': False, 'zeroline': False, 'showline': False, 'showticklabels': False},
+        #         autosize=False,
+        #         showlegend=False,
+        #         plot_bgcolor='white', width=1200, height=550)
+        #
+        #     fig.update_layout(xaxis=dict(range=[-1, 6.5]), yaxis=dict(range=[-1, 4]))
+        #     # fig.show()
+        #     fig.write_image(os.path.join(self.dir, "si_bar.png"))
 
     def test(self):
         ## new data preprocess & feature extraction
@@ -279,7 +323,8 @@ class model_test:
         with open('{}/info.json'.format(self.dir), 'r', encoding='utf-8') as make_file: #읽고
             data = json.load(make_file)
             data['y_pred'] = self.y_pred
-            data['y_pred_proba'] = self.y_pred_proba
+            data['y_pred_proba_mdd'] = self.y_pred_proba_mdd
+            data['y_pred_proba_hc'] = self.y_pred_proba_hc
             data['best_model'] = self.best_model
 
         with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file: #쓰기

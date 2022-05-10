@@ -76,18 +76,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
         self.horizontalLayout_18.setContentsMargins(2, 2, 2, 2)
 
-        self.btn_toggle = QPushButton(self.frame_5)
-        self.btn_toggle.setObjectName(u"btn_toggle")
+        # self.btn_toggle = QPushButton(self.frame_5)
+        # self.btn_toggle.setObjectName(u"btn_toggle")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_toggle.sizePolicy().hasHeightForWidth())
-        self.btn_toggle.setSizePolicy(sizePolicy)
-        self.btn_toggle.setMinimumSize(QSize(0, 40))
-        self.btn_toggle.setMaximumSize(QSize(45, 40))
-        self.btn_toggle.setStyleSheet(style)
-
-        self.horizontalLayout_18.addWidget(self.btn_toggle)
+        # sizePolicy.setHeightForWidth(self.btn_toggle.sizePolicy().hasHeightForWidth())
+        # self.btn_toggle.setSizePolicy(sizePolicy)
+        # self.btn_toggle.setMinimumSize(QSize(0, 40))
+        # self.btn_toggle.setMaximumSize(QSize(45, 40))
+        # self.btn_toggle.setStyleSheet(style)
+        #
+        # self.horizontalLayout_18.addWidget(self.btn_toggle)
 
         self.frame_37 = QFrame(self.frame_5)
         self.frame_37.setObjectName(u"frame_37")
@@ -259,6 +259,7 @@ class Ui_MainWindow(object):
                                     "height: 30px;\n"
                                     "background-color: rgb(255, 255, 255)")
         self.lineEdit.setClearButtonEnabled(True)
+        self.lineEdit.setPlaceholderText("환자 ID 혹은 이름 입력")
         self.horizontalLayout_15.addWidget(self.lineEdit)
 
         self.btn_search = QPushButton(self.frame_33)
@@ -642,7 +643,7 @@ class Ui_MainWindow(object):
         self.pages.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
 
-        changeBtnIcon(self.btn_toggle, "./icon/left.png", 24)
+        # changeBtnIcon(self.btn_toggle, "./icon/left.png", 24)
         # changeBtnIcon(self.btn_home, "./icon/home.png", 24)
         # changeBtnIcon(self.btn_anal, "./icon/report.png", 24)
         # changeBtnIcon(self.btn_new_file, "./icon/new_file.png", 24)
@@ -662,7 +663,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u" 메뉴", None))
+        # self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u" 메뉴", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Maumgyeol-Depression   ver. 1.0.0"))
         # self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
         # self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
