@@ -7,8 +7,13 @@ from model_Test.directory import ROOT_DIR
 import matplotlib.pyplot as plt
 import mne
 import pandas as pd
-import plotly.graph_objects as go
+
 from PIL import Image
+import matplotlib.image as img
+from matplotlib.figure import Figure
+import numpy as np
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import matplotlib.pyplot as plt
 
 from model_Test.fc_plot import VisualizeFc
 
@@ -188,84 +193,77 @@ class model_test:
         x_mdd = x_data[np.argmax(self.values[:3])][y_data == 1]
         x_hc = x_data[np.argmax(self.values[:3])][y_data == 0]
 
-        plt.figure(figsize=(10, 6))
-        plt.suptitle('{}'.format(self.best_model.upper()), fontsize=20)
-        for i in range(3):
-            y_hc = np.mean(x_hc[:, i], axis=0)
-            yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
-            y_mdd = np.mean(x_mdd[:, i], axis=0)
-            yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
-            plt.subplot(1, 3, i + 1)
-            plt.xlim(0, 1)
-            data_1 = {
-                'x': 0.2,
-                'y': y_hc,
-                'yerr': yerr_hc}
-            data_2 = {
-                'x': 0.8,
-                'y': y_mdd,
-                'yerr': yerr_mdd}
-            plt.scatter(data_1['x'], y_hc, color='blue', alpha=1, marker='D', s=60)
-            plt.scatter(data_2['x'], y_mdd, color='red', alpha=1, marker='D', s=60)
-            plt.errorbar(**data_1, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='blue', elinewidth=3)
-            plt.errorbar(**data_2, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='red', elinewidth=3)
-            result_data=[result_psd, result_fc, result_ni]
-            y_temp = result_data[np.argmax(self.values[:3])][0, i]
-            # y_temp = getattr(mod, 'result_{}'.format(best))
-            if y_hc > y_mdd:
-                if y_temp < y_mdd - (yerr_mdd):
-                    y_temp = y_mdd - (yerr_mdd)
-                elif y_temp > y_hc + yerr_hc:
-                    y_temp = y_hc + (yerr_hc)
-            else:
-                if y_temp < y_hc - yerr_hc:
-                    y_temp = y_hc - (yerr_hc)
-                elif y_temp > y_mdd + yerr_mdd:
-                    y_temp = y_mdd + (yerr_mdd)
-            plt.axhline(y=y_temp, color='g', linewidth=3, alpha=0.5)
-            plt.scatter(0.47, y_temp, marker='o', s=120, color='g', alpha=0.5)
-            plt.text(0.5, y_temp, 'Yours', color='black', size=16)
-            plt.gca().axes.xaxis.set_ticks([])
-            plt.gca().axes.yaxis.set_ticks([])
-        plt.tight_layout(h_pad=0.5, w_pad=0.5)
-        plt.savefig("{}/position_plot.png".format(self.dir), bbox_inches='tight', pad_inches=0.4)
-        plt.close()
-
+        # plt.figure(figsize=(10, 6))
+        # plt.suptitle('{}'.format(self.best_model.upper()), fontsize=20)
         # for i in range(3):
         #     y_hc = np.mean(x_hc[:, i], axis=0)
         #     yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
         #     y_mdd = np.mean(x_mdd[:, i], axis=0)
         #     yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
-        #     dist = abs(y_hc - y_mdd) / 4
-        #     center = max(y_hc, y_mdd) - dist * 2
-        #     result_data = [result_psd, result_fc, result_ni]
+        #     plt.subplot(1, 3, i + 1)
+        #     plt.xlim(0, 1)
+        #     data_1 = {
+        #         'x': 0.2,
+        #         'y': y_hc,
+        #         'yerr': yerr_hc}
+        #     data_2 = {
+        #         'x': 0.8,
+        #         'y': y_mdd,
+        #         'yerr': yerr_mdd}
+        #     plt.scatter(data_1['x'], y_hc, color='blue', alpha=1, marker='D', s=60)
+        #     plt.scatter(data_2['x'], y_mdd, color='red', alpha=1, marker='D', s=60)
+        #     plt.errorbar(**data_1, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='blue', elinewidth=3)
+        #     plt.errorbar(**data_2, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='red', elinewidth=3)
+        #     result_data=[result_psd, result_fc, result_ni]
         #     y_temp = result_data[np.argmax(self.values[:3])][0, i]
-        #     if y_temp >= y_mdd + dist * 5:
-        #         y_temp = y_mdd + dist * 5
-        #     elif y_temp <= y_hc - dist * 5:
-        #         y_temp = y_hc - dist * 5
-        #
-        #     fig = go.Figure(
-        #         go.Scatter(mode="markers", x=[3 - (y_temp - center) * 1 / dist], y=[1.05],
-        #                    marker={'symbol': 'arrow-up', 'line_color': 'black', 'line_width': 1, 'color': 'yellow',
-        #                            'size': 25},
-        #                    hovertemplate="name: %{y}%{x}<br>number: %{marker.symbol}<extra></extra>"))
-        #     image_path = os.path.join(ROOT_DIR, "data/base_F_bar.png")
-        #     fig.add_layout_image(
-        #         {'source': Image.open(image_path), 'xref': "x", 'yref': "y", 'x': 0, 'y': 2,
-        #          'sizex': 6, 'sizey': 0.9,
-        #          'sizing': "stretch", 'layer': "below"})
-        #
-        #     fig.update_layout(
-        #         xaxis={'showgrid': False, 'zeroline': False, 'showline': False, 'showticklabels': False},
-        #         yaxis={'showgrid': False, 'zeroline': False, 'showline': False, 'showticklabels': False},
-        #         autosize=False,
-        #         showlegend=False,
-        #         plot_bgcolor='white', width=1200, height=550)
-        #
-        #     fig.update_layout(xaxis=dict(range=[-1, 6.5]), yaxis=dict(range=[-1, 4]))
-        #     # fig.show()
-        #     fig.write_image(os.path.join(self.dir, "si_bar.png"))
+        #     # y_temp = getattr(mod, 'result_{}'.format(best))
+        #     if y_hc > y_mdd:
+        #         if y_temp < y_mdd - (yerr_mdd):
+        #             y_temp = y_mdd - (yerr_mdd)
+        #         elif y_temp > y_hc + yerr_hc:
+        #             y_temp = y_hc + (yerr_hc)
+        #     else:
+        #         if y_temp < y_hc - yerr_hc:
+        #             y_temp = y_hc - (yerr_hc)
+        #         elif y_temp > y_mdd + yerr_mdd:
+        #             y_temp = y_mdd + (yerr_mdd)
+        #     plt.axhline(y=y_temp, color='g', linewidth=3, alpha=0.5)
+        #     plt.scatter(0.47, y_temp, marker='o', s=120, color='g', alpha=0.5)
+        #     plt.text(0.5, y_temp, 'Yours', color='black', size=16)
+        #     plt.gca().axes.xaxis.set_ticks([])
+        #     plt.gca().axes.yaxis.set_ticks([])
+        # plt.tight_layout(h_pad=0.5, w_pad=0.5)
+        # plt.savefig("{}/position_plot.png".format(self.dir), bbox_inches='tight', pad_inches=0.4)
+        # plt.close()
+
+        y_hc = np.mean(x_hc[:, 0], axis=0)
+        y_mdd = np.mean(x_mdd[:, 0], axis=0)
+        dist = abs(y_hc - y_mdd) / 7
+        center = max(y_hc, y_mdd) - dist * 3.5
+
+        fig, ax = plt.subplots(figsize=(14, 3))
+        ax.set_xlim(0, 10)
+        ax.set_ylim(0, 10)
+        image_path = os.path.join(ROOT_DIR, "plot_image/best_F_bar.png")
+        image = img.imread(image_path)
+        image_arr = np.array(plt.imread(image_path))
+        imagebox = OffsetImage(image_arr, zoom=1.02)
+        ab = AnnotationBbox(imagebox, (0, 2), bboxprops={'edgecolor': 'none', 'alpha': 1}, box_alignment=(0, 0))
+        ax.add_artist(ab)
+        ax.spines['bottom'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        plt.draw()
+        result_data = [result_psd, result_fc, result_ni]
+        y_temp = result_data[np.argmax(self.values[:3])][0, 0]
+        plt.scatter((5 - (y_temp - center) * 1 / dist), 1.2, marker="^", s=400, color='yellow', edgecolors='black',
+                    linewidth=0.7)
+        plt.gca().axes.yaxis.set_ticks([])
+        plt.gca().axes.xaxis.set_ticks([])
+        plt.show()
+        plt.savefig("{}/position_plot.png".format(self.dir))
+        # plt.close()
 
     def test(self):
         ## new data preprocess & feature extraction
