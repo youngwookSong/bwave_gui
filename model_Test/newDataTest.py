@@ -50,6 +50,7 @@ class model_test:
         fisher_dir = os.path.join(ROOT_DIR, "model/idx_{}.npy".format(name))
         idx = np.load(fisher_dir)
         result = result[:, idx]
+        print("{} best_fisher_idx_3: ".format(name), idx[:3])
 
         return clf, result
 
@@ -240,30 +241,39 @@ class model_test:
         y_mdd = np.mean(x_mdd[:, 0], axis=0)
         dist = abs(y_hc - y_mdd) / 7
         center = max(y_hc, y_mdd) - dist * 3.5
+        print("dist: ", dist)
+        print("center: ", center)
 
-        fig, ax = plt.subplots(figsize=(14, 3))
-        ax.set_xlim(0, 10)
-        ax.set_ylim(0, 10)
-        image_path = os.path.join(ROOT_DIR, "plot_image/best_F_bar.png")
-        image = img.imread(image_path)
-        image_arr = np.array(plt.imread(image_path))
-        imagebox = OffsetImage(image_arr, zoom=1.02)
-        ab = AnnotationBbox(imagebox, (0, 2), bboxprops={'edgecolor': 'none', 'alpha': 1}, box_alignment=(0, 0))
-        ax.add_artist(ab)
-        ax.spines['bottom'].set_visible(False)
-        ax.spines['left'].set_visible(False)
-        ax.spines['right'].set_visible(False)
-        ax.spines['top'].set_visible(False)
-        plt.draw()
-        result_data = [result_psd, result_fc, result_ni]
-        y_temp = result_data[np.argmax(self.values[:3])][0, 0]
-        plt.scatter((5 - (y_temp - center) * 1 / dist), 1.2, marker="^", s=400, color='yellow', edgecolors='black',
-                    linewidth=0.7)
-        plt.gca().axes.yaxis.set_ticks([])
-        plt.gca().axes.xaxis.set_ticks([])
-        plt.show()
-        plt.savefig("{}/position_plot.png".format(self.dir))
-        # plt.close()
+        for i in range(3):
+            fig, ax = plt.subplots(figsize=(14, 3))
+            ax.set_xlim(0, 10)
+            ax.set_ylim(0, 10)
+            image_path = os.path.join(ROOT_DIR, "plot_image/base_F_bar.png")
+            image_arr = np.array(plt.imread(image_path))
+            imagebox = OffsetImage(image_arr, zoom=1.02)
+            ab = AnnotationBbox(imagebox, (0, 2), bboxprops={'edgecolor': 'none', 'alpha': 1}, box_alignment=(0, 0))
+            ax.add_artist(ab)
+            ax.spines['bottom'].set_visible(False)
+            ax.spines['left'].set_visible(False)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            plt.draw()
+            result_data = [result_psd, result_fc, result_ni]
+            best_model_idx = np.argmax(self.values[:3])
+            y_temp = result_data[best_model_idx][0, i]
+            temp_dist = 5 - (y_temp - center) * 1 / dist
+            if temp_dist > 10:
+                temp_dist = 9.5
+            if temp_dist < 0:
+                temp_dist = 0.5
+            print("temp_dist: ", temp_dist)
+            ax.scatter(temp_dist, 1.2, marker="^", s=600, color='yellow', edgecolors='black',
+                        linewidth=0.7)
+            plt.gca().axes.yaxis.set_ticks([])
+            plt.gca().axes.xaxis.set_ticks([])
+            fig.figure.savefig("{}/position_plot_{}.png".format(self.dir, i))
+            # plt.show()
+            plt.close()
 
     def test(self):
         ## new data preprocess & feature extraction
@@ -343,3 +353,27 @@ class model_test:
             vis_bwave.mean_plot()
             vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff', bbox_inches='tight', pad_inches=0)
             plt.close()
+
+
+# center = 7.52456
+# y_temp = 7.127428
+# dist = 0.0907733
+# fig, ax = plt.subplots(figsize=(14,3))
+# ax.set_xlim(0, 10)
+# ax.set_ylim(0, 10)
+# image_arr = np.array(plt.imread(os.path.join(ROOT_DIR, "plot_image/base_F_bar.png")))
+# imagebox = OffsetImage(image_arr, zoom=1.02)
+# ab = AnnotationBbox(imagebox, (0, 2),bboxprops={'edgecolor':'none','alpha':1}, box_alignment=(0,0))
+# ax.add_artist(ab)
+# ax.spines['bottom'].set_visible(False)
+# ax.spines['left'].set_visible(False)
+# ax.spines['right'].set_visible(False)
+# ax.spines['top'].set_visible(False)
+# ax.axes.get_xaxis().set_visible(False)
+# ax.axes.get_yaxis().set_visible(False)
+# plt.draw()
+# plt.scatter((5- (y_temp-center)*1/dist),1.2, marker="^",s=400, color='yellow', edgecolors='black', linewidth=0.7)
+# plt.gca().axes.yaxis.set_ticks([])
+# plt.gca().axes.xaxis.set_ticks([])
+# # plt.savefig('a.png')
+# plt.show()

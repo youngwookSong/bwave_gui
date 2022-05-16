@@ -160,22 +160,20 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     ## 테이블에 데이터 삭제
     import shutil
     def remove_table_data(self):
-        print(len(self.checkboxList))
-        print(self.dataList)
-
-        delIdx = []
+        delIdx = np.array([])
         for idx, chbox in enumerate(self.checkboxList):
             if chbox.isChecked() == True:
                 path = os.path.join(personal_res.root, self.dataList[idx])
-                print("path:", path)
                 if os.path.exists(path):
                     shutil.rmtree(path)
+                delIdx = np.append(delIdx, int(idx))
 
-                self.ui.tableWidget.removeRow(idx)
-                del self.checkboxList[idx]
-                del self.dataList[idx]
-                self.row -= 1
-            print(self.dataList)
+        for i in range(len(delIdx)):
+            self.ui.tableWidget.removeRow(delIdx[i])
+            del self.checkboxList[int(delIdx[i])]
+            del self.dataList[int(delIdx[i])]
+            self.row -= 1
+            delIdx = delIdx - 1
 
     ## 테이블 더블 클릭 시 해당 데이터 결과 화면으로 이동
     def table_double_clicked(self):
@@ -215,6 +213,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             layoutCB.setContentsMargins(0, 0, 0, 0)
             cellWidget.setLayout(layoutCB)
             cellWidget.setStyleSheet(u"border:0px")
+
             self.checkboxList.append(ckbox)
             self.dataList.append('{}_{}'.format(num, name))
 

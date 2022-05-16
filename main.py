@@ -1,5 +1,6 @@
 import sys
 import os
+import numpy as np
 from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6 import QtUiTools, QtGui
 from PySide6.QtGui import *

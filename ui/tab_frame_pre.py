@@ -1113,17 +1113,17 @@ class Ui_tabFrame_pre(QFrame):
 
         self.label_70 = QLabel(self.frame_64)
         self.label_70.setObjectName(u"label_70")
-        self.label_70.setGeometry(QRect(20, 30, 71, 20))
+        self.label_70.setGeometry(QRect(20, 35, 71, 20))
         self.label_70.setStyleSheet(u"font: 63 10pt \"Segoe UI Semibold\";")
         self.label_70.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
         self.label_71 = QLabel(self.frame_64)
         self.label_71.setObjectName(u"label_71")
-        self.label_71.setGeometry(QRect(20, 115, 71, 20))
+        self.label_71.setGeometry(QRect(20, 120, 71, 20))
         self.label_71.setStyleSheet(u"font: 63 10pt \"Segoe UI Semibold\";")
         self.label_71.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
         self.label_72 = QLabel(self.frame_64)
         self.label_72.setObjectName(u"label_72")
-        self.label_72.setGeometry(QRect(20, 197, 71, 20))
+        self.label_72.setGeometry(QRect(20, 203, 71, 20))
         self.label_72.setStyleSheet(u"font: 63 10pt \"Segoe UI Semibold\";")
         self.label_72.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
@@ -1398,9 +1398,9 @@ class Ui_tabFrame_pre(QFrame):
         self.label_36.setStyleSheet(u"image:url(./personal_data/{}_{}/mode_prob.png)".format(self.num, self.name))
         # self.label_52.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot.png)".format(self.num, self.name))
 
-        self.label_67.setStyleSheet(u"image:url(./model_Test/plot_image/bar_2.png)")
-        self.label_68.setStyleSheet(u"image:url(./model_Test/plot_image/bar_2.png)")
-        self.label_69.setStyleSheet(u"image:url(./model_Test/plot_image/bar_2.png)")
+        self.label_67.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_0.png)".format(self.num, self.name))
+        self.label_68.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_1.png)".format(self.num, self.name))
+        self.label_69.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_2.png)".format(self.num, self.name))
 
         ## 가장 유의미한 지표
         label_list = [self.label_12, self.label_7, self.label_8, self.label_10, self.label_13, self.label_14, self.label_15]
