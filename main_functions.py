@@ -1,6 +1,7 @@
 import shutil
 import time
 import os
+import datetime
 
 # from PyQt5 import uic
 from PySide6.QtWidgets import QTableWidgetItem
@@ -109,6 +110,89 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     #         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
     #         self.animation.start()
 
+    def search_today(self):
+        UIFunctions.reset_table(self) #처음에 reset해야 바로 month나 week눌렀을때 잘 찾아짐
+        self.ui.btn_reset.setDisabled(False)
+
+        today_date = QDate.currentDate().toString('yyyy-MM-dd')
+
+        search_list = []
+        for person in self.dataList:
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            if info_json_path['date'] == today_date:
+                search_list.append(person)
+        print(search_list)
+
+        self.ui.tableWidget.setRowCount(len(search_list))
+
+        self.checkboxList = []  # reset
+        self.dataList = []  # reset
+
+        for row, person in enumerate(search_list):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+                                          info_json_path['date'], info_json_path['y_pred_proba'])
+
+    def search_week(self):
+        UIFunctions.reset_table(self)  # 처음에 reset해야 바로 month나 week눌렀을때 잘 찾아짐
+        self.ui.btn_reset.setDisabled(False)
+
+        today_week = QDate.currentDate().weekNumber()
+        print(today_week)
+
+        search_list = []
+        for person in self.dataList:
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            date_split = info_json_path['date'].split("-")
+            if QDate(int(date_split[0]), int(date_split[1]), int(date_split[2])).weekNumber() == today_week:
+                search_list.append(person)
+        print(search_list)
+
+        self.ui.tableWidget.setRowCount(len(search_list))
+
+        self.checkboxList = []  # reset
+        self.dataList = []  # reset
+
+        for row, person in enumerate(search_list):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+                                          info_json_path['date'], info_json_path['y_pred_proba'])
+
+    def search_month(self):
+        UIFunctions.reset_table(self) #처음에 reset해야 바로 month나 week눌렀을때 잘 찾아짐
+        self.ui.btn_reset.setDisabled(False)
+
+        today_date = QDate.currentDate().toString('MM')
+
+        search_list = []
+        for person in self.dataList:
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            if info_json_path['date'].split('-')[1] == today_date:
+                search_list.append(person)
+        print(search_list)
+
+        self.ui.tableWidget.setRowCount(len(search_list))
+
+        self.checkboxList = []  # reset
+        self.dataList = []  # reset
+
+        for row, person in enumerate(search_list):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+                                          info_json_path['date'], info_json_path['y_pred_proba'])
+
     ## 각 row의 해당하는 고유의 체크박스 만들기
     def make_chbox(self, idx):
         ckbox = QCheckBox()
@@ -136,10 +220,10 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
     ## 테이블 데이터 검색
     def search_table_data(self):
-        print(self.dataList)
-        print(self.checkboxList)
+        UIFunctions.reset_table(self)
+        self.ui.btn_reset.setDisabled(False)
+
         search_text = self.ui.lineEdit.text()
-        print(search_text)
 
         search_list = []
         for s in self.dataList:
@@ -149,13 +233,44 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         print(search_list)
 
         # TODO: 검색한 결과를 가지고 테이블에 뿌려주기
-        # for row, person in enumerate(search_list):
-        #     self.dataList.append(person)
-        #     with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
-        #         info_json_path = json.load(f)
-        #     self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
-        #     UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
-        #                                   info_json_path['date'], info_json_path['y_pred_proba'])
+        self.ui.tableWidget.setRowCount(len(search_list))
+
+        self.checkboxList = []  #reset
+        self.dataList = [] #reset
+
+        for row, person in enumerate(search_list):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+                                          info_json_path['date'], info_json_path['y_pred_proba'])
+
+    ## 처음 테이블로 돌아가기 reset
+    def reset_table(self):
+        # self.ui.lineEdit.setText("")
+        self.ui.btn_reset.setDisabled(True)
+
+        ## 로컬 파일에 있는 데이터 가져오기
+        self.data = os.listdir(personal_res.root)
+        self.data.remove('resources.py')
+        self.data.remove('__pycache__')
+        print(self.data)
+
+        self.row = len(self.data)
+        self.ui.tableWidget.setRowCount(self.row)
+
+        self.checkboxList = []  # 체크박스 리스트 저장하기
+        self.dataList = []  # 체크박스 인덱스에 맞는 데이터 저장하기
+
+        ## 데이블에 하나씩 넣기
+        for row, person in enumerate(self.data):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+                                          info_json_path['date'], info_json_path['y_pred_proba'])
 
     ## 테이블에 데이터 삭제
     import shutil
@@ -203,6 +318,8 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if self._dialog.exec(): #확인 버튼 눌렀을때
 
             file, name, birth, num, date, sex = self._dialog.info() #정보 받아오기
+
+            UIFunctions.reset_table(self)
 
             ## table에 새로운 열 추가 #TODO: 위에 함수로 바꾸기
             ckbox = QCheckBox()

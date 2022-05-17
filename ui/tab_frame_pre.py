@@ -1410,18 +1410,28 @@ class Ui_tabFrame_pre(QFrame):
             for i in range(7):
                 label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/absolute_{}.png)"
                                             .format(self.num, self.name, freq[i])))
+            self.label_70.setText(QCoreApplication.translate("MainWindow", u"Fp1_θ", None))
+            self.label_71.setText(QCoreApplication.translate("MainWindow", u"O2_low_α", None))
+            self.label_72.setText(QCoreApplication.translate("MainWindow", u"P8_θ", None))
         if self.data['best_model'] == 'fc':
             for i in range(7):
                 label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/plv_{}.png)"
                                             .format(self.num, self.name, freq[i])))
+            self.label_70.setText(QCoreApplication.translate("MainWindow", u"F7-C4_δ", None))
+            self.label_71.setText(QCoreApplication.translate("MainWindow", u"P4-T7_δ", None))
+            self.label_72.setText(QCoreApplication.translate("MainWindow", u"O2-Pz_θ", None))
         if self.data['best_model'] == 'ni':
             for i in range(7):
                 label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/network_{}.png)"
                                             .format(self.num, self.name, freq[i])))
+            self.label_70.setText(QCoreApplication.translate("MainWindow", u"Fp2-F4_θ", None))
+            self.label_71.setText(QCoreApplication.translate("MainWindow", u"T7-C3_δ", None))
+            self.label_72.setText(QCoreApplication.translate("MainWindow", u"F7-P3_θ", None))
 
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"{} - Most Influential Feature".format(self.data['best_model'].upper()), None))
         self.label_52.setText(QCoreApplication.translate("MainWindow", u"Most Influential Feature : {}".format(self.data['best_model'].upper()), None))
         # self.label_15.setStyleSheet(u"image:url(./model_Test/plot_image/psd_topomap_.png)")
+
 
 
 
@@ -1562,10 +1572,6 @@ class Ui_tabFrame_pre(QFrame):
         self.label_67.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_68.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_69.setText(QCoreApplication.translate("MainWindow", u"", None))
-
-        self.label_70.setText(QCoreApplication.translate("MainWindow", u"TextLabel_1", None))
-        self.label_71.setText(QCoreApplication.translate("MainWindow", u"TextLabel_2", None))
-        self.label_72.setText(QCoreApplication.translate("MainWindow", u"TextLabel_3", None))
 
     # retranslateUi
 

@@ -45,8 +45,8 @@ class LoginView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
-        # self._dialog_product = Ui_Dialog_product()
-        # self._dialog_product.show()
+        self._dialog_product = Ui_Dialog_product()
+        self._dialog_product.show()
 
         self.show()
 
@@ -80,7 +80,6 @@ class MainView(QMainWindow):
         self._tabFrame = None
         self._dialog = None # new file의 dialog
 
-
         self.prep_activepage = None
         self.menu_state = "open"
 
@@ -97,26 +96,7 @@ class MainView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
-        ## 로컬 파일에 있는 데이터 가져오기
-        self.data = os.listdir(personal_res.root)
-        self.data.remove('resources.py')
-        self.data.remove('__pycache__')
-        print(self.data)
-
-        self.row = len(self.data)
-        self.ui.tableWidget.setRowCount(self.row)
-
-        self.checkboxList = [] # 체크박스 리스트 저장하기
-        self.dataList = [] # 체크박스 인덱스에 맞는 데이터 저장하기
-
-        ## 데이블에 하나씩 넣기
-        for row, person in enumerate(self.data):
-            self.dataList.append(person)
-            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
-                info_json_path = json.load(f)
-            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
-            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
-                                          info_json_path['date'], info_json_path['y_pred_proba'])
+        UIFunctions.reset_table(self) #테이블에 데이터 넣기
 
         self.show()
 
@@ -132,8 +112,16 @@ class MainView(QMainWindow):
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
         # 홈 화면 new file 버튼
         self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        # Today 버튼
+        self.ui.btn_today.clicked.connect(lambda: UIFunctions.search_today(self))
+        # Week 버튼
+        self.ui.btn_week.clicked.connect(lambda: UIFunctions.search_week(self))
+        # Month 버튼
+        self.ui.btn_month.clicked.connect(lambda: UIFunctions.search_month(self))
         # 검색 버튼
         self.ui.btn_search.clicked.connect(lambda: UIFunctions.search_table_data(self))
+        # reset 버튼
+        self.ui.btn_reset.clicked.connect(lambda: UIFunctions.reset_table(self))
         # 삭제 버튼
         self.ui.btn_delete.clicked.connect(lambda: UIFunctions.remove_table_data(self))
         # 로그아웃 버튼

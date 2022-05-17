@@ -241,8 +241,6 @@ class model_test:
         y_mdd = np.mean(x_mdd[:, 0], axis=0)
         dist = abs(y_hc - y_mdd) / 7
         center = max(y_hc, y_mdd) - dist * 3.5
-        print("dist: ", dist)
-        print("center: ", center)
 
         for i in range(3):
             fig, ax = plt.subplots(figsize=(14, 3))
@@ -266,12 +264,11 @@ class model_test:
                 temp_dist = 9.5
             if temp_dist < 0:
                 temp_dist = 0.5
-            print("temp_dist: ", temp_dist)
             ax.scatter(temp_dist, 1.2, marker="^", s=600, color='yellow', edgecolors='black',
                         linewidth=0.7)
             plt.gca().axes.yaxis.set_ticks([])
             plt.gca().axes.xaxis.set_ticks([])
-            fig.figure.savefig("{}/position_plot_{}.png".format(self.dir, i))
+            fig.figure.savefig("{}/position_plot_{}.png".format(self.dir, i), bbox_inches='tight')
             # plt.show()
             plt.close()
 

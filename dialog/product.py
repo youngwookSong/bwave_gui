@@ -337,8 +337,8 @@ class Ui_Dialog_product(QDialog):
         self.label_6.setText(QCoreApplication.translate("Dialog", u"5) \uc0ac\uc6a9\ubc29\ubc95 \ubc0f \uc0ac\uc6a9\uc0c1\uc758 \uc8fc\uc758\uc0ac\ud56d", None))
         self.label_7.setText(QCoreApplication.translate("Dialog", u"6) \uc81c\ud488\uc758 \uc0ac\uc6a9\ubaa9\uc801", None))
         self.label_8.setText(QCoreApplication.translate("Dialog", u"7) \ubcf4\uad00 \ub610\ub294 \uc800\uc7a5\ubc29\ubc95", None))
-        self.label_9.setText(QCoreApplication.translate("Dialog", u"\uc0c1\ud638 : \n"
-"\uc8fc\uc18c : ", None))
+        self.label_9.setText(QCoreApplication.translate("Dialog", u"\uc0c1\ud638 : 비웨이브(주)\n"
+"\uc8fc\uc18c : 경기도 고양시 일산서구 주화로 180, 5층 507호 (대화동, 월드메르디앙)", None))
         self.label_10.setText(QCoreApplication.translate("Dialog", u"\uc81c\uc870\ubc88\ud638 : \n"
 "\uc81c\uc870\ub144\uc6d4\uc77c : ", None))
         self.label_11.setText(QCoreApplication.translate("Dialog", u"\uc81c\ud488\uba85 : Maumgyeol PRO\n"

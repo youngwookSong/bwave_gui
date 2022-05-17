@@ -202,6 +202,9 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
         self.pushButton_3.setSizePolicy(sizePolicy)
         self.pushButton_3.setStyleSheet(btn_style)
+        self.pushButton_3.setIcon(QtGui.QIcon(icon_search))
+        self.pushButton_3.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+
 
         self.horizontalLayout_17.addWidget(self.pushButton_3)
 
@@ -269,8 +272,22 @@ class Ui_MainWindow(object):
         self.btn_search.setMinimumSize(QSize(40, 0))
         self.btn_search.setMaximumSize(QSize(40, 40))
         self.btn_search.setStyleSheet(btn_style)
+        self.btn_search.setIcon(QtGui.QIcon(icon_search))
+        self.btn_search.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
 
         self.horizontalLayout_15.addWidget(self.btn_search)
+
+        self.btn_reset = QPushButton(self.frame_33)
+        self.btn_reset.setObjectName(u"btn_reset")
+        sizePolicy.setHeightForWidth(self.btn_search.sizePolicy().hasHeightForWidth())
+        self.btn_reset.setSizePolicy(sizePolicy)
+        self.btn_reset.setMinimumSize(QSize(40, 0))
+        self.btn_reset.setMaximumSize(QSize(40, 40))
+        self.btn_reset.setStyleSheet(btn_style)
+        self.btn_reset.setIcon(QtGui.QIcon(icon_reset))
+        self.btn_reset.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
+
+        self.horizontalLayout_15.addWidget(self.btn_reset)
 
         self.btn_delete = QPushButton(self.frame_33)
         self.btn_delete.setObjectName(u"btn_delete")
@@ -279,6 +296,8 @@ class Ui_MainWindow(object):
         self.btn_delete.setMinimumSize(QSize(40, 0))
         self.btn_delete.setMaximumSize(QSize(40, 40))
         self.btn_delete.setStyleSheet(btn_style)
+        self.btn_delete.setIcon(QtGui.QIcon(icon_delete))
+        self.btn_delete.setIconSize(QtCore.QSize(self.btn_cmm, self.btn_cmm))
 
         self.horizontalLayout_15.addWidget(self.btn_delete)
 
@@ -296,6 +315,7 @@ class Ui_MainWindow(object):
                                        "color: rgb(153, 153, 153);\n"
                                        "text-align: center;")
         self.tableWidget.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
+        self.tableWidget.verticalHeader().setVisible(False)
 
         if (self.tableWidget.columnCount() < 5):
                 self.tableWidget.setColumnCount(5)
@@ -671,9 +691,10 @@ class Ui_MainWindow(object):
         self.btn_add.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.btn_open.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"~", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"search", None))
-        self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
-        self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
+        # self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"search", None))
+        # self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
+        # self.btn_reset.setText(QCoreApplication.translate("MainWindow", u"지움", None))
+        # self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
         self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"Analysis", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
         self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))
