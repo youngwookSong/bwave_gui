@@ -170,7 +170,7 @@ class Ui_MainWindow(object):
         self.dateEdit.setObjectName(u"dateEdit")
         self.dateEdit.setStyleSheet(u"color: rgb(153, 153, 153);")
         self.dateEdit.setCalendarPopup(True)
-        self.dateEdit.setDate(QDate(2021, 1, 1))
+        self.dateEdit.setDate(QDate(2022, 1, 1))
 
         self.horizontalLayout_14.addWidget(self.dateEdit)
 

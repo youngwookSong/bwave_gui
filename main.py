@@ -45,8 +45,8 @@ class LoginView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
-        self._dialog_product = Ui_Dialog_product()
-        self._dialog_product.show()
+        # self._dialog_product = Ui_Dialog_product()
+        # self._dialog_product.show()
 
         self.show()
 
@@ -112,6 +112,8 @@ class MainView(QMainWindow):
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
         # 홈 화면 new file 버튼
         self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        # date search 버튼
+        self.ui.pushButton_3.clicked.connect(lambda: UIFunctions.date_search(self))
         # Today 버튼
         self.ui.btn_today.clicked.connect(lambda: UIFunctions.search_today(self))
         # Week 버튼

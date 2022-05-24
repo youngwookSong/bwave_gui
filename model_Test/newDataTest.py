@@ -87,23 +87,21 @@ class model_test:
             band_psd = np.hstack((band_psd, bn[i]))
 
         if power == "rel":
-            csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_rel_PSD_band_335.csv")
-            hc = pd.read_csv(csv_dir)
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_rel_PSD_band_335.csv"))
 
             zscore_psd = np.zeros(133)
             for i in range(len(band_psd)):
                 zscore_psd[i] = (band_psd[i] - hc.values[0][i]) / hc.values[1][i]
             zscore_psd = np.split(zscore_psd, 7)
 
-            for i in range(len(zscore_psd)):
+            for i in range(len(zscore_psd)): # zscore_psd = (7*19) 19개 채널을 plot_topomap에 넣어서 topomap 그림
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False, contours=0)
                 # plt.show()
                 fig.figure.savefig("{}/relative_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
 
         if power == "abs":
-            csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_band_335.csv")
-            hc = pd.read_csv(csv_dir)
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_band_335.csv"))
 
             zscore_psd = np.zeros(133)
             for i in range(len(band_psd)):
@@ -117,6 +115,75 @@ class model_test:
                 fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
 
+    def psd_fre_make_png(self, power):
+        ## plot 하나에 이미지로 만듬
+        new_im = [Image.new('RGB', (509 * 5, 525 * 6), "white"), Image.new('RGB', (509 * 5, 525 * 6), "white")]
+        x_offset = 0
+        y_offset = 0
+        change_new = 0
+        for i in range(55):
+            file = os.path.join(self.fre_dir, "{}{}.png".format(power, i))
+            im = Image.open(file)
+            new_im[change_new].paste(im, (x_offset, y_offset))
+            x_offset += im.size[0]
+            if x_offset == 509 * 5:
+                y_offset += im.size[1]
+                x_offset = 0
+            if y_offset == 525 * 6:
+                y_offset = 0
+                change_new = 1
+            os.remove(file)
+
+        new_im[0].save(os.path.join(self.fre_dir, 'frequency_{}_1.png'.format(power)))
+        new_im[1].save(os.path.join(self.fre_dir, 'frequency_{}_2.png'.format(power)))
+
+    def psd_fre(self, psd_hz, power):
+        hz = np.linspace(1, 55, 55).astype(int)
+        ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
+                    'P8', 'O1', 'O2']
+
+        temp_montage = mne.channels.make_standard_montage('biosemi64')
+        temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
+        temp_info.set_montage(temp_montage)
+
+        self.fre_dir = os.path.join(self.dir, "frequency")
+        try:
+            if not os.path.exists(self.fre_dir):
+                os.makedirs(self.fre_dir)
+        except OSError:
+            print('Error: Creating directory. ' + self.fre_dir)
+
+        if power == "rel":
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_rel_PSD_Hz_335.csv"))
+
+            zscore_psd_hz = np.zeros(len(hc.columns))
+            for i in range(len(psd_hz)):
+                zscore_psd_hz[i] = (psd_hz[i] - hc.values[0][i]) / hc.values[1][i]
+            zscore_psd_hz = np.split(zscore_psd_hz, 55)
+
+            for i in range(len(zscore_psd_hz)):
+                plt.title(str(hz[i]) + " Hz", fontsize=30)
+                fig, _ = mne.viz.plot_topomap(zscore_psd_hz[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow',
+                                              show=False)
+                fig.figure.savefig("{}/rel{}.png".format(self.fre_dir, i), bbox_inches='tight', pad_inches=0.4)
+                plt.close()
+
+        if power == "abs":
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_Hz_335.csv"))
+
+            zscore_psd_hz = np.zeros(len(hc.columns))
+            for i in range(len(psd_hz)):
+                zscore_psd_hz[i] = (psd_hz[i] - hc.values[0][i]) / hc.values[1][i]
+            zscore_psd_hz = np.split(zscore_psd_hz, 55)
+
+            for i in range(len(zscore_psd_hz)):
+                plt.title(str(hz[i]) + " Hz", fontsize=30)
+                fig, _ = mne.viz.plot_topomap(zscore_psd_hz[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow',
+                                              show=False)
+                fig.figure.savefig("{}/abs{}.png".format(self.fre_dir, i), bbox_inches='tight', pad_inches=0.4)
+                plt.close()
+
+        self.psd_fre_make_png(power)
 
     def ni_plot(self, ni):
 
@@ -193,49 +260,6 @@ class model_test:
 
         x_mdd = x_data[np.argmax(self.values[:3])][y_data == 1]
         x_hc = x_data[np.argmax(self.values[:3])][y_data == 0]
-
-        # plt.figure(figsize=(10, 6))
-        # plt.suptitle('{}'.format(self.best_model.upper()), fontsize=20)
-        # for i in range(3):
-        #     y_hc = np.mean(x_hc[:, i], axis=0)
-        #     yerr_hc = np.std(x_hc[:, i], axis=0) / np.sqrt(len(x_hc[:, i]))
-        #     y_mdd = np.mean(x_mdd[:, i], axis=0)
-        #     yerr_mdd = np.std(x_mdd[:, i], axis=0) / np.sqrt(len(x_mdd[:, i]))
-        #     plt.subplot(1, 3, i + 1)
-        #     plt.xlim(0, 1)
-        #     data_1 = {
-        #         'x': 0.2,
-        #         'y': y_hc,
-        #         'yerr': yerr_hc}
-        #     data_2 = {
-        #         'x': 0.8,
-        #         'y': y_mdd,
-        #         'yerr': yerr_mdd}
-        #     plt.scatter(data_1['x'], y_hc, color='blue', alpha=1, marker='D', s=60)
-        #     plt.scatter(data_2['x'], y_mdd, color='red', alpha=1, marker='D', s=60)
-        #     plt.errorbar(**data_1, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='blue', elinewidth=3)
-        #     plt.errorbar(**data_2, alpha=1, fmt='None', capsize=10, capthick=3, ecolor='red', elinewidth=3)
-        #     result_data=[result_psd, result_fc, result_ni]
-        #     y_temp = result_data[np.argmax(self.values[:3])][0, i]
-        #     # y_temp = getattr(mod, 'result_{}'.format(best))
-        #     if y_hc > y_mdd:
-        #         if y_temp < y_mdd - (yerr_mdd):
-        #             y_temp = y_mdd - (yerr_mdd)
-        #         elif y_temp > y_hc + yerr_hc:
-        #             y_temp = y_hc + (yerr_hc)
-        #     else:
-        #         if y_temp < y_hc - yerr_hc:
-        #             y_temp = y_hc - (yerr_hc)
-        #         elif y_temp > y_mdd + yerr_mdd:
-        #             y_temp = y_mdd + (yerr_mdd)
-        #     plt.axhline(y=y_temp, color='g', linewidth=3, alpha=0.5)
-        #     plt.scatter(0.47, y_temp, marker='o', s=120, color='g', alpha=0.5)
-        #     plt.text(0.5, y_temp, 'Yours', color='black', size=16)
-        #     plt.gca().axes.xaxis.set_ticks([])
-        #     plt.gca().axes.yaxis.set_ticks([])
-        # plt.tight_layout(h_pad=0.5, w_pad=0.5)
-        # plt.savefig("{}/position_plot.png".format(self.dir), bbox_inches='tight', pad_inches=0.4)
-        # plt.close()
 
         y_hc = np.mean(x_hc[:, 0], axis=0)
         y_mdd = np.mean(x_mdd[:, 0], axis=0)
@@ -322,6 +346,9 @@ class model_test:
         self.psd_plot(raw_file.psd[0], "rel")
         self.psd_plot(raw_file.psd_abs[0], "abs")
 
+        self.psd_fre(raw_file.psd_hz[0], "rel")
+        self.psd_fre(raw_file.psd_hz_abs[0], "abs")
+
         self.ni_plot(raw_file.ni[0][28:])
 
         ##JSON
@@ -337,8 +364,7 @@ class model_test:
 
         ##  ------------------- fc_plot
 
-        csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_plv_335.csv")
-        hc = pd.read_csv(csv_dir)
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_plv_335.csv"))
 
         zscore_plv = np.zeros(len(raw_file.fc_f[0]))
         for i in range(len(zscore_plv)):
@@ -350,27 +376,3 @@ class model_test:
             vis_bwave.mean_plot()
             vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff', bbox_inches='tight', pad_inches=0)
             plt.close()
-
-
-# center = 7.52456
-# y_temp = 7.127428
-# dist = 0.0907733
-# fig, ax = plt.subplots(figsize=(14,3))
-# ax.set_xlim(0, 10)
-# ax.set_ylim(0, 10)
-# image_arr = np.array(plt.imread(os.path.join(ROOT_DIR, "plot_image/base_F_bar.png")))
-# imagebox = OffsetImage(image_arr, zoom=1.02)
-# ab = AnnotationBbox(imagebox, (0, 2),bboxprops={'edgecolor':'none','alpha':1}, box_alignment=(0,0))
-# ax.add_artist(ab)
-# ax.spines['bottom'].set_visible(False)
-# ax.spines['left'].set_visible(False)
-# ax.spines['right'].set_visible(False)
-# ax.spines['top'].set_visible(False)
-# ax.axes.get_xaxis().set_visible(False)
-# ax.axes.get_yaxis().set_visible(False)
-# plt.draw()
-# plt.scatter((5- (y_temp-center)*1/dist),1.2, marker="^",s=400, color='yellow', edgecolors='black', linewidth=0.7)
-# plt.gca().axes.yaxis.set_ticks([])
-# plt.gca().axes.xaxis.set_ticks([])
-# # plt.savefig('a.png')
-# plt.show()

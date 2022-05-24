@@ -289,6 +289,7 @@ class BwaveData:
         psds /= np.sum(psds, axis=-1, keepdims=True)  # (epochs, sensors, freq)
 
         psds = psds.mean(axis=0)
+
         X = []
         for fmin, fmax in FREQ_BANDS.values():
             psds_band = psds[:, (freqs >= fmin) & (freqs < fmax)].sum(axis=1)

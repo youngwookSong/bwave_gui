@@ -110,6 +110,38 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     #         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
     #         self.animation.start()
 
+    def date_search(self):
+        UIFunctions.reset_table(self)  # 처음에 reset해야 바로 month나 week눌렀을때 잘 찾아짐
+        self.ui.btn_reset.setDisabled(False)
+
+        today_date = QDate.currentDate()
+
+        pre_date = self.ui.dateEdit.date()
+        cur_date = self.ui.dateEdit_2.date()
+
+        search_list = []
+        for person in self.dataList:
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            date_split = info_json_path['date'].split("-")
+            per_Qdate = QDate(int(date_split[0]), int(date_split[1]), int(date_split[2])).daysTo(today_date)
+            if per_Qdate <= pre_date.daysTo(today_date) and per_Qdate >= cur_date.daysTo(today_date):
+                search_list.append(person)
+        print(search_list)
+
+        self.ui.tableWidget.setRowCount(len(search_list))
+
+        self.checkboxList = []  # reset
+        self.dataList = []  # reset
+
+        for row, person in enumerate(search_list):
+            self.dataList.append(person)
+            with open(os.path.join(personal_res.root, '{}/info.json'.format(person)), 'r', encoding='utf-8') as f:
+                info_json_path = json.load(f)
+            self.ui.tableWidget.setCellWidget(row, 0, UIFunctions.make_chbox(self, row))
+            UIFunctions.make_table_format(self, row, info_json_path['num'], info_json_path['name'],
+                                          info_json_path['date'], info_json_path['y_pred_proba'])
+
     def search_today(self):
         UIFunctions.reset_table(self) #처음에 reset해야 바로 month나 week눌렀을때 잘 찾아짐
         self.ui.btn_reset.setDisabled(False)
