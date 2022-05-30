@@ -9,6 +9,7 @@ from PySide6.QtWidgets import *
 
 import personal_data.resources as personal_res
 from dialog.psdPowerHz import Ui_Dialog_power
+from dialog.source_plot import Ui_Dialog_source
 from style import *
 
 import json
@@ -1148,7 +1149,7 @@ class Ui_tabFrame_pre(QFrame):
         sizePolicy4.setHeightForWidth(self.pushButton_8.sizePolicy().hasHeightForWidth())
         self.pushButton_8.setSizePolicy(sizePolicy4)
         self.pushButton_8.setStyleSheet(btn_style)
-        self.pushButton_8.clicked.connect(lambda: self.open_psd_power())
+        self.pushButton_8.clicked.connect(lambda: self.open_source_plot())
 
         self.horizontalLayout_46.addWidget(self.pushButton_8)
 
@@ -1673,4 +1674,10 @@ class Ui_tabFrame_pre(QFrame):
 
     def open_psd_power(self):
         self._psd_dialog = Ui_Dialog_power(self.name, self.num)
+        self._psd_dialog.setWindowTitle("PSD Hz Topomap")
         self._psd_dialog.show()
+
+    def open_source_plot(self):
+        self._source_plot = Ui_Dialog_source()
+        self._source_plot.setWindowTitle("Source Plot")
+        self._source_plot.show()

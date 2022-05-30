@@ -133,7 +133,7 @@ class MainView(QMainWindow):
         # 분석하기 버튼
         self.ui.btn_anal.clicked.connect(lambda: UIFunctions.analysis_result(self))
 
-    def button_logout_action(self): #이거 나중에 main_functions로 옮기기
+    def button_logout_action(self):
         self.close()
         self.second = LoginView()
         self.second.show()

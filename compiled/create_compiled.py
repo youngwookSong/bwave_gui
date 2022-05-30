@@ -5,10 +5,12 @@ import py_compile
 import resources #밖 resource
 import com_resources #complide resource
 
-main_res = resources.root
-save_res = com_resources.root
+control = "personal_data"
 
-file_name = "style.py"
+main_res = os.path.join(resources.root, control)
+save_res = os.path.join(com_resources.root, control)
+
+file_name = "resources.py"
 file_name_save = file_name.split(".")[0] + ".cpython-310.py"
 pyc_file = file_name_save.replace('.py', '.pyc')
 print(pyc_file)

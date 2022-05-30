@@ -346,6 +346,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
     def handleOpenDialog(self):
         self._dialog = Ui_Dialog()
+        self._dialog.setWindowTitle("환자 입력")
 
         if self._dialog.exec(): #확인 버튼 눌렀을때
 
