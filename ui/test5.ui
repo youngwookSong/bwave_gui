@@ -1272,7 +1272,7 @@ QPushButton:hover {
                     <enum>QTabWidget::Rounded</enum>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>2</number>
                    </property>
                    <property name="usesScrollButtons">
                     <bool>true</bool>
@@ -1906,6 +1906,22 @@ QPushButton:hover {
                                      <number>0</number>
                                     </property>
                                     <item>
+                                     <widget class="QLabel" name="label_72">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                      <property name="alignment">
+                                       <set>Qt::AlignCenter</set>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
                                      <widget class="QPushButton" name="pushButton_5">
                                       <property name="sizePolicy">
                                        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -2019,6 +2035,19 @@ QPushButton:hover {
                                     <property name="bottomMargin">
                                      <number>0</number>
                                     </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_73">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                     </widget>
+                                    </item>
                                     <item>
                                      <widget class="QPushButton" name="pushButton_6">
                                       <property name="sizePolicy">
@@ -2146,6 +2175,19 @@ QPushButton:hover {
                                      <number>0</number>
                                     </property>
                                     <item>
+                                     <widget class="QLabel" name="label_74">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
                                      <widget class="QPushButton" name="pushButton_7">
                                       <property name="sizePolicy">
                                        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -2244,6 +2286,19 @@ QPushButton:hover {
                                     <property name="bottomMargin">
                                      <number>0</number>
                                     </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_75">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                     </widget>
+                                    </item>
                                     <item>
                                      <widget class="QPushButton" name="pushButton_8">
                                       <property name="sizePolicy">
@@ -2371,6 +2426,19 @@ QPushButton:hover {
                                      <number>0</number>
                                     </property>
                                     <item>
+                                     <widget class="QLabel" name="label_76">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
                                      <widget class="QPushButton" name="pushButton_9">
                                       <property name="sizePolicy">
                                        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -2469,6 +2537,19 @@ QPushButton:hover {
                                     <property name="bottomMargin">
                                      <number>0</number>
                                     </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_77">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>TextLabel</string>
+                                      </property>
+                                     </widget>
+                                    </item>
                                     <item>
                                      <widget class="QPushButton" name="pushButton_10">
                                       <property name="sizePolicy">
@@ -2844,6 +2925,19 @@ QPushButton:hover {
                           <property name="frameShadow">
                            <enum>QFrame::Raised</enum>
                           </property>
+                          <widget class="QPushButton" name="pushButton_11">
+                           <property name="geometry">
+                            <rect>
+                             <x>10</x>
+                             <y>60</y>
+                             <width>75</width>
+                             <height>23</height>
+                            </rect>
+                           </property>
+                           <property name="text">
+                            <string>PushButton</string>
+                           </property>
+                          </widget>
                          </widget>
                         </item>
                        </layout>
@@ -3779,6 +3873,158 @@ QPushButton:hover {
                                   </widget>
                                  </item>
                                 </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="tab_3">
+                    <attribute name="title">
+                     <string>쪽</string>
+                    </attribute>
+                    <layout class="QVBoxLayout" name="verticalLayout_29">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QFrame" name="frame_74">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_49"/>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_75">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_50">
+                        <item>
+                         <widget class="QFrame" name="frame_78">
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <widget class="QPushButton" name="pushButton_12">
+                           <property name="geometry">
+                            <rect>
+                             <x>40</x>
+                             <y>160</y>
+                             <width>75</width>
+                             <height>23</height>
+                            </rect>
+                           </property>
+                           <property name="text">
+                            <string>PushButton</string>
+                           </property>
+                          </widget>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QFrame" name="frame_79">
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_30">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QFrame" name="frame_76">
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_51">
+                              <item>
+                               <widget class="QLabel" name="label_78">
+                                <property name="text">
+                                 <string>TextLabel</string>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_77">
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_52">
+                              <item>
+                               <widget class="QLabel" name="label_79">
+                                <property name="text">
+                                 <string>TextLabel</string>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_80">
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_53">
+                              <item>
+                               <widget class="QLabel" name="label_80">
+                                <property name="text">
+                                 <string>TextLabel</string>
+                                </property>
                                </widget>
                               </item>
                              </layout>

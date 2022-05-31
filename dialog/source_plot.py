@@ -38,7 +38,8 @@ class Ui_Dialog_source(QDialog):
     def __init__(self):
         super().__init__()
 
-        self.resize(750, 600)
+        self.resize(900, 700)
+        self.setMinimumSize(QSize(900, 700))
         self.setWindowTitle("source_plot")
         self.verticalLayout = QVBoxLayout(self)
         self.verticalLayout.setSpacing(0)

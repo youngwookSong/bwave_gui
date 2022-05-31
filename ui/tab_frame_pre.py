@@ -764,12 +764,7 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_28.setSpacing(0)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(0, 0, 0, 0)
-        # self.label_9 = QLabel(self.frame_27)
-        # self.label_9.setObjectName(u"label_9")
-        # self.label_9.setMinimumSize(QSize(0, 300))
-        # self.label_9.setAlignment(Qt.AlignCenter)
 
-        # self.verticalLayout_28.addWidget(self.label_9)
         self.circularProgressBarBase = QFrame(self.frame_27)
         self.circularProgressBarBase.setObjectName(u"circularProgressBarBase")
         # self.circularProgressBarBase.setGeometry(QRect(10, 10, 320, 320))
@@ -885,11 +880,6 @@ class Ui_tabFrame_pre(QFrame):
         self.label_64.setGeometry(QRect(350, 30, 121, 31))
         self.label_64.setStyleSheet(u"font: 10pt \"Segoe UI Symbol\";")
         self.label_64.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
-        # self.label_67 = QLabel(self.frame_27)
-        # self.label_67.setObjectName(u"label_67")
-        # self.label_67.setGeometry(QRect(335, 210, 121, 31))
-        # self.label_67.setStyleSheet(u"font: 10pt \"Segoe UI Symbol\";")
-        # self.label_67.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
         self.label_9 = QLabel(self.frame_27)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setGeometry(QRect(365, 60, 71, 21))
@@ -902,14 +892,9 @@ class Ui_tabFrame_pre(QFrame):
         self.label_66.setObjectName(u"label_66")
         self.label_66.setGeometry(QRect(365, 180, 71, 21))
         self.label_66.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
-        # self.label_68 = QLabel(self.frame_27)
-        # self.label_68.setObjectName(u"label_68")
-        # self.label_68.setGeometry(QRect(350, 240, 71, 21))
-        # self.label_68.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
 
         self.label_36 = QLabel(self.frame_27)
         self.label_36.setObjectName(u"label_36")
-        # self.label_36.setMinimumSize(QSize(0, 150))
         self.label_36.setMaximumSize(QSize(16777215, 250))
         self.label_36.setAlignment(Qt.AlignCenter)
 
@@ -996,11 +981,21 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_43.setSpacing(0)
         self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
         self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
+        self.label_72 = QLabel(self.frame_68)
+        self.label_72.setObjectName(u"label_72")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.label_72.sizePolicy().hasHeightForWidth())
+        self.label_72.setSizePolicy(sizePolicy4)
+        self.label_72.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_43.addWidget(self.label_72)
+
         self.pushButton_5 = QPushButton(self.frame_68)
         self.pushButton_5.setObjectName(u"pushButton_5")
-        self.pushButton_5.setStyleSheet(btn_style)
+        self.pushButton_5.setStyleSheet(more_btn_style)
         self.pushButton_5.clicked.connect(lambda: self.open_psd_power())
-        sizePolicy4 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
@@ -1044,11 +1039,19 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_44.setSpacing(0)
         self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
         self.horizontalLayout_44.setContentsMargins(0, 0, 0, 0)
+
+        self.label_73 = QLabel(self.frame_69)
+        self.label_73.setObjectName(u"label_73")
+        sizePolicy4.setHeightForWidth(self.label_73.sizePolicy().hasHeightForWidth())
+        self.label_73.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_44.addWidget(self.label_73)
+
         self.pushButton_6 = QPushButton(self.frame_69)
         self.pushButton_6.setObjectName(u"pushButton_6")
         sizePolicy4.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
         self.pushButton_6.setSizePolicy(sizePolicy4)
-        self.pushButton_6.setStyleSheet(btn_style)
+        self.pushButton_6.setStyleSheet(more_btn_style)
         self.pushButton_6.clicked.connect(lambda: self.open_psd_power())
 
         self.horizontalLayout_44.addWidget(self.pushButton_6)
@@ -1099,11 +1102,19 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_45.setSpacing(0)
         self.horizontalLayout_45.setObjectName(u"horizontalLayout_45")
         self.horizontalLayout_45.setContentsMargins(0, 0, 0, 0)
+
+        self.label_74 = QLabel(self.frame_70)
+        self.label_74.setObjectName(u"label_74")
+        sizePolicy4.setHeightForWidth(self.label_74.sizePolicy().hasHeightForWidth())
+        self.label_74.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_45.addWidget(self.label_74)
+
         self.pushButton_7 = QPushButton(self.frame_70)
         self.pushButton_7.setObjectName(u"pushButton_7")
         sizePolicy4.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
         self.pushButton_7.setSizePolicy(sizePolicy4)
-        self.pushButton_7.setStyleSheet(btn_style)
+        self.pushButton_7.setStyleSheet(more_btn_style)
         self.pushButton_7.clicked.connect(lambda: self.open_psd_power())
 
         self.horizontalLayout_45.addWidget(self.pushButton_7)
@@ -1144,11 +1155,18 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_46.setSpacing(0)
         self.horizontalLayout_46.setObjectName(u"horizontalLayout_46")
         self.horizontalLayout_46.setContentsMargins(0, 0, 0, 0)
+        self.label_75 = QLabel(self.frame_71)
+        self.label_75.setObjectName(u"label_75")
+        sizePolicy4.setHeightForWidth(self.label_75.sizePolicy().hasHeightForWidth())
+        self.label_75.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_46.addWidget(self.label_75)
+
         self.pushButton_8 = QPushButton(self.frame_71)
         self.pushButton_8.setObjectName(u"pushButton_8")
         sizePolicy4.setHeightForWidth(self.pushButton_8.sizePolicy().hasHeightForWidth())
         self.pushButton_8.setSizePolicy(sizePolicy4)
-        self.pushButton_8.setStyleSheet(btn_style)
+        self.pushButton_8.setStyleSheet(more_btn_style)
         self.pushButton_8.clicked.connect(lambda: self.open_source_plot())
 
         self.horizontalLayout_46.addWidget(self.pushButton_8)
@@ -1199,11 +1217,18 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_47.setSpacing(0)
         self.horizontalLayout_47.setObjectName(u"horizontalLayout_47")
         self.horizontalLayout_47.setContentsMargins(0, 0, 0, 0)
+        self.label_76 = QLabel(self.frame_72)
+        self.label_76.setObjectName(u"label_76")
+        sizePolicy4.setHeightForWidth(self.label_76.sizePolicy().hasHeightForWidth())
+        self.label_76.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_47.addWidget(self.label_76)
+
         self.pushButton_9 = QPushButton(self.frame_72)
         self.pushButton_9.setObjectName(u"pushButton_9")
         sizePolicy4.setHeightForWidth(self.pushButton_9.sizePolicy().hasHeightForWidth())
         self.pushButton_9.setSizePolicy(sizePolicy4)
-        self.pushButton_9.setStyleSheet(btn_style)
+        self.pushButton_9.setStyleSheet(more_btn_style)
         self.pushButton_9.clicked.connect(lambda: self.open_psd_power())
 
         self.horizontalLayout_47.addWidget(self.pushButton_9)
@@ -1244,11 +1269,18 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_48.setSpacing(0)
         self.horizontalLayout_48.setObjectName(u"horizontalLayout_48")
         self.horizontalLayout_48.setContentsMargins(0, 0, 0, 0)
+        self.label_77 = QLabel(self.frame_73)
+        self.label_77.setObjectName(u"label_77")
+        sizePolicy4.setHeightForWidth(self.label_77.sizePolicy().hasHeightForWidth())
+        self.label_77.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayout_48.addWidget(self.label_77)
+
         self.pushButton_10 = QPushButton(self.frame_73)
         self.pushButton_10.setObjectName(u"pushButton_10")
         sizePolicy4.setHeightForWidth(self.pushButton_10.sizePolicy().hasHeightForWidth())
         self.pushButton_10.setSizePolicy(sizePolicy4)
-        self.pushButton_10.setStyleSheet(btn_style)
+        self.pushButton_10.setStyleSheet(more_btn_style)
         self.pushButton_10.clicked.connect(lambda: self.open_psd_power())
 
         self.horizontalLayout_48.addWidget(self.pushButton_10)
@@ -1442,6 +1474,12 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_47.setFrameShape(QFrame.StyledPanel)
         self.frame_47.setFrameShadow(QFrame.Raised)
 
+        self.pushButton_11 = QPushButton(self.frame_47)
+        self.pushButton_11.setObjectName(u"pushButton_11")
+        self.pushButton_11.setGeometry(QRect(-10, 60, 75, 23))
+        self.pushButton_11.setDisabled(False)
+        self.pushButton_11.clicked.connect(lambda: self.tab_pages.setCurrentIndex(2))
+
         self.horizontalLayout_6.addWidget(self.frame_47)
 
         self.verticalLayout_10.addWidget(self.frame_7)
@@ -1457,6 +1495,98 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_10.addWidget(self.frame_61)
 
         self.tab_pages.addWidget(self.tabFrame_anal)
+
+        ## ----------------------------------------------------세번째 페이지
+
+        self.tabFrame_anal_2 = QWidget()
+        self.tabFrame_anal_2.setObjectName(u"tabFrame_anal_2")
+        self.verticalLayout_29 = QVBoxLayout(self.tabFrame_anal_2)
+        self.verticalLayout_29.setSpacing(0)
+        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
+        self.verticalLayout_29.setContentsMargins(0, 0, 0, 0)
+        self.frame_74 = QFrame(self.tabFrame_anal_2)
+        self.frame_74.setObjectName(u"frame_74")
+        self.frame_74.setFrameShape(QFrame.StyledPanel)
+        self.frame_74.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_49 = QHBoxLayout(self.frame_74)
+        self.horizontalLayout_49.setObjectName(u"horizontalLayout_49")
+
+        self.verticalLayout_29.addWidget(self.frame_74)
+
+        self.frame_75 = QFrame(self.tabFrame_anal_2)
+        self.frame_75.setObjectName(u"frame_75")
+        self.frame_75.setFrameShape(QFrame.StyledPanel)
+        self.frame_75.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_50 = QHBoxLayout(self.frame_75)
+        self.horizontalLayout_50.setObjectName(u"horizontalLayout_50")
+        self.frame_78 = QFrame(self.frame_75)
+        self.frame_78.setObjectName(u"frame_78")
+        self.frame_78.setFrameShape(QFrame.StyledPanel)
+        self.frame_78.setFrameShadow(QFrame.Raised)
+
+        self.pushButton_12 = QPushButton(self.frame_78)
+        self.pushButton_12.setObjectName(u"pushButton_12")
+        self.pushButton_12.setGeometry(QRect(40, 160, 75, 23))
+        self.pushButton_12.setDisabled(False)
+        self.pushButton_12.clicked.connect(lambda: self.tab_pages.setCurrentIndex(1))
+
+        self.horizontalLayout_50.addWidget(self.frame_78)
+
+        self.frame_79 = QFrame(self.frame_75)
+        self.frame_79.setObjectName(u"frame_79")
+        self.frame_79.setFrameShape(QFrame.StyledPanel)
+        self.frame_79.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_30 = QVBoxLayout(self.frame_79)
+        self.verticalLayout_30.setSpacing(0)
+        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
+        self.verticalLayout_30.setContentsMargins(0, 0, 0, 0)
+        self.frame_76 = QFrame(self.frame_79)
+        self.frame_76.setObjectName(u"frame_76")
+        self.frame_76.setFrameShape(QFrame.StyledPanel)
+        self.frame_76.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_51 = QHBoxLayout(self.frame_76)
+        self.horizontalLayout_51.setObjectName(u"horizontalLayout_51")
+        self.label_78 = QLabel(self.frame_76)
+        self.label_78.setObjectName(u"label_78")
+
+        self.horizontalLayout_51.addWidget(self.label_78)
+
+        self.verticalLayout_30.addWidget(self.frame_76)
+
+        self.frame_77 = QFrame(self.frame_79)
+        self.frame_77.setObjectName(u"frame_77")
+        self.frame_77.setFrameShape(QFrame.StyledPanel)
+        self.frame_77.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_52 = QHBoxLayout(self.frame_77)
+        self.horizontalLayout_52.setObjectName(u"horizontalLayout_52")
+        self.label_79 = QLabel(self.frame_77)
+        self.label_79.setObjectName(u"label_79")
+
+        self.horizontalLayout_52.addWidget(self.label_79)
+
+        self.verticalLayout_30.addWidget(self.frame_77)
+
+        self.frame_80 = QFrame(self.frame_79)
+        self.frame_80.setObjectName(u"frame_80")
+        self.frame_80.setFrameShape(QFrame.StyledPanel)
+        self.frame_80.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_53 = QHBoxLayout(self.frame_80)
+        self.horizontalLayout_53.setObjectName(u"horizontalLayout_53")
+        self.label_80 = QLabel(self.frame_80)
+        self.label_80.setObjectName(u"label_80")
+
+        self.horizontalLayout_53.addWidget(self.label_80)
+
+        self.verticalLayout_30.addWidget(self.frame_80)
+
+        self.horizontalLayout_50.addWidget(self.frame_79)
+
+        self.verticalLayout_29.addWidget(self.frame_75)
+
+        self.tab_pages.addWidget(self.tabFrame_anal_2)
+
+
+        ## --------------------------------------------네번째
         self.verticalLayout_6.addWidget(self.tab_pages)
 
         self.tab_pages.setCurrentIndex(0)
@@ -1495,9 +1625,9 @@ class Ui_tabFrame_pre(QFrame):
 
         self.label_36.setStyleSheet(u"image:url(./personal_data/{}_{}/mode_prob.png)".format(self.num, self.name))
 
-        # self.label_67.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_0.png)".format(self.num, self.name))
-        # self.label_68.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_1.png)".format(self.num, self.name))
-        # self.label_69.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_2.png)".format(self.num, self.name))
+        self.label_78.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_0.png)".format(self.num, self.name))
+        self.label_79.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_1.png)".format(self.num, self.name))
+        self.label_80.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_2.png)".format(self.num, self.name))
 
         ## 가장 유의미한 지표
         label_list = [self.label_12, self.label_7, self.label_8, self.label_10, self.label_13, self.label_14, self.label_15]
@@ -1628,6 +1758,7 @@ class Ui_tabFrame_pre(QFrame):
         self.label_61.setText(QCoreApplication.translate("MainWindow", u"Gamma", None))
 
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"back", None))
+        self.pushButton_11.setText(QCoreApplication.translate("MainWindow", u"next", None))
 
         self.labelTitle.setText(QCoreApplication.translate("MainWindow",
                                                            u"MDD\nprobabilty",
@@ -1663,12 +1794,25 @@ class Ui_tabFrame_pre(QFrame):
         self.label_44.setText(QCoreApplication.translate("MainWindow", u"FC-source", None))
         self.label_69.setText(QCoreApplication.translate("MainWindow", u"NI-source", None))
 
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u" frequency ", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u" connect ", None))
-        self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u" network ", None))
-        self.pushButton_8.setText(QCoreApplication.translate("MainWindow", u" see more ", None))
-        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u" see more ", None))
-        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u" see more ", None))
+        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"frequency", None))
+        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"connect", None))
+        self.pushButton_7.setText(QCoreApplication.translate("MainWindow", u"network", None))
+        self.pushButton_8.setText(QCoreApplication.translate("MainWindow", u"see more", None))
+        self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"see more", None))
+        self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"see more", None))
+
+        self.label_72.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_73.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_75.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_76.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_77.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+
+        ## ------------------------------ 세번쨰 페이지지
+        self.label_78.setText(QCoreApplication.translate("MainWindow", u"", None))
+        self.label_79.setText(QCoreApplication.translate("MainWindow", u"", None))
+        self.label_80.setText(QCoreApplication.translate("MainWindow", u"", None))
+        self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"back", None))
 
     # retranslateUi
 
