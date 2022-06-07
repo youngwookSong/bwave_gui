@@ -1801,7 +1801,7 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"see more", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"see more", None))
 
-        self.label_72.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_72.setText(QCoreApplication.translate("MainWindow", u"         ", None))
         self.label_73.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_75.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
