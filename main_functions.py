@@ -7,7 +7,8 @@ import datetime
 from PySide6.QtWidgets import QTableWidgetItem
 
 from main import *
-from dialog.newfile_dialog2 import Ui_Dialog
+from dialog.newfile_dialog_new import Ui_Dialog
+from dialog.newfile_dialog_add import Ui_Dialog_add
 from dialog.loadingBar import Ui_Dialog_loading, Worker, ThreadClass
 
 from ui.tab_frame import Ui_tabFrame
@@ -344,9 +345,13 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
-    def handleOpenDialog(self):
-        self._dialog = Ui_Dialog()
-        self._dialog.setWindowTitle("환자 입력")
+    def handleOpenDialog(self, type):
+        if type == 'new':
+            self._dialog = Ui_Dialog()
+            self._dialog.setWindowTitle("new 환자 입력")
+        if type == 'add':
+            self._dialog = Ui_Dialog_add(self.dataList)
+            self._dialog.setWindowTitle("add 환자 입력")
 
         if self._dialog.exec(): #확인 버튼 눌렀을때
 

@@ -107,9 +107,9 @@ class MainView(QMainWindow):
         # 메뉴 토글 버튼
         # self.ui.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 60, True))
         # new file 버튼
-        self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, 'new'))
         # add 버튼
-        self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, "add"))
         # 홈 화면 new file 버튼
         self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
         # date search 버튼
