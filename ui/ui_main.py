@@ -552,7 +552,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.logo = QLabel(self.frame_24)
         self.logo.setObjectName(u"logo")
-        self.logo.setStyleSheet("image:url(./icon/bwave_logo_2.png)")
+        print("/".join(root.split("\\")))
+        self.logo.setStyleSheet("image:url({}/bwave_logo_2.png)".format("/".join(root.split("\\"))))
         self.logo.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_17.addWidget(self.logo)
@@ -683,18 +684,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        # self.btn_toggle.setText(QCoreApplication.translate("MainWindow", u" 메뉴", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Maumgyeol-Depression   ver. 1.0.0"))
-        # self.btn_home.setText(QCoreApplication.translate("MainWindow", u"  메인 화면", None))
-        # self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"  진단 결과", None))
         self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.btn_add.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.btn_open.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"~", None))
-        # self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"search", None))
-        # self.btn_search.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
-        # self.btn_reset.setText(QCoreApplication.translate("MainWindow", u"지움", None))
-        # self.btn_delete.setText(QCoreApplication.translate("MainWindow", u"\uc0ad\uc81c", None))
         self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"Analysis", None))
         self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
         self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))

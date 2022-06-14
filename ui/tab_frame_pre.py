@@ -11,6 +11,8 @@ import personal_data.resources as personal_res
 from dialog.psdPowerHz import Ui_Dialog_power
 from dialog.source_plot import Ui_Dialog_source
 from style import *
+from personal_data.resources import *
+from model_Test.directory import ROOT_DIR_con
 
 import json
 
@@ -1602,55 +1604,53 @@ class Ui_tabFrame_pre(QFrame):
         network_array = [self.n_delta, self.n_theta, self.n_Lowalpha, self.n_Highalpha, self.n_Lowbeta, self.n_Highbeta, self.n_gamma]
 
         for i in range(7):
-            absolute_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/absolute_{}.png)"
-                                            .format(self.num, self.name, freq[i]))
-            relative_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/relative_{}.png)"
-                                            .format(self.num, self.name, freq[i]))
-            plv_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/plv_{}.png)"
-                                            .format(self.num, self.name, freq[i]))
-            wpli_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/plv_{}.png)"
-                                       .format(self.num, self.name, freq[i]))
-            network_array[i].setStyleSheet(u"image:url(./personal_data/{}_{}/network_{}.png)"
-                                        .format(self.num, self.name, freq[i]))
-
-        # self.label_36.setStyleSheet(u"image:url(./icon/plot.png)")
+            absolute_array[i].setStyleSheet(u"image:url({}/{}_{}/absolute_{}.png)"
+                                            .format(root_con, self.num, self.name, freq[i]))
+            relative_array[i].setStyleSheet(u"image:url({}/{}_{}/relative_{}.png)"
+                                            .format(root_con, self.num, self.name, freq[i]))
+            plv_array[i].setStyleSheet(u"image:url({}/{}_{}/plv_{}.png)"
+                                            .format(root_con, self.num, self.name, freq[i]))
+            wpli_array[i].setStyleSheet(u"image:url({}/{}_{}/plv_{}.png)"
+                                       .format(root_con, self.num, self.name, freq[i]))
+            network_array[i].setStyleSheet(u"image:url({}/{}_{}/network_{}.png)"
+                                        .format(root_con, self.num, self.name, freq[i]))
 
         ## 분석 화면 plot
-        self.label_38.setStyleSheet(u"image:url(./personal_data/{}_{}/absolute_Theta.png)".format(self.num, self.name))
-        self.label_40.setStyleSheet(u"image:url(./personal_data/{}_{}/plv_Theta.png)".format(self.num, self.name))
-        self.label_52.setStyleSheet(u"image:url(./personal_data/{}_{}/network_Theta.png)".format(self.num, self.name))
-        self.label_39.setStyleSheet(u"image:url(./model_Test/plot_image/source_1.png)")
-        self.label_43.setStyleSheet(u"image:url(./model_Test/plot_image/source_2.jpg)")
-        self.label_68.setStyleSheet(u"image:url(./model_Test/plot_image/source_3.png)")
+        self.label_38.setStyleSheet(u"image:url({}/{}_{}/absolute_Theta.png)".format(root_con, self.num, self.name))
+        self.label_40.setStyleSheet(u"image:url({}/{}_{}/plv_Theta.png)".format(root_con, self.num, self.name))
+        self.label_52.setStyleSheet(u"image:url({}/{}_{}/network_Theta.png)".format(root_con, self.num, self.name))
+        self.label_39.setStyleSheet(u"image:url({}/plot_image/source_1.png)".format(ROOT_DIR_con))
+        self.label_43.setStyleSheet(u"image:url({}/plot_image/source_2.jpg)".format(ROOT_DIR_con))
+        self.label_68.setStyleSheet(u"image:url({}/plot_image/source_3.png)".format(ROOT_DIR_con))
 
-        self.label_36.setStyleSheet(u"image:url(./personal_data/{}_{}/mode_prob.png)".format(self.num, self.name))
+        self.label_36.setStyleSheet(u"image:url({}/{}_{}/mode_prob.png)".format(root_con, self.num, self.name))
 
-        self.label_78.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_0.png)".format(self.num, self.name))
-        self.label_79.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_1.png)".format(self.num, self.name))
-        self.label_80.setStyleSheet(u"image:url(./personal_data/{}_{}/position_plot_2.png)".format(self.num, self.name))
+        self.label_78.setStyleSheet(u"image:url({}/{}_{}/position_plot_0.png)".format(root_con, self.num, self.name))
+        self.label_79.setStyleSheet(u"image:url({}/{}_{}/position_plot_1.png)".format(root_con, self.num, self.name))
+        self.label_80.setStyleSheet(u"image:url({}/{}_{}/position_plot_2.png)".format(root_con, self.num, self.name))
 
         ## 가장 유의미한 지표
         label_list = [self.label_12, self.label_7, self.label_8, self.label_10, self.label_13, self.label_14, self.label_15]
-        with open('./personal_data/{}_{}/info.json'.format(self.num, self.name), 'r', encoding='utf-8') as f:
+        with open('{}/{}_{}/info.json'.format(root_con, self.num, self.name), 'r', encoding='utf-8') as f:
             self.data = json.load(f)
         if self.data['best_model'] == 'psd':
             for i in range(7):
-                label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/absolute_{}.png)"
-                                            .format(self.num, self.name, freq[i])))
+                label_list[i].setStyleSheet((u"image:url({}/{}_{}/absolute_{}.png)"
+                                            .format(root_con, self.num, self.name, freq[i])))
             # self.label_70.setText(QCoreApplication.translate("MainWindow", u"Fp1_θ", None))
             # self.label_71.setText(QCoreApplication.translate("MainWindow", u"O2_low_α", None))
             # self.label_72.setText(QCoreApplication.translate("MainWindow", u"P8_θ", None))
         if self.data['best_model'] == 'fc':
             for i in range(7):
-                label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/plv_{}.png)"
-                                            .format(self.num, self.name, freq[i])))
+                label_list[i].setStyleSheet((u"image:url({}/{}_{}/plv_{}.png)"
+                                            .format(root_con, self.num, self.name, freq[i])))
             # self.label_70.setText(QCoreApplication.translate("MainWindow", u"F7-C4_δ", None))
             # self.label_71.setText(QCoreApplication.translate("MainWindow", u"P4-T7_δ", None))
             # self.label_72.setText(QCoreApplication.translate("MainWindow", u"O2-Pz_θ", None))
         if self.data['best_model'] == 'ni':
             for i in range(7):
-                label_list[i].setStyleSheet((u"image:url(./personal_data/{}_{}/network_{}.png)"
-                                            .format(self.num, self.name, freq[i])))
+                label_list[i].setStyleSheet((u"image:url({}/{}_{}/network_{}.png)"
+                                            .format(root_con, self.num, self.name, freq[i])))
             # self.label_70.setText(QCoreApplication.translate("MainWindow", u"Fp2-F4_θ", None))
             # self.label_71.setText(QCoreApplication.translate("MainWindow", u"T7-C3_δ", None))
             # self.label_72.setText(QCoreApplication.translate("MainWindow", u"F7-P3_θ", None))
@@ -1763,9 +1763,6 @@ class Ui_tabFrame_pre(QFrame):
         self.labelTitle.setText(QCoreApplication.translate("MainWindow",
                                                            u"MDD\nprobabilty",
                                                            None))
-        # self.labelPercentage.setText(QCoreApplication.translate("MainWindow",
-        #                                                         u"<p><span style=\" font-size:58pt;\"></span><span style=\" font-size:58pt; vertical-align:super;\">%</span></p>",
-        #                                                         None))
 
         self.labelPercentage.setText(QCoreApplication.translate("MainWindow",
                                                                 u"{}%".format(round(float(self.y_pred_proba_mdd), 1)),

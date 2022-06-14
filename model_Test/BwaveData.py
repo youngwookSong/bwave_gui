@@ -6,6 +6,8 @@ from model_Test.directory import FREQ_BANDS, FUNCDATA_DIR, ch_detect, ch_detect_
 from model_Test.helper_functions import *
 from sklearn.decomposition import PCA
 from joblib import Parallel, delayed
+from multiprocessing import freeze_support
+from multiprocessing import Pool
 import itertools
 
 
@@ -336,26 +338,36 @@ class BwaveData:
         return plvs
 
     def phase_locking_value(self, filtered, sens_comb):
+        # freeze_support()
         h_filtered = filtered.apply_hilbert()
         epoc_dat = h_filtered.get_data()
-        # print("calcul start")
         _, sen_no, _ = epoc_dat.shape
         plvs = np.zeros((sen_no, sen_no, 1))
-        plvs = Parallel(n_jobs=2)(delayed(self.calcul)(plvs, epoc_dat, c1, c2) for c1, c2 in sens_comb)
-        return plvs[0]
+
+        # plvs = Parallel(n_jobs=2)(delayed(self.calcul)(plvs, epoc_dat, c1, c2) for c1, c2 in sens_comb)
+        for c1, c2 in sens_comb:
+            plvs = self.calcul(plvs, epoc_dat, c1, c2)
+
+        return plvs
+
 
     def FC(self, source=False, show=False):
+        # freeze_support()
         print("FC :", end=" ", flush=True)
         start = time.time()
         _, sen_no, _ = self.prep_epochs.get_data().shape
         sens_comb = list(itertools.combinations(range(sen_no), 2))
 
-        plv_temp = Parallel(n_jobs=7)(delayed(self.phase_locking_value)(
-            self.prep_epochs.copy().filter(int(fmin), int(fmax), n_jobs=1, verbose=False, method='iir'), sens_comb) for
-                                      fmin, fmax
-                                      in FREQ_BANDS.values())
+        # plv_temp = Parallel(n_jobs=7)(delayed(self.phase_locking_value)(
+        #     self.prep_epochs.copy().filter(int(fmin), int(fmax), n_jobs=1, verbose=False, method='iir'), sens_comb) for
+        #                               fmin, fmax
+        #                               in FREQ_BANDS.values())
+        plv_temp = []
+        for fmin, fmax in FREQ_BANDS.values():
+            print(fmin)
+            epoch_filter = self.prep_epochs.copy().filter(int(fmin), int(fmax), n_jobs=1, verbose=False, method='iir')
+            plv_temp.append(self.phase_locking_value(epoch_filter, sens_comb))
 
-        # plv_mat = np.concatenate(result, axis=2).swapaxes(0,1)
         plv_mat = np.concatenate(plv_temp, axis=2)
         plv_flatten = np.ravel(plv_mat.swapaxes(0, 1), order='F')
         plv_flatten = plv_flatten[plv_flatten != 0]

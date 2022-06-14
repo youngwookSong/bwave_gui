@@ -402,6 +402,10 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             self._dialog_loading = Ui_Dialog_loading(file, self.directory)  # loading bar 열기 (여기서 알고리즘 돌림 모델에 넣고)
             self._dialog_loading.exec()
 
+            ## 그냥 모델 돌리기기
+            # md = model_test(file, self.directory)
+            # md.test()
+
             # 탭 추가 및 해당 탭으로 이동
             self.ui.pages.setCurrentWidget(self.ui.anal)
             # cur_idx = self.ui.tableWidget.currentIndex()

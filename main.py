@@ -23,6 +23,7 @@ import personal_data.resources as personal_res
 from dialog.product import Ui_Dialog_product
 
 import json
+from multiprocessing import freeze_support
 
 class LoginView(QMainWindow):
     def __init__(self):
@@ -139,6 +140,7 @@ class MainView(QMainWindow):
         self.second.show()
 
 if __name__ == '__main__':
+    # freeze_support()
     app = QApplication(sys.argv)
     main = LoginView()
     sys.exit(app.exec())

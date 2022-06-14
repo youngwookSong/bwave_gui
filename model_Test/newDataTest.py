@@ -250,7 +250,7 @@ class model_test:
 
 
     def position_plot(self, result_psd, result_fc, result_ni):
-        with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(root), 'rb') as f:
+        with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(ROOT_DIR), 'rb') as f:
             df = pickle.load(f)
 
         y_data = df['target'].to_numpy()

@@ -12,6 +12,8 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
+from personal_data.resources import *
+
 
 class Ui_Dialog_power(QDialog):
     def __init__(self, name, num):
@@ -162,14 +164,14 @@ class Ui_Dialog_power(QDialog):
         QMetaObject.connectSlotsByName(self)
         # setupUi
 
-        self.label_2.setStyleSheet(u"image:url(./personal_data/{}_{}/frequency/frequency_abs_1.png)"
-                                   .format(self.num, self.name))
-        self.label_3.setStyleSheet(u"image:url(./personal_data/{}_{}/frequency/frequency_abs_2.png)"
-                                   .format(self.num, self.name))
-        self.label_5.setStyleSheet(u"image:url(./personal_data/{}_{}/frequency/frequency_rel_1.png)"
-                                   .format(self.num, self.name))
-        self.label_6.setStyleSheet(u"image:url(./personal_data/{}_{}/frequency/frequency_rel_2.png)"
-                                   .format(self.num, self.name))
+        self.label_2.setStyleSheet(u"image:url({}/{}_{}/frequency/frequency_abs_1.png)"
+                                   .format(root_con, self.num, self.name))
+        self.label_3.setStyleSheet(u"image:url({}/{}_{}/frequency/frequency_abs_2.png)"
+                                   .format(root_con, self.num, self.name))
+        self.label_5.setStyleSheet(u"image:url({}/{}_{}/frequency/frequency_rel_1.png)"
+                                   .format(root_con, self.num, self.name))
+        self.label_6.setStyleSheet(u"image:url({}/{}_{}/frequency/frequency_rel_2.png)"
+                                   .format(root_con, self.num, self.name))
 
         self.pushButton.clicked.connect(lambda: self.next_btn())
         self.pushButton_2.clicked.connect(lambda: self.pre_btn())

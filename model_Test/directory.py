@@ -2,6 +2,7 @@ import os
 import datetime
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_DIR = os.path.join(ROOT_DIR, 'bwave_pro_data.xlsx')
+ROOT_DIR_con = "/".join(ROOT_DIR.split("\\"))
 
 
 #now = datetime.datetime.now()
