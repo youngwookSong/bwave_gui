@@ -470,10 +470,5 @@ class Ui_Dialog_add(QDialog):
         file_name = QFileDialog.getOpenFileName(self,self.tr("Open Data files"), "./", self.tr(file_format))
         print(file_name)
         self.lineEdit.setText(file_name[0])
-        # if file_name[0]:
-        #     with open(file_name[0], encoding='UTF-8') as f:
-        #         text = f.read()
-        #     # self.plainTextEdit.setPlainText(text)
 
-        # TODO: 파일 받아오기 (경로)
 

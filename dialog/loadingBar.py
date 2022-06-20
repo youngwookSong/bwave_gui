@@ -179,7 +179,7 @@ class Worker(QtCore.QThread):
     def run(self):
         for i in range(1, 100):
             self.updateProgress.emit(i)
-            time.sleep(0.4)
+            time.sleep(0.8)
 
     def stop(self):
         self.terminate() #강제 종료

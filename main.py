@@ -46,8 +46,8 @@ class LoginView(QMainWindow):
         self.ui.title_bar.mouseMoveEvent = moveWindow
         UIFunctions.uiDefinitions(self)
 
-        # self._dialog_product = Ui_Dialog_product()
-        # self._dialog_product.show()
+        self._dialog_product = Ui_Dialog_product()
+        self._dialog_product.show()
 
         self.show()
 

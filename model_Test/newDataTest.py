@@ -16,6 +16,7 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import matplotlib.pyplot as plt
 
 from model_Test.fc_plot import VisualizeFc
+from model_Test.directory import FUNCDATA_DIR
 
 from resources import root
 
@@ -76,7 +77,7 @@ class model_test:
 
     def psd_plot(self, psd, power): # 위 두줄
 
-        temp_montage = mne.channels.make_standard_montage('biosemi64')
+        temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
         temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
         temp_info.set_montage(temp_montage)
 
@@ -142,7 +143,7 @@ class model_test:
         ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
                     'P8', 'O1', 'O2']
 
-        temp_montage = mne.channels.make_standard_montage('biosemi64')
+        temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
         temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
         temp_info.set_montage(temp_montage)
 
@@ -187,7 +188,7 @@ class model_test:
 
     def ni_plot(self, ni):
 
-        temp_montage = mne.channels.make_standard_montage('biosemi64')
+        temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
         temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
         temp_info.set_montage(temp_montage)
 

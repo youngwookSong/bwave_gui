@@ -11,7 +11,6 @@ from dialog.newfile_dialog_new import Ui_Dialog
 from dialog.newfile_dialog_add import Ui_Dialog_add
 from dialog.loadingBar import Ui_Dialog_loading, Worker, ThreadClass
 
-from ui.tab_frame import Ui_tabFrame
 from ui.tab_frame_pre import Ui_tabFrame_pre
 
 from model_Test.newDataTest import model_test
@@ -286,6 +285,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
         ## 로컬 파일에 있는 데이터 가져오기
         self.data = os.listdir(personal_res.root)
+        print(personal_res)
         self.data.remove('resources.py')
         self.data.remove('__pycache__')
         print(self.data)
