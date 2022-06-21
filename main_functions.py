@@ -446,7 +446,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if result == QMessageBox.Ok:
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
 
-            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba_mdd, self._tabFrame.y_pred)
+            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba_mdd, self._tabFrame.y_pred, 60.7, 39.3)
 
             # self._tabFrame.circularProgress.setStyleSheet(progress_functions.newStylesheet)
 

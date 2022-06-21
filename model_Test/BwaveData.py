@@ -279,7 +279,7 @@ class BwaveData:
         # log
         psds = np.log10(1 + (1e12 * psds))
 
-        ## absolute
+        ## absolute # TODO: epoch 길이로 나누기
         psds_abs = psds.mean(axis=0)
         X_abs = []
         for fmin, fmax in FREQ_BANDS.values():
