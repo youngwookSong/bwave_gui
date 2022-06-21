@@ -17,7 +17,7 @@ class progress_functions:
         self.progressBarValue(0)
 
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.progress) #여기에 파라매터 넣으면 안돌아감
+        self.timer.timeout.connect(lambda: self.progress) #여기에 파라매터 넣으면 안돌아감
         # TIMER IN MILLISECONDS
         self.timer.start(15)
 
