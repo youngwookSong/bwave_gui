@@ -36,6 +36,7 @@ class model_test:
         self.y_pred_proba_hc = None
         self.best_model = None
         self.values = None
+        self.tr_proba = None
 
     def prepare(self, name, result):
         model_dir = os.path.join(ROOT_DIR, "model/model_{}".format(name))
@@ -249,6 +250,55 @@ class model_test:
         plt.savefig("{}/mode_prob.png".format(self.dir), bbox_inches='tight', pad_inches=0.1)
         plt.close()
 
+    def find_idx_plot(self, list, name, x_new):
+        band = ['delta', 'theta', 'low alpha', 'high alpha', 'low beta', 'high beta', 'gamma']
+        ch = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8',
+              'P7', 'P3', 'PZ', 'P4', 'P8', 'O1', 'O2']
+
+        with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(ROOT_DIR), 'rb') as f:
+            df = pickle.load(f)
+
+        x = df[name].to_numpy()
+        x_data = np.vstack(x)
+        sort = df['sort'].to_numpy()
+        y_data = df['target'].to_numpy()
+        x_ref = x_data[sort == 'treatment refractory']
+        x_good = x_data[sort == 'good treatment response']
+
+        score_list = []
+        for i in list:
+            score = 1
+            print("###########################################")
+
+            new = x_new[0, i]
+            good = np.mean(x_good[:, i], axis=0)
+            ref = np.mean(x_ref[:, i], axis=0)
+
+            # print(i, band[i // 19] + " " + str(ch[i % 19]) + ", idx: " + str(i))
+            print("idx: ", i)
+            print("new: ", new)
+            print("good: ", good)
+            print("refractory", ref)
+
+            if abs(good - new) < abs(ref - new):
+                score = 0
+
+            score_list.append(score)
+
+        print(score_list)
+
+        return score_list
+
+    def tr_probabilty(self, result_psd, result_fc, result_ni):
+        psd_eff_idx = [81, 80, 85, 84, 116, 79, 82, 90, 86, 77]
+        fc_eff_idx = [840, 1182, 305, 1011, 1022, 327, 498, 156, 338, 254]
+        ni_eff_idx = [110, 185, 113, 160, 109, 111, 189, 33, 118, 223]
+
+        all_score = self.find_idx_plot(psd_eff_idx, "psd", result_psd) + \
+                    self.find_idx_plot(fc_eff_idx, "fc", result_fc) + self.find_idx_plot(ni_eff_idx, "ni", result_ni)
+
+        print(all_score)
+        self.tr_proba = str(round(all_score.count(1)/len(all_score) * 100, 2))
 
     def position_plot(self, result_psd, result_fc, result_ni):
         with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(ROOT_DIR), 'rb') as f:
@@ -339,6 +389,9 @@ class model_test:
         self.model_6_chart(clf_psd.predict_proba(result_psd)[0], clf_fc.predict_proba(result_fc)[0],
                            clf_ni.predict_proba(result_ni)[0])
 
+        ## tr probabilty 표시
+        self.tr_probabilty(raw_file.psd, raw_file.fc_f, raw_file.ni)
+
         ## positin plot ---------------------------
         self.position_plot(result_psd, result_fc, result_ni)
 
@@ -359,6 +412,7 @@ class model_test:
             data['y_pred_proba_mdd'] = self.y_pred_proba_mdd
             data['y_pred_proba_hc'] = self.y_pred_proba_hc
             data['best_model'] = self.best_model
+            data['tr_proba'] = self.tr_proba
 
         with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file: #쓰기
             json.dump(data, make_file, ensure_ascii=False, indent='\t')

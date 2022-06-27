@@ -17,7 +17,8 @@ from model_Test.directory import ROOT_DIR_con
 import json
 
 class Ui_tabFrame_pre(QFrame):
-    def __init__(self, current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba_mdd, y_pred_proba_hc, best_model):
+    def __init__(self, current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba_mdd, y_pred_proba_hc,
+                 best_model, tr, gr):
         super().__init__()
         self.current_tab = current_tab
         self.file = file
@@ -30,6 +31,8 @@ class Ui_tabFrame_pre(QFrame):
         self.y_pred_proba_mdd = y_pred_proba_mdd
         self.y_pred_proba_hc = y_pred_proba_hc
         self.best_model = best_model
+        self.tr = tr
+        self.gr = gr
 
         self.data = None
 
@@ -1877,7 +1880,7 @@ class Ui_tabFrame_pre(QFrame):
                                                            None))
 
         self.labelPercentage_tr.setText(QCoreApplication.translate("MainWindow",
-                                                                u"{}%".format(round(float(self.y_pred_proba_mdd), 1)),
+                                                                u"{}%".format(round(float(self.tr), 1)),
                                                                 None))
 
         self.labelTitle_gr.setText(QCoreApplication.translate("MainWindow",
@@ -1886,7 +1889,7 @@ class Ui_tabFrame_pre(QFrame):
 
         self.labelPercentage_gr.setText(QCoreApplication.translate("MainWindow",
                                                                    u"{}%".format(
-                                                                       round(float(self.y_pred_proba_mdd), 1)),
+                                                                       round(float(self.gr), 1)),
                                                                    None))
 
         self.label_62.setText(QCoreApplication.translate("MainWindow", u"\u25a0  MDD Probability", None))
