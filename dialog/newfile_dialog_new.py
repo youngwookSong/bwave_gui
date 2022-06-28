@@ -364,9 +364,8 @@ class Ui_Dialog(QDialog):
 
         self.horizontalLayout.addWidget(self.container)
 
-
         self.retranslateUi(self)
-        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.accepted.connect(self.safe_code)
         self.buttonBox.rejected.connect(self.reject)
 
         QMetaObject.connectSlotsByName(self)
@@ -400,10 +399,28 @@ class Ui_Dialog(QDialog):
         date = self.dateEdit.text()
         if self.radioButton_3.isChecked():
             sex = '남성'
-        if self.radioButton_4.isChecked():
+        elif self.radioButton_4.isChecked():
             sex = '여성'
+        else:
+            sex = 0
 
         return file, name, birth, num, date, sex
+
+    def safe_code(self):
+        file, name, birth, num, date, sex = self.info()
+        if file and name and birth and num and date and sex:
+            self.accept()
+        else:
+            # QmessageBox
+            information = "모든 데이터를 입력하세요!"
+            msgBox = QMessageBox()
+            msgBox.setWindowTitle("ERROR")
+            msgBox.setText("데이터 입력")
+            msgBox.setInformativeText(information)
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.setDefaultButton(QMessageBox.Ok)
+            result = msgBox.exec()
 
     # 파일 탐색기 열기
     def open_file(self):  # 열기(O)

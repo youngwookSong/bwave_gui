@@ -348,7 +348,7 @@ class BwaveData:
         for c1, c2 in sens_comb:
             plvs = self.calcul(plvs, epoc_dat, c1, c2)
 
-        return plvs
+        return plvs  # plvs[0]
 
 
     def FC(self, source=False, show=False):

@@ -112,7 +112,9 @@ class MainView(QMainWindow):
         # add 버튼
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, "add"))
         # 홈 화면 new file 버튼
-        self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self))
+        self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, "new"))
+        # 홈 화면 add 버튼
+        self.ui.pushButton_2.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, "add"))
         # date search 버튼
         self.ui.pushButton_3.clicked.connect(lambda: UIFunctions.date_search(self))
         # Today 버튼
