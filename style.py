@@ -15,6 +15,26 @@ btn_style = (u"QPushButton{\n"
             "}"
 )
 
+tab_btn_style = (u"QPushButton{\n"
+            "	background-color: rgb(215, 221, 224);\n"
+            "	border:0px solid;\n"
+            "	border-radius:4px;\n"
+            "   font-size: 12px;\n"
+            "   font-style: bold;\n"
+            "}\n"
+            "QPushButton:hover{\n"
+            "	\n"
+            "	background-color: rgba(215, 221, 224, 0.5);\n"
+            "}"
+)
+
+tab_btn_style_bot = (u"QPushButton:hover{\n"
+            "	\n"
+            "	color: rgb(27, 64, 247);\n"
+            "}"
+)
+
+
 more_btn_style = (u"QPushButton{\n"
             "	color: rgb(0, 0, 0);\n"
             "	border:0px solid;\n"

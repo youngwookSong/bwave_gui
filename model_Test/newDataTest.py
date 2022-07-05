@@ -239,7 +239,6 @@ class model_test:
         bars = plt.bar(x, self.values, color='#54829C', alpha=0.5, width=0.7)
         bars[np.argmax(self.values)].set_color('r')
         self.best_model = model[np.argmax(self.values[:3])]
-        plt.title('Predictive probability by model', fontsize=20)
         for i, v in enumerate(self.values):
             plt.text(x[i], v + 2.5, int(self.values[i]),  # 좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])
                      fontsize=13,

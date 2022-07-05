@@ -757,11 +757,12 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_5 = QHBoxLayout(self.frame_6)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(25, 10, 25, 10) # margin 고치기
-        self.horizontalLayout_5.setSpacing(50)
+        self.horizontalLayout_5.setSpacing(0)
         self.frame_9 = QFrame(self.frame_6)
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QFrame.Raised)
+        # self.frame_9.setStyleSheet(u"#frame_9{border-right: 1px solid;}")
         self.horizontalLayout_9 = QHBoxLayout(self.frame_9)
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
@@ -811,6 +812,13 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_47.setFrameShape(QFrame.StyledPanel)
         self.frame_47.setFrameShadow(QFrame.Raised)
 
+        self.line = QFrame(self.frame_47)
+        self.line.setObjectName(u"line")
+        self.line.setGeometry(QRect(20, 15, 250, 3))
+        self.line.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
         self.horizontalLayout_10_31.addWidget(self.frame_47)
 
         self.verticalLayout_28.addWidget(self.frame_31)
@@ -823,7 +831,7 @@ class Ui_tabFrame_pre(QFrame):
         # self.circularProgressBarBase.setAlignment(Qt.AlignCenter)
         self.circularProgress = QFrame(self.circularProgressBarBase)
         self.circularProgress.setObjectName(u"circularProgress")
-        self.circularProgress.setGeometry(QRect(20, 10, 300, 300))
+        self.circularProgress.setGeometry(QRect(10, 25, 300, 300))
         self.circularProgress.setStyleSheet(u"QFrame{\n"
                                             "	border-radius: 150px;\n"
                                             "	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:0.749 rgba(255, 0, 127, 0), stop:0.750 rgba(85, 170, 255, 255));\n"
@@ -832,7 +840,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress.setFrameShadow(QFrame.Raised)
         self.circularBg = QFrame(self.circularProgressBarBase)
         self.circularBg.setObjectName(u"circularBg")
-        self.circularBg.setGeometry(QRect(20, 10, 300, 300))
+        self.circularBg.setGeometry(QRect(10, 25, 300, 300))
         self.circularBg.setStyleSheet(u"QFrame{\n"
                                       "	border-radius: 150px;\n"
                                       "	background-color: rgba(255, 90, 0, 0.2);\n"
@@ -841,7 +849,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularBg.setFrameShadow(QFrame.Raised)
         self.container = QFrame(self.circularProgressBarBase)
         self.container.setObjectName(u"container")
-        self.container.setGeometry(QRect(45, 35, 250, 250))
+        self.container.setGeometry(QRect(35, 50, 250, 250))
         self.container.setStyleSheet(u"QFrame{\n"
                                      "	border-radius: 125px;\n"
                                      "	background-color: rgb(255, 255, 255);\n"
@@ -888,35 +896,75 @@ class Ui_tabFrame_pre(QFrame):
         ## 오른쪽 글씨
         self.label_62 = QLabel(self.circularProgressBarBase)
         self.label_62.setObjectName(u"label_62")
-        self.label_62.setGeometry(QRect(340, 90, 121, 31))
+        self.label_62.setGeometry(QRect(325, 105, 121, 31))
         self.label_62.setStyleSheet(u"font: 10pt \"Segoe UI Symbol\";")
         self.label_62.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
         self.label_63 = QLabel(self.circularProgressBarBase)
         self.label_63.setObjectName(u"label_63")
-        self.label_63.setGeometry(QRect(340, 150, 121, 31))
+        self.label_63.setGeometry(QRect(325, 165, 121, 31))
         self.label_63.setStyleSheet(u"font: 10pt \"Segoe UI Symbol\";")
         self.label_63.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
         self.label_64 = QLabel(self.circularProgressBarBase)
         self.label_64.setObjectName(u"label_64")
-        self.label_64.setGeometry(QRect(340, 30, 121, 31))
+        self.label_64.setGeometry(QRect(325, 45, 121, 31))
         self.label_64.setStyleSheet(u"font: 10pt \"Segoe UI Symbol\";")
         self.label_64.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
         self.label_9 = QLabel(self.circularProgressBarBase)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setGeometry(QRect(355, 60, 71, 21))
+        self.label_9.setGeometry(QRect(340, 75, 71, 21))
         self.label_9.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
         self.label_65 = QLabel(self.circularProgressBarBase)
         self.label_65.setObjectName(u"label_65")
-        self.label_65.setGeometry(QRect(355, 120, 71, 21))
+        self.label_65.setGeometry(QRect(340, 135, 71, 21))
         self.label_65.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
         self.label_66 = QLabel(self.circularProgressBarBase)
         self.label_66.setObjectName(u"label_66")
-        self.label_66.setGeometry(QRect(355, 180, 71, 21))
+        self.label_66.setGeometry(QRect(340, 195, 71, 21))
         self.label_66.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
+
+        self.frame_59 = QFrame(self.frame_27)
+        self.frame_59.setObjectName(u"frame_59")
+        self.frame_59.setMaximumSize(QSize(16777215, 50))
+        self.frame_59.setFrameShape(QFrame.StyledPanel)
+        self.frame_59.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.frame_59)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.frame_60 = QFrame(self.frame_59)
+        self.frame_60.setObjectName(u"frame_60")
+        self.frame_60.setFrameShape(QFrame.StyledPanel)
+        self.frame_60.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_42 = QVBoxLayout(self.frame_60)
+        self.verticalLayout_42.setSpacing(0)
+        self.verticalLayout_42.setObjectName(u"verticalLayout_42")
+        self.verticalLayout_42.setContentsMargins(0, 0, 0, 0)
+        self.label_12 = QLabel(self.frame_60)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setStyleSheet(u"font: 63 18pt \"Segoe UI Semibold\";")
+
+        self.verticalLayout_42.addWidget(self.label_12)
+
+        self.label_13 = QLabel(self.frame_60)
+        self.label_13.setObjectName(u"label_13")
+
+        self.verticalLayout_42.addWidget(self.label_13)
+
+        self.horizontalLayout_6.addWidget(self.frame_60)
+
+        self.frame_100 = QFrame(self.frame_59)
+        self.frame_100.setObjectName(u"frame_100")
+        self.frame_100.setFrameShape(QFrame.StyledPanel)
+        self.frame_100.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_6.addWidget(self.frame_100)
+
+        self.verticalLayout_28.addWidget(self.frame_59)
 
         self.label_36 = QLabel(self.frame_27)
         self.label_36.setObjectName(u"label_36")
         self.label_36.setAlignment(Qt.AlignCenter)
+        self.label_36.setMaximumSize(16777215, 300)
 
         self.verticalLayout_28.addWidget(self.label_36)
 
@@ -924,10 +972,26 @@ class Ui_tabFrame_pre(QFrame):
 
         self.horizontalLayout_5.addWidget(self.frame_9)
 
+        self.frame_107 = QFrame(self.frame_6)
+        self.frame_107.setObjectName(u"frame_107")
+        self.frame_107.setMaximumSize(QSize(40, 16777215))
+        self.frame_107.setFrameShape(QFrame.StyledPanel)
+        self.frame_107.setFrameShadow(QFrame.Raised)
+
+        self.line_2 = QFrame(self.frame_107)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setGeometry(QRect(15, 20, 3, 385))
+        self.line_2.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.line_2.setFrameShape(QFrame.VLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.horizontalLayout_5.addWidget(self.frame_107)
+
         self.frame_8 = QFrame(self.frame_6)
         self.frame_8.setObjectName(u"frame_8")
         self.frame_8.setFrameShape(QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QFrame.Raised)
+        # self.frame_8.setStyleSheet(u"#frame_8{border-left: 1px solid;}")
         self.verticalLayout_37 = QVBoxLayout(self.frame_8)
         self.verticalLayout_37.setSpacing(0)
         self.verticalLayout_37.setObjectName(u"verticalLayout_37")
@@ -977,6 +1041,7 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_81.setObjectName(u"frame_81")
         self.frame_81.setFrameShape(QFrame.NoFrame)
         self.frame_81.setFrameShadow(QFrame.Raised)
+        # self.frame_81.setStyleSheet(u"QFrame:hover{background-color: rgba(215, 221, 224, 0.5);}")
         self.horizontalLayout_11 = QHBoxLayout(self.frame_81)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
@@ -989,13 +1054,13 @@ class Ui_tabFrame_pre(QFrame):
 
         self.label_101 = QLabel(self.frame_101)
         self.label_101.setObjectName(u"label_101")
-        self.label_101.setGeometry(QRect(8, 7, 221, 50))
+        self.label_101.setGeometry(QRect(3, 32, 221, 50))
         self.label_101.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
         self.label_101.setAlignment(Qt.AlignCenter)
 
         self.circularProgress_tr = QFrame(self.frame_101) #색깔 배경
         self.circularProgress_tr.setObjectName(u"circularProgress_tr")
-        self.circularProgress_tr.setGeometry(QRect(15, 70, 200, 200))
+        self.circularProgress_tr.setGeometry(QRect(10, 95, 200, 200))
         self.circularProgress_tr.setStyleSheet(u"QFrame{\n"
                                                "border-radius: 100px;\n"
                                                "background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:0.749 rgba(255, 0, 127, 0), stop:0.750 rgba(85, 170, 255, 255));\n"
@@ -1004,7 +1069,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_tr.setFrameShadow(QFrame.Raised)
         self.circularBg_tr = QFrame(self.frame_101)  #흰 배경
         self.circularBg_tr.setObjectName(u"circularBg_tr")
-        self.circularBg_tr.setGeometry(QRect(15, 70, 200, 200))
+        self.circularBg_tr.setGeometry(QRect(10, 95, 200, 200))
         self.circularBg_tr.setStyleSheet(u"QFrame{\n"
                                       "	border-radius: 100px;\n"
                                       "	background-color: rgba(255, 90, 0, 0.2);\n"
@@ -1013,7 +1078,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularBg_tr.setFrameShadow(QFrame.Raised)
         self.container_tr = QFrame(self.frame_101) #가운데 글씨 넣는 곳
         self.container_tr.setObjectName(u"container_tr")
-        self.container_tr.setGeometry(QRect(40, 95, 150, 150))
+        self.container_tr.setGeometry(QRect(35, 120, 150, 150))
         self.container_tr.setStyleSheet(u"QFrame{\n"
                                      "	border-radius: 75px;\n"
                                      "	background-color: rgb(255, 255, 255);\n"
@@ -1056,6 +1121,11 @@ class Ui_tabFrame_pre(QFrame):
         self.container_tr.raise_()
         # self.verticalLayout_28_tr.addWidget(self.circularProgressBarBase_tr)
 
+        self.pushButton_19 = QPushButton(self.frame_101)
+        self.pushButton_19.setObjectName(u"pushButton_19")
+        self.pushButton_19.setGeometry(QRect(83, 220, 55, 23))
+        self.pushButton_19.setStyleSheet(tab_btn_style)
+
         self.horizontalLayout_11.addWidget(self.frame_101)
 
         self.frame_102 = QFrame(self.frame_81)
@@ -1065,13 +1135,13 @@ class Ui_tabFrame_pre(QFrame):
 
         self.label_102 = QLabel(self.frame_102)
         self.label_102.setObjectName(u"label_102")
-        self.label_102.setGeometry(QRect(20, 7, 191, 50))
+        self.label_102.setGeometry(QRect(15, 32, 191, 50))
         self.label_102.setStyleSheet(u"font: 63 14pt \"Segoe UI Semibold\";")
         self.label_102.setAlignment(Qt.AlignCenter)
 
         self.circularProgress_gr = QFrame(self.frame_102)  # 색깔 배경
         self.circularProgress_gr.setObjectName(u"circularProgress_gr")
-        self.circularProgress_gr.setGeometry(QRect(15, 70, 200, 200))
+        self.circularProgress_gr.setGeometry(QRect(10, 95, 200, 200))
         self.circularProgress_gr.setStyleSheet(u"QFrame{\n"
                                                "border-radius: 100px;\n"
                                                "background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:0.749 rgba(255, 0, 127, 0), stop:0.750 rgba(85, 170, 255, 255));\n"
@@ -1080,7 +1150,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_gr.setFrameShadow(QFrame.Raised)
         self.circularBg_gr = QFrame(self.frame_102)  # 흰 배경
         self.circularBg_gr.setObjectName(u"circularBg_gr")
-        self.circularBg_gr.setGeometry(QRect(15, 70, 200, 200))
+        self.circularBg_gr.setGeometry(QRect(10, 95, 200, 200))
         self.circularBg_gr.setStyleSheet(u"QFrame{\n"
                                          "	border-radius: 100px;\n"
                                          "	background-color: rgba(255, 90, 0, 0.2);\n"
@@ -1089,7 +1159,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularBg_gr.setFrameShadow(QFrame.Raised)
         self.container_gr = QFrame(self.frame_102)  # 가운데 글씨 넣는 곳
         self.container_gr.setObjectName(u"container_gr")
-        self.container_gr.setGeometry(QRect(40, 95, 150, 150))
+        self.container_gr.setGeometry(QRect(35, 120, 150, 150))
         self.container_gr.setStyleSheet(u"QFrame{\n"
                                         "	border-radius: 75px;\n"
                                         "	background-color: rgb(255, 255, 255);\n"
@@ -1132,6 +1202,11 @@ class Ui_tabFrame_pre(QFrame):
         self.container_gr.raise_()
         # self.verticalLayout_28_tr.addWidget(self.circularProgressBarBase_tr)
 
+        self.pushButton_20 = QPushButton(self.frame_102)
+        self.pushButton_20.setObjectName(u"pushButton_20")
+        self.pushButton_20.setGeometry(QRect(83, 220, 55, 23))
+        self.pushButton_20.setStyleSheet(tab_btn_style)
+
         self.horizontalLayout_11.addWidget(self.frame_102)
 
         self.verticalLayout_37.addWidget(self.frame_81)
@@ -1140,11 +1215,58 @@ class Ui_tabFrame_pre(QFrame):
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
 
+        self.frame_103 = QFrame(self.frame_8)
+        self.frame_103.setObjectName(u"frame_103")
+        self.frame_103.setMaximumSize(QSize(16777215, 50))
+        self.frame_103.setFrameShape(QFrame.StyledPanel)
+        self.frame_103.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_103)
+        self.horizontalLayout_10.setSpacing(0)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.frame_104 = QFrame(self.frame_103)
+        self.frame_104.setObjectName(u"frame_104")
+        self.frame_104.setFrameShape(QFrame.StyledPanel)
+        self.frame_104.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_43 = QVBoxLayout(self.frame_104)
+        self.verticalLayout_43.setSpacing(0)
+        self.verticalLayout_43.setObjectName(u"verticalLayout_43")
+        self.verticalLayout_43.setContentsMargins(0, 0, 0, 0)
+        self.label_14 = QLabel(self.frame_104)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setStyleSheet(u"font: 63 18pt \"Segoe UI Semibold\";")
+
+        self.verticalLayout_43.addWidget(self.label_14)
+
+        self.label_15 = QLabel(self.frame_104)
+        self.label_15.setObjectName(u"label_15")
+
+        self.verticalLayout_43.addWidget(self.label_15)
+
+        self.horizontalLayout_10.addWidget(self.frame_104)
+
+        self.frame_105 = QFrame(self.frame_103)
+        self.frame_105.setObjectName(u"frame_105")
+        self.frame_105.setFrameShape(QFrame.StyledPanel)
+        self.frame_105.setFrameShadow(QFrame.Raised)
+
+        self.line_3 = QFrame(self.frame_105)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setGeometry(QRect(10, 18, 200, 3))
+        self.line_3.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.line_3.setFrameShape(QFrame.VLine)
+        self.line_3.setFrameShadow(QFrame.Sunken)
+
+        self.horizontalLayout_10.addWidget(self.frame_105)
+
+        self.verticalLayout_37.addWidget(self.frame_103)
+
         self.tabWidget_100 = QTabWidget(self.frame_8)
         self.tabWidget_100.setObjectName(u"tabWidget_100")
         sizePolicy.setHeightForWidth(self.tabWidget_100.sizePolicy().hasHeightForWidth())
         self.tabWidget_100.setSizePolicy(sizePolicy)
         self.tabWidget_100.setTabPosition(QTabWidget.North)
+        self.tabWidget_100.setMaximumSize(16777215, 305)
         self.tabWidget_100Page1 = QWidget()
         self.tabWidget_100Page1.setObjectName(u"tabWidget_100Page1")
         self.verticalLayout_38 = QVBoxLayout(self.tabWidget_100Page1)
@@ -1168,54 +1290,52 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
+
         self.label_38 = QLabel(self.frame_30)
         self.label_38.setObjectName(u"label_38")
         self.label_38.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_13.addWidget(self.label_38)
 
-        self.frame_68 = QFrame(self.frame_30)
-        self.frame_68.setObjectName(u"frame_68")
-        sizePolicy3.setHeightForWidth(self.frame_68.sizePolicy().hasHeightForWidth())
-        self.frame_68.setSizePolicy(sizePolicy3)
-        self.frame_68.setStyleSheet(u"")
-        self.frame_68.setFrameShape(QFrame.StyledPanel)
-        self.frame_68.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_43 = QHBoxLayout(self.frame_68)
-        self.horizontalLayout_43.setSpacing(0)
-        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
-        self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
-        self.label_72 = QLabel(self.frame_68)
-        self.label_72.setObjectName(u"label_72")
         sizePolicy4 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.label_72.sizePolicy().hasHeightForWidth())
-        self.label_72.setSizePolicy(sizePolicy4)
+
+        self.frame_68 = QFrame(self.frame_30)
+        self.frame_68.setObjectName(u"frame_68")
+        sizePolicy.setHeightForWidth(self.frame_68.sizePolicy().hasHeightForWidth())
+        self.frame_68.setSizePolicy(sizePolicy)
+        self.frame_68.setMaximumSize(QSize(16777215, 40))
+        self.frame_68.setStyleSheet(u"")
+        self.frame_68.setFrameShape(QFrame.StyledPanel)
+        self.frame_68.setFrameShadow(QFrame.Raised)
+        self.label_72 = QLabel(self.frame_68)
+        self.label_72.setObjectName(u"label_72")
+        self.label_72.setGeometry(QRect(80, 5, 47, 16))
+        sizePolicy5 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.label_72.sizePolicy().hasHeightForWidth())
+        self.label_72.setSizePolicy(sizePolicy5)
         self.label_72.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_43.addWidget(self.label_72)
-
         self.pushButton_5 = QPushButton(self.frame_68)
         self.pushButton_5.setObjectName(u"pushButton_5")
-        sizePolicy4.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        self.pushButton_5.setSizePolicy(sizePolicy4)
+        self.pushButton_5.setGeometry(QRect(130, 10, 64, 16))
+        sizePolicy5.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
+        self.pushButton_5.setSizePolicy(sizePolicy5)
         self.pushButton_5.setIconSize(QSize(16, 16))
         self.pushButton_5.setAutoDefault(False)
         self.pushButton_5.setFlat(False)
+        self.pushButton_5.setStyleSheet(tab_btn_style)
         self.pushButton_5.clicked.connect(lambda: self.open_psd_power())
-
-        self.horizontalLayout_43.addWidget(self.pushButton_5)
-
-        self.verticalLayout_13.addWidget(self.frame_68)
-
-        self.label_70 = QLabel(self.frame_30)
+        self.label_70 = QLabel(self.frame_68)
         self.label_70.setObjectName(u"label_70")
-        sizePolicy3.setHeightForWidth(self.label_70.sizePolicy().hasHeightForWidth())
-        self.label_70.setSizePolicy(sizePolicy3)
+        self.label_70.setGeometry(QRect(10, 20, 100, 12))
+        sizePolicy5.setHeightForWidth(self.label_70.sizePolicy().hasHeightForWidth())
+        self.label_70.setSizePolicy(sizePolicy5)
         self.label_70.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_13.addWidget(self.label_70)
+        self.verticalLayout_13.addWidget(self.frame_68)
 
         self.horizontalLayout_66.addWidget(self.frame_30)
 
@@ -1227,11 +1347,20 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
+
         self.label_39 = QLabel(self.frame_63)
         self.label_39.setObjectName(u"label_39")
         self.label_39.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_14.addWidget(self.label_39)
+
+        self.label_71 = QLabel(self.frame_63)
+        self.label_71.setObjectName(u"label_71")
+        sizePolicy3.setHeightForWidth(self.label_71.sizePolicy().hasHeightForWidth())
+        self.label_71.setSizePolicy(sizePolicy3)
+        self.label_71.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_14.addWidget(self.label_71)
 
         self.frame_69 = QFrame(self.frame_63)
         self.frame_69.setObjectName(u"frame_69")
@@ -1260,14 +1389,6 @@ class Ui_tabFrame_pre(QFrame):
 
         self.verticalLayout_14.addWidget(self.frame_69)
 
-        self.label_71 = QLabel(self.frame_63)
-        self.label_71.setObjectName(u"label_71")
-        sizePolicy3.setHeightForWidth(self.label_71.sizePolicy().hasHeightForWidth())
-        self.label_71.setSizePolicy(sizePolicy3)
-        self.label_71.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_14.addWidget(self.label_71)
-
         self.horizontalLayout_66.addWidget(self.frame_63)
 
         self.verticalLayout_38.addWidget(self.frame_26)
@@ -1279,14 +1400,6 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_39.setSpacing(0)
         self.verticalLayout_39.setObjectName(u"verticalLayout_39")
         self.verticalLayout_39.setContentsMargins(0, 0, 0, 0)
-        self.label_37 = QLabel(self.tab_4)
-        self.label_37.setObjectName(u"label_37")
-        sizePolicy3.setHeightForWidth(self.label_37.sizePolicy().hasHeightForWidth())
-        self.label_37.setSizePolicy(sizePolicy3)
-        self.label_37.setStyleSheet(u"font: 75 16pt \"Arial\";")
-        self.label_37.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_39.addWidget(self.label_37)
 
         self.frame_28 = QFrame(self.tab_4)
         self.frame_28.setObjectName(u"frame_28")
@@ -1405,14 +1518,6 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_40.setSpacing(0)
         self.verticalLayout_40.setObjectName(u"verticalLayout_40")
         self.verticalLayout_40.setContentsMargins(0, 0, 0, 0)
-        self.label_103 = QLabel(self.tab_5)
-        self.label_103.setObjectName(u"label_103")
-        sizePolicy3.setHeightForWidth(self.label_103.sizePolicy().hasHeightForWidth())
-        self.label_103.setSizePolicy(sizePolicy3)
-        self.label_103.setStyleSheet(u"font: 75 16pt \"Arial\";")
-        self.label_103.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_40.addWidget(self.label_103)
 
         self.frame_29 = QFrame(self.tab_5)
         self.frame_29.setObjectName(u"frame_29")
@@ -1535,7 +1640,7 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_61 = QFrame(self.tabFrame_anal)
         self.frame_61.setObjectName(u"frame_61")
         self.frame_61.setMinimumSize(QSize(0, 0))
-        self.frame_61.setMaximumSize(QSize(16777215, 50))
+        self.frame_61.setMaximumSize(QSize(16777215, 20))
         self.frame_61.setFrameShape(QFrame.StyledPanel)
         self.frame_61.setFrameShadow(QFrame.Raised)
 
@@ -1843,6 +1948,7 @@ class Ui_tabFrame_pre(QFrame):
         self.label_68.setText(QCoreApplication.translate("MainWindow", u"", None))
 
         self.label_70.setText(QCoreApplication.translate("MainWindow", u"PSD-sensor", None))
+        self.label_72.setText(QCoreApplication.translate("MainWindow", u"Fp1 - Delta", None))
         self.label_42.setText(QCoreApplication.translate("MainWindow", u"FC-sensor", None))
         self.label_67.setText(QCoreApplication.translate("MainWindow", u"NI-sensor", None))
         self.label_71.setText(QCoreApplication.translate("MainWindow", u"PSD-source", None))
@@ -1869,15 +1975,21 @@ class Ui_tabFrame_pre(QFrame):
         self.tabWidget_100.setTabText(self.tabWidget_100.indexOf(self.tab_5),
                                       QCoreApplication.translate("MainWindow", u"NI", None))
 
-
-        self.label_37.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_103.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Prediction of MDD %", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Mean of 6 Model Probability", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Prediction of Tx Outcome %", None))
         self.label_8.setText(
             QCoreApplication.translate("MainWindow", u"Medication TR index & Brain Stimulation GR index", None))
+
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Predictive Probability by Model", None))
+        self.label_13.setText(
+            QCoreApplication.translate("MainWindow", u"Best model is Source Functional Connectivity", None))
+
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Influential Features", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Sensor & Source Level Feature Indices", None))
+
+        self.pushButton_19.setText(QCoreApplication.translate("MainWindow", u"Detail", None))
+        self.pushButton_20.setText(QCoreApplication.translate("MainWindow", u"Detail", None))
 
         ## ------------------------------ 세번쨰 페이지지
         self.label_78.setText(QCoreApplication.translate("MainWindow", u"", None))

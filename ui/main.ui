@@ -1326,6 +1326,9 @@ QPushButton:hover {
                        <property name="frameShadow">
                         <enum>QFrame::Raised</enum>
                        </property>
+                       <property name="lineWidth">
+                        <number>1</number>
+                       </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_7">
                         <property name="spacing">
                          <number>0</number>
@@ -1546,6 +1549,9 @@ QPushButton:hover {
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_5">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QFrame" name="frame_9">
                           <property name="frameShape">
@@ -1589,7 +1595,7 @@ QPushButton:hover {
                                <number>0</number>
                               </property>
                               <property name="rightMargin">
-                               <number>10</number>
+                               <number>0</number>
                               </property>
                               <property name="bottomMargin">
                                <number>0</number>
@@ -1599,7 +1605,7 @@ QPushButton:hover {
                                 <property name="maximumSize">
                                  <size>
                                   <width>16777215</width>
-                                  <height>70</height>
+                                  <height>50</height>
                                  </size>
                                 </property>
                                 <property name="frameShape">
@@ -1676,6 +1682,22 @@ QPushButton:hover {
                                    <property name="frameShadow">
                                     <enum>QFrame::Raised</enum>
                                    </property>
+                                   <widget class="Line" name="line">
+                                    <property name="geometry">
+                                     <rect>
+                                      <x>30</x>
+                                      <y>20</y>
+                                      <width>118</width>
+                                      <height>3</height>
+                                     </rect>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">background-color: rgb(0, 0, 0);</string>
+                                    </property>
+                                    <property name="orientation">
+                                     <enum>Qt::Horizontal</enum>
+                                    </property>
+                                   </widget>
                                   </widget>
                                  </item>
                                 </layout>
@@ -1797,11 +1819,98 @@ QPushButton:hover {
                                </widget>
                               </item>
                               <item>
+                               <widget class="QFrame" name="frame_59">
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>50</height>
+                                 </size>
+                                </property>
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
+                                </property>
+                                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QFrame" name="frame_60">
+                                   <property name="frameShape">
+                                    <enum>QFrame::StyledPanel</enum>
+                                   </property>
+                                   <property name="frameShadow">
+                                    <enum>QFrame::Raised</enum>
+                                   </property>
+                                   <layout class="QVBoxLayout" name="verticalLayout_42">
+                                    <property name="spacing">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_12">
+                                      <property name="styleSheet">
+                                       <string notr="true">font: 63 18pt &quot;Segoe UI Semibold&quot;;</string>
+                                      </property>
+                                      <property name="text">
+                                       <string>Predictive Probability by Model</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_13">
+                                      <property name="text">
+                                       <string>Best model is Source Functional Connectivity</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QFrame" name="frame_100">
+                                   <property name="frameShape">
+                                    <enum>QFrame::StyledPanel</enum>
+                                   </property>
+                                   <property name="frameShadow">
+                                    <enum>QFrame::Raised</enum>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                              <item>
                                <widget class="QLabel" name="label_36">
                                 <property name="maximumSize">
                                  <size>
                                   <width>360</width>
-                                  <height>16777215</height>
+                                  <height>230</height>
                                  </size>
                                 </property>
                                 <property name="text">
@@ -1810,12 +1919,47 @@ QPushButton:hover {
                                 <property name="alignment">
                                  <set>Qt::AlignCenter</set>
                                 </property>
+                                <property name="margin">
+                                 <number>0</number>
+                                </property>
                                </widget>
                               </item>
                              </layout>
                             </widget>
                            </item>
                           </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QFrame" name="frame_107">
+                          <property name="maximumSize">
+                           <size>
+                            <width>40</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <widget class="Line" name="line_2">
+                           <property name="geometry">
+                            <rect>
+                             <x>20</x>
+                             <y>130</y>
+                             <width>3</width>
+                             <height>61</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(0, 0, 0);</string>
+                           </property>
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                          </widget>
                          </widget>
                         </item>
                         <item>
@@ -1980,6 +2124,25 @@ QPushButton:hover {
                                   <set>Qt::AlignCenter</set>
                                  </property>
                                 </widget>
+                                <widget class="QPushButton" name="pushButton_19">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>120</x>
+                                   <y>220</y>
+                                   <width>75</width>
+                                   <height>23</height>
+                                  </rect>
+                                 </property>
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="text">
+                                  <string>PushButton</string>
+                                 </property>
+                                </widget>
                                </widget>
                               </item>
                               <item>
@@ -2009,6 +2172,122 @@ QPushButton:hover {
                                   <set>Qt::AlignCenter</set>
                                  </property>
                                 </widget>
+                                <widget class="QPushButton" name="pushButton_20">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>130</x>
+                                   <y>220</y>
+                                   <width>75</width>
+                                   <height>23</height>
+                                  </rect>
+                                 </property>
+                                 <property name="text">
+                                  <string>PushButton</string>
+                                 </property>
+                                </widget>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_103">
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>50</height>
+                              </size>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_10">
+                              <property name="spacing">
+                               <number>0</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <item>
+                               <widget class="QFrame" name="frame_104">
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
+                                </property>
+                                <layout class="QVBoxLayout" name="verticalLayout_43">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QLabel" name="label_14">
+                                   <property name="styleSheet">
+                                    <string notr="true">font: 63 18pt &quot;Segoe UI Semibold&quot;;</string>
+                                   </property>
+                                   <property name="text">
+                                    <string>Prediction of MDD %</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_15">
+                                   <property name="text">
+                                    <string>Mean of 6 Model Probability</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QFrame" name="frame_105">
+                                <property name="frameShape">
+                                 <enum>QFrame::StyledPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                 <enum>QFrame::Raised</enum>
+                                </property>
+                                <widget class="Line" name="line_3">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>30</x>
+                                   <y>20</y>
+                                   <width>118</width>
+                                   <height>3</height>
+                                  </rect>
+                                 </property>
+                                 <property name="styleSheet">
+                                  <string notr="true">background-color: rgb(0, 0, 0);</string>
+                                 </property>
+                                 <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                                 </property>
+                                </widget>
                                </widget>
                               </item>
                              </layout>
@@ -2021,6 +2300,12 @@ QPushButton:hover {
                                <horstretch>0</horstretch>
                                <verstretch>0</verstretch>
                               </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>230</height>
+                              </size>
                              </property>
                              <property name="tabPosition">
                               <enum>QTabWidget::North</enum>
@@ -2109,10 +2394,16 @@ QPushButton:hover {
                                      <item>
                                       <widget class="QFrame" name="frame_68">
                                        <property name="sizePolicy">
-                                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                          <horstretch>0</horstretch>
                                          <verstretch>0</verstretch>
                                         </sizepolicy>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>16777215</width>
+                                         <height>40</height>
+                                        </size>
                                        </property>
                                        <property name="styleSheet">
                                         <string notr="true"/>
@@ -2123,83 +2414,84 @@ QPushButton:hover {
                                        <property name="frameShadow">
                                         <enum>QFrame::Raised</enum>
                                        </property>
-                                       <layout class="QHBoxLayout" name="horizontalLayout_43">
-                                        <property name="spacing">
-                                         <number>0</number>
+                                       <widget class="QLabel" name="label_72">
+                                        <property name="geometry">
+                                         <rect>
+                                          <x>80</x>
+                                          <y>0</y>
+                                          <width>47</width>
+                                          <height>16</height>
+                                         </rect>
                                         </property>
-                                        <property name="leftMargin">
-                                         <number>0</number>
+                                        <property name="sizePolicy">
+                                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                          <horstretch>0</horstretch>
+                                          <verstretch>0</verstretch>
+                                         </sizepolicy>
                                         </property>
-                                        <property name="topMargin">
-                                         <number>0</number>
+                                        <property name="text">
+                                         <string>textlabel</string>
                                         </property>
-                                        <property name="rightMargin">
-                                         <number>0</number>
+                                        <property name="alignment">
+                                         <set>Qt::AlignCenter</set>
                                         </property>
-                                        <property name="bottomMargin">
-                                         <number>0</number>
+                                       </widget>
+                                       <widget class="QPushButton" name="pushButton_5">
+                                        <property name="geometry">
+                                         <rect>
+                                          <x>130</x>
+                                          <y>10</y>
+                                          <width>64</width>
+                                          <height>16</height>
+                                         </rect>
                                         </property>
-                                        <item>
-                                         <widget class="QLabel" name="label_72">
-                                          <property name="sizePolicy">
-                                           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                                            <horstretch>0</horstretch>
-                                            <verstretch>0</verstretch>
-                                           </sizepolicy>
-                                          </property>
-                                          <property name="text">
-                                           <string>textlabel</string>
-                                          </property>
-                                          <property name="alignment">
-                                           <set>Qt::AlignCenter</set>
-                                          </property>
-                                         </widget>
-                                        </item>
-                                        <item>
-                                         <widget class="QPushButton" name="pushButton_5">
-                                          <property name="sizePolicy">
-                                           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                                            <horstretch>0</horstretch>
-                                            <verstretch>0</verstretch>
-                                           </sizepolicy>
-                                          </property>
-                                          <property name="text">
-                                           <string>PushButton</string>
-                                          </property>
-                                          <property name="iconSize">
-                                           <size>
-                                            <width>16</width>
-                                            <height>16</height>
-                                           </size>
-                                          </property>
-                                          <property name="autoDefault">
-                                           <bool>false</bool>
-                                          </property>
-                                          <property name="default">
-                                           <bool>false</bool>
-                                          </property>
-                                          <property name="flat">
-                                           <bool>false</bool>
-                                          </property>
-                                         </widget>
-                                        </item>
-                                       </layout>
-                                      </widget>
-                                     </item>
-                                     <item>
-                                      <widget class="QLabel" name="label_70">
-                                       <property name="sizePolicy">
-                                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                                         <horstretch>0</horstretch>
-                                         <verstretch>0</verstretch>
-                                        </sizepolicy>
-                                       </property>
-                                       <property name="text">
-                                        <string>TextLabel</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignCenter</set>
-                                       </property>
+                                        <property name="sizePolicy">
+                                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                          <horstretch>0</horstretch>
+                                          <verstretch>0</verstretch>
+                                         </sizepolicy>
+                                        </property>
+                                        <property name="text">
+                                         <string>PushButton</string>
+                                        </property>
+                                        <property name="iconSize">
+                                         <size>
+                                          <width>16</width>
+                                          <height>16</height>
+                                         </size>
+                                        </property>
+                                        <property name="autoDefault">
+                                         <bool>false</bool>
+                                        </property>
+                                        <property name="default">
+                                         <bool>false</bool>
+                                        </property>
+                                        <property name="flat">
+                                         <bool>false</bool>
+                                        </property>
+                                       </widget>
+                                       <widget class="QLabel" name="label_70">
+                                        <property name="geometry">
+                                         <rect>
+                                          <x>10</x>
+                                          <y>20</y>
+                                          <width>100</width>
+                                          <height>12</height>
+                                         </rect>
+                                        </property>
+                                        <property name="sizePolicy">
+                                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                          <horstretch>0</horstretch>
+                                          <verstretch>0</verstretch>
+                                         </sizepolicy>
+                                        </property>
+                                        <property name="text">
+                                         <string>TextLabel</string>
+                                        </property>
+                                        <property name="alignment">
+                                         <set>Qt::AlignCenter</set>
+                                        </property>
+                                       </widget>
                                       </widget>
                                      </item>
                                     </layout>
@@ -2231,6 +2523,22 @@ QPushButton:hover {
                                      </property>
                                      <item>
                                       <widget class="QLabel" name="label_39">
+                                       <property name="text">
+                                        <string>TextLabel</string>
+                                       </property>
+                                       <property name="alignment">
+                                        <set>Qt::AlignCenter</set>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item>
+                                      <widget class="QLabel" name="label_71">
+                                       <property name="sizePolicy">
+                                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                         <horstretch>0</horstretch>
+                                         <verstretch>0</verstretch>
+                                        </sizepolicy>
+                                       </property>
                                        <property name="text">
                                         <string>TextLabel</string>
                                        </property>
@@ -2296,22 +2604,6 @@ QPushButton:hover {
                                          </widget>
                                         </item>
                                        </layout>
-                                      </widget>
-                                     </item>
-                                     <item>
-                                      <widget class="QLabel" name="label_71">
-                                       <property name="sizePolicy">
-                                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                                         <horstretch>0</horstretch>
-                                         <verstretch>0</verstretch>
-                                        </sizepolicy>
-                                       </property>
-                                       <property name="text">
-                                        <string>TextLabel</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignCenter</set>
-                                       </property>
                                       </widget>
                                      </item>
                                     </layout>
@@ -2634,25 +2926,6 @@ QPushButton:hover {
                                <property name="bottomMargin">
                                 <number>0</number>
                                </property>
-                               <item>
-                                <widget class="QLabel" name="label_103">
-                                 <property name="sizePolicy">
-                                  <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                                   <horstretch>0</horstretch>
-                                   <verstretch>0</verstretch>
-                                  </sizepolicy>
-                                 </property>
-                                 <property name="styleSheet">
-                                  <string notr="true">font: 75 16pt &quot;Arial&quot;;</string>
-                                 </property>
-                                 <property name="text">
-                                  <string>TextLabel</string>
-                                 </property>
-                                 <property name="alignment">
-                                  <set>Qt::AlignCenter</set>
-                                 </property>
-                                </widget>
-                               </item>
                                <item>
                                 <widget class="QFrame" name="frame_29">
                                  <property name="frameShape">
