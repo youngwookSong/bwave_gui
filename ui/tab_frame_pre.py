@@ -10,6 +10,8 @@ from PySide6.QtWidgets import *
 import personal_data.resources as personal_res
 from dialog.psdPowerHz import Ui_Dialog_power
 from dialog.source_plot import Ui_Dialog_source
+from dialog.trDetail import Ui_Dialog_trDetail
+
 from style import *
 from personal_data.resources import *
 from model_Test.directory import ROOT_DIR_con
@@ -1125,6 +1127,7 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_19.setObjectName(u"pushButton_19")
         self.pushButton_19.setGeometry(QRect(83, 220, 55, 23))
         self.pushButton_19.setStyleSheet(tab_btn_style)
+        self.pushButton_19.clicked.connect(lambda: self.open_tr_detail())
 
         self.horizontalLayout_11.addWidget(self.frame_101)
 
@@ -1311,16 +1314,16 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_68.setFrameShadow(QFrame.Raised)
         self.label_72 = QLabel(self.frame_68)
         self.label_72.setObjectName(u"label_72")
-        self.label_72.setGeometry(QRect(80, 5, 47, 16))
+        self.label_72.setGeometry(QRect(0, 0, 100, 16))
         sizePolicy5 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         sizePolicy5.setHorizontalStretch(0)
         sizePolicy5.setVerticalStretch(0)
         sizePolicy5.setHeightForWidth(self.label_72.sizePolicy().hasHeightForWidth())
         self.label_72.setSizePolicy(sizePolicy5)
-        self.label_72.setAlignment(Qt.AlignCenter)
+        self.label_72.setAlignment(Qt.AlignRight)
         self.pushButton_5 = QPushButton(self.frame_68)
         self.pushButton_5.setObjectName(u"pushButton_5")
-        self.pushButton_5.setGeometry(QRect(130, 10, 64, 16))
+        self.pushButton_5.setGeometry(QRect(120, 8, 64, 20))
         sizePolicy5.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
         self.pushButton_5.setSizePolicy(sizePolicy5)
         self.pushButton_5.setIconSize(QSize(16, 16))
@@ -1330,10 +1333,10 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_5.clicked.connect(lambda: self.open_psd_power())
         self.label_70 = QLabel(self.frame_68)
         self.label_70.setObjectName(u"label_70")
-        self.label_70.setGeometry(QRect(10, 20, 100, 12))
+        self.label_70.setGeometry(QRect(0, 15, 100, 16))
         sizePolicy5.setHeightForWidth(self.label_70.sizePolicy().hasHeightForWidth())
         self.label_70.setSizePolicy(sizePolicy5)
-        self.label_70.setAlignment(Qt.AlignCenter)
+        self.label_70.setAlignment(Qt.AlignRight)
 
         self.verticalLayout_13.addWidget(self.frame_68)
 
@@ -1366,26 +1369,31 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_69.setObjectName(u"frame_69")
         sizePolicy3.setHeightForWidth(self.frame_69.sizePolicy().hasHeightForWidth())
         self.frame_69.setSizePolicy(sizePolicy3)
+        self.frame_69.setMaximumSize(QSize(16777215, 40))
         self.frame_69.setFrameShape(QFrame.StyledPanel)
         self.frame_69.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_44 = QHBoxLayout(self.frame_69)
-        self.horizontalLayout_44.setSpacing(0)
-        self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
-        self.horizontalLayout_44.setContentsMargins(0, 0, 0, 0)
         self.label_73 = QLabel(self.frame_69)
         self.label_73.setObjectName(u"label_73")
-        sizePolicy4.setHeightForWidth(self.label_73.sizePolicy().hasHeightForWidth())
-        self.label_73.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_44.addWidget(self.label_73)
-
+        self.label_73.setGeometry(QRect(0, 0, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_73.sizePolicy().hasHeightForWidth())
+        self.label_73.setSizePolicy(sizePolicy5)
+        self.label_73.setAlignment(Qt.AlignRight)
         self.pushButton_6 = QPushButton(self.frame_69)
         self.pushButton_6.setObjectName(u"pushButton_6")
-        sizePolicy4.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
-        self.pushButton_6.setSizePolicy(sizePolicy4)
+        self.pushButton_6.setGeometry(QRect(120, 8, 64, 20))
+        sizePolicy5.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
+        self.pushButton_6.setSizePolicy(sizePolicy5)
+        self.pushButton_6.setIconSize(QSize(16, 16))
+        self.pushButton_6.setAutoDefault(False)
+        self.pushButton_6.setFlat(False)
+        self.pushButton_6.setStyleSheet(tab_btn_style)
         self.pushButton_6.clicked.connect(lambda: self.open_source_plot())
-
-        self.horizontalLayout_44.addWidget(self.pushButton_6)
+        self.label_71 = QLabel(self.frame_69)
+        self.label_71.setObjectName(u"label_71")
+        self.label_71.setGeometry(QRect(0, 15, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_71.sizePolicy().hasHeightForWidth())
+        self.label_71.setSizePolicy(sizePolicy5)
+        self.label_71.setAlignment(Qt.AlignRight)
 
         self.verticalLayout_14.addWidget(self.frame_69)
 
@@ -1427,35 +1435,33 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_70.setObjectName(u"frame_70")
         sizePolicy3.setHeightForWidth(self.frame_70.sizePolicy().hasHeightForWidth())
         self.frame_70.setSizePolicy(sizePolicy3)
+        self.frame_70.setMaximumSize(QSize(16777215, 40))
         self.frame_70.setFrameShape(QFrame.StyledPanel)
         self.frame_70.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_45 = QHBoxLayout(self.frame_70)
-        self.horizontalLayout_45.setSpacing(0)
-        self.horizontalLayout_45.setObjectName(u"horizontalLayout_45")
-        self.horizontalLayout_45.setContentsMargins(0, 0, 0, 0)
         self.label_74 = QLabel(self.frame_70)
         self.label_74.setObjectName(u"label_74")
-        sizePolicy4.setHeightForWidth(self.label_74.sizePolicy().hasHeightForWidth())
-        self.label_74.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_45.addWidget(self.label_74)
-
+        self.label_74.setGeometry(QRect(0, 0, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_74.sizePolicy().hasHeightForWidth())
+        self.label_74.setSizePolicy(sizePolicy5)
+        self.label_74.setAlignment(Qt.AlignRight)
         self.pushButton_7 = QPushButton(self.frame_70)
         self.pushButton_7.setObjectName(u"pushButton_7")
-        sizePolicy4.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
-        self.pushButton_7.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_45.addWidget(self.pushButton_7)
+        self.pushButton_7.setGeometry(QRect(120, 8, 64, 20))
+        sizePolicy5.setHeightForWidth(self.pushButton_7.sizePolicy().hasHeightForWidth())
+        self.pushButton_7.setSizePolicy(sizePolicy5)
+        self.pushButton_7.setIconSize(QSize(16, 16))
+        self.pushButton_7.setAutoDefault(False)
+        self.pushButton_7.setFlat(False)
+        self.pushButton_7.setStyleSheet(tab_btn_style)
+        self.pushButton_7.clicked.connect(lambda: self.open_psd_power())
+        self.label_42 = QLabel(self.frame_70)
+        self.label_42.setObjectName(u"label_42")
+        self.label_42.setGeometry(QRect(0, 15, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_42.sizePolicy().hasHeightForWidth())
+        self.label_42.setSizePolicy(sizePolicy5)
+        self.label_42.setAlignment(Qt.AlignRight)
 
         self.verticalLayout_15.addWidget(self.frame_70)
-
-        self.label_42 = QLabel(self.frame_64)
-        self.label_42.setObjectName(u"label_42")
-        sizePolicy3.setHeightForWidth(self.label_42.sizePolicy().hasHeightForWidth())
-        self.label_42.setSizePolicy(sizePolicy3)
-        self.label_42.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_15.addWidget(self.label_42)
 
         self.horizontalLayout_34.addWidget(self.frame_64)
 
@@ -1477,35 +1483,33 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_71.setObjectName(u"frame_71")
         sizePolicy3.setHeightForWidth(self.frame_71.sizePolicy().hasHeightForWidth())
         self.frame_71.setSizePolicy(sizePolicy3)
+        self.frame_71.setMaximumSize(QSize(16777215, 40))
         self.frame_71.setFrameShape(QFrame.StyledPanel)
         self.frame_71.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_46 = QHBoxLayout(self.frame_71)
-        self.horizontalLayout_46.setSpacing(0)
-        self.horizontalLayout_46.setObjectName(u"horizontalLayout_46")
-        self.horizontalLayout_46.setContentsMargins(0, 0, 0, 0)
         self.label_75 = QLabel(self.frame_71)
         self.label_75.setObjectName(u"label_75")
-        sizePolicy4.setHeightForWidth(self.label_75.sizePolicy().hasHeightForWidth())
-        self.label_75.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_46.addWidget(self.label_75)
-
+        self.label_75.setGeometry(QRect(0, 0, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_75.sizePolicy().hasHeightForWidth())
+        self.label_75.setSizePolicy(sizePolicy5)
+        self.label_75.setAlignment(Qt.AlignRight)
         self.pushButton_8 = QPushButton(self.frame_71)
         self.pushButton_8.setObjectName(u"pushButton_8")
-        sizePolicy4.setHeightForWidth(self.pushButton_8.sizePolicy().hasHeightForWidth())
-        self.pushButton_8.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_46.addWidget(self.pushButton_8)
+        self.pushButton_8.setGeometry(QRect(120, 8, 64, 20))
+        sizePolicy5.setHeightForWidth(self.pushButton_8.sizePolicy().hasHeightForWidth())
+        self.pushButton_8.setSizePolicy(sizePolicy5)
+        self.pushButton_8.setIconSize(QSize(16, 16))
+        self.pushButton_8.setAutoDefault(False)
+        self.pushButton_8.setFlat(False)
+        self.pushButton_8.setStyleSheet(tab_btn_style)
+        self.pushButton_8.clicked.connect(lambda: self.open_source_plot())
+        self.label_44 = QLabel(self.frame_71)
+        self.label_44.setObjectName(u"label_44")
+        self.label_44.setGeometry(QRect(0, 15, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_44.sizePolicy().hasHeightForWidth())
+        self.label_44.setSizePolicy(sizePolicy5)
+        self.label_44.setAlignment(Qt.AlignRight)
 
         self.verticalLayout_16.addWidget(self.frame_71)
-
-        self.label_44 = QLabel(self.frame_65)
-        self.label_44.setObjectName(u"label_44")
-        sizePolicy3.setHeightForWidth(self.label_44.sizePolicy().hasHeightForWidth())
-        self.label_44.setSizePolicy(sizePolicy3)
-        self.label_44.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_16.addWidget(self.label_44)
 
         self.horizontalLayout_34.addWidget(self.frame_65)
 
@@ -1545,35 +1549,33 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_72.setObjectName(u"frame_72")
         sizePolicy3.setHeightForWidth(self.frame_72.sizePolicy().hasHeightForWidth())
         self.frame_72.setSizePolicy(sizePolicy3)
+        self.frame_72.setMaximumSize(QSize(16777215, 40))
         self.frame_72.setFrameShape(QFrame.StyledPanel)
         self.frame_72.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_47 = QHBoxLayout(self.frame_72)
-        self.horizontalLayout_47.setSpacing(0)
-        self.horizontalLayout_47.setObjectName(u"horizontalLayout_47")
-        self.horizontalLayout_47.setContentsMargins(0, 0, 0, 0)
         self.label_76 = QLabel(self.frame_72)
         self.label_76.setObjectName(u"label_76")
-        sizePolicy4.setHeightForWidth(self.label_76.sizePolicy().hasHeightForWidth())
-        self.label_76.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_47.addWidget(self.label_76)
-
+        self.label_76.setGeometry(QRect(0, 0, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_76.sizePolicy().hasHeightForWidth())
+        self.label_76.setSizePolicy(sizePolicy5)
+        self.label_76.setAlignment(Qt.AlignRight)
         self.pushButton_9 = QPushButton(self.frame_72)
         self.pushButton_9.setObjectName(u"pushButton_9")
-        sizePolicy4.setHeightForWidth(self.pushButton_9.sizePolicy().hasHeightForWidth())
-        self.pushButton_9.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_47.addWidget(self.pushButton_9)
+        self.pushButton_9.setGeometry(QRect(120, 8, 64, 20))
+        sizePolicy5.setHeightForWidth(self.pushButton_9.sizePolicy().hasHeightForWidth())
+        self.pushButton_9.setSizePolicy(sizePolicy5)
+        self.pushButton_9.setIconSize(QSize(16, 16))
+        self.pushButton_9.setAutoDefault(False)
+        self.pushButton_9.setFlat(False)
+        self.pushButton_9.setStyleSheet(tab_btn_style)
+        self.pushButton_9.clicked.connect(lambda: self.open_psd_power())
+        self.label_67 = QLabel(self.frame_72)
+        self.label_67.setObjectName(u"label_67")
+        self.label_67.setGeometry(QRect(0, 15, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_67.sizePolicy().hasHeightForWidth())
+        self.label_67.setSizePolicy(sizePolicy5)
+        self.label_67.setAlignment(Qt.AlignRight)
 
         self.verticalLayout_18.addWidget(self.frame_72)
-
-        self.label_67 = QLabel(self.frame_66)
-        self.label_67.setObjectName(u"label_67")
-        sizePolicy3.setHeightForWidth(self.label_67.sizePolicy().hasHeightForWidth())
-        self.label_67.setSizePolicy(sizePolicy3)
-        self.label_67.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_18.addWidget(self.label_67)
 
         self.horizontalLayout_65.addWidget(self.frame_66)
 
@@ -1595,35 +1597,33 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_73.setObjectName(u"frame_73")
         sizePolicy3.setHeightForWidth(self.frame_73.sizePolicy().hasHeightForWidth())
         self.frame_73.setSizePolicy(sizePolicy3)
+        self.frame_73.setMaximumSize(QSize(16777215, 40))
         self.frame_73.setFrameShape(QFrame.StyledPanel)
         self.frame_73.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_48 = QHBoxLayout(self.frame_73)
-        self.horizontalLayout_48.setSpacing(0)
-        self.horizontalLayout_48.setObjectName(u"horizontalLayout_48")
-        self.horizontalLayout_48.setContentsMargins(0, 0, 0, 0)
         self.label_77 = QLabel(self.frame_73)
         self.label_77.setObjectName(u"label_77")
-        sizePolicy4.setHeightForWidth(self.label_77.sizePolicy().hasHeightForWidth())
-        self.label_77.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_48.addWidget(self.label_77)
-
+        self.label_77.setGeometry(QRect(0, 0, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_77.sizePolicy().hasHeightForWidth())
+        self.label_77.setSizePolicy(sizePolicy5)
+        self.label_77.setAlignment(Qt.AlignRight)
         self.pushButton_10 = QPushButton(self.frame_73)
         self.pushButton_10.setObjectName(u"pushButton_10")
-        sizePolicy4.setHeightForWidth(self.pushButton_10.sizePolicy().hasHeightForWidth())
-        self.pushButton_10.setSizePolicy(sizePolicy4)
-
-        self.horizontalLayout_48.addWidget(self.pushButton_10)
+        self.pushButton_10.setGeometry(QRect(120, 8, 64, 20))
+        sizePolicy5.setHeightForWidth(self.pushButton_10.sizePolicy().hasHeightForWidth())
+        self.pushButton_10.setSizePolicy(sizePolicy5)
+        self.pushButton_10.setIconSize(QSize(16, 16))
+        self.pushButton_10.setAutoDefault(False)
+        self.pushButton_10.setFlat(False)
+        self.pushButton_10.setStyleSheet(tab_btn_style)
+        self.pushButton_10.clicked.connect(lambda: self.open_source_plot())
+        self.label_69 = QLabel(self.frame_73)
+        self.label_69.setObjectName(u"label_69")
+        self.label_69.setGeometry(QRect(0, 15, 100, 16))
+        sizePolicy5.setHeightForWidth(self.label_69.sizePolicy().hasHeightForWidth())
+        self.label_69.setSizePolicy(sizePolicy5)
+        self.label_69.setAlignment(Qt.AlignRight)
 
         self.verticalLayout_20.addWidget(self.frame_73)
-
-        self.label_69 = QLabel(self.frame_67)
-        self.label_69.setObjectName(u"label_69")
-        sizePolicy3.setHeightForWidth(self.label_69.sizePolicy().hasHeightForWidth())
-        self.label_69.setSizePolicy(sizePolicy3)
-        self.label_69.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_20.addWidget(self.label_69)
 
         self.horizontalLayout_65.addWidget(self.frame_67)
 
@@ -1962,7 +1962,6 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_9.setText(QCoreApplication.translate("MainWindow", u"see more", None))
         self.pushButton_10.setText(QCoreApplication.translate("MainWindow", u"see more", None))
 
-        self.label_72.setText(QCoreApplication.translate("MainWindow", u"         ", None))
         self.label_73.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_75.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
@@ -1998,6 +1997,10 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"back", None))
 
     # retranslateUi
+    def open_tr_detail(self):
+        self._tr_detail_dialog = Ui_Dialog_trDetail()
+        self._tr_detail_dialog.setWindowTitle("TR Detail")
+        self._tr_detail_dialog.show()
 
     def open_psd_power(self):
         self._psd_dialog = Ui_Dialog_power(self.name, self.num)
