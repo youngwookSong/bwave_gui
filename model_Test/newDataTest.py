@@ -412,6 +412,9 @@ class model_test:
             data['y_pred_proba_hc'] = self.y_pred_proba_hc
             data['best_model'] = self.best_model
             data['tr_proba'] = self.tr_proba
+            data['psd_sensor'] = clf_psd.predict_proba(result_psd)[0][1]
+            data['fc_sensor'] = clf_fc.predict_proba(result_fc)[0][1]
+            data['ni_sensor'] = clf_ni.predict_proba(result_ni)[0][1]
 
         with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file: #쓰기
             json.dump(data, make_file, ensure_ascii=False, indent='\t')

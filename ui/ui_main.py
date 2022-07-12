@@ -641,7 +641,7 @@ class Ui_MainWindow(object):
         self.tabWidget.tabCloseRequested.connect(self.close_current_tab)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.tabWidget.addTab(self.tab, "")
+        # self.tabWidget.addTab(self.tab, "") # -------------------------------------------1번 탭 생성
 
         self.verticalLayout_7.addWidget(self.tabWidget)
 

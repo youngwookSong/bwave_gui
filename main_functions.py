@@ -340,7 +340,9 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                                          info_json_path['birth'], info_json_path['num'], info_json_path['date'],
                                          info_json_path['sex'], info_json_path['y_pred'],
                                          info_json_path['y_pred_proba_mdd'], info_json_path['y_pred_proba_hc'],
-                                         info_json_path['best_model'], info_json_path['tr_proba'], 75.32)
+                                         info_json_path['best_model'], info_json_path['tr_proba'],
+                                         info_json_path['psd_sensor'], info_json_path['fc_sensor'],
+                                         info_json_path['ni_sensor'])
 
             # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
@@ -419,7 +421,9 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
 
             self._tabFrame = Ui_tabFrame_pre(current_tab, file, name, birth, num, date, sex, info_json_path['y_pred'],
                                              info_json_path['y_pred_proba_mdd'], info_json_path['y_pred_proba_hc'],
-                                             info_json_path['best_model'], info_json_path['tr_proba'], 75.32)
+                                             info_json_path['best_model'], info_json_path['tr_proba'],
+                                             info_json_path['psd_sensor'], info_json_path['fc_sensor'],
+                                             info_json_path['ni_sensor'])
             # self.ui.tabWidget.setCurrentWidget(self._tabFrame)
             # self.ui.tableWidget.setCurrentIndex(cur_idx+1)
 
@@ -445,8 +449,7 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
         if result == QMessageBox.Ok:
             self._tabFrame.tab_pages.setCurrentWidget(self._tabFrame.tabFrame_anal)
 
-            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba_mdd, self._tabFrame.tr,
-                                         self._tabFrame.gr)
+            self.pf = progress_functions(self._tabFrame, self._tabFrame.y_pred_proba_mdd, self._tabFrame.tr)
 
             # self._tabFrame.circularProgress.setStyleSheet(progress_functions.newStylesheet)
 
