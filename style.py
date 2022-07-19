@@ -109,3 +109,17 @@ main_btn_style = (u"QPushButton{\n"
         "}"
 )
 
+progress_circle_style_base = """
+                    QFrame{
+                        border-radius: 60px;
+                        background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(255, 90, 0, 1));
+                    }
+                    """
+
+progress_circle_style_maxProba = """
+                    QFrame{
+                        border-radius: 60px;
+                        background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(15, 130, 255, 0.8));
+                    }
+                    """
+

@@ -89,7 +89,7 @@ class model_test:
             band_psd = np.hstack((band_psd, bn[i]))
 
         if power == "rel":
-            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_rel_PSD_band_335.csv"))
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_psd_338.csv"))
 
             zscore_psd = np.zeros(133)
             for i in range(len(band_psd)):
@@ -97,13 +97,14 @@ class model_test:
             zscore_psd = np.split(zscore_psd, 7)
 
             for i in range(len(zscore_psd)): # zscore_psd = (7*19) 19개 채널을 plot_topomap에 넣어서 topomap 그림
-                fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False, contours=0)
+                fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False,
+                                              contours=4, sensors=True, onselect=True, names=ch_names)
                 # plt.show()
                 fig.figure.savefig("{}/relative_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
 
         if power == "abs":
-            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_band_335.csv"))
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database1/HC_reg_abs_PSD_band_335.csv"))
 
             zscore_psd = np.zeros(133)
             for i in range(len(band_psd)):
@@ -112,7 +113,7 @@ class model_test:
 
             for i in range(len(zscore_psd)):
                 fig, _ = mne.viz.plot_topomap(zscore_psd[i], pos=temp_info, vmin=-3, vmax=3, cmap='rainbow', show=False,
-                                              contours=0)
+                                              contours=4, sensors=True, onselect=True, names=ch_names)
                 # plt.show()
                 fig.figure.savefig("{}/absolute_{}.png".format(self.dir, bands[i]), bbox_inches='tight', pad_inches=0.4)
                 plt.close()
@@ -156,7 +157,7 @@ class model_test:
             print('Error: Creating directory. ' + self.fre_dir)
 
         if power == "rel":
-            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_rel_PSD_Hz_335.csv"))
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database1/HC_reg_rel_PSD_Hz_335.csv"))
 
             zscore_psd_hz = np.zeros(len(hc.columns))
             for i in range(len(psd_hz)):
@@ -171,7 +172,7 @@ class model_test:
                 plt.close()
 
         if power == "abs":
-            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_abs_PSD_Hz_335.csv"))
+            hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database1/HC_reg_abs_PSD_Hz_335.csv"))
 
             zscore_psd_hz = np.zeros(len(hc.columns))
             for i in range(len(psd_hz)):
@@ -187,6 +188,20 @@ class model_test:
 
         self.psd_fre_make_png(power)
 
+    def fc_plot(self, fc):
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_plv_338.csv"))
+
+        zscore_plv = np.zeros(len(fc))
+        for i in range(len(zscore_plv)):
+            zscore_plv[i] = (fc[i] - hc.values[0][i]) / hc.values[1][i]
+
+        for i in range(7):
+            vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=i, n_lines=5)
+            vis_bwave.mean_plot()
+            vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff',
+                                         bbox_inches='tight', pad_inches=0)
+            plt.close()
+
     def ni_plot(self, ni):
 
         temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
@@ -201,7 +216,7 @@ class model_test:
             temp = np.array(np.split(nodal_band[i], 2)[1])
             clustering = np.hstack((clustering, temp)) if clustering.size else temp
 
-        csv_dir = os.path.join(ROOT_DIR, "data/HC_reg_plv_ni_clustering_335.csv")
+        csv_dir = os.path.join(ROOT_DIR, "data/st_database1/HC_reg_plv_ni_clustering_335.csv")
         hc_clustering = pd.read_csv(csv_dir)
 
         zscore_clustering = np.zeros(len(hc_clustering.columns))
@@ -299,6 +314,107 @@ class model_test:
         print(all_score)
         self.tr_proba = str(round(all_score.count(1)/len(all_score) * 100, 2))
 
+    def main_detail(self, result, name):
+        band = ['delta', 'theta', 'low alpha', 'high alpha', 'low beta', 'high beta', 'gamma']
+
+        ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
+                    'P8', 'O1', 'O2']
+
+        temp_data = result
+        zscore_psd = np.zeros(len(temp_data))
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_{}_338.csv".format(name)))
+        for i in range(len(zscore_psd)):
+            zscore_psd[i] = (temp_data[i] - hc.values[0][i]) / hc.values[1][i]
+
+        idx = np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format(name)))
+        idx = idx[:3]
+
+        marker_params = dict(marker='o', markerfacecolor='w', markeredgecolor='k', markeredgewidth=1.5,
+                             markersize=35, fillstyle='full', alpha=.6)
+        temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
+        temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
+        temp_info.set_montage(temp_montage)
+
+        for i in range(len(idx)):
+            freq_band = idx[i] // 19
+            print(freq_band)
+            zscore_psd_freq = zscore_psd[19 * freq_band:19 * (freq_band + 1)]
+            mask = np.zeros(zscore_psd_freq.shape, dtype='bool')
+            mask[idx[i] % 19] = True
+            plt.rcParams.update({'font.size': 22, 'font.weight': 'bold', 'text.color': 'k'})
+            fig, _ = mne.viz.plot_topomap(zscore_psd_freq, pos=temp_info, show=False, cmap='rainbow', vmin=-3, vmax=3,
+                                          contours=4,
+                                          sensors=True, show_names=True, names=ch_names,
+                                          mask=mask, mask_params=marker_params)
+            fig.figure.savefig("{}/psd_detail_{}.png".format(self.dir, i), bbox_inches='tight', pad_inches=0.4)
+            plt.close()
+
+        if self.y_pred == "MDD":  # MDD
+            print("max index:", np.argmax(abs(zscore_psd)), "freq band:", band[np.argmax(abs(zscore_psd)) // 19])
+            freq_band = np.argmax(abs(zscore_psd)) // 19
+            zscore_psd = zscore_psd[19 * freq_band:19 * (freq_band + 1)]
+            print(zscore_psd.shape)
+            mask = np.zeros(zscore_psd.shape, dtype='bool')
+            mask[np.argmax(abs(zscore_psd))] = True
+        else:
+            print("min index:", np.argmin(abs(zscore_psd)), "freq band:", band[np.argmin(abs(zscore_psd)) // 19])
+            freq_band = np.argmin(abs(zscore_psd)) // 19
+            zscore_psd = zscore_psd[19 * freq_band:19 * (freq_band + 1)]
+            mask = np.zeros(zscore_psd.shape, dtype='bool')
+            mask[np.argmix(abs(zscore_psd))] = True
+
+        plt.rcParams.update({'font.size': 22, 'font.weight': 'bold', 'text.color': 'k'})
+        fig, _ = mne.viz.plot_topomap(zscore_psd, pos=temp_info, show=False, cmap='bwr',
+                                      vmin=-3, vmax=3, contours=4,
+                                      sensors=True, show_names=True, names=ch_names,
+                                      mask=mask, mask_params=marker_params)
+        fig.figure.savefig("{}/psd_infl.png".format(self.dir), bbox_inches='tight', pad_inches=0.4)
+        plt.close()
+
+    def main_detail_fc(self, result):
+        temp_data = result
+        zscore_plv = np.zeros(len(temp_data))
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_plv_338.csv"))
+        for i in range(len(zscore_plv)):
+            zscore_plv[i] = (temp_data[i] - hc.values[0][i]) / hc.values[1][i]
+        print(zscore_plv.shape)
+
+        band_num = 7
+        band = ['delta', 'theta', 'low alpha',
+                'high alpha', 'low beta', 'high beta', 'gamma']
+        ch_names = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8',
+                    'P7', 'P3', 'PZ', 'P4', 'P8', 'O1', 'O2']
+        comb_data = pd.read_csv(os.path.join(ROOT_DIR, "data/comb.csv"))
+        idx_1 = os.path.join(ROOT_DIR, "model/idx_fc.npy")
+        idx = np.load(idx_1)[:3]
+
+        for i in range(len(idx)):
+            freq_band = idx[i] // 171
+            print(idx[i], freq_band)
+            # print(comb[idx[i]], band[freq_band])
+            vis_bwave = VisualizeFc(zscore_plv, idx_dir=idx_1, vmin=-3, vmax=3,
+                                    freq_band=freq_band, n_lines=1)
+            vis_bwave.mean_plot()
+            vis_bwave.fig.figure.savefig("{}/plv_detail_{}.png".format(self.dir, i), facecolor='#ffffff',
+                                         bbox_inches='tight', pad_inches=0)
+            plt.close()
+
+        if self.y_pred == "MDD":  # MDD
+            print("max index:", np.argmax(abs(zscore_plv)), "freq band:", band[np.argmax(abs(zscore_plv)) // 171])
+            freq_band = np.argmax(abs(zscore_plv)) // 171
+            print(zscore_plv.shape)
+        else:
+            print("min index:", np.argmin(abs(zscore_plv)), "freq band:", band[np.argmin(abs(zscore_plv)) // 171])
+            freq_band = np.argmin(abs(zscore_plv)) // 171
+
+        # print(comb_data[np.argmax(abs(zscore_plv))])
+        print(band[freq_band])
+        vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=freq_band, n_lines=1)
+        vis_bwave.mean_plot()
+        vis_bwave.fig.figure.savefig("{}/plv_infl.png".format(self.dir), facecolor='#ffffff',
+                                     bbox_inches='tight', pad_inches=0)
+        plt.close()
+
     def position_plot(self, result_psd, result_fc, result_ni):
         with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(ROOT_DIR), 'rb') as f:
             df = pickle.load(f)
@@ -356,20 +472,13 @@ class model_test:
         raw_file.load_file(file_path)
         raw_file.preprocess()
 
-        # fig = raw_file.prep_epochs.plot_psd(fmin=1., fmax=55., show=False)
-        # fig.figure.savefig("{}/psd_power.png".format(self.dir))
-        # plt.close()
-
         raw_file.PSD()
         raw_file.FC()
         raw_file.NI()
-        result_psd = raw_file.psd
-        result_fc = raw_file.fc_f
-        result_ni = raw_file.ni
 
-        clf_psd, result_psd = self.prepare("psd", result_psd)
-        clf_fc, result_fc = self.prepare("fc", result_fc)
-        clf_ni, result_ni = self.prepare("ni", result_ni)
+        clf_psd, result_psd = self.prepare("psd", raw_file.psd)
+        clf_fc, result_fc = self.prepare("fc", raw_file.fc_f)
+        clf_ni, result_ni = self.prepare("ni", raw_file.ni)
 
         ##source----------------------------------------
         # raw_file_s = bd_s()
@@ -392,7 +501,7 @@ class model_test:
         self.tr_probabilty(raw_file.psd, raw_file.fc_f, raw_file.ni)
 
         ## positin plot ---------------------------
-        self.position_plot(result_psd, result_fc, result_ni)
+        # self.position_plot(result_psd, result_fc, result_ni)
 
         self.pred_n_plot()
 
@@ -403,6 +512,8 @@ class model_test:
         self.psd_fre(raw_file.psd_hz_abs[0], "abs")
 
         self.ni_plot(raw_file.ni[0][28:])
+
+        self.main_detail(raw_file.psd[0], "psd")
 
         ##JSON
         with open('{}/info.json'.format(self.dir), 'r', encoding='utf-8') as make_file: #읽고
@@ -415,21 +526,14 @@ class model_test:
             data['psd_sensor'] = clf_psd.predict_proba(result_psd)[0][1]
             data['fc_sensor'] = clf_fc.predict_proba(result_fc)[0][1]
             data['ni_sensor'] = clf_ni.predict_proba(result_ni)[0][1]
+            ## 임의로 설정
+            data['psd_source'] = clf_psd.predict_proba(result_psd)[0][0]
+            data['fc_source'] = clf_fc.predict_proba(result_fc)[0][0]
+            data['ni_source'] = clf_ni.predict_proba(result_ni)[0][0]
 
         with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file: #쓰기
             json.dump(data, make_file, ensure_ascii=False, indent='\t')
 
         ##  ------------------- fc_plot
-
-        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/HC_reg_plv_335.csv"))
-
-        zscore_plv = np.zeros(len(raw_file.fc_f[0]))
-        for i in range(len(zscore_plv)):
-            zscore_plv[i] = (raw_file.fc_f[0][i] - hc.values[0][i]) / hc.values[1][i]
-
-
-        for i in range(7):
-            vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=i)
-            vis_bwave.mean_plot()
-            vis_bwave.fig.figure.savefig("{}/plv_{}.png".format(self.dir, bands[i]), facecolor='#ffffff', bbox_inches='tight', pad_inches=0)
-            plt.close()
+        self.fc_plot(raw_file.fc_f[0])
+        self.main_detail_fc(raw_file.fc_f[0])

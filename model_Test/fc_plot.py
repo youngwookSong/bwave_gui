@@ -7,7 +7,6 @@ from sklearn import preprocessing
 import pickle
 from model_Test.directory import ROOT_DIR
 
-
 band_num = 7
 ch_names = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8',
             'P7', 'P3', 'PZ', 'P4', 'P8', 'O1', 'O2']
@@ -18,13 +17,14 @@ class VisualizeFc:
     def __init__(self,
                  plv,
                  idx_dir,
-                 vmin=0.4,
-                 vmax=1.,
-                 freq_band=None
+                 vmin,
+                 vmax,
+                 freq_band,
+                 n_lines
                  ):
 
         if idx_dir:
-            self.idx = np.load(idx_dir) # fisher score로 할때
+            self.idx = np.load(idx_dir)[:3] # fisher score로 할때
             self.idx = self._set_freq_band(self.idx, freq_band) # 해당 frequency의 피쳐를 뽑기위해
         else:
             self.idx = np.array([i for i in range(len(plv))])
@@ -33,14 +33,23 @@ class VisualizeFc:
         self.vmax = vmax
         self._vis_index()
         self.plv = plv
+        self.n_lines = n_lines
 
     def mean_plot(self, start=0, end=-1):
         feat = self.plv[self.idx]
-        feat[abs(feat) < 2] = 0
-        self.fig, _ = mne.viz.plot_connectivity_circle(feat, ch_names, (self.viz_i, self.viz_j),
+        if self.n_lines == None:
+            # feat[abs(feat) < 2] = 0
+            self.fig, _ = mne.viz.plot_connectivity_circle(feat, ch_names, (self.viz_i, self.viz_j),
                                           vmin=self.vmin, vmax=self.vmax, show=False, fontsize_names=30,
-                                         facecolor="#ffffff", textcolor="#000000",colormap='bwr', colorbar=False)
-
+                                         facecolor="#ffffff", textcolor="#000000",colormap='twilight_shifted', colorbar=False,
+                                                           n_lines=self.n_lines)
+        else:
+            self.fig, _ = mne.viz.plot_connectivity_circle(feat, ch_names, (self.viz_i, self.viz_j),
+                                                           vmin=self.vmin, vmax=self.vmax, show=False,
+                                                           fontsize_names=30, facecolor="#ffffff",
+                                                           textcolor="#000000", colormap='twilight_shifted',
+                                                           linewidth=3, node_linewidth=2, n_lines=self.n_lines,
+                                                           colorbar=False)
 
     def _set_freq_band(self, idx, s):
         if s == None:
