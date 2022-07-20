@@ -343,7 +343,9 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                                          info_json_path['best_model'], info_json_path['tr_proba'],
                                          info_json_path['psd_sensor'], info_json_path['fc_sensor'],
                                          info_json_path['ni_sensor'], info_json_path['psd_source'],
-                                         info_json_path['fc_source'], info_json_path['ni_source'])
+                                         info_json_path['fc_source'], info_json_path['ni_source'],
+                                         info_json_path['psd_infl_band'], info_json_path['fc_infl_band'],
+                                         info_json_path['ni_infl_band'])
 
             # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
@@ -425,9 +427,9 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                                              info_json_path['best_model'], info_json_path['tr_proba'],
                                              info_json_path['psd_sensor'], info_json_path['fc_sensor'],
                                              info_json_path['ni_sensor'], info_json_path['psd_source'],
-                                             info_json_path['fc_source'], info_json_path['ni_source'])
-            # self.ui.tabWidget.setCurrentWidget(self._tabFrame)
-            # self.ui.tableWidget.setCurrentIndex(cur_idx+1)
+                                             info_json_path['fc_source'], info_json_path['ni_source'],
+                                             info_json_path['psd_infl_band'], info_json_path['fc_infl_band'],
+                                             info_json_path['ni_infl_band'])
 
         else: #취소 버튼 눌렀을때
             print("cancel")
@@ -464,8 +466,5 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             # self.ui.tableWidget.item(self.row - 1, 4).setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
         elif result == QMessageBox.Cancel:
             print("Cancel")
-
-        # self._tabFrame.pushButton_4.clicked.connect(lambda:  self._tabFrame.tab_pages.setCurrentIndex(0))
-
 
         # TODO: 만약 탭하나 생성하고 또 다른 탭 생성하고 전 탭가서 분석하기 누를 경우.. self._tabFrame은 최근 탭에 업데이트 되어있다. 분석하기 버튼 누를때 현재 탭 위젯 가지고 오기

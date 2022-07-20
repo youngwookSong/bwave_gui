@@ -1,3 +1,4 @@
+import matplotlib
 import numpy as np
 import os
 import pickle
@@ -37,6 +38,9 @@ class model_test:
         self.best_model = None
         self.values = None
         self.tr_proba = None
+        self.psd_infl_band = None
+        self.fc_infl_band = None
+        self.ni_infl_band = None
 
     def prepare(self, name, result):
         model_dir = os.path.join(ROOT_DIR, "model/model_{}".format(name))
@@ -189,7 +193,7 @@ class model_test:
         self.psd_fre_make_png(power)
 
     def fc_plot(self, fc):
-        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_plv_338.csv"))
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_fc_338.csv"))
 
         zscore_plv = np.zeros(len(fc))
         for i in range(len(zscore_plv)):
@@ -314,9 +318,9 @@ class model_test:
         print(all_score)
         self.tr_proba = str(round(all_score.count(1)/len(all_score) * 100, 2))
 
-    def main_detail(self, result, name):
-        band = ['delta', 'theta', 'low alpha', 'high alpha', 'low beta', 'high beta', 'gamma']
-
+    def main_detail(self, result, name, prenum, nexnum):
+        # TODO: ni 활성화 (지금은 그냥 psd3-6idx로 ni를 넣어둠. idx계산해서 psd랑 똑같이 해놓기)
+        band = ['Delta', 'Theta', 'LowAlpha', 'HighAlpha', 'LowBeta', 'HighBeta', 'Gamma']
         ch_names = ['Fp1', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'T7', 'C3', 'Cz', 'C4', 'T8', 'P7', 'P3', 'Pz', 'P4',
                     'P8', 'O1', 'O2']
 
@@ -326,8 +330,8 @@ class model_test:
         for i in range(len(zscore_psd)):
             zscore_psd[i] = (temp_data[i] - hc.values[0][i]) / hc.values[1][i]
 
-        idx = np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format(name)))
-        idx = idx[:3]
+        idx = np.load(os.path.join(ROOT_DIR, "model/idx_psd.npy"))
+        idx = idx[prenum:nexnum] # TODO: ni 활성화 (지금은 그냥 psd3-6idx로 ni를 넣어둠)
 
         marker_params = dict(marker='o', markerfacecolor='w', markeredgecolor='k', markeredgewidth=1.5,
                              markersize=35, fillstyle='full', alpha=.6)
@@ -337,7 +341,7 @@ class model_test:
 
         for i in range(len(idx)):
             freq_band = idx[i] // 19
-            print(freq_band)
+            print("psd_idx:", freq_band, idx[i] % 19)
             zscore_psd_freq = zscore_psd[19 * freq_band:19 * (freq_band + 1)]
             mask = np.zeros(zscore_psd_freq.shape, dtype='bool')
             mask[idx[i] % 19] = True
@@ -346,23 +350,29 @@ class model_test:
                                           contours=4,
                                           sensors=True, show_names=True, names=ch_names,
                                           mask=mask, mask_params=marker_params)
-            fig.figure.savefig("{}/psd_detail_{}.png".format(self.dir, i), bbox_inches='tight', pad_inches=0.4)
+
+            # TODO: ni 활성화 (지금은 그냥 psd3-6idx로 ni를 넣어둠. )
+            fig.figure.savefig("{}/{}_detail_{}.png".format(self.dir, name, i), bbox_inches='tight', pad_inches=0.4)
             plt.close()
 
         if self.y_pred == "MDD":  # MDD
-            print("max index:", np.argmax(abs(zscore_psd)), "freq band:", band[np.argmax(abs(zscore_psd)) // 19])
+            print("max index:", np.argmax(abs(zscore_psd)), "freq band:", (band[np.argmax(abs(zscore_psd)) // 19]),
+                  "channel:", ch_names[np.argmax(abs(zscore_psd)) % 19])
             freq_band = np.argmax(abs(zscore_psd)) // 19
             zscore_psd = zscore_psd[19 * freq_band:19 * (freq_band + 1)]
-            print(zscore_psd.shape)
             mask = np.zeros(zscore_psd.shape, dtype='bool')
             mask[np.argmax(abs(zscore_psd))] = True
         else:
-            print("min index:", np.argmin(abs(zscore_psd)), "freq band:", band[np.argmin(abs(zscore_psd)) // 19])
+            print("min index:", np.argmin(abs(zscore_psd)), "freq band:", band[np.argmin(abs(zscore_psd)) // 19],
+                  "channel:", ch_names[np.argmin(abs(zscore_psd)) % 19])
             freq_band = np.argmin(abs(zscore_psd)) // 19
             zscore_psd = zscore_psd[19 * freq_band:19 * (freq_band + 1)]
             mask = np.zeros(zscore_psd.shape, dtype='bool')
-            mask[np.argmix(abs(zscore_psd))] = True
+            mask[np.argmin(abs(zscore_psd))] = True
 
+        # TODO: ni 활성화 (지금은 그냥 topo theta를 넣음)
+        self.psd_infl_band = band[freq_band]
+        self.ni_infl_band = band[freq_band + 1]
         plt.rcParams.update({'font.size': 22, 'font.weight': 'bold', 'text.color': 'k'})
         fig, _ = mne.viz.plot_topomap(zscore_psd, pos=temp_info, show=False, cmap='bwr',
                                       vmin=-3, vmax=3, contours=4,
@@ -374,14 +384,13 @@ class model_test:
     def main_detail_fc(self, result):
         temp_data = result
         zscore_plv = np.zeros(len(temp_data))
-        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_plv_338.csv"))
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_fc_338.csv"))
         for i in range(len(zscore_plv)):
             zscore_plv[i] = (temp_data[i] - hc.values[0][i]) / hc.values[1][i]
         print(zscore_plv.shape)
 
         band_num = 7
-        band = ['delta', 'theta', 'low alpha',
-                'high alpha', 'low beta', 'high beta', 'gamma']
+        band = ['Delta', 'Theta', 'LowAlpha', 'HighAlpha', 'LowBeta', 'HighBeta', 'Gamma']
         ch_names = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8',
                     'P7', 'P3', 'PZ', 'P4', 'P8', 'O1', 'O2']
         comb_data = pd.read_csv(os.path.join(ROOT_DIR, "data/comb.csv"))
@@ -402,17 +411,62 @@ class model_test:
         if self.y_pred == "MDD":  # MDD
             print("max index:", np.argmax(abs(zscore_plv)), "freq band:", band[np.argmax(abs(zscore_plv)) // 171])
             freq_band = np.argmax(abs(zscore_plv)) // 171
-            print(zscore_plv.shape)
         else:
             print("min index:", np.argmin(abs(zscore_plv)), "freq band:", band[np.argmin(abs(zscore_plv)) // 171])
             freq_band = np.argmin(abs(zscore_plv)) // 171
 
-        # print(comb_data[np.argmax(abs(zscore_plv))])
-        print(band[freq_band])
+        self.fc_infl_band = band[freq_band]
         vis_bwave = VisualizeFc(zscore_plv, idx_dir=None, vmin=-3, vmax=3, freq_band=freq_band, n_lines=1)
         vis_bwave.mean_plot()
         vis_bwave.fig.figure.savefig("{}/plv_infl.png".format(self.dir), facecolor='#ffffff',
                                      bbox_inches='tight', pad_inches=0)
+        plt.close()
+
+    def gradientbars(self, bars):
+        ax = bars[0].axes
+        lim = ax.get_xlim() + ax.get_ylim()
+        for bar in bars:
+            bar.set_zorder(1)
+            bar.set_facecolor("none")
+            x, y = bar.get_xy()
+            w, h = bar.get_width(), bar.get_height()
+            grad = np.atleast_2d(np.linspace(0, 1 * w / 6, 256))
+            cmap = plt.get_cmap('coolwarm_r')
+            ax.imshow(grad, extent=[x, x + w, y, y + h], aspect="auto", zorder=0,
+                      norm=matplotlib.colors.NoNorm(vmin=0, vmax=1), cmap=cmap)
+        ax.axis(lim)
+
+    def feature_detail(self, result, feature):
+        band = ['delta', 'theta', 'low alpha', 'high alpha', 'low beta', 'high beta', 'gamma']
+        ch = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8', 'P7', 'P3', 'PZ', 'P4', 'P8',
+              'O1', 'O2', 'VEO', 'HEO']
+
+        hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_{}_338.csv".format(feature)))
+        mdd = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/MDD_{}_478.csv".format(feature)))
+        idx = np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format(feature)))
+
+        idx_num = [0, 1, 2, 3, 4]
+        print(idx[idx_num[0]], idx[idx_num[1]], idx[idx_num[2]], idx[idx_num[3]], idx[idx_num[4]])
+        temp_data = [result[idx[i]] for i in idx_num]
+        mean_mdd = [mdd[str(idx[i])][0] for i in idx_num]
+        mean_hc = [hc[str(idx[i])][0] for i in idx_num]
+        mean = [(mean_mdd[i] + mean_hc[i]) / 2 for i in range(len(temp_data))]
+        distance = [abs(mean[i] - mean_mdd[i]) for i in range(len(temp_data))]
+        xarr = [(temp_data[i] - mean[i]) / (distance[i] / 1.5) if mean_mdd[i] < mean_hc[i] else -(
+                    temp_data[i] - mean[i]) / (distance[i] / 2) for i in range(len(temp_data))]
+        xarr = np.array(xarr)
+        print(xarr)
+        xarr = np.clip(xarr, 0.2, 5.8)
+
+        Y = [1,2,3,4,5]
+        plt.figure(figsize=(10, 6))
+        plt.xlim(0, 6)
+        plt.ylim(0, 6)
+        bar = plt.barh(Y, 6, height=0.7, align='center', alpha=0.8)
+        self.gradientbars(bar)
+        plt.scatter(xarr, Y, s=300, color='k', alpha=1, marker="d", )
+        plt.axis('off')
+        plt.savefig("{}/feature_detail_{}.png".format(self.dir, feature), bbox_inches='tight', pad_inches=0)
         plt.close()
 
     def position_plot(self, result_psd, result_fc, result_ni):
@@ -507,13 +561,18 @@ class model_test:
 
         self.psd_plot(raw_file.psd[0], "rel")
         self.psd_plot(raw_file.psd_abs[0], "abs")
-
         self.psd_fre(raw_file.psd_hz[0], "rel")
         self.psd_fre(raw_file.psd_hz_abs[0], "abs")
-
+        self.fc_plot(raw_file.fc_f[0])
         self.ni_plot(raw_file.ni[0][28:])
 
-        self.main_detail(raw_file.psd[0], "psd")
+        self.main_detail(raw_file.psd[0], "psd", 0, 3)
+        self.main_detail(raw_file.psd[0], "ni", 3, 6)
+        self.main_detail_fc(raw_file.fc_f[0])
+
+        self.feature_detail(raw_file.psd[0], "psd")
+        self.feature_detail(raw_file.fc_f[0], "fc")
+        self.feature_detail(raw_file.ni[0], "ni")
 
         ##JSON
         with open('{}/info.json'.format(self.dir), 'r', encoding='utf-8') as make_file: #읽고
@@ -526,14 +585,15 @@ class model_test:
             data['psd_sensor'] = clf_psd.predict_proba(result_psd)[0][1]
             data['fc_sensor'] = clf_fc.predict_proba(result_fc)[0][1]
             data['ni_sensor'] = clf_ni.predict_proba(result_ni)[0][1]
+            data['psd_infl_band'] = self.psd_infl_band
+            data['fc_infl_band'] = self.fc_infl_band
+            data['ni_infl_band'] = self.ni_infl_band
             ## 임의로 설정
-            data['psd_source'] = clf_psd.predict_proba(result_psd)[0][0]
-            data['fc_source'] = clf_fc.predict_proba(result_fc)[0][0]
-            data['ni_source'] = clf_ni.predict_proba(result_ni)[0][0]
+            data['psd_source'] = 0.582396
+            data['fc_source'] = 0.6839863
+            data['ni_source'] = 0.6232363
 
         with open('{}/info.json'.format(self.dir), 'w', encoding='utf-8') as make_file: #쓰기
             json.dump(data, make_file, ensure_ascii=False, indent='\t')
 
-        ##  ------------------- fc_plot
-        self.fc_plot(raw_file.fc_f[0])
-        self.main_detail_fc(raw_file.fc_f[0])
+

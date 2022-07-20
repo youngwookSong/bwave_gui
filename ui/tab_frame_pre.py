@@ -10,11 +10,13 @@ from PySide6.QtWidgets import *
 import personal_data.resources as personal_res
 from dialog.psdPowerHz import Ui_Dialog_power
 from dialog.source_plot import Ui_Dialog_source
-from dialog.trDetail import Ui_Dialog_trDetail
+from dialog.mddDetail import Ui_Dialog_mdd_Detail
+from dialog.feature_detail import Ui_Dialog_feature_detail
 
 from style import *
 from personal_data.resources import *
 from model_Test.directory import ROOT_DIR_con
+from icon.resources import root
 
 import json
 import os
@@ -23,7 +25,8 @@ import mne
 
 class Ui_tabFrame_pre(QFrame):
     def __init__(self, current_tab, file, name, birth, num, date, sex, y_pred, y_pred_proba_mdd, y_pred_proba_hc,
-                 best_model, tr, psd_sen, fc_sen, ni_sen, psd_sou, fc_sou, ni_sou):
+                 best_model, tr, psd_sen, fc_sen, ni_sen, psd_sou, fc_sou, ni_sou, psd_infl_band, fc_infl_band,
+                 ni_infl_band):
         super().__init__()
         self.current_tab = current_tab
         self.file = file
@@ -43,13 +46,16 @@ class Ui_tabFrame_pre(QFrame):
         self.psd_sou = psd_sou
         self.fc_sou = fc_sou
         self.ni_sou = ni_sou
+        self.psd_infl_band = psd_infl_band
+        self.fc_infl_band = fc_infl_band
+        self.ni_infl_band = ni_infl_band
 
         # 6개 원 그래프를 위한 변수
         self.circularProgressCoordinate = [5, 20, 120, 120]
         self.circularBgCoordinate = [5, 20, 120, 120]
         self.containerCoordinate = [20, 35, 90, 90]
-        self.labelTitleCoordinate = [2, 0, 61, 35]
-        self.labelPercentageCoordinate = [20, 40, 61, 50]
+        self.labelTitleCoordinate = [2, 0, 61, 30]
+        self.labelPercentageCoordinate = [20, 30, 61, 50]
 
         self.data = None
 
@@ -930,7 +936,7 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_detail.setAutoDefault(False)
         self.pushButton_detail.setFlat(False)
         self.pushButton_detail.setStyleSheet(tab_btn_style)
-        self.pushButton_detail.clicked.connect(lambda: self.open_psd_power())
+        self.pushButton_detail.clicked.connect(lambda: self.open_mdd_detail())
 
         self.circularBg.raise_()
         self.circularProgress.raise_()
@@ -1018,10 +1024,10 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_91.setObjectName(u"frame_91")
         self.frame_91.setFrameShape(QFrame.StyledPanel)
         self.frame_91.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_31 = QVBoxLayout(self.frame_91)
-        self.verticalLayout_31.setSpacing(0)
-        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
-        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout = QGridLayout(self.frame_91)
+        self.gridLayout.setSpacing(0)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.frame_92 = QFrame(self.frame_91)
         self.frame_92.setObjectName(u"frame_92")
         self.frame_92.setFrameShape(QFrame.StyledPanel)
@@ -1034,6 +1040,91 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_94.setObjectName(u"frame_94")
         self.frame_94.setFrameShape(QFrame.StyledPanel)
         self.frame_94.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_42.addWidget(self.frame_94)
+
+        self.frame_95 = QFrame(self.frame_92)
+        self.frame_95.setObjectName(u"frame_95")
+        self.frame_95.setFrameShape(QFrame.StyledPanel)
+        self.frame_95.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_42.addWidget(self.frame_95)
+
+        self.frame_96 = QFrame(self.frame_92)
+        self.frame_96.setObjectName(u"frame_96")
+        self.frame_96.setFrameShape(QFrame.StyledPanel)
+        self.frame_96.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_42.addWidget(self.frame_96)
+
+        self.gridLayout.addWidget(self.frame_92, 0, 1, 1, 1)
+
+        self.frame_102 = QFrame(self.frame_91)
+        self.frame_102.setObjectName(u"frame_102")
+        self.frame_102.setMaximumSize(QSize(30, 16777215))
+        self.frame_102.setFrameShape(QFrame.StyledPanel)
+        self.frame_102.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_31 = QVBoxLayout(self.frame_102)
+        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
+
+        self.frame_106 = QFrame(self.frame_102)
+        self.frame_106.setObjectName(u"frame_106")
+        self.frame_106.setStyleSheet(u"image:url({}/senser.png)".format("/".join(root.split("\\"))))
+        self.frame_106.setFrameShape(QFrame.StyledPanel)
+        self.frame_106.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout_31.addWidget(self.frame_106)
+
+        self.frame_108 = QFrame(self.frame_102)
+        self.frame_108.setObjectName(u"frame_108")
+        self.frame_108.setStyleSheet(u"image:url({}/source.png)".format("/".join(root.split("\\"))))
+        self.frame_108.setFrameShape(QFrame.StyledPanel)
+        self.frame_108.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout_31.addWidget(self.frame_108)
+
+        self.gridLayout.addWidget(self.frame_102, 0, 0, 2, 1)
+
+        self.frame_93 = QFrame(self.frame_91)
+        self.frame_93.setObjectName(u"frame_93")
+        self.frame_93.setFrameShape(QFrame.StyledPanel)
+        self.frame_93.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_43 = QHBoxLayout(self.frame_93)
+        self.horizontalLayout_43.setSpacing(0)
+        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
+        self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
+        self.frame_97 = QFrame(self.frame_93)
+        self.frame_97.setObjectName(u"frame_97")
+        self.frame_97.setFrameShape(QFrame.StyledPanel)
+        self.frame_97.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_43.addWidget(self.frame_97)
+
+        self.frame_98 = QFrame(self.frame_93)
+        self.frame_98.setObjectName(u"frame_98")
+        self.frame_98.setFrameShape(QFrame.StyledPanel)
+        self.frame_98.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_43.addWidget(self.frame_98)
+
+        self.frame_99 = QFrame(self.frame_93)
+        self.frame_99.setObjectName(u"frame_99")
+        self.frame_99.setFrameShape(QFrame.StyledPanel)
+        self.frame_99.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_43.addWidget(self.frame_99)
+
+        self.gridLayout.addWidget(self.frame_93, 1, 1, 1, 1)
+
+        self.verticalLayout_28.addWidget(self.frame_91)
+
+        self.horizontalLayout_9.addWidget(self.frame_27)
+
+        self.horizontalLayout_5.addWidget(self.frame_9)
+
+        ##########################################################################################
 
         self.circularProgress_psd_sen = QFrame(self.frame_94)  # 색깔 배경
         self.circularProgress_psd_sen.setObjectName(u"circularProgress_psd_sen")
@@ -1052,8 +1143,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.circularBgCoordinate[0], self.circularBgCoordinate[1], self.circularBgCoordinate[2],
                   self.circularBgCoordinate[3]))
         self.circularBg_psd_sen.setStyleSheet(u"QFrame{\n"
-                                              "	border-radius: 60px;\n"
-                                              "	background-color: rgba(255, 90, 0, 0.2);\n"
+                                              "   border-radius: 60px;\n"
+                                              "   background-color: rgba(255, 90, 0, 0.2);\n"
                                               "}")
         self.circularBg_psd_sen.setFrameShape(QFrame.StyledPanel)
         self.circularBg_psd_sen.setFrameShadow(QFrame.Raised)
@@ -1063,8 +1154,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.containerCoordinate[0], self.containerCoordinate[1], self.containerCoordinate[2],
                   self.containerCoordinate[3]))
         self.container_psd_sen.setStyleSheet(u"QFrame{\n"
-                                             "	border-radius: 45px;\n"
-                                             "	background-color: rgb(255, 255, 255);\n"
+                                             "   border-radius: 45px;\n"
+                                             "   background-color: rgb(255, 255, 255);\n"
                                              "}")
         self.container_psd_sen.setFrameShape(QFrame.StyledPanel)
         self.container_psd_sen.setFrameShadow(QFrame.Raised)
@@ -1107,13 +1198,6 @@ class Ui_tabFrame_pre(QFrame):
         # self.label_7.setGeometry(QRect(10, 10, 30, 100))
         # self.label_7.setStyleSheet(u"color: rgb(34,34,34);")
 
-        self.horizontalLayout_42.addWidget(self.frame_94)
-
-        self.frame_95 = QFrame(self.frame_92)
-        self.frame_95.setObjectName(u"frame_95")
-        self.frame_95.setFrameShape(QFrame.StyledPanel)
-        self.frame_95.setFrameShadow(QFrame.Raised)
-
         self.circularProgress_fc_sen = QFrame(self.frame_95)  # 색깔 배경
         self.circularProgress_fc_sen.setObjectName(u"circularProgress_fc_sen")
         self.circularProgress_fc_sen.setGeometry(
@@ -1131,8 +1215,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.circularBgCoordinate[0], self.circularBgCoordinate[1], self.circularBgCoordinate[2],
                   self.circularBgCoordinate[3]))
         self.circularBg_fc_sen.setStyleSheet(u"QFrame{\n"
-                                             "	border-radius: 60px;\n"
-                                             "	background-color: rgba(255, 90, 0, 0.2);\n"
+                                             "   border-radius: 60px;\n"
+                                             "   background-color: rgba(255, 90, 0, 0.2);\n"
                                              "}")
         self.circularBg_fc_sen.setFrameShape(QFrame.StyledPanel)
         self.circularBg_fc_sen.setFrameShadow(QFrame.Raised)
@@ -1142,8 +1226,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.containerCoordinate[0], self.containerCoordinate[1], self.containerCoordinate[2],
                   self.containerCoordinate[3]))
         self.container_fc_sen.setStyleSheet(u"QFrame{\n"
-                                            "	border-radius: 45px;\n"
-                                            "	background-color: rgb(255, 255, 255);\n"
+                                            "   border-radius: 45px;\n"
+                                            "   background-color: rgb(255, 255, 255);\n"
                                             "}")
         self.container_fc_sen.setFrameShape(QFrame.StyledPanel)
         self.container_fc_sen.setFrameShadow(QFrame.Raised)
@@ -1181,13 +1265,6 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_fc_sen.raise_()
         self.container_fc_sen.raise_()
 
-        self.horizontalLayout_42.addWidget(self.frame_95)
-
-        self.frame_96 = QFrame(self.frame_92)
-        self.frame_96.setObjectName(u"frame_96")
-        self.frame_96.setFrameShape(QFrame.StyledPanel)
-        self.frame_96.setFrameShadow(QFrame.Raised)
-
         self.circularProgress_ni_sen = QFrame(self.frame_96)  # 색깔 배경
         self.circularProgress_ni_sen.setObjectName(u"circularProgress_ni_sen")
         self.circularProgress_ni_sen.setGeometry(
@@ -1205,8 +1282,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.circularBgCoordinate[0], self.circularBgCoordinate[1], self.circularBgCoordinate[2],
                   self.circularBgCoordinate[3]))
         self.circularBg_ni_sen.setStyleSheet(u"QFrame{\n"
-                                             "	border-radius: 60px;\n"
-                                             "	background-color: rgba(255, 90, 0, 0.2);\n"
+                                             "   border-radius: 60px;\n"
+                                             "   background-color: rgba(255, 90, 0, 0.2);\n"
                                              "}")
         self.circularBg_ni_sen.setFrameShape(QFrame.StyledPanel)
         self.circularBg_ni_sen.setFrameShadow(QFrame.Raised)
@@ -1216,8 +1293,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.containerCoordinate[0], self.containerCoordinate[1], self.containerCoordinate[2],
                   self.containerCoordinate[3]))
         self.container_ni_sen.setStyleSheet(u"QFrame{\n"
-                                            "	border-radius: 45px;\n"
-                                            "	background-color: rgb(255, 255, 255);\n"
+                                            "   border-radius: 45px;\n"
+                                            "   background-color: rgb(255, 255, 255);\n"
                                             "}")
         self.container_ni_sen.setFrameShape(QFrame.StyledPanel)
         self.container_ni_sen.setFrameShadow(QFrame.Raised)
@@ -1255,22 +1332,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_ni_sen.raise_()
         self.container_ni_sen.raise_()
 
-        self.horizontalLayout_42.addWidget(self.frame_96)
-
-        self.verticalLayout_31.addWidget(self.frame_92)
-
-        self.frame_93 = QFrame(self.frame_91)
-        self.frame_93.setObjectName(u"frame_93")
-        self.frame_93.setFrameShape(QFrame.StyledPanel)
-        self.frame_93.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_43 = QHBoxLayout(self.frame_93)
-        self.horizontalLayout_43.setSpacing(0)
-        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
-        self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
-        self.frame_97 = QFrame(self.frame_93)
-        self.frame_97.setObjectName(u"frame_97")
-        self.frame_97.setFrameShape(QFrame.StyledPanel)
-        self.frame_97.setFrameShadow(QFrame.Raised)
+        ##########################################################################################
 
         self.circularProgress_psd_sou = QFrame(self.frame_97)  # 색깔 배경
         self.circularProgress_psd_sou.setObjectName(u"circularProgress_psd_sou")
@@ -1289,8 +1351,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.circularBgCoordinate[0], self.circularBgCoordinate[1], self.circularBgCoordinate[2],
                   self.circularBgCoordinate[3]))
         self.circularBg_psd_sou.setStyleSheet(u"QFrame{\n"
-                                              "	border-radius: 60px;\n"
-                                              "	background-color: rgba(255, 90, 0, 0.2);\n"
+                                              "   border-radius: 60px;\n"
+                                              "   background-color: rgba(255, 90, 0, 0.2);\n"
                                               "}")
         self.circularBg_psd_sou.setFrameShape(QFrame.StyledPanel)
         self.circularBg_psd_sou.setFrameShadow(QFrame.Raised)
@@ -1300,8 +1362,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.containerCoordinate[0], self.containerCoordinate[1], self.containerCoordinate[2],
                   self.containerCoordinate[3]))
         self.container_psd_sou.setStyleSheet(u"QFrame{\n"
-                                             "	border-radius: 45px;\n"
-                                             "	background-color: rgb(255, 255, 255);\n"
+                                             "   border-radius: 45px;\n"
+                                             "   background-color: rgb(255, 255, 255);\n"
                                              "}")
         self.container_psd_sou.setFrameShape(QFrame.StyledPanel)
         self.container_psd_sou.setFrameShadow(QFrame.Raised)
@@ -1339,13 +1401,6 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_psd_sou.raise_()
         self.container_psd_sou.raise_()
 
-        self.horizontalLayout_43.addWidget(self.frame_97)
-
-        self.frame_98 = QFrame(self.frame_93)
-        self.frame_98.setObjectName(u"frame_98")
-        self.frame_98.setFrameShape(QFrame.StyledPanel)
-        self.frame_98.setFrameShadow(QFrame.Raised)
-
         self.circularProgress_fc_sou = QFrame(self.frame_98)  # 색깔 배경
         self.circularProgress_fc_sou.setObjectName(u"circularProgress_fc_sou")
         self.circularProgress_fc_sou.setGeometry(
@@ -1363,8 +1418,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.circularBgCoordinate[0], self.circularBgCoordinate[1], self.circularBgCoordinate[2],
                   self.circularBgCoordinate[3]))
         self.circularBg_fc_sou.setStyleSheet(u"QFrame{\n"
-                                             "	border-radius: 60px;\n"
-                                             "	background-color: rgba(255, 90, 0, 0.2);\n"
+                                             "   border-radius: 60px;\n"
+                                             "   background-color: rgba(255, 90, 0, 0.2);\n"
                                              "}")
         self.circularBg_fc_sou.setFrameShape(QFrame.StyledPanel)
         self.circularBg_fc_sou.setFrameShadow(QFrame.Raised)
@@ -1374,8 +1429,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.containerCoordinate[0], self.containerCoordinate[1], self.containerCoordinate[2],
                   self.containerCoordinate[3]))
         self.container_fc_sou.setStyleSheet(u"QFrame{\n"
-                                            "	border-radius: 45px;\n"
-                                            "	background-color: rgb(255, 255, 255);\n"
+                                            "   border-radius: 45px;\n"
+                                            "   background-color: rgb(255, 255, 255);\n"
                                             "}")
         self.container_fc_sou.setFrameShape(QFrame.StyledPanel)
         self.container_fc_sou.setFrameShadow(QFrame.Raised)
@@ -1413,13 +1468,6 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_fc_sou.raise_()
         self.container_fc_sou.raise_()
 
-        self.horizontalLayout_43.addWidget(self.frame_98)
-
-        self.frame_99 = QFrame(self.frame_93)
-        self.frame_99.setObjectName(u"frame_99")
-        self.frame_99.setFrameShape(QFrame.StyledPanel)
-        self.frame_99.setFrameShadow(QFrame.Raised)
-
         self.circularProgress_ni_sou = QFrame(self.frame_99)  # 색깔 배경
         self.circularProgress_ni_sou.setObjectName(u"circularProgress_ni_sou")
         self.circularProgress_ni_sou.setGeometry(
@@ -1437,8 +1485,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.circularBgCoordinate[0], self.circularBgCoordinate[1], self.circularBgCoordinate[2],
                   self.circularBgCoordinate[3]))
         self.circularBg_ni_sou.setStyleSheet(u"QFrame{\n"
-                                             "	border-radius: 60px;\n"
-                                             "	background-color: rgba(255, 90, 0, 0.2);\n"
+                                             "   border-radius: 60px;\n"
+                                             "   background-color: rgba(255, 90, 0, 0.2);\n"
                                              "}")
         self.circularBg_ni_sou.setFrameShape(QFrame.StyledPanel)
         self.circularBg_ni_sou.setFrameShadow(QFrame.Raised)
@@ -1448,8 +1496,8 @@ class Ui_tabFrame_pre(QFrame):
             QRect(self.containerCoordinate[0], self.containerCoordinate[1], self.containerCoordinate[2],
                   self.containerCoordinate[3]))
         self.container_ni_sou.setStyleSheet(u"QFrame{\n"
-                                            "	border-radius: 45px;\n"
-                                            "	background-color: rgb(255, 255, 255);\n"
+                                            "   border-radius: 45px;\n"
+                                            "   background-color: rgb(255, 255, 255);\n"
                                             "}")
         self.container_ni_sou.setFrameShape(QFrame.StyledPanel)
         self.container_ni_sou.setFrameShadow(QFrame.Raised)
@@ -1487,9 +1535,7 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgress_ni_sou.raise_()
         self.container_ni_sou.raise_()
 
-        self.horizontalLayout_43.addWidget(self.frame_99)
-
-        self.verticalLayout_31.addWidget(self.frame_93)
+        ##########################################################################################
 
         self.verticalLayout_28.addWidget(self.frame_91)
 
@@ -1635,7 +1681,7 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_7.setAutoDefault(False)
         self.pushButton_7.setFlat(False)
         self.pushButton_7.setStyleSheet(tab_btn_style)
-        self.pushButton_7.clicked.connect(lambda: self.open_psd_power())
+        self.pushButton_7.clicked.connect(lambda: self.open_psd_power("relative"))
         self.label_42 = QLabel(self.frame_70)
         self.label_42.setObjectName(u"label_42")
         self.label_42.setGeometry(QRect(0, 15, 100, 16))
@@ -1763,7 +1809,7 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_5.setAutoDefault(False)
         self.pushButton_5.setFlat(False)
         self.pushButton_5.setStyleSheet(tab_btn_style)
-        self.pushButton_5.clicked.connect(lambda: self.open_tr_detail())
+        self.pushButton_5.clicked.connect(lambda: self.open_feature_detail("plv"))
         self.label_70 = QLabel(self.frame_68)
         self.label_70.setObjectName(u"label_70")
         self.label_70.setGeometry(QRect(0, 15, 100, 16))
@@ -1891,7 +1937,7 @@ class Ui_tabFrame_pre(QFrame):
         self.pushButton_9.setAutoDefault(False)
         self.pushButton_9.setFlat(False)
         self.pushButton_9.setStyleSheet(tab_btn_style)
-        self.pushButton_9.clicked.connect(lambda: self.open_tr_detail())
+        self.pushButton_9.clicked.connect(lambda: self.open_feature_detail("network"))
         self.label_67 = QLabel(self.frame_72)
         self.label_67.setObjectName(u"label_67")
         self.label_67.setGeometry(QRect(0, 15, 100, 16))
@@ -2155,11 +2201,11 @@ class Ui_tabFrame_pre(QFrame):
                                         .format(root_con, self.num, self.name, freq[i]))
 
         ## 분석 화면 plot
-        self.label_38.setStyleSheet(u"image:url({}/{}_{}/plv_Theta.png)".format(root_con, self.num, self.name))
-        self.label_40.setStyleSheet(u"image:url({}/{}_{}/absolute_Theta.png)".format(root_con, self.num, self.name))
+        self.label_40.setStyleSheet(u"image:url({}/{}_{}/psd_infl.png)".format(root_con, self.num, self.name))
+        self.label_38.setStyleSheet(u"image:url({}/{}_{}/plv_infl.png)".format(root_con, self.num, self.name))
         self.label_52.setStyleSheet(u"image:url({}/{}_{}/network_Theta.png)".format(root_con, self.num, self.name))
         self.label_39.setStyleSheet(u"image:url({}/plot_image/source_2.jpg)".format(ROOT_DIR_con))
-        self.label_43.setStyleSheet(u"image:url({}/plot_image/source_1.png)".format(ROOT_DIR_con))
+        self.label_43.setStyleSheet(u"image:url({}/plot_image/source_psd.png)".format(ROOT_DIR_con))
         self.label_68.setStyleSheet(u"image:url({}/plot_image/source_3.png)".format(ROOT_DIR_con))
 
         # self.label_36.setStyleSheet(u"image:url({}/{}_{}/mode_prob.png)".format(root_con, self.num, self.name))
@@ -2303,7 +2349,7 @@ class Ui_tabFrame_pre(QFrame):
         self.label_68.setText(QCoreApplication.translate("MainWindow", u"", None))
 
         self.label_70.setText(QCoreApplication.translate("MainWindow", u"FC-sensor", None))
-        self.label_72.setText(QCoreApplication.translate("MainWindow", u"Fp1 - Delta", None))
+        self.label_72.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.fc_infl_band), None))
         self.label_42.setText(QCoreApplication.translate("MainWindow", u"PSD-sensor", None))
         self.label_67.setText(QCoreApplication.translate("MainWindow", u"NI-sensor", None))
         self.label_71.setText(QCoreApplication.translate("MainWindow", u"FC-source", None))
@@ -2315,11 +2361,11 @@ class Ui_tabFrame_pre(QFrame):
         for button in pushButton_list:
             button.setText(QCoreApplication.translate("MainWindow", u"Detail", None))
 
-        self.label_73.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_74.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_75.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_76.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_77.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.label_73.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.fc_infl_band), None))
+        self.label_74.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.psd_infl_band), None))
+        self.label_75.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.psd_infl_band), None))
+        self.label_76.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.ni_infl_band), None))
+        self.label_77.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.ni_infl_band), None))
 
         self.label_37.setText(QCoreApplication.translate("MainWindow", u" PSD(Power Spectral Density)", None))
         self.label_58.setText(QCoreApplication.translate("MainWindow", u" FC(Functional Connectivity)", None))
@@ -2342,37 +2388,46 @@ class Ui_tabFrame_pre(QFrame):
         self.label_80.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"back", None))
 
-        self.labelTitle_psd_sen.setText(QCoreApplication.translate("MainWindow", u"sensor\n" "PSD", None))
+        self.labelTitle_psd_sen.setText(QCoreApplication.translate("MainWindow", u"PSD", None))
         self.labelPercentage_psd_sen.setText(
             QCoreApplication.translate("MainWindow", u"{}% ".format(round(self.psd_sen * 100)), None))
-        self.labelTitle_fc_sen.setText(QCoreApplication.translate("MainWindow", u"sensor\n" "FC", None))
+        self.labelTitle_fc_sen.setText(QCoreApplication.translate("MainWindow", u"FC", None))
         self.labelPercentage_fc_sen.setText(
             QCoreApplication.translate("MainWindow", u"{}%".format(round(self.fc_sen * 100)), None))
-        self.labelTitle_ni_sen.setText(QCoreApplication.translate("MainWindow", u"sensor\n" "NI", None))
+        self.labelTitle_ni_sen.setText(QCoreApplication.translate("MainWindow", u"NI", None))
         self.labelPercentage_ni_sen.setText(
             QCoreApplication.translate("MainWindow", u"{}%".format(round(self.ni_sen * 100)), None))
-        self.labelTitle_psd_sou.setText(QCoreApplication.translate("MainWindow", u"source\n" "PSD", None))
+        self.labelTitle_psd_sou.setText(QCoreApplication.translate("MainWindow", u"PSD", None))
         self.labelPercentage_psd_sou.setText(
             QCoreApplication.translate("MainWindow", u"{}%".format(round(self.psd_sou * 100)), None))
-        self.labelTitle_fc_sou.setText(QCoreApplication.translate("MainWindow", u"source\n" "FC", None))
+        self.labelTitle_fc_sou.setText(QCoreApplication.translate("MainWindow", u"FC", None))
         self.labelPercentage_fc_sou.setText(
             QCoreApplication.translate("MainWindow", u"{}%".format(round(self.fc_sou * 100)), None))
-        self.labelTitle_ni_sou.setText(QCoreApplication.translate("MainWindow", u"source\n" "NI", None))
+        self.labelTitle_ni_sou.setText(QCoreApplication.translate("MainWindow", u"NI", None))
         self.labelPercentage_ni_sou.setText(
             QCoreApplication.translate("MainWindow", u"{}%".format(round(self.ni_sou * 100)), None))
 
         # self.label_7.setText(QCoreApplication.translate(u"S\nE\nN\nS\nE\nR", None))
 
     # retranslateUi
-    def open_tr_detail(self):
-        self._tr_detail_dialog = Ui_Dialog_trDetail()
-        self._tr_detail_dialog.setWindowTitle("TR Detail")
-        self._tr_detail_dialog.show()
+    def open_mdd_detail(self):
+        self._mdd_detail_dialog = Ui_Dialog_mdd_Detail(self.name, self.num)
+        self._mdd_detail_dialog.setWindowTitle("MDD Detail")
+        self._mdd_detail_dialog.show()
 
-    def open_psd_power(self):
+    def open_psd_power(self, feature):
         self._psd_dialog = Ui_Dialog_power(self.name, self.num)
         self._psd_dialog.setWindowTitle("PSD Hz Topomap")
         self._psd_dialog.show()
+
+        self._feature_dialog = Ui_Dialog_feature_detail(self.name, self.num, feature)
+        self._feature_dialog.setWindowTitle("Feature Detail")
+        self._feature_dialog.show()
+
+    def open_feature_detail(self, feature):
+        self._feature_dialog = Ui_Dialog_feature_detail(self.name, self.num, feature)
+        self._feature_dialog.setWindowTitle("Feature Detail")
+        self._feature_dialog.show()
 
     def open_source_plot(self):
         self._source_plot = Ui_Dialog_source()
