@@ -14,8 +14,11 @@ from PySide6.QtWidgets import *
 
 
 class Ui_Dialog_trDetail(QDialog):
-    def __init__(self):
+    def __init__(self, name, num):
         super().__init__()
+
+        self.name = name
+        self.num = num
 
         self.resize(1150, 750)
         self.setMaximumSize(1150, 750)

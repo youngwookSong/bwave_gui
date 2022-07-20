@@ -1,0 +1,20 @@
+{
+	"file": "C:/Users/Bwave/Desktop/bwave_pro_data/bwave/MDD/0040648_m_ec.cnt",
+	"name": "1",
+	"birth": "1",
+	"num": "1",
+	"date": "2022-07-20",
+	"sex": "남성",
+	"y_pred_proba": "-",
+	"y_pred": "MDD",
+	"y_pred_proba_mdd": "70.83",
+	"y_pred_proba_hc": "29.17",
+	"best_model": "ni",
+	"tr_proba": "33.33",
+	"psd_sensor": 0.830342191494083,
+	"fc_sensor": 0.37812646597253696,
+	"ni_sensor": 0.9165148031247902,
+	"psd_source": 0.1696578085059168,
+	"fc_source": 0.6218735340274631,
+	"ni_source": 0.0834851968752098
+}
