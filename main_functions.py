@@ -2,6 +2,7 @@ import shutil
 import time
 import os
 import datetime
+import hashlib
 
 # from PyQt5 import uic
 from PySide6.QtWidgets import QTableWidgetItem
@@ -10,6 +11,7 @@ from main import *
 from dialog.newfile_dialog_new import Ui_Dialog
 from dialog.newfile_dialog_add import Ui_Dialog_add
 from dialog.loadingBar import Ui_Dialog_loading, Worker, ThreadClass
+from dialog.saveFile import Ui_Dialog_saveFile
 
 from ui.tab_frame_pre import Ui_tabFrame_pre
 
@@ -19,12 +21,13 @@ GLOBAL_STATE = 0
 from style import *
 import resources as main_res
 import personal_data.resources as personal_res
+import login_data.resources as ld_res
 from functions.progress_functions import progress_functions
 
 import json
 from collections import OrderedDict
 
-class UIFunctions(MainView): #main.py의 클래스를 상속
+class UIFunctions(LoginView, MainView): #main.py의 클래스를 상속
     def maximize_restore(self):
         global GLOBAL_STATE
         status = GLOBAL_STATE
@@ -347,14 +350,14 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
                                          info_json_path['psd_infl_band'], info_json_path['fc_infl_band'],
                                          info_json_path['ni_infl_band'])
 
-            # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
+        # QMessageBox.information(self, "ERROR", "아직 분석이 안되었습니다. 분석부터 하세요")
 
     ## new_file(인적정보, 파일 업로드) 창 열기 (modal)
     def handleOpenDialog(self, type):
         if type == 'new':
             self._dialog = Ui_Dialog()
             self._dialog.setWindowTitle("new 환자 입력")
-        if type == 'add':
+        elif type == 'add':
             self._dialog = Ui_Dialog_add(self.dataList)
             self._dialog.setWindowTitle("add 환자 입력")
 
@@ -468,3 +471,29 @@ class UIFunctions(MainView): #main.py의 클래스를 상속
             print("Cancel")
 
         # TODO: 만약 탭하나 생성하고 또 다른 탭 생성하고 전 탭가서 분석하기 누를 경우.. self._tabFrame은 최근 탭에 업데이트 되어있다. 분석하기 버튼 누를때 현재 탭 위젯 가지고 오기
+
+    def loginAccess(self, id, pwd):
+        userId = id
+        userPwd = pwd
+
+        # originHashedPwd = bcrypt.hashpw(password=b"1234", salt=bcrypt.gensalt())
+        # print("origin hash : {}".format(originHashedPwd))
+        # hashedPwd = bcrypt.hashpw(password=userPwd.encode('utf-8'), salt=bcrypt.gensalt())
+        # originHashedPwd = hashlib.sha256(b'1234').hexdigest()
+        # print("origin hash : {}".format(originHashedPwd))
+
+        hashedPwd = hashlib.sha256(userPwd.encode('utf-8')).hexdigest()
+        print("HashedPwd : {}".format(hashedPwd))
+
+        with open(os.path.join(ld_res.root, 'data.txt')) as f:
+            data = f.readline()
+            data = data.split()
+
+        if data[0] == userId and hashedPwd == data[1]:
+            return True
+        else:
+            return False
+
+    def save_file(self):
+        self._dialog_saveFile = Ui_Dialog_saveFile()
+        self._dialog_saveFile.show()

@@ -265,7 +265,7 @@ class Ui_Dialog_feature_detail(QDialog):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.label.setText(QCoreApplication.translate("Dialog", u"{} Senser Detail".format(self.title.upper()), None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"{} Sensor Detail".format(self.title.upper()), None))
         self.label_16.setText(QCoreApplication.translate("Dialog", u"Feature Position Plot", None))
 
         ch_list = [self.label_19, self.label_21, self.label_22, self.label_23, self.label_24]

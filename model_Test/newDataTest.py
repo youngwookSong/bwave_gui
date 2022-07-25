@@ -62,7 +62,6 @@ class model_test:
 
 
     def pred_n_plot(self): ## 확률 원 그래프
-
         self.y_pred_proba_mdd *= 100
         self.y_pred_proba_mdd = round(self.y_pred_proba_mdd, 2)
         self.y_pred_proba_hc *= 100
@@ -81,7 +80,6 @@ class model_test:
         self.y_pred_proba_hc = str(self.y_pred_proba_hc)
 
     def psd_plot(self, psd, power): # 위 두줄
-
         temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
         temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
         temp_info.set_montage(temp_montage)
@@ -207,7 +205,6 @@ class model_test:
             plt.close()
 
     def ni_plot(self, ni):
-
         temp_montage = mne.channels.read_custom_montage(os.path.join(FUNCDATA_DIR, 'biosemi64.txt'))
         temp_info = mne.create_info(ch_names, 1, ch_types='eeg', verbose=None)
         temp_info.set_montage(temp_montage)
@@ -237,7 +234,6 @@ class model_test:
             plt.close()
 
     def model_6_chart(self, psd, fc, ni):
-
         mdd_proba = (psd[1] + fc[1] + ni[1]) / 3
         hc_proba = (psd[0] + fc[0] + ni[0]) / 3
 
@@ -269,17 +265,12 @@ class model_test:
         plt.close()
 
     def find_idx_plot(self, list, name, x_new):
-        band = ['delta', 'theta', 'low alpha', 'high alpha', 'low beta', 'high beta', 'gamma']
-        ch = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8',
-              'P7', 'P3', 'PZ', 'P4', 'P8', 'O1', 'O2']
-
         with open('{}/bwave_19_reg_4sec_plv/feature.pickle'.format(ROOT_DIR), 'rb') as f:
             df = pickle.load(f)
 
         x = df[name].to_numpy()
         x_data = np.vstack(x)
         sort = df['sort'].to_numpy()
-        y_data = df['target'].to_numpy()
         x_ref = x_data[sort == 'treatment refractory']
         x_good = x_data[sort == 'good treatment response']
 
@@ -389,10 +380,7 @@ class model_test:
             zscore_plv[i] = (temp_data[i] - hc.values[0][i]) / hc.values[1][i]
         print(zscore_plv.shape)
 
-        band_num = 7
         band = ['Delta', 'Theta', 'LowAlpha', 'HighAlpha', 'LowBeta', 'HighBeta', 'Gamma']
-        ch_names = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8',
-                    'P7', 'P3', 'PZ', 'P4', 'P8', 'O1', 'O2']
         comb_data = pd.read_csv(os.path.join(ROOT_DIR, "data/comb.csv"))
         idx_1 = os.path.join(ROOT_DIR, "model/idx_fc.npy")
         idx = np.load(idx_1)[:3]
@@ -437,10 +425,6 @@ class model_test:
         ax.axis(lim)
 
     def feature_detail(self, result, feature):
-        band = ['delta', 'theta', 'low alpha', 'high alpha', 'low beta', 'high beta', 'gamma']
-        ch = ['FP1', 'FP2', 'F7', 'F3', 'FZ', 'F4', 'F8', 'T7', 'C3', 'CZ', 'C4', 'T8', 'P7', 'P3', 'PZ', 'P4', 'P8',
-              'O1', 'O2', 'VEO', 'HEO']
-
         hc = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/HC_{}_338.csv".format(feature)))
         mdd = pd.read_csv(os.path.join(ROOT_DIR, "data/st_database2/MDD_{}_478.csv".format(feature)))
         idx = np.load(os.path.join(ROOT_DIR, "model/idx_{}.npy".format(feature)))
@@ -513,7 +497,6 @@ class model_test:
             plt.gca().axes.yaxis.set_ticks([])
             plt.gca().axes.xaxis.set_ticks([])
             fig.figure.savefig("{}/position_plot_{}.png".format(self.dir, i), bbox_inches='tight')
-            # plt.show()
             plt.close()
 
     def test(self):

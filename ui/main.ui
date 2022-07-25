@@ -338,7 +338,7 @@ QPushButton:hover{
 }</string>
                   </property>
                   <property name="text">
-                   <string>open</string>
+                   <string>print</string>
                   </property>
                  </widget>
                 </item>
@@ -849,23 +849,14 @@ QPushButton:hover{
                    <enum>QFrame::Raised</enum>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_19">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>15</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
                    <item>
                     <widget class="QLabel" name="label_title">
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Franklin Gothic Heavy</family>
@@ -874,6 +865,30 @@ QPushButton:hover{
                      </property>
                      <property name="text">
                       <string>title</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton_13">
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton {
+	border:none;
+	border-radius: 3px;
+	background-color: rgb(100, 100, 100);
+}
+QPushButton:hover {
+	
+	background-color: rgba(255,0, 0, 150);
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>표시기재</string>
                      </property>
                     </widget>
                    </item>
@@ -2002,7 +2017,7 @@ QPushButton:hover {
                                         </rect>
                                        </property>
                                        <property name="text">
-                                        <string>SENSER</string>
+                                        <string>SENSOR</string>
                                        </property>
                                       </widget>
                                      </widget>

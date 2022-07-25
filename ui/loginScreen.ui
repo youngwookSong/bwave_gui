@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>808</height>
+    <height>815</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -257,7 +257,7 @@ background-color: rgb(255, 255, 255);</string>
 	background-color: rgb(85, 255, 127);
 }
 QPushButton:hover {
-	
+
 	background-color: rgba(85, 255, 127, 150);
 }</string>
                      </property>
@@ -290,7 +290,7 @@ QPushButton:hover {
 	background-color: rgb(255, 170, 0);
 }
 QPushButton:hover {
-	
+
 	background-color: rgba(255, 170, 0, 150);
 }</string>
                      </property>
@@ -323,7 +323,7 @@ QPushButton:hover {
 	background-color: rgb(255, 0, 0);
 }
 QPushButton:hover {
-	
+
 	background-color: rgba(255,0, 0, 150);
 }</string>
                      </property>
@@ -340,8 +340,41 @@ QPushButton:hover {
              </item>
              <item>
               <widget class="QFrame" name="frame">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(55, 55, 56);</string>
+                <string notr="true">#frame {background-color: rgb(55, 55, 56);}
+#frame_2 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_3 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_4 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_5 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_6 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_7 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_8 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_9 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_10 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_11 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_12 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_13 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_14 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_15 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_16 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_17 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_18 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_19 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_20 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_21 {background-color: rgb(0, 0, 0, 0.0);}
+#frame_22 {background-color: rgb(0, 0, 0, 0.0);}
+#label  {background-color: rgb(0, 0, 0, 0.0);}
+#label_2  {background-color: rgb(0, 0, 0, 0.0);}
+#label_3  {background-color: rgb(0, 0, 0, 0.0);}
+#label_4  {background-color: rgb(0, 0, 0, 0.0);}
+#label_5  {background-color: rgb(0, 0, 0, 0.0);}
+#littleLogo  {background-color: rgb(0, 0, 0, 0.0);}
+
+
+</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
@@ -372,6 +405,9 @@ QPushButton:hover {
                     <width>16777215</width>
                     <height>80</height>
                    </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::StyledPanel</enum>
@@ -550,6 +586,22 @@ color: rgb(255, 255, 255);</string>
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
                      </property>
+                     <widget class="QFrame" name="frame_16">
+                      <property name="geometry">
+                       <rect>
+                        <x>240</x>
+                        <y>170</y>
+                        <width>120</width>
+                        <height>80</height>
+                       </rect>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                     </widget>
                     </widget>
                    </item>
                    <item>
@@ -622,6 +674,12 @@ AI Diagnostics Software - Depression</string>
                       </item>
                       <item>
                        <widget class="QFrame" name="frame_14">
+                        <property name="autoFillBackground">
+                         <bool>false</bool>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
                         </property>
@@ -629,23 +687,24 @@ AI Diagnostics Software - Depression</string>
                          <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QHBoxLayout" name="horizontalLayout_7">
-                         <property name="spacing">
-                          <number>0</number>
-                         </property>
-                         <property name="leftMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="topMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="rightMargin">
-                          <number>0</number>
-                         </property>
-                         <property name="bottomMargin">
-                          <number>0</number>
-                         </property>
+                         <item>
+                          <widget class="QFrame" name="frame_21">
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                          </widget>
+                         </item>
                          <item>
                           <widget class="QFrame" name="frame_15">
+                           <property name="autoFillBackground">
+                            <bool>false</bool>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
                            <property name="frameShape">
                             <enum>QFrame::StyledPanel</enum>
                            </property>
@@ -768,39 +827,6 @@ AI Diagnostics Software - Depression</string>
                               </layout>
                              </widget>
                             </item>
-                           </layout>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QFrame" name="frame_16">
-                           <property name="maximumSize">
-                            <size>
-                             <width>250</width>
-                             <height>16777215</height>
-                            </size>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::StyledPanel</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <layout class="QHBoxLayout" name="horizontalLayout_10">
-                            <property name="spacing">
-                             <number>0</number>
-                            </property>
-                            <property name="leftMargin">
-                             <number>50</number>
-                            </property>
-                            <property name="topMargin">
-                             <number>50</number>
-                            </property>
-                            <property name="rightMargin">
-                             <number>50</number>
-                            </property>
-                            <property name="bottomMargin">
-                             <number>50</number>
-                            </property>
                             <item>
                              <widget class="QPushButton" name="btn_login">
                               <property name="sizePolicy">
@@ -821,6 +847,16 @@ font-size: 20px;</string>
                            </layout>
                           </widget>
                          </item>
+                         <item>
+                          <widget class="QFrame" name="frame_22">
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                          </widget>
+                         </item>
                         </layout>
                        </widget>
                       </item>
@@ -834,6 +870,9 @@ font-size: 20px;</string>
                        <width>250</width>
                        <height>16777215</height>
                       </size>
+                     </property>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="frameShape">
                       <enum>QFrame::StyledPanel</enum>

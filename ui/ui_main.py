@@ -15,6 +15,7 @@ from PySide6.QtWidgets import *
 
 from style import *
 from icon.resources import *
+from dialog.product import Ui_Dialog_product
 
 def changeBtnIcon(button, iconFile, size):
     button.setIcon(QtGui.QIcon(iconFile))
@@ -25,6 +26,8 @@ class Ui_MainWindow(object):
         self.btn_cmm = 20
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
+
+        self._dialog_product = Ui_Dialog_product()
 
         MainWindow.resize(1350, 900)
         MainWindow.setMinimumSize(QSize(1350, 900))
@@ -137,14 +140,14 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13.addWidget(self.btn_add)
 
-        self.btn_open = QPushButton(self.top_menus)
-        self.btn_open.setObjectName(u"btn_open")
-        sizePolicy.setHeightForWidth(self.btn_open.sizePolicy().hasHeightForWidth())
-        self.btn_open.setSizePolicy(sizePolicy)
-        self.btn_open.setMinimumSize(QSize(0, 40))
-        self.btn_open.setStyleSheet(btn_style)
+        self.btn_print = QPushButton(self.top_menus)
+        self.btn_print.setObjectName(u"btn_print")
+        sizePolicy.setHeightForWidth(self.btn_print.sizePolicy().hasHeightForWidth())
+        self.btn_print.setSizePolicy(sizePolicy)
+        self.btn_print.setMinimumSize(QSize(0, 40))
+        self.btn_print.setStyleSheet(btn_style)
 
-        self.horizontalLayout_13.addWidget(self.btn_open)
+        self.horizontalLayout_13.addWidget(self.btn_print)
 
         self.verticalLayout_2.addWidget(self.top_menus)
 
@@ -410,15 +413,40 @@ class Ui_MainWindow(object):
         self.horizontalLayout_19.setSpacing(0)
         self.horizontalLayout_19.setObjectName(u"verticalLayout_6")
         self.horizontalLayout_19.setContentsMargins(15, 0, 0, 0)
-        self.label_title = QLabel(self.frame_title)
-        self.label_title.setObjectName(u"label_title")
-        self.label_title.setStyleSheet(u"color: rgb(153, 153, 153)")
-        font = QFont()
-        font.setFamily(u"Franklin Gothic Heavy")
-        font.setPointSize(14)
-        self.label_title.setFont(font)
+        # self.label_title = QLabel(self.frame_title)
+        # self.label_title.setObjectName(u"label_title")
+        # self.label_title.setStyleSheet(u"color: rgb(153, 153, 153)")
+        # font = QFont()
+        # font.setFamily(u"Franklin Gothic Heavy")
+        # font.setPointSize(14)
+        # self.label_title.setFont(font)
+        #
+        # self.horizontalLayout_19.addWidget(self.label_title)
 
-        self.horizontalLayout_19.addWidget(self.label_title)
+        # 표시기재
+        self.pushButton_13 = QPushButton(self.frame_title)
+        self.pushButton_13.setObjectName(u"pushButton_13")
+        self.pushButton_13.setMaximumSize(QSize(100, 50))
+        self.pushButton_13.setStyleSheet(u"QPushButton {\n"
+                                        "	border:none;\n"
+                                        "	border-radius: 3px;\n"
+                                        "	background-color: rgb(100, 100, 100);\n"
+                                        "}\n"
+                                        "QPushButton:hover {\n"
+                                        "	\n"
+                                        "	background-color: rgba(255,0, 0, 150);\n"
+                                        "}")
+
+        self.horizontalLayout_19.addWidget(self.pushButton_13)
+
+        self.label_19 = QLabel(self.frame_title)
+        self.label_19.setObjectName(u"label_19")
+        self.label_19.setStyleSheet(u"margin-right: 15px;")
+        self.label_19.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
+        self.label_19.setMargin(0)
+
+        self.horizontalLayout_19.addWidget(self.label_19)
+        self.pushButton_13.clicked.connect(lambda: self._dialog_product.show())
 
         self.UserID = QLabel(self.frame_title)
         self.UserID.setObjectName(u"UserID")
@@ -630,6 +658,7 @@ class Ui_MainWindow(object):
         self.pages.addWidget(self.home)
         self.anal = QWidget()
         self.anal.setObjectName(u"anal")
+        self.anal.setStyleSheet(u"background-color: rgb(36, 36, 36);")
         self.verticalLayout_7 = QVBoxLayout(self.anal)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.tabWidget = QTabWidget(self.anal)
@@ -669,7 +698,7 @@ class Ui_MainWindow(object):
         # changeBtnIcon(self.btn_home, "./icon/home.png", 24)
         # changeBtnIcon(self.btn_anal, "./icon/report.png", 24)
         # changeBtnIcon(self.btn_new_file, "./icon/new_file.png", 24)
-        # changeBtnIcon(self.btn_open_2, "./icon/open_file.png", 24)
+        # changeBtnIcon(self.btn_print_2, "./icon/print_file.png", 24)
         # changeBtnIcon(self.btn_save_2, "./icon/save.png", 24)
         # changeBtnIcon(self.btn_new_file_2, "./icon/setting.png", 24)
 
@@ -679,8 +708,7 @@ class Ui_MainWindow(object):
 
     def close_current_tab(self, i):
             if self.tabWidget.count() < 2:
-                    return
-
+                self.pages.setCurrentIndex(0)
             self.tabWidget.removeTab(i)
 
     def retranslateUi(self, MainWindow):
@@ -688,10 +716,10 @@ class Ui_MainWindow(object):
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Maumgyeol-Depression   ver. 1.0.0"))
         self.btn_new_file.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.btn_add.setText(QCoreApplication.translate("MainWindow", u"Add", None))
-        self.btn_open.setText(QCoreApplication.translate("MainWindow", u"Print", None))
+        self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"~", None))
         self.btn_anal.setText(QCoreApplication.translate("MainWindow", u"Analysis", None))
-        self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
+        # self.label_title.setText(QCoreApplication.translate("MainWindow", u"Bwave Pro", None))
         self.btn_today.setText(QCoreApplication.translate("MainWindow", u"Today", None))
         self.btn_week.setText(QCoreApplication.translate("MainWindow", u"This Week", None))
         self.btn_month.setText(QCoreApplication.translate("MainWindow", u"This Month", None))
@@ -728,7 +756,5 @@ class Ui_MainWindow(object):
         __qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
         __qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\uc810\uc218", None));
 
+        self.pushButton_13.setText(QCoreApplication.translate("MainWindow", u"\ud45c\uc2dc\uae30\uc7ac", None))
     #TODO: pushButton 코드봐서 정리하고 logo도 정리
-
-    # retranslateUi
-

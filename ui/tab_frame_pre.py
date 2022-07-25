@@ -4,7 +4,7 @@ from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+    QPalette, QPixmap, QRadialGradient, QTransform, QScreen)
 from PySide6.QtWidgets import *
 
 import personal_data.resources as personal_res
@@ -610,7 +610,6 @@ class Ui_tabFrame_pre(QFrame):
 
         self.horizontalLayout_26.addWidget(self.frame_46)
 
-
         self.verticalLayout_tabpre.addWidget(self.frame_39)
 
         self.tab_pages.addWidget(self.tabFrame_pre)
@@ -791,13 +790,12 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_6.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_5 = QHBoxLayout(self.frame_6)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(25, 10, 25, 10) # margin 고치기
+        self.horizontalLayout_5.setContentsMargins(25, 10, 25, 10)
         self.horizontalLayout_5.setSpacing(0)
         self.frame_9 = QFrame(self.frame_6)
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setFrameShape(QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QFrame.Raised)
-        # self.frame_9.setStyleSheet(u"#frame_9{border-right: 1px solid;}")
         self.horizontalLayout_9 = QHBoxLayout(self.frame_9)
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
@@ -865,10 +863,8 @@ class Ui_tabFrame_pre(QFrame):
         self.circularProgressBarBase = QFrame(self.frame_27)
         self.circularProgressBarBase.setObjectName(u"circularProgressBarBase")
         self.circularProgressBarBase.setMinimumSize(0, 330)
-        # self.circularProgressBarBase.setGeometry(QRect(10, 10, 320, 320))
         self.circularProgressBarBase.setFrameShape(QFrame.NoFrame)
         self.circularProgressBarBase.setFrameShadow(QFrame.Raised)
-        # self.circularProgressBarBase.setAlignment(Qt.AlignCenter)
         self.circularProgress = QFrame(self.circularProgressBarBase)
         self.circularProgress.setObjectName(u"circularProgress")
         self.circularProgress.setGeometry(QRect(10, 25, 300, 300))
@@ -1012,13 +1008,6 @@ class Ui_tabFrame_pre(QFrame):
         self.horizontalLayout_6.addWidget(self.frame_100)
 
         self.verticalLayout_28.addWidget(self.frame_59)
-
-        # self.label_36 = QLabel(self.frame_27)
-        # self.label_36.setObjectName(u"label_36")
-        # self.label_36.setAlignment(Qt.AlignCenter)
-        # self.label_36.setMaximumSize(16777215, 300)
-        #
-        # self.verticalLayout_28.addWidget(self.label_36)
 
         self.frame_91 = QFrame(self.frame_27)
         self.frame_91.setObjectName(u"frame_91")
@@ -1192,11 +1181,6 @@ class Ui_tabFrame_pre(QFrame):
         self.circularBg_psd_sen.raise_()
         self.circularProgress_psd_sen.raise_()
         self.container_psd_sen.raise_()
-
-        # self.label_7 = QLabel(self.frame_94)
-        # self.label_7.setObjectName(u"label_7")
-        # self.label_7.setGeometry(QRect(10, 10, 30, 100))
-        # self.label_7.setStyleSheet(u"color: rgb(34,34,34);")
 
         self.circularProgress_fc_sen = QFrame(self.frame_95)  # 색깔 배경
         self.circularProgress_fc_sen.setObjectName(u"circularProgress_fc_sen")
@@ -2040,64 +2024,6 @@ class Ui_tabFrame_pre(QFrame):
         self.frame_74.setFrameShape(QFrame.StyledPanel)
         self.frame_74.setFrameShadow(QFrame.Raised)
 
-        # self.circularProgress_tr = QFrame(self.frame_74)  # 색깔 배경
-        # self.circularProgress_tr.setObjectName(u"circularProgress_tr")
-        # self.circularProgress_tr.setGeometry(QRect(15, 15, 130, 130))
-        # self.circularProgress_tr.setStyleSheet(u"QFrame{\n"
-        #                                        "border-radius: 65px;\n"
-        #                                        "background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:0.749 rgba(255, 0, 127, 0), stop:0.750 rgba(85, 170, 255, 255));\n"
-        #                                        "}")
-        # self.circularProgress_tr.setFrameShape(QFrame.NoFrame)
-        # self.circularProgress_tr.setFrameShadow(QFrame.Raised)
-        # self.circularBg_tr = QFrame(self.frame_74)  # 색깔 나머지 배경
-        # self.circularBg_tr.setObjectName(u"circularBg_tr")
-        # self.circularBg_tr.setGeometry(QRect(15, 15, 130, 130))
-        # self.circularBg_tr.setStyleSheet(u"QFrame{\n"
-        #                                  "	border-radius: 65px;\n"
-        #                                  "	background-color: rgba(255, 90, 0, 0.2);\n"
-        #                                  "}")
-        # self.circularBg_tr.setFrameShape(QFrame.StyledPanel)
-        # self.circularBg_tr.setFrameShadow(QFrame.Raised)
-        # self.container_tr = QFrame(self.frame_74)  # 가운데 작은 흰색 원
-        # self.container_tr.setObjectName(u"container_tr")
-        # self.container_tr.setGeometry(QRect(35, 35, 90, 90))
-        # self.container_tr.setStyleSheet(u"QFrame{\n"
-        #                                 "	border-radius: 45px;\n"
-        #                                 "	background-color: rgb(255, 255, 255);\n"
-        #                                 "}")
-        # self.container_tr.setFrameShape(QFrame.StyledPanel)
-        # self.container_tr.setFrameShadow(QFrame.Raised)
-        # self.widget_tr = QWidget(self.container_tr)
-        # self.widget_tr.setObjectName(u"widget_tr")
-        # self.widget_tr.setGeometry(QRect(15, 15, 61, 61))
-        # self.widget_tr.setStyleSheet("background-color: none;")
-        # self.labelTitle_tr = QLabel(self.widget_tr)
-        # self.labelTitle_tr.setObjectName(u"labelTitle_tr")
-        # self.labelTitle_tr.setGeometry(QRect(0, 0, 61, 20))
-        # font = QFont()
-        # font.setFamily(u"Segoe UI")
-        # font.setPointSize(12)
-        # self.labelTitle_tr.setFont(font)
-        # self.labelTitle_tr.setStyleSheet(u"background-color: none;")
-        # self.labelTitle_tr.setAlignment(Qt.AlignCenter)
-        #
-        # self.labelPercentage_tr = QLabel(self.widget_tr)
-        # self.labelPercentage_tr.setObjectName(u"labelPercentage_tr")
-        # self.labelPercentage_tr.setGeometry(QRect(0, 10, 61, 50))
-        # font1 = QFont()
-        # font1.setFamily(u"Roboto")
-        # font1.setPointSize(20)
-        # self.labelPercentage_tr.setFont(font1)
-        # self.labelPercentage_tr.setStyleSheet(u"background-color: none;\n"
-        #                                       "color: rgba(255, 90, 0, 255);\n"
-        #                                       "font-style: bold;\n")
-        # self.labelPercentage_tr.setAlignment(Qt.AlignCenter)
-        #
-        #
-        # self.circularBg_tr.raise_()
-        # self.circularProgress_tr.raise_()
-        # self.container_tr.raise_()
-
         self.verticalLayout_29.addWidget(self.frame_74)
 
         self.frame_75 = QFrame(self.tabFrame_anal_2)
@@ -2171,7 +2097,6 @@ class Ui_tabFrame_pre(QFrame):
         self.verticalLayout_29.addWidget(self.frame_75)
 
         self.tab_pages.addWidget(self.tabFrame_anal_2)
-
 
         ## --------------------------------------------네번째
         self.verticalLayout_6.addWidget(self.tab_pages)
@@ -2268,45 +2193,10 @@ class Ui_tabFrame_pre(QFrame):
         self.label_33_h.setText(QCoreApplication.translate("MainWindow", u"High-Beta (22~30Hz)", None))
         self.label_34.setText(QCoreApplication.translate("MainWindow", u"Gamma (30~55Hz)", None))
         self.label_41.setText(QCoreApplication.translate("MainWindow", u"Absolute Power", None))
-        self.A_delta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.A_theta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.A_LowAlpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.A_HighAlpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.A_LowBeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.A_HighBeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.A_Gamma.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_59.setText(QCoreApplication.translate("MainWindow", u"Relative Power", None))
-        self.R_delta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.R_theta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.R_Lowalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.R_Highalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.R_Lowbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.R_Highbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.R_gamma.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_53.setText(QCoreApplication.translate("MainWindow", u"Functional Connectivity - PLV", None))
-        self.plv_delta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.plv_theta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.plv_Lowalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.plv_Highalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.plv_Lowbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.plv_Highbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.plv_gamma.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_47.setText(QCoreApplication.translate("MainWindow", u"Functional Connectivity - WPLI", None))
-        self.wp_delta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.wp_theta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.wp_Lowalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.wp_Highalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.wp_Lowbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.wp_Highbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.wp_gamma.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.label_35.setText(QCoreApplication.translate("MainWindow", u"Network (clustering coeffience)", None))
-        self.n_delta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.n_theta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.n_Lowalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.n_Highalpha.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.n_Lowbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.n_Highbeta.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.n_gamma.setText(QCoreApplication.translate("MainWindow", u"", None))
 
         ## --------------------------------분석 페이지
         self.label_45.setText(QCoreApplication.translate("MainWindow", u"Patient ID:", None))
@@ -2340,13 +2230,6 @@ class Ui_tabFrame_pre(QFrame):
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"{}", None).format(self.y_pred))
         self.label_65.setText(QCoreApplication.translate("MainWindow", u"{}%", None).format(self.y_pred_proba_mdd))
         self.label_66.setText(QCoreApplication.translate("MainWindow", u"{}%", None).format(self.y_pred_proba_hc))
-        # self.label_68.setText(QCoreApplication.translate("MainWindow", u"{}", None).format(self.best_model.upper()))
-        self.label_38.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_39.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_40.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_43.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_52.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_68.setText(QCoreApplication.translate("MainWindow", u"", None))
 
         self.label_70.setText(QCoreApplication.translate("MainWindow", u"FC-sensor", None))
         self.label_72.setText(QCoreApplication.translate("MainWindow", u"{} Band".format(self.fc_infl_band), None))
@@ -2371,7 +2254,6 @@ class Ui_tabFrame_pre(QFrame):
         self.label_58.setText(QCoreApplication.translate("MainWindow", u" FC(Functional Connectivity)", None))
         self.label_60.setText(QCoreApplication.translate("MainWindow", u" NI(Network Indices)", None))
 
-
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Prediction of MDD %", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Mean of 6 Model Probability", None))
 
@@ -2382,10 +2264,6 @@ class Ui_tabFrame_pre(QFrame):
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Influential Features", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Sensor & Source Level Feature Indices", None))
 
-        ## ------------------------------ 세번쨰 페이지지
-        self.label_78.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_79.setText(QCoreApplication.translate("MainWindow", u"", None))
-        self.label_80.setText(QCoreApplication.translate("MainWindow", u"", None))
         self.pushButton_12.setText(QCoreApplication.translate("MainWindow", u"back", None))
 
         self.labelTitle_psd_sen.setText(QCoreApplication.translate("MainWindow", u"PSD", None))
@@ -2406,8 +2284,6 @@ class Ui_tabFrame_pre(QFrame):
         self.labelTitle_ni_sou.setText(QCoreApplication.translate("MainWindow", u"NI", None))
         self.labelPercentage_ni_sou.setText(
             QCoreApplication.translate("MainWindow", u"{}%".format(round(self.ni_sou * 100)), None))
-
-        # self.label_7.setText(QCoreApplication.translate(u"S\nE\nN\nS\nE\nR", None))
 
     # retranslateUi
     def open_mdd_detail(self):

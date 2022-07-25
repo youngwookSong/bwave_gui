@@ -13,6 +13,7 @@ from ui.ui_main import Ui_MainWindow
 from ui.ui_loginScreen import Ui_LoginWindow
 
 #import gui functions
+import main_functions
 from main_functions import *
 
 #import stylesheet
@@ -21,6 +22,7 @@ import resources as main_res
 import personal_data.resources as personal_res
 
 from dialog.product import Ui_Dialog_product
+from dialog.loginFail import Ui_Dialog_loginFail
 
 import json
 from multiprocessing import freeze_support
@@ -49,6 +51,8 @@ class LoginView(QMainWindow):
         self._dialog_product = Ui_Dialog_product()
         self._dialog_product.show()
 
+        self._dialog_loginFail = Ui_Dialog_loginFail()
+
         self.show()
 
     def mousePressEvent(self, event):
@@ -61,9 +65,21 @@ class LoginView(QMainWindow):
     def button_login_action(self): #이거 나중에 main_functions로 옮기기
         ## user ID 저장
         self.user = self.ui.IDInput.text()
+        self.pwd = self.ui.passwordInput.text()
         print(self.user)
+        print(self.pwd)
 
-        ## 로그인 화면 닫기
+        ## 로그인 기능
+        # Password 해쉬화하여 저장
+        # accept = main_functions.UIFunctions.loginAccess(self, self.user, self.pwd)
+        # if accept:
+        #     ## 로그인 화면 닫기
+        #     self.close()
+        #     self.second = MainView(self.user) ## 해당 id 전송
+        #     self.second.show()
+        # else:
+        #     self._dialog_loginFail.show()
+
         self.close()
         self.second = MainView(self.user) ## 해당 id 전송
         self.second.show()
@@ -111,6 +127,8 @@ class MainView(QMainWindow):
         self.ui.btn_new_file.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, 'new'))
         # add 버튼
         self.ui.btn_add.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, "add"))
+        # print 버튼
+        self.ui.btn_print.clicked.connect(lambda: UIFunctions.save_file(self))
         # 홈 화면 new file 버튼
         self.ui.pushButton.clicked.connect(lambda: UIFunctions.handleOpenDialog(self, "new"))
         # 홈 화면 add 버튼

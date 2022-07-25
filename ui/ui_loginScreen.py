@@ -165,10 +165,41 @@ class Ui_LoginWindow(object):
 
 
         self.verticalLayout.addWidget(self.title_bar)
-
+        
         self.frame = QFrame(self.content_frame)
         self.frame.setObjectName(u"frame")
-        self.frame.setStyleSheet(u"background-color: rgb(55, 55, 56);")
+        self.frame.setStyleSheet(u"#frame {background: url(./icon/background2.png)}\n"
+                                 "#frame_2 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_3 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_4 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_5 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_6 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_7 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_8 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_9 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_10 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_11 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_12 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_13 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_14 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_15 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_16 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_17 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_18 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_19 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_20 {background-color: rg"
+                                 "b(0, 0, 0, 0.0);}\n"
+                                 "#frame_21 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#frame_22 {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#label  {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#label_2  {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#label_3  {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#label_4  {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#label_5  {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "#littleLogo  {background-color: rgb(0, 0, 0, 0.0);}\n"
+                                 "\n"
+                                 "\n"
+                                 "")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.frame)
