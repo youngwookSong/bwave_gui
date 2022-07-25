@@ -433,7 +433,6 @@ class UIFunctions(LoginView, MainView): #main.py의 클래스를 상속
                                              info_json_path['fc_source'], info_json_path['ni_source'],
                                              info_json_path['psd_infl_band'], info_json_path['fc_infl_band'],
                                              info_json_path['ni_infl_band'])
-
         else: #취소 버튼 눌렀을때
             print("cancel")
 
